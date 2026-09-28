@@ -61,34 +61,93 @@ are preserved in [results/bootstrap-20260927](results/bootstrap-20260927/);
 current unprofiled smoke records reflect the new source and are not replacements
 for a controlled comparison. Remote CI and controlled S/M remain unexecuted.
 
-## Controlled S-scale campaign (hosted) — 2026-09-28
+## Controlled S-scale campaign (hosted), pass 1 — 2026-09-28
 
-The GitHub Actions `S-scale paired evaluation` workflow ran on a native
-`ubuntu-24.04-arm` runner (Neoverse-N2, 4 vCPU, kernel 6.17 aarch64), unblocking
-what this Mac's SDK/load ceiling prevented. **180 controlled records, state
-PASS, 0 condition failures, `sdk_workaround: false`.** Evidence: [summary](results/s-scale-hosted/summary.json),
-[manifest](results/s-scale-hosted/manifest.json), [records](results/s-scale-hosted/records.jsonl),
-[runner context](results/hosted-context/run.json). Oversized per-query reference
-dumps (up to 122 MiB) are reproducible from this run and are not stored in git;
-see `results/s-scale-hosted/references/` in the workflow's uploaded artifact.
+Superseded by the pass-2 rerun below; kept for the record. The GitHub Actions
+`S-scale paired evaluation` workflow ran on a native `ubuntu-24.04-arm` runner
+(Neoverse-N2, 4 vCPU, kernel 6.17 aarch64), unblocking what this Mac's
+SDK/load ceiling prevented. **180 controlled records, state PASS, 0 condition
+failures, `sdk_workaround: false`.** Evidence (archived): [summary](results/s-scale-hosted-pass1-20260928/summary.json),
+[manifest](results/s-scale-hosted-pass1-20260928/manifest.json), [records](results/s-scale-hosted-pass1-20260928/records.jsonl).
 
 Comparing pure Rust and pure Zig at S scale (corpus/synthetic/S-campaign-mixed-20260928.json,
-mixed shape, 10 repeats) reproduces the same asymmetries already visible at
-SMOKE scale in [results/phases](results/phases/), now at ~150-200x the entity
-count, which is evidence the pattern is structural rather than noise:
+mixed shape, 10 repeats) reproduced the same asymmetries visible at SMOKE
+scale in the pass-1 phase evidence ([results/phases-pass1-20260928](results/phases-pass1-20260928/)),
+at ~150-200x the entity count:
 
-- **Load phase**: Rust's JSON load is consistently ~2x faster than Zig's across
-  every query (SMOKE: ~2.8ms vs ~5.5ms; S: ~486ms vs ~1000ms).
-- **Index phase**: Zig's hash-index construction is consistently faster than
-  Rust's (SMOKE: ~0.8ms vs ~0.8-0.9ms roughly tied; S: ~355-397ms vs ~572-661ms,
-  Zig ~35-45% faster).
+- **Load phase**: Rust's JSON load ~2x faster than Zig's on every query
+  (SMOKE: ~2.8ms vs ~5.5ms; S: ~486ms vs ~1000ms).
+- **Index phase**: Zig's hash-index construction faster than Rust's
+  (S: ~355-397ms vs ~572-661ms, Zig ~35-45% faster).
 - **Result/encoding phase and peak RSS on larger result sets** (`scan-type`,
-  `depth-8`): Zig is ~2-2.3x faster to encode and uses ~2-2.3x less peak RSS
-  than Rust, at both scales.
-- **Net effect**: which candidate has the lower median *elapsed* time depends on
-  the query shape (Rust wins point lookups and shallow traversals where load
-  dominates; Zig wins large-result-set queries where encoding/memory dominates)
-  — there is no overall winner across W1/W2 at this scale.
+  `depth-8`): Zig ~2-2.3x faster to encode and ~2-2.3x less peak RSS than
+  Rust, at both scales.
+- **Net effect**: Rust won point lookups and shallow traversals (load
+  dominates); Zig won large-result-set queries (encoding/memory dominates) —
+  no overall winner across W1/W2 at this scale.
+
+Pass 2 below found the "result" side of this gap was substantially a Rust
+implementation artifact, not a language/runtime difference.
+
+## Representation pass 2 and S-scale re-run — 2026-09-28
+
+[ADR-0002 pass 2](adr/0002-matched-phase-baseline.md#representation-pass-2--phase-decomposition-and-rust-encode-fairness-2026-09-28)
+found Rust's `encode()` built a `serde_json::Value` tree before serializing
+(double-allocating every id/enum/evidence row), while Zig's encoder already
+serialized typed structs directly. Fixed by serializing typed structs directly
+in Rust too (digest verified byte-identical against the oracle); `query` was
+also split from `materialize` in both candidates so the phase timings
+distinguish traversal from result construction (`phase_detail_ns`, additive
+alongside the unchanged `phases_ns`). Conformance unaffected: 212/159 PASS
+before and after.
+
+The same `S-campaign-mixed-20260928` corpus, oracle, query set, repetition
+policy (10 repeats) and canonical validation were re-run on the same runner
+label (`ubuntu-24.04-arm`), producing another **180 controlled records, 0
+condition failures**. Evidence: [summary](results/s-scale-hosted/summary.json),
+[manifest](results/s-scale-hosted/manifest.json), [records](results/s-scale-hosted/records.jsonl).
+Pass-1 evidence is archived at [results/s-scale-hosted-pass1-20260928](results/s-scale-hosted-pass1-20260928/)
+for direct comparison; this was a different runner instance, not fixed
+hardware, so small (single-digit percent) deltas on unrelated queries are
+runner variance, not signal.
+
+| Query (Rust only; Zig deltas were all within ±3%, i.e. unchanged) | Before (median elapsed) | After | Delta |
+|---|---|---|---|
+| W1 scan-type | 3166.2 ms | 1659.2 ms | **-47.6%** |
+| W2 depth-8 | 4233.4 ms | 2087.6 ms | **-50.7%** |
+| W2 depth-4 | 1841.0 ms | 1386.7 ms | -24.7% |
+| W2 outgoing / incoming / mixed-relations | 1192-1261 ms | 1088-1152 ms | -8.6% to -8.8% |
+| W1 lookup-first / lookup-missing, W2 depth-2 | 1134-1180 ms | 1178-1184 ms | +0.2% to +4.2% (noise) |
+
+Peak RSS on the two largest-result queries: `scan-type` 1507 MB -> 547 MB
+(**-64%**); `depth-8` 2143 MB -> 638 MB (**-70%**). Phase detail confirms the
+source: `scan-type`'s encode phase alone is 410 ms of the 513 ms new `result`
+total (materialize 103 ms); `depth-8`'s encode is 643 ms of 806 ms
+(materialize 164 ms) — consistent with removing a full extra allocation pass,
+not with any traversal/query-logic change (`query`+`materialize` after the
+split sums to within ~3% of pass-1's combined `query` phase on both queries,
+confirming the split repartitions the same work rather than changing it).
+
+**Which differences disappeared**: the "Zig wins large-result queries"
+finding from pass 1 is gone. Rust is now faster than Zig on both `scan-type`
+(1659 ms vs pass-1 Zig's unaffected ~1936 ms) and `depth-8` (2088 ms vs Zig's
+~2289 ms) — the encode-side asymmetry was the dominant cause of that result,
+not a fundamental representation or runtime property.
+**Which differences shrank**: `depth-4` and the outgoing/incoming/mixed-relations
+group, more modestly (materialize+encode contribute less to their smaller
+result sets).
+**Which differences remained/reversed direction**: none reversed in Zig's
+favor; Rust is now equal-or-ahead on every W1/W2 query at S scale.
+**Which differences grew**: none.
+
+**Load-phase asymmetry is untouched** (Rust ~2x faster to decode than Zig,
+same as pass 1) and **index-phase asymmetry is untouched** (Zig ~35-45%
+faster to build indices) — pass 2 did not touch either implementation's
+decode or index code, so this is the expected, unaffected baseline, not a
+new finding. Language Gate #1 remains **OPEN**: this closes the specific
+result-encoding fairness gap pass 1 flagged, it does not by itself select a
+kernel language, and W3-W12, corpus M, and hybrid-at-scale are still
+outstanding (see below).
 
 This is Rust's `serde_json::Value` + Zig's typed records/manual allocation
 showing up in measurement, not a kernel/query-engine difference; it does not

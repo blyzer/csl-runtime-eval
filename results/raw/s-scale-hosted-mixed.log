@@ -178,4 +178,4 @@
 {"completed": 178, "total": 180, "candidate": "zig", "query": "mixed-relations"}
 {"completed": 179, "total": 180, "candidate": "zig", "query": "mixed-relations"}
 {"completed": 180, "total": 180, "candidate": "rust", "query": "mixed-relations"}
-{"state": "PASS", "classification": "controlled", "records": 180, "output": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/s-scale-hosted"}
+{"state": "PASS", "classification": "controlled", "records": 180, "output": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/s-scale-hosted-36405210578"}
