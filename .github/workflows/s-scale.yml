@@ -84,11 +84,14 @@ jobs:
       - name: Run paired S campaign
         env:
           CORPUS_SHAPE: ${{ inputs.shape }}
+          # campaign.py refuses an existing output directory (ADR-0003): never
+          # reuse a path a prior committed run already created.
+          OUTPUT_DIR: results/s-scale-hosted-${{ github.run_id }}
         run: |
           set -euo pipefail
           python harness/campaign.py run --preset S --repeat 10 --seed 20260928 \
             --shape "$CORPUS_SHAPE" --max-load-per-cpu 0.75 \
-            --output results/s-scale-hosted | tee results/s-scale-hosted.log
+            --output "$OUTPUT_DIR" | tee "$OUTPUT_DIR.log"
       - name: Upload evidence, including failed or blocked attempts
         if: always()
         uses: actions/upload-artifact@v4
