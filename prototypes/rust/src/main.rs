@@ -1,5 +1,6 @@
 mod model;
 use model::{Edge, Entity, Evidence, Fixture};
+use serde::Serialize;
 use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
 use std::collections::{HashMap, HashSet};
@@ -155,15 +156,7 @@ impl<'a> Store<'a> {
         })
     }
     fn eval(&self, q: &Value, truncated: &mut bool) -> Result<Set> {
-        valid_query(q)?;
         let op = q["op"].as_str().ok_or("missing op")?;
-        if q.get("relation").is_some_and(|v| !member(v, &REL))
-            || q.get("kind").is_some_and(|v| !member(v, &KIND))
-            || q.get("direction")
-                .is_some_and(|v| !member(v, &["OUT", "IN"]))
-        {
-            return Err("invalid query enum".into());
-        }
         if op == "RESOLVE" {
             if let Some(name) = q["name"].as_str() {
                 return Ok(self
@@ -256,12 +249,21 @@ impl<'a> Store<'a> {
         }
         Ok(result)
     }
-    fn select(&self, q: &Value) -> Result<Selection> {
+    /// Validate once (the recursive tree walk already covers every nested
+    /// `input`) and run the traversal/set logic. This is the "query" phase:
+    /// it excludes result construction, which `materialize` owns.
+    fn query(&self, q: &Value) -> Result<(Set, bool)> {
         if q["schema"] != "csl.eval.query/v0.1" || !q["query_id"].is_string() {
             return Err("invalid query schema".into());
         }
+        valid_query(q)?;
         let mut truncated = false;
         let selected = self.eval(q, &mut truncated)?;
+        Ok((selected, truncated))
+    }
+    /// Build the normalized in-memory result (sorted ids, filtered/sorted
+    /// evidence) from a raw query outcome. This is the "materialize" phase.
+    fn materialize(&self, q: &Value, selected: Set, truncated: bool) -> Selection {
         let mut ids: Vec<_> = selected.iter().copied().collect();
         ids.sort_unstable();
         let minimum = q["evidence"]["min_quality"]
@@ -292,27 +294,84 @@ impl<'a> Store<'a> {
                 e.freshness_epoch,
             )
         });
-        Ok(Selection {
+        Selection {
             ids,
             props,
             truncated,
-        })
+        }
     }
-    fn encode(&self, q: &Value, selection: Selection) -> Result<Value> {
-        let payload = json!({"entities":selection.ids,"propositions":selection.props,"knowledge":{"model":"open-world"},"completeness":{"entity_set":if selection.truncated{"TRUNCATED"}else if self.fx.complete{"COMPLETE"}else{"OBSERVED"}}});
+    fn select(&self, q: &Value) -> Result<Selection> {
+        let (selected, truncated) = self.query(q)?;
+        Ok(self.materialize(q, selected, truncated))
+    }
+    /// Serialize directly from typed structs to canonical bytes: no
+    /// intermediate `serde_json::Value` tree, matching Zig's
+    /// `std.json.stringifyAlloc` on typed structs (ADR-0004 fairness pass).
+    /// Field order is declared alphabetically to match the oracle's
+    /// `sort_keys=True` canonicalization; `Payload`'s field order is the
+    /// digest input, `Envelope`'s is cosmetic (compared by parsed equality).
+    fn encode(&self, q: &Value, selection: Selection) -> Result<Vec<u8>> {
+        #[derive(Serialize)]
+        struct Completeness<'a> {
+            entity_set: &'a str,
+        }
+        #[derive(Serialize)]
+        struct Knowledge {
+            model: &'static str,
+        }
+        #[derive(Serialize)]
+        struct Payload<'a> {
+            completeness: Completeness<'a>,
+            entities: &'a [u64],
+            knowledge: Knowledge,
+            propositions: &'a [Evidence],
+        }
+        #[derive(Serialize)]
+        struct Envelope<'a> {
+            completeness: Completeness<'a>,
+            digest: String,
+            entities: &'a [u64],
+            knowledge: Knowledge,
+            propositions: &'a [Evidence],
+            query_id: &'a str,
+            schema: &'static str,
+            snapshot: &'a str,
+        }
+        let entity_set = if selection.truncated {
+            "TRUNCATED"
+        } else if self.fx.complete {
+            "COMPLETE"
+        } else {
+            "OBSERVED"
+        };
+        let payload = Payload {
+            completeness: Completeness { entity_set },
+            entities: &selection.ids,
+            knowledge: Knowledge {
+                model: "open-world",
+            },
+            propositions: &selection.props,
+        };
         let digest = format!("sha256:{:x}", Sha256::digest(serde_json::to_vec(&payload)?));
-        let mut result = payload;
-        result["schema"] = json!("csl.eval.result/v0.1");
-        result["snapshot"] = json!(self.fx.snapshot);
-        result["query_id"] = q["query_id"].clone();
-        result["digest"] = json!(digest);
-        Ok(result)
+        let envelope = Envelope {
+            completeness: Completeness { entity_set },
+            digest,
+            entities: &selection.ids,
+            knowledge: Knowledge {
+                model: "open-world",
+            },
+            propositions: &selection.props,
+            query_id: q["query_id"].as_str().ok_or("missing query_id")?,
+            schema: "csl.eval.result/v0.1",
+            snapshot: &self.fx.snapshot,
+        };
+        Ok(serde_json::to_vec(&envelope)?)
     }
-    fn execute(&self, q: &Value) -> Result<Value> {
+    fn execute(&self, q: &Value) -> Result<Vec<u8>> {
         self.encode(q, self.select(q)?)
     }
 }
-fn main_run() -> Result<Value> {
+fn main_run() -> Result<String> {
     let args: Vec<String> = std::env::args().collect();
     let cmd = args.get(1).map(String::as_str).unwrap_or("info");
     let arg = |key: &str| -> Result<&str> {
@@ -323,7 +382,8 @@ fn main_run() -> Result<Value> {
     };
     if cmd == "info" {
         return Ok(
-            json!({"candidate":"rust","status":"typed-hash-v1","representation":"typed-hash-v1"}),
+            json!({"candidate":"rust","status":"typed-hash-v1","representation":"typed-hash-v1"})
+                .to_string(),
         );
     }
     if cmd == "boundary" {
@@ -342,9 +402,7 @@ fn main_run() -> Result<Value> {
             times.push(start.elapsed().as_nanos());
             digest = format!("sha256:{:x}", Sha256::digest(&output));
         }
-        return Ok(
-            json!({"strategy":"pure-rust","payload_bytes":size,"latency_ns":times,"calls_per_query":0,"bytes_copied":size,"output_allocations_per_call":if size==0{0}else{1},"result_digest":digest}),
-        );
+        return Ok(json!({"strategy":"pure-rust","payload_bytes":size,"latency_ns":times,"calls_per_query":0,"bytes_copied":size,"output_allocations_per_call":if size==0{0}else{1},"result_digest":digest}).to_string());
     }
     let path = arg(if cmd == "workload" {
         "--corpus"
@@ -354,32 +412,61 @@ fn main_run() -> Result<Value> {
     let start = std::time::Instant::now();
     let bytes = std::fs::read(path)?;
     let fx: Fixture = serde_json::from_slice(&bytes)?;
-    let load_ns = start.elapsed().as_nanos();
+    // decode and construct are fused: serde deserializes bytes directly into
+    // the typed `Fixture`, with no intermediate generic representation to
+    // isolate a separate construction pass from (see ADR-0004 fairness note;
+    // Zig's `std.json.parseFromSlice` is fused the same way).
+    let decode_ns = start.elapsed().as_nanos();
+    let construct_ns: u128 = 0;
+    let load_ns = decode_ns + construct_ns;
     let start = std::time::Instant::now();
     let store = Store::new(&fx)?;
     let index_ns = start.elapsed().as_nanos();
     match cmd {
-        "load" => Ok(json!({"entities":store.entities.len(),"snapshot":fx.snapshot})),
-        "query" => store.execute(&serde_json::from_slice(&std::fs::read(arg("--query")?)?)?),
+        "load" => Ok(json!({"entities":store.entities.len(),"snapshot":fx.snapshot}).to_string()),
+        "query" => {
+            let q: Value = serde_json::from_slice(&std::fs::read(arg("--query")?)?)?;
+            Ok(String::from_utf8(store.execute(&q)?)?)
+        }
         "workload" => {
             let workload = arg("--id")?;
             if !["W1", "W2"].contains(&workload) {
                 return Err("unknown workload".into());
             }
             let params: Value = serde_json::from_str(arg("--params")?)?;
+            let query = &params["query"];
             if args.iter().any(|v| v == "--profile") {
                 let start = std::time::Instant::now();
-                let selection = store.select(&params["query"])?;
+                let (selected, truncated) = store.query(query)?;
                 let query_ns = start.elapsed().as_nanos();
                 let start = std::time::Instant::now();
-                let result = store.encode(&params["query"], selection)?;
-                std::hint::black_box(serde_json::to_vec(&result)?);
-                let result_ns = start.elapsed().as_nanos();
-                Ok(
-                    json!({"profile_schema":"csl.eval.profile/v0.1", "representation":"typed-hash-v1", "phases_ns":{"load":load_ns,"index":index_ns,"query":query_ns,"result":result_ns},"result":result}),
-                )
+                let selection = store.materialize(query, selected, truncated);
+                let materialize_ns = start.elapsed().as_nanos();
+                let start = std::time::Instant::now();
+                let result_bytes = store.encode(query, selection)?;
+                let encode_ns = start.elapsed().as_nanos();
+                std::hint::black_box(&result_bytes);
+                let result_ns = materialize_ns + encode_ns;
+                let metadata = json!({
+                    "profile_schema": "csl.eval.profile/v0.1",
+                    "representation": "typed-hash-v1",
+                    "phases_ns": {
+                        "load": load_ns, "index": index_ns, "query": query_ns, "result": result_ns
+                    },
+                    "phase_detail_ns": {
+                        "decode": decode_ns, "construct": construct_ns,
+                        "materialize": materialize_ns, "encode": encode_ns
+                    }
+                })
+                .to_string();
+                let result_str = String::from_utf8(result_bytes)?;
+                Ok(format!(
+                    "{},\"result\":{}}}",
+                    &metadata[..metadata.len() - 1],
+                    result_str
+                ))
             } else {
-                store.execute(&params["query"])
+                Ok(String::from_utf8(store.execute(query)?)?)
             }
         }
         _ => Err("unknown command".into()),

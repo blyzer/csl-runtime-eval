@@ -290,8 +290,10 @@ def run_campaign(args):
             grouped[(row['workload'], row['query'], row['candidate'])].append(row)
         summaries = []
         for (workload, query, candidate), samples in sorted(grouped.items()):
+            has_detail = all('phase_detail_ns' in row for row in samples)
             summaries.append({'workload': workload, 'query': query, 'candidate': candidate, 'samples': len(samples),
                               'median_phases_ns': {k: statistics.median(row['phases_ns'][k] for row in samples) for k in ('load', 'index', 'query', 'result')},
+                              **({'median_phase_detail_ns': {k: statistics.median(row['phase_detail_ns'][k] for row in samples) for k in ('decode', 'construct', 'materialize', 'encode')}} if has_detail else {}),
                               'median_elapsed_ns': statistics.median(row['elapsed_ns'] for row in samples),
                               'median_peak_rss_bytes': statistics.median(row['rss_peak_bytes'] for row in samples)})
         save(output / 'summary.json', {'state': 'PASS', 'classification': manifest['classification'], 'records': len(rows),

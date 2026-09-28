@@ -7,6 +7,12 @@ GitHub Actions Linux ARM64 runner (see "Controlled S-scale campaign (hosted)"
 below). Controlled M-scale, the remaining Gate workloads, and hybrid-at-scale
 still have not been executed.
 
+This repository is P1-P5 of a larger program; [ADR-0004](adr/0004-program-roadmap-and-gates.md)
+preserves the full roadmap (Gate #2/P15, Tree-sitter, Glean/Angle, MLIR, Mojo)
+and the status taxonomy (IMPLEMENTED / IN PROGRESS / PLANNED / EXPERIMENTAL /
+RESEARCH / DEFERRED) used below. Everything in this file is IMPLEMENTED or IN
+PROGRESS; nothing from ADR-0004 beyond Gate #1 exists in this repo yet.
+
 | Area | State | Implementation and proof |
 |---|---|---|
 | Initial audit | DONE | [initial-audit.md](results/raw/initial-audit.md); existing staged files and unrelated web assets preserved |

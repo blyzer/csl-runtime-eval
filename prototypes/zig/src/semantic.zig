@@ -163,15 +163,23 @@ pub const Store = struct {
         return result;
     }
     pub const Selection = struct { ids: []u64, props: []Evidence, truncated: bool };
-    pub fn select(self: *const Store, q: Query) !Selection {
+    /// Validate once and run the traversal/set logic: the "query" phase,
+    /// excluding result construction (owned by `materialize`).
+    pub const QueryOutcome = struct { selected: Set, truncated: bool };
+    pub fn query(self: *const Store, q: Query) !QueryOutcome {
         if (q.schema == null or !std.mem.eql(u8, q.schema.?, "csl.eval.query/v0.1") or q.query_id == null) return error.InvalidQuery;
         try validateQuery(q);
         var truncated = false;
         const selected = try self.eval(q, &truncated);
-        const ids = try sorted(self.a, selected);
+        return .{ .selected = selected, .truncated = truncated };
+    }
+    /// Build the normalized in-memory result (sorted ids, filtered/sorted
+    /// evidence) from a raw query outcome: the "materialize" phase.
+    pub fn materialize(self: *const Store, q: Query, outcome: QueryOutcome) !Selection {
+        const ids = try sorted(self.a, outcome.selected);
         var props = std.ArrayList(Evidence).init(self.a);
         for (self.fx.evidence) |e| {
-            if (!selected.contains(e.subject) and !selected.contains(e.object)) continue;
+            if (!outcome.selected.contains(e.subject) and !outcome.selected.contains(e.object)) continue;
             if (q.evidence.min_quality) |qual| {
                 if (@intFromEnum(e.quality) < @intFromEnum(qual)) continue;
             }
@@ -181,7 +189,10 @@ pub const Store = struct {
             try props.append(e);
         }
         std.mem.sort(Evidence, props.items, {}, evLess);
-        return .{ .ids = ids, .props = props.items, .truncated = truncated };
+        return .{ .ids = ids, .props = props.items, .truncated = outcome.truncated };
+    }
+    pub fn select(self: *const Store, q: Query) !Selection {
+        return self.materialize(q, try self.query(q));
     }
     pub fn encode(self: *const Store, q: Query, selection: Selection) ![]const u8 {
         const ids = selection.ids;

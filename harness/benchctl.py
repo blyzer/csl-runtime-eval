@@ -116,15 +116,26 @@ def corpus_path(corpus):
 
 def profile_metadata(envelope, elapsed_ns):
     """Reject missing/unsupported timing metadata before accepting a measurement."""
-    if not isinstance(envelope, dict) or set(envelope) != {'profile_schema', 'representation', 'phases_ns', 'result'}:
+    required = {'profile_schema', 'representation', 'phases_ns', 'result'}
+    optional = {'phase_detail_ns'}
+    if not isinstance(envelope, dict) or not required <= set(envelope) or set(envelope) - required - optional:
         raise ValueError('invalid profile envelope')
-    for field in ('profile_schema', 'representation', 'phases_ns'):
+    fields = ('profile_schema', 'representation', 'phases_ns') + (('phase_detail_ns',) if 'phase_detail_ns' in envelope else ())
+    for field in fields:
         import jsonschema
         jsonschema.validate(envelope[field], VALIDATORS['benchmark-record'].schema['properties'][field])
     phases = envelope['phases_ns']
     if any(type(value) is not int for value in phases.values()) or sum(phases.values()) > elapsed_ns:
         raise ValueError('invalid phase duration or phase sum exceeds process elapsed time')
-    return {key: envelope[key] for key in ('profile_schema', 'representation', 'phases_ns')}
+    if 'phase_detail_ns' in envelope:
+        detail = envelope['phase_detail_ns']
+        if any(type(value) is not int for value in detail.values()):
+            raise ValueError('invalid phase detail duration')
+        if detail['decode'] + detail['construct'] != phases['load']:
+            raise ValueError('decode+construct must equal load')
+        if detail['materialize'] + detail['encode'] != phases['result']:
+            raise ValueError('materialize+encode must equal result')
+    return {key: envelope[key] for key in fields}
 
 def unpack_profile(envelope, elapsed_ns):
     metadata = profile_metadata(envelope, elapsed_ns)

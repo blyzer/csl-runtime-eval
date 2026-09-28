@@ -43,12 +43,22 @@ fn run(a: std.mem.Allocator) ![]const u8 {
         for (args) |value| {
             if (std.mem.eql(u8, value, "--profile")) {
                 timer.reset();
-                const selection = try store.select(params.value.query);
+                const outcome = try store.query(params.value.query);
                 const query_ns = timer.lap();
+                const selection = try store.materialize(params.value.query, outcome);
+                const materialize_ns = timer.lap();
                 const result = try store.encode(params.value.query, selection);
-                const result_ns = timer.read();
+                const encode_ns = timer.read();
+                const result_ns = materialize_ns + encode_ns;
                 // Embed the already serialized result without allocating a second JSON tree.
-                const metadata = try std.json.stringifyAlloc(a, .{ .profile_schema = "csl.eval.profile/v0.1", .representation = "typed-hash-v1", .phases_ns = .{ .load = load_ns, .index = index_ns, .query = query_ns, .result = result_ns } }, .{});
+                // decode/construct are fused: std.json.parseFromSlice parses bytes directly
+                // into the typed Fixture, with no separate construction pass to isolate.
+                const metadata = try std.json.stringifyAlloc(a, .{
+                    .profile_schema = "csl.eval.profile/v0.1",
+                    .representation = "typed-hash-v1",
+                    .phases_ns = .{ .load = load_ns, .index = index_ns, .query = query_ns, .result = result_ns },
+                    .phase_detail_ns = .{ .decode = load_ns, .construct = @as(u64, 0), .materialize = materialize_ns, .encode = encode_ns },
+                }, .{});
                 return std.fmt.allocPrint(a, "{s},\"result\":{s}}}", .{ metadata[0 .. metadata.len - 1], result });
             }
         }

@@ -34,6 +34,16 @@ class Profiles(unittest.TestCase):
             with self.subTest(duration=value),self.assertRaises(Exception):unpack_profile(bad,100)
         with self.assertRaises(ValueError):unpack_profile(envelope,9)
 
+    def test_phase_detail_consistency(self):
+        from harness.benchctl import unpack_profile
+        envelope={**self.envelope(),'phase_detail_ns':{'decode':1,'construct':0,'materialize':1,'encode':3}}
+        actual,metadata=unpack_profile(envelope,10)
+        self.assertEqual(metadata['phase_detail_ns'],envelope['phase_detail_ns'])
+        for bad_detail in [{'decode':2,'construct':0,'materialize':1,'encode':3},
+                           {'decode':1,'construct':0,'materialize':1,'encode':4}]:
+            bad={**envelope,'phase_detail_ns':bad_detail}
+            with self.subTest(detail=bad_detail),self.assertRaises(ValueError):unpack_profile(bad,10)
+
     def test_result_mismatch_is_never_accepted(self):
         from harness.benchctl import benchmark
         from pathlib import Path

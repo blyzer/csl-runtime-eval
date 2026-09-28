@@ -145,6 +145,34 @@
       },
       "additionalProperties": false
     },
+    "phase_detail_ns": {
+      "type": "object",
+      "required": [
+        "decode",
+        "construct",
+        "materialize",
+        "encode"
+      ],
+      "properties": {
+        "decode": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "construct": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "materialize": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "encode": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
     "profile_schema": {
       "const": "csl.eval.profile/v0.1"
     }
@@ -158,6 +186,11 @@
     "profile_schema": [
       "phases_ns",
       "representation"
+    ],
+    "phase_detail_ns": [
+      "phases_ns",
+      "representation",
+      "profile_schema"
     ]
   }
 }
