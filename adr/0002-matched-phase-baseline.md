@@ -76,3 +76,66 @@ Next: repeat this pass on a supported native compiler/SDK pair, then controlled
 S-scale repeated runs with fixed machine/load conditions and recorded ordering.
 Any further representation tuning must be named and made available to both pure
 candidates before drawing comparative conclusions.
+
+## Representation pass 2 — phase decomposition and Rust encode fairness (2026-09-28)
+
+Prompted by the controlled S-scale campaign in [ADR-0003](0003-s-scale-campaign.md),
+which showed Rust ~2-2.3x slower and using ~2-2.3x more peak RSS than Zig on
+large-result queries (`scan-type`, `depth-8`). Pass 1's `query`/`result` split
+already conflated distinct work (line 44-45 above); this pass separates it and
+investigates the RSS/time gap's actual source per ADR-0004 section 7-8.
+
+**Finding**: Rust's `encode()` built a `serde_json::Value` tree via the `json!()`
+macro before serializing it — every id, enum variant and evidence row was
+allocated twice, once into the generic `Value` and once into output bytes. Zig's
+`encode()` already called `std.json.stringifyAlloc` directly on typed structs,
+with no intermediate generic representation. This is exactly the "generic JSON
+DOM vs typed records" asymmetry pass 1 was meant to close, but pass 1 only
+covered the fixture/store side; the result-encoding side still had it.
+
+**Fix**: `Store::encode` now defines typed `Payload`/`Envelope` structs (fields
+declared alphabetically, matching the oracle's `sort_keys=True` canonicalization,
+so the digest stays byte-identical — verified against `tests/golden_fixture.json`)
+and serializes them directly with `serde_json::to_vec`, matching Zig's approach.
+Separately, `valid_query` was being re-run recursively at every nested `eval()`
+level even though its own recursion already validates the whole tree in one top
+-level call; the redundant per-level calls were removed. Both changes are
+representation/implementation fixes, not language comparisons: they remove
+asymmetries pass 1 didn't reach, they do not favor either candidate by design.
+
+**Phase split**: `query` (pass 1) is now `query` (traversal only, via a new
+`Store::query`) plus `materialize` (sorted ids + filtered/sorted evidence, via
+a new `Store::materialize`); `load` conceptually splits into `decode`+`construct`,
+but both candidates parse bytes directly into typed structs in one call, so
+`construct` is definitionally `0` for both — not a missing measurement. These
+are exposed as an additive `phase_detail_ns: {decode, construct, materialize,
+encode}` object alongside the unchanged `phases_ns: {load, index, query, result}`
+(now `load=decode`, `result=materialize+encode`), so historical `phases_ns`
+records and their consumers are unaffected. `harness/benchctl.py` enforces
+`decode+construct==load` and `materialize+encode==result` before accepting a
+record. Zig's `select()` received the identical `query`/`materialize` split for
+phase symmetry; it needed no encode-side fix.
+
+**SMOKE-scale effect (Rust only; local Zig build blocked by this Mac's SDK
+issue, see TOOLCHAINS.md)**: `scan-type`'s `result` phase (materialize+encode)
+dropped from a 3,392,062 ns median (pass 1) to roughly 2,450,000-2,510,000 ns
+across five reruns — encode alone now runs at ~2.0-2.1ms, materialize at
+~0.35-0.4ms, confirming encoding (not result construction) was the dominant
+cost the Value-tree indirection added. This is a ~25-28% reduction on this
+one query at SMOKE scale; it does not by itself close the S-scale gap and must
+be reconfirmed at S scale on matching hardware before any conclusion.
+
+**Execution modes**: only E2E (decode through encode, one process per query,
+per ADR-0003's isolation design) is implemented; it is what `workload` already
+does. KERNEL mode (amortize decode/index once, repeat query/materialize/encode
+in-process) is designed — an opt-in `--repeat-in-process N` flag — but not
+built this iteration. MATERIALIZE mode (isolate materialize+encode from a
+precomputed id/evidence selection) is **BLOCKED**: it needs a stable
+precomputed-selection input format that does not exist yet, and one process
+per timing sample is deliberate for the existing isolation guarantees; forcing
+it now would either bypass those guarantees or require a larger redesign than
+this pass's scope.
+
+Next: verified Zig conformance on hosted CI, then a fresh controlled S-scale
+campaign under this pass, compared query-by-query against the pass-1 S-scale
+evidence in the "Controlled S-scale campaign (hosted)" section of STATUS.md.
