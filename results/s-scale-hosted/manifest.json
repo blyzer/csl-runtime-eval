@@ -1,0 +1,111 @@
+{
+  "schema": "csl.eval.campaign/v0.1",
+  "state": "PASS",
+  "started_utc": "2026-09-28T08:21:31.875082+00:00",
+  "environment": {
+    "tools": {
+      "python3": {
+        "state": "PASS",
+        "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.12.14"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/home/runner/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/home/runner/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/usr/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "Linux-6.17.0-1022-azure-aarch64-with-glibc2.39",
+    "architecture": "aarch64",
+    "uname": [
+      "Linux",
+      "runnervmoyp6c",
+      "6.17.0-1022-azure",
+      "#22-Ubuntu SMP Mon Jul 27 17:12:01 UTC 2026",
+      "aarch64",
+      "aarch64"
+    ],
+    "hardware": "aarch64",
+    "cpu_count": 4,
+    "runtime_python": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/python",
+    "sdk_workaround": false
+  },
+  "preflight_machine": {
+    "utc": "2026-09-28T08:21:30.283885+00:00",
+    "load_average": [
+      1.22412109375,
+      0.615234375,
+      0.24560546875
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 15288483840,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "native_probe": {
+    "state": "PASS",
+    "command": [
+      "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/zig",
+      "build-exe",
+      "/tmp/csl-native-probe-y9bhh2hx/probe.zig",
+      "-lc",
+      "-femit-bin=/tmp/csl-native-probe-y9bhh2hx/probe"
+    ],
+    "build_exit": 0,
+    "diagnostic": "",
+    "run_exit": 0,
+    "sdk": null
+  },
+  "preflight_failures": [],
+  "classification": "controlled",
+  "preset": "S",
+  "shape": "mixed",
+  "repeat": 10,
+  "seed": 20260928,
+  "source_digest": "f7c585d4d216aad92e073acd15a18d3c24bdc285ed765942be3190d81b77198e",
+  "policy": {
+    "max_one_minute_load_per_cpu": 0.75,
+    "minimum_available_memory_gib": 3,
+    "swapping": "reject controlled samples with increased swapout counter",
+    "cache": "one validated unmeasured warm-up per candidate/query; OS caches not flushed",
+    "order": "seeded query order; alternating paired candidate order",
+    "isolation": "serial native processes; oracle preparation and result verification outside native timing"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust/target/release/csl-eval-rust",
+      "digest": "8bef11ce3ce41b8a79f8e3748de56003e71cbb502bdadee6f6d7238c3fb8e043",
+      "bytes": 851896
+    },
+    "zig": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/zig/zig-out/bin/csl-eval-zig",
+      "digest": "651e37a0b21a985692bfc2ec329d6daa8aac496584ad77436c3c369c9716e89c",
+      "bytes": 2014944
+    }
+  },
+  "corpus": {
+    "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/S-campaign-mixed-20260928.json",
+    "digest": "7ea1c7884968206fff29bfd3f0a0102018df2e82cd6377061870b18ab369c4d5",
+    "entities": 100000,
+    "edges": 1000000,
+    "evidence": 1000000
+  },
+  "finished_utc": "2026-09-28T08:34:24.620350+00:00",
+  "records": 180
+}

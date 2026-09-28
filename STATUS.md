@@ -1,8 +1,11 @@
 # Runtime evaluation status
 
 Gate #1: **PARTIAL — no architecture decision**. This is an empirical bootstrap,
-not production CSL. All results below are local macOS/arm64 evidence; remote
-GitHub Actions and controlled S/M performance runs have not been executed.
+not production CSL. Most results below are local macOS/arm64 evidence; a
+controlled S-scale W1/W2 campaign for pure Rust/Zig has since run on a native
+GitHub Actions Linux ARM64 runner (see "Controlled S-scale campaign (hosted)"
+below). Controlled M-scale, the remaining Gate workloads, and hybrid-at-scale
+still have not been executed.
 
 | Area | State | Implementation and proof |
 |---|---|---|
@@ -22,8 +25,8 @@ GitHub Actions and controlled S/M performance runs have not been executed.
 | W10 A/B | DONE (bootstrap experiment) | `csl_kernel_experimental.h` and execute_into are separate from stable v1; **200 samples**, 5 sizes, 10 repeats, A/B and independent pure Rust/Zig allocation-copy controls. [records](results/w10/records.json), [latencies/tax](results/w10/boundary.json). Echo is not a CSL workload; tax includes ownership and copy costs |
 | W10 C | PARTIAL | `harness/shared_view.py` bounds/version/snapshot/integrity/lifetime seam and tests; mmap implementation and measurements NOT STARTED |
 | W11 smoke builds | DONE | Debug/release builds and **6 PASS** clean-output/no-op records, including real Zig-linked hybrid; [builds](results/w11/builds.json). Dependency/global/kernel caches may be warm; not fully uncached build claims |
-| CI and manifest | DONE locally | Executable `ci/*.sh`, `ci/manifest.py`, `.github/workflows/smoke.yml`; [smoke log](results/raw/phase-smoke.log). Source manifest uses repository-relative paths and excludes itself/results/caches. Remote CI execution pending |
-| Gate-scale evaluation | PARTIAL | Controlled S/M repeats and remaining Gate workloads; typed/hash and phase-timing groundwork complete, no winner selected |
+| CI and manifest | DONE, remote executed | Executable `ci/*.sh`, `ci/manifest.py`, `.github/workflows/{smoke,s-scale}.yml`; [smoke log](results/raw/phase-smoke.log). Source manifest uses repository-relative paths and excludes itself/results/caches. `smoke` and the controlled `s-scale` campaign have both run and passed on hosted GitHub Actions (see hosted section below) |
+| Gate-scale evaluation | PARTIAL | Controlled S repeats for pure Rust/Zig W1/W2 done on hosted ARM64 (see below); M repeats and remaining Gate workloads pending; typed/hash and phase-timing groundwork complete, no winner selected |
 
 ## Typed/hash representation pass 1 — 2026-09-28
 
@@ -52,6 +55,41 @@ are preserved in [results/bootstrap-20260927](results/bootstrap-20260927/);
 current unprofiled smoke records reflect the new source and are not replacements
 for a controlled comparison. Remote CI and controlled S/M remain unexecuted.
 
+## Controlled S-scale campaign (hosted) — 2026-09-28
+
+The GitHub Actions `S-scale paired evaluation` workflow ran on a native
+`ubuntu-24.04-arm` runner (Neoverse-N2, 4 vCPU, kernel 6.17 aarch64), unblocking
+what this Mac's SDK/load ceiling prevented. **180 controlled records, state
+PASS, 0 condition failures, `sdk_workaround: false`.** Evidence: [summary](results/s-scale-hosted/summary.json),
+[manifest](results/s-scale-hosted/manifest.json), [records](results/s-scale-hosted/records.jsonl),
+[runner context](results/hosted-context/run.json). Oversized per-query reference
+dumps (up to 122 MiB) are reproducible from this run and are not stored in git;
+see `results/s-scale-hosted/references/` in the workflow's uploaded artifact.
+
+Comparing pure Rust and pure Zig at S scale (corpus/synthetic/S-campaign-mixed-20260928.json,
+mixed shape, 10 repeats) reproduces the same asymmetries already visible at
+SMOKE scale in [results/phases](results/phases/), now at ~150-200x the entity
+count, which is evidence the pattern is structural rather than noise:
+
+- **Load phase**: Rust's JSON load is consistently ~2x faster than Zig's across
+  every query (SMOKE: ~2.8ms vs ~5.5ms; S: ~486ms vs ~1000ms).
+- **Index phase**: Zig's hash-index construction is consistently faster than
+  Rust's (SMOKE: ~0.8ms vs ~0.8-0.9ms roughly tied; S: ~355-397ms vs ~572-661ms,
+  Zig ~35-45% faster).
+- **Result/encoding phase and peak RSS on larger result sets** (`scan-type`,
+  `depth-8`): Zig is ~2-2.3x faster to encode and uses ~2-2.3x less peak RSS
+  than Rust, at both scales.
+- **Net effect**: which candidate has the lower median *elapsed* time depends on
+  the query shape (Rust wins point lookups and shallow traversals where load
+  dominates; Zig wins large-result-set queries where encoding/memory dominates)
+  — there is no overall winner across W1/W2 at this scale.
+
+This is Rust's `serde_json::Value` + Zig's typed records/manual allocation
+showing up in measurement, not a kernel/query-engine difference; it does not
+by itself justify an architecture choice. Pure Rust and pure Zig only — hybrid
+has no S-scale measurement yet. Corpus M, workloads W3-W12, mutation/persistence
+and hybrid-at-scale remain the same open items listed below.
+
 ## S-scale campaign protocol — 2026-09-28
 
 [ADR-0003](adr/0003-s-scale-campaign.md) defines the serial paired runner in
@@ -61,18 +99,19 @@ conditions. Every accepted result must match its schema-validated oracle tree,
 including JSON value types. Source, corpus, artifact and reference hashes protect
 campaign provenance. Python validation now has **17 passing test methods**.
 
-The native controlled preflight is **BLOCKED**: Zig 0.14.1 cannot link its libc
-probe with the original SDK, the local SDK overlay is present, and host load
-exceeds the declared ceiling. [Preflight evidence](results/s-scale-preflight/controlled/manifest.json).
-The paired runner passed a 36-record exploratory SMOKE campaign. Native and
-profile conformance remain **212/159 PASS**, with zero failures/skips.
+The native controlled preflight on **this Mac** remains **BLOCKED**: Zig 0.14.1
+cannot link its libc probe with the original SDK, the local SDK overlay is
+present, and host load exceeds the declared ceiling. [Preflight evidence](results/s-scale-preflight/controlled/manifest.json).
+The paired runner passed a 36-record exploratory SMOKE campaign locally. Native
+and profile conformance remain **212/159 PASS**, with zero failures/skips.
 
-A manually dispatched [GitHub Actions workflow](.github/workflows/s-scale.yml)
-is prepared and passes actionlint. It uses pinned toolchains and native Linux
-ARM64 by default, records runner context, and uploads evidence even after a
-failure. It has not been published or executed; no CSL GitHub remote is configured.
-Hosted VM results will require their own scope and do not imply bare-metal
-qualification. Controlled S and M evidence remain outstanding.
+The [GitHub Actions workflow](.github/workflows/s-scale.yml) passes actionlint
+and, dispatched against a native `ubuntu-24.04-arm` runner, ran the preflight
+clean (`sdk_workaround: false`) and completed the controlled S-scale W1/W2
+campaign — see the hosted section above. Hosted VM results are their own scope
+and do not imply bare-metal qualification. Controlled M evidence and the
+remaining Gate workloads (W3-W9, W12), hybrid-at-scale, and mutation/persistence
+remain outstanding.
 
 ## Measurements and provenance
 

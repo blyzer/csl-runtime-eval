@@ -1,0 +1,2582 @@
+[
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "iteration": 9
+  }
+]

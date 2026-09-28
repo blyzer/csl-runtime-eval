@@ -1,0 +1,107 @@
+{"state": "PASS", "validation": "schemas"}
+{"state": "PASS", "validation": "oracle"}
+{"architecture": "aarch64", "cpu_count": 4, "hardware": "aarch64", "os": "Linux-6.17.0-1022-azure-aarch64-with-glibc2.39", "runtime_python": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/python", "sdk_workaround": false, "tools": {"cargo": {"path": "/home/runner/.cargo/bin/cargo", "state": "PASS", "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"}, "git": {"path": "/usr/bin/git", "state": "PASS", "version": "git version 2.55.0"}, "python3": {"path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/python3", "state": "PASS", "version": "Python 3.12.14"}, "rustc": {"path": "/home/runner/.cargo/bin/rustc", "state": "PASS", "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"}, "zig": {"path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/zig", "state": "PASS", "version": "0.14.1"}}, "uname": ["Linux", "runnervmoyp6c", "6.17.0-1022-azure", "#22-Ubuntu SMP Mon Jul 27 17:12:01 UTC 2026", "aarch64", "aarch64"]}
+{"corpus": "SMOKE", "seed": 20260927, "state": "PASS"}
+test_equality_preserves_json_types (tests.test_campaign.Campaign.test_equality_preserves_json_types) ... ok
+test_machine_guards (tests.test_campaign.Campaign.test_machine_guards) ... ok
+test_order_is_paired_balanced_and_reproducible (tests.test_campaign.Campaign.test_order_is_paired_balanced_and_reproducible) ... ok
+test_prepared_oracle_resets_query_state (tests.test_campaign.Campaign.test_prepared_oracle_resets_query_state) ... ok
+test_sample_compares_full_result_and_rejects_invalid_profile (tests.test_campaign.Campaign.test_sample_compares_full_result_and_rejects_invalid_profile) ... ok
+test_missing_tool_is_not_pass (tests.test_harness.Harness.test_missing_tool_is_not_pass) ... ok
+test_process_exit_and_metrics (tests.test_harness.Harness.test_process_exit_and_metrics) ... ok
+test_hybrid_profile_is_rejected (tests.test_harness.Profiles.test_hybrid_profile_is_rejected) ... ok
+test_profile_validation (tests.test_harness.Profiles.test_profile_validation) ... ok
+test_result_mismatch_is_never_accepted (tests.test_harness.Profiles.test_result_mismatch_is_never_accepted) ... ok
+test_cases (tests.test_semantics.Semantics.test_cases) ... ok
+test_digest_is_semantic (tests.test_semantics.Semantics.test_digest_is_semantic) ... ok
+test_generator (tests.test_semantics.Semantics.test_generator) ... ok
+test_golden (tests.test_semantics.Semantics.test_golden) ... ok
+test_malformed (tests.test_semantics.Semantics.test_malformed) ... ok
+test_empty (tests.test_shared_view.SharedViews.test_empty) ... ok
+test_lifetime_and_bounds (tests.test_shared_view.SharedViews.test_lifetime_and_bounds) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.259s
+
+OK
+{"artifact_bytes": 851896, "build_kind": "existing-cache", "candidate": "rust", "command": ["/home/runner/.cargo/bin/cargo", "build", "--release", "--manifest-path", "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust/Cargo.toml"], "elapsed_ns": 5920866353, "state": "PASS"}
+{"artifact_bytes": 2014944, "build_kind": "existing-cache", "candidate": "zig", "command": ["/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/zig", "build", "-Doptimize=ReleaseFast"], "elapsed_ns": 19352068076, "state": "PASS"}
+{"artifact_bytes": 937864, "build_kind": "existing-cache", "candidate": "hybrid", "command": ["/home/runner/.cargo/bin/cargo", "build", "--release", "--manifest-path", "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/hybrid/Cargo.toml"], "elapsed_ns": 17307030788, "state": "PASS"}
+{"counts": {"FAIL": 0, "PASS": 212, "SKIP": 0}, "state": "PASS"}
+{"counts": {"FAIL": 0, "PASS": 159, "SKIP": 0}, "state": "PASS"}
+[{"candidate": "rust", "records": 3, "state": "PASS", "workload": "W1"}, {"candidate": "zig", "records": 3, "state": "PASS", "workload": "W1"}, {"candidate": "hybrid", "records": 3, "state": "PASS", "workload": "W1"}]
+[{"candidate": "rust", "records": 3, "state": "PASS", "workload": "W1"}, {"candidate": "zig", "records": 3, "state": "PASS", "workload": "W1"}]
+[{"candidate": "rust", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "hybrid", "records": 6, "state": "PASS", "workload": "W2"}]
+[{"candidate": "rust", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 6, "state": "PASS", "workload": "W2"}]
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling libc v0.2.189
+   Compiling zmij v1.0.23
+   Compiling generic-array v0.14.7
+   Compiling serde_core v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling cfg-if v1.0.5
+   Compiling csl-eval-hybrid v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/hybrid/rust)
+   Compiling memchr v2.8.3
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling cpufeatures v0.2.17
+   Compiling itoa v1.0.18
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.91s
+     Running unittests src/main.rs (prototypes/hybrid/target/debug/build/csl-eval-hybrid/ba6622a2b35fa716/out/csl_eval_hybrid-ba6622a2b35fa716)
+
+running 1 test
+test tests::ffi_roundtrip ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling csl-eval-hybrid v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/hybrid/rust)
+    Finished `release` profile [optimized] target(s) in 0.56s
+     Running `prototypes/hybrid/target/release/csl-eval-hybrid info`
+{"abi_version":1,"candidate":"hybrid","semantic_kernel":"zig"}
+    Finished `release` profile [optimized] target(s) in 0.01s
+     Running `prototypes/hybrid/target/release/csl-eval-hybrid echo 'CSL Rust + Zig'`
+{"echo":"CSL Rust + Zig"}
+{"entities": 1000, "edges": 5000, "seed": 20260927, "output": "corpus/synthetic/SMOKE-cycle.json"}
+[{"candidate": "rust", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "hybrid", "records": 6, "state": "PASS", "workload": "W2"}]
+{"entities": 1000, "edges": 5000, "seed": 20260927, "output": "corpus/synthetic/SMOKE-fanout.json"}
+[{"candidate": "rust", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "hybrid", "records": 6, "state": "PASS", "workload": "W2"}]
+{"completed": 1, "total": 36, "candidate": "rust", "query": "outgoing"}
+{"completed": 2, "total": 36, "candidate": "zig", "query": "outgoing"}
+{"completed": 3, "total": 36, "candidate": "zig", "query": "outgoing"}
+{"completed": 4, "total": 36, "candidate": "rust", "query": "outgoing"}
+{"completed": 5, "total": 36, "candidate": "zig", "query": "scan-type"}
+{"completed": 6, "total": 36, "candidate": "rust", "query": "scan-type"}
+{"completed": 7, "total": 36, "candidate": "rust", "query": "scan-type"}
+{"completed": 8, "total": 36, "candidate": "zig", "query": "scan-type"}
+{"completed": 9, "total": 36, "candidate": "rust", "query": "depth-8"}
+{"completed": 10, "total": 36, "candidate": "zig", "query": "depth-8"}
+{"completed": 11, "total": 36, "candidate": "zig", "query": "depth-8"}
+{"completed": 12, "total": 36, "candidate": "rust", "query": "depth-8"}
+{"completed": 13, "total": 36, "candidate": "zig", "query": "depth-4"}
+{"completed": 14, "total": 36, "candidate": "rust", "query": "depth-4"}
+{"completed": 15, "total": 36, "candidate": "rust", "query": "depth-4"}
+{"completed": 16, "total": 36, "candidate": "zig", "query": "depth-4"}
+{"completed": 17, "total": 36, "candidate": "rust", "query": "lookup-missing"}
+{"completed": 18, "total": 36, "candidate": "zig", "query": "lookup-missing"}
+{"completed": 19, "total": 36, "candidate": "zig", "query": "lookup-missing"}
+{"completed": 20, "total": 36, "candidate": "rust", "query": "lookup-missing"}
+{"completed": 21, "total": 36, "candidate": "zig", "query": "lookup-first"}
+{"completed": 22, "total": 36, "candidate": "rust", "query": "lookup-first"}
+{"completed": 23, "total": 36, "candidate": "rust", "query": "lookup-first"}
+{"completed": 24, "total": 36, "candidate": "zig", "query": "lookup-first"}
+{"completed": 25, "total": 36, "candidate": "zig", "query": "depth-2"}
+{"completed": 26, "total": 36, "candidate": "rust", "query": "depth-2"}
+{"completed": 27, "total": 36, "candidate": "rust", "query": "depth-2"}
+{"completed": 28, "total": 36, "candidate": "zig", "query": "depth-2"}
+{"completed": 29, "total": 36, "candidate": "rust", "query": "incoming"}
+{"completed": 30, "total": 36, "candidate": "zig", "query": "incoming"}
+{"completed": 31, "total": 36, "candidate": "zig", "query": "incoming"}
+{"completed": 32, "total": 36, "candidate": "rust", "query": "incoming"}
+{"completed": 33, "total": 36, "candidate": "rust", "query": "mixed-relations"}
+{"completed": 34, "total": 36, "candidate": "zig", "query": "mixed-relations"}
+{"completed": 35, "total": 36, "candidate": "zig", "query": "mixed-relations"}
+{"completed": 36, "total": 36, "candidate": "rust", "query": "mixed-relations"}
+{"state": "PASS", "classification": "exploratory", "records": 36, "output": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/campaign-ci.IoNUm4/run"}

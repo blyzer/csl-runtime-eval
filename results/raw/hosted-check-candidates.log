@@ -1,0 +1,100 @@
+RUN cargo fmt --manifest-path prototypes/rust/Cargo.toml --check
+PASS
+RUN cargo clippy --manifest-path prototypes/rust/Cargo.toml --all-targets --all-features -- -D warnings
+   Compiling version_check v0.9.5
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+    Checking typenum v1.20.1
+   Compiling libc v0.2.189
+   Compiling generic-array v0.14.7
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling syn v3.0.6
+    Checking crypto-common v0.1.7
+    Checking block-buffer v0.10.4
+   Compiling serde_json v1.0.151
+   Compiling serde v1.0.229
+    Checking digest v0.10.7
+    Checking cpufeatures v0.2.17
+    Checking cfg-if v1.0.5
+    Checking itoa v1.0.18
+    Checking memchr v2.8.3
+    Checking sha2 v0.10.9
+   Compiling serde_derive v1.0.229
+    Checking csl-eval-rust v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.36s
+PASS
+RUN cargo test --manifest-path prototypes/rust/Cargo.toml
+   Compiling typenum v1.20.1
+   Compiling serde_core v1.0.229
+   Compiling libc v0.2.189
+   Compiling zmij v1.0.23
+   Compiling itoa v1.0.18
+   Compiling cfg-if v1.0.5
+   Compiling memchr v2.8.3
+   Compiling generic-array v0.14.7
+   Compiling cpufeatures v0.2.17
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling csl-eval-rust v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.79s
+     Running unittests src/main.rs (prototypes/rust/target/debug/build/csl-eval-rust/58ce721666be7fdc/out/csl_eval_rust-58ce721666be7fdc)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+PASS
+RUN cargo build --manifest-path prototypes/rust/Cargo.toml
+   Compiling csl-eval-rust v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.71s
+PASS
+RUN cargo build --release --manifest-path prototypes/rust/Cargo.toml
+    Finished `release` profile [optimized] target(s) in 0.01s
+PASS
+RUN cargo fmt --manifest-path prototypes/hybrid/Cargo.toml --check
+PASS
+RUN cargo clippy --manifest-path prototypes/hybrid/Cargo.toml --all-targets --all-features -- -D warnings
+    Checking typenum v1.20.1
+    Checking libc v0.2.189
+    Checking zmij v1.0.23
+    Checking serde_core v1.0.229
+    Checking memchr v2.8.3
+    Checking itoa v1.0.18
+    Checking generic-array v0.14.7
+   Compiling csl-eval-hybrid v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/hybrid/rust)
+    Checking cpufeatures v0.2.17
+    Checking cfg-if v1.0.5
+    Checking block-buffer v0.10.4
+    Checking crypto-common v0.1.7
+    Checking digest v0.10.7
+    Checking sha2 v0.10.9
+    Checking serde_json v1.0.151
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.09s
+PASS
+RUN cargo test --manifest-path prototypes/hybrid/Cargo.toml
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running unittests src/main.rs (prototypes/hybrid/target/debug/build/csl-eval-hybrid/ba6622a2b35fa716/out/csl_eval_hybrid-ba6622a2b35fa716)
+
+running 1 test
+test tests::ffi_roundtrip ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+PASS
+RUN cargo build --manifest-path prototypes/hybrid/Cargo.toml
+   Compiling csl-eval-hybrid v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/hybrid/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.37s
+PASS
+RUN cargo build --release --manifest-path prototypes/hybrid/Cargo.toml
+    Finished `release` profile [optimized] target(s) in 0.01s
+PASS
+RUN zig fmt --check prototypes/zig prototypes/hybrid/zig
+PASS
+PASS prototypes/zig build/test
+PASS prototypes/hybrid/zig build/test

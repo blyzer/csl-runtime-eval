@@ -7,3 +7,4 @@ __pycache__/
 corpus/synthetic/*.json
 !corpus/synthetic/SMOKE.json
 results/s-scale-exploratory/references/
+results/s-scale-hosted/references/
