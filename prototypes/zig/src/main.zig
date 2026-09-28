@@ -31,10 +31,19 @@ fn run(a: std.mem.Allocator) ![]const u8 {
     const workload = std.mem.eql(u8, args[1], "workload");
     var timer = try std.time.Timer.start();
     const fixture = try std.fs.cwd().readFileAlloc(a, try arg(args, if (workload) "--corpus" else "--fixture"), std.math.maxInt(usize));
+    const read_ns = timer.lap();
     const fx = try std.json.parseFromSlice(sem.Fixture, a, fixture, .{});
-    const load_ns = timer.lap();
-    const store = try sem.Store.init(a, fx.value);
-    const index_ns = timer.read();
+    const parse_ns = timer.lap();
+    const load_ns = read_ns + parse_ns;
+    try sem.Store.checkSchema(fx.value);
+    const entities = try sem.Store.buildEntities(a, fx.value);
+    const entities_ns = timer.lap();
+    var adjacency = try sem.Store.buildAdjacency(a, fx.value, &entities);
+    const adjacency_ns = timer.lap();
+    sem.Store.sortAdjacency(&adjacency.out, &adjacency.inc);
+    const sort_ns = timer.read();
+    const index_ns = entities_ns + adjacency_ns + sort_ns;
+    const store = sem.Store{ .a = a, .fx = fx.value, .entities = entities, .out = adjacency.out, .inc = adjacency.inc };
     if (std.mem.eql(u8, args[1], "load")) return std.json.stringifyAlloc(a, .{ .entities = fx.value.entities.len, .snapshot = fx.value.snapshot }, .{});
     if (workload) {
         const id = try arg(args, "--id");
@@ -58,6 +67,7 @@ fn run(a: std.mem.Allocator) ![]const u8 {
                     .representation = "typed-hash-v1",
                     .phases_ns = .{ .load = load_ns, .index = index_ns, .query = query_ns, .result = result_ns },
                     .phase_detail_ns = .{ .decode = load_ns, .construct = @as(u64, 0), .materialize = materialize_ns, .encode = encode_ns },
+                    .phase_subdetail_ns = .{ .read = read_ns, .parse = parse_ns, .entities = entities_ns, .adjacency = adjacency_ns, .sort = sort_ns },
                 }, .{});
                 return std.fmt.allocPrint(a, "{s},\"result\":{s}}}", .{ metadata[0 .. metadata.len - 1], result });
             }

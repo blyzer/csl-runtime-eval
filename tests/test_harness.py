@@ -44,6 +44,19 @@ class Profiles(unittest.TestCase):
             bad={**envelope,'phase_detail_ns':bad_detail}
             with self.subTest(detail=bad_detail),self.assertRaises(ValueError):unpack_profile(bad,10)
 
+    def test_phase_subdetail_consistency(self):
+        from harness.benchctl import unpack_profile
+        base={**self.envelope(),'phase_detail_ns':{'decode':1,'construct':0,'materialize':1,'encode':3}}
+        envelope={**base,'phase_subdetail_ns':{'read':1,'parse':0,'entities':1,'adjacency':1,'sort':0}}
+        actual,metadata=unpack_profile(envelope,10)
+        self.assertEqual(metadata['phase_subdetail_ns'],envelope['phase_subdetail_ns'])
+        with self.assertRaisesRegex(ValueError,'phase_detail_ns'):
+            unpack_profile({k:v for k,v in envelope.items() if k!='phase_detail_ns'},10)
+        for bad_sub in [{'read':2,'parse':0,'entities':1,'adjacency':1,'sort':0},
+                        {'read':1,'parse':0,'entities':2,'adjacency':1,'sort':0}]:
+            bad={**envelope,'phase_subdetail_ns':bad_sub}
+            with self.subTest(sub=bad_sub),self.assertRaises(ValueError):unpack_profile(bad,10)
+
     def test_result_mismatch_is_never_accepted(self):
         from harness.benchctl import benchmark
         from pathlib import Path

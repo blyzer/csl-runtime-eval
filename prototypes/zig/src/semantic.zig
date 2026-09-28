@@ -74,34 +74,56 @@ pub const Store = struct {
     entities: std.AutoHashMap(u64, Entity),
     out: Index,
     inc: Index,
-    pub fn init(a: A, fx: Fixture) !Store {
+    pub fn checkSchema(fx: Fixture) !void {
         if (!std.mem.eql(u8, fx.schema, "csl.eval.fixture/v0.1")) return error.InvalidFixture;
-        var self = Store{ .a = a, .fx = fx, .entities = std.AutoHashMap(u64, Entity).init(a), .out = Index.init(a), .inc = Index.init(a) };
+    }
+    /// Entity map build + container-reference validation: the "entities"
+    /// index sub-phase (STEP 3 investigation).
+    pub fn buildEntities(a: A, fx: Fixture) !std.AutoHashMap(u64, Entity) {
+        var entities = std.AutoHashMap(u64, Entity).init(a);
         for (fx.entities) |e| {
-            if (e.id == 0 or e.name_sid >= fx.strings.len or self.entities.contains(e.id)) return error.InvalidEntity;
-            try self.entities.put(e.id, e);
+            if (e.id == 0 or e.name_sid >= fx.strings.len or entities.contains(e.id)) return error.InvalidEntity;
+            try entities.put(e.id, e);
         }
         for (fx.entities) |e| {
             if (e.container) |id| {
-                if (!self.entities.contains(id)) return error.InvalidReference;
+                if (!entities.contains(id)) return error.InvalidReference;
             }
         }
+        return entities;
+    }
+    pub const Adjacency = struct { out: Index, inc: Index };
+    /// Outgoing/incoming adjacency build + edge/evidence-reference
+    /// validation: the "adjacency" index sub-phase.
+    pub fn buildAdjacency(a: A, fx: Fixture, entities: *const std.AutoHashMap(u64, Entity)) !Adjacency {
+        var out = Index.init(a);
+        var inc = Index.init(a);
         for (fx.relations) |e| {
-            if (!self.entities.contains(e.subject) or !self.entities.contains(e.object)) return error.InvalidReference;
-            for ([_]*Index{ &self.out, &self.inc }, [_]u64{ e.subject, e.object }) |idx, id| {
+            if (!entities.contains(e.subject) or !entities.contains(e.object)) return error.InvalidReference;
+            for ([_]*Index{ &out, &inc }, [_]u64{ e.subject, e.object }) |idx, id| {
                 const entry = try idx.getOrPut(id);
                 if (!entry.found_existing) entry.value_ptr.* = std.ArrayList(Edge).init(a);
                 try entry.value_ptr.append(e);
             }
         }
         for (fx.evidence) |e| {
-            if (e.proposition == 0 or !self.entities.contains(e.subject) or !self.entities.contains(e.object)) return error.InvalidEvidence;
+            if (e.proposition == 0 or !entities.contains(e.subject) or !entities.contains(e.object)) return error.InvalidEvidence;
         }
-        for ([_]*Index{ &self.out, &self.inc }) |idx| {
+        return .{ .out = out, .inc = inc };
+    }
+    /// Final adjacency-list sort: the "sort" index sub-phase.
+    pub fn sortAdjacency(out: *Index, inc: *Index) void {
+        for ([_]*Index{ out, inc }) |idx| {
             var it = idx.valueIterator();
             while (it.next()) |rows| std.mem.sort(Edge, rows.items, {}, edgeLess);
         }
-        return self;
+    }
+    pub fn init(a: A, fx: Fixture) !Store {
+        try checkSchema(fx);
+        const entities = try buildEntities(a, fx);
+        var adjacency = try buildAdjacency(a, fx, &entities);
+        sortAdjacency(&adjacency.out, &adjacency.inc);
+        return Store{ .a = a, .fx = fx, .entities = entities, .out = adjacency.out, .inc = adjacency.inc };
     }
     fn eval(self: *const Store, q: Query, truncated: *bool) anyerror!Set {
         var result = Set.init(self.a);

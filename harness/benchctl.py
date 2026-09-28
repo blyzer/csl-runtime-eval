@@ -117,10 +117,14 @@ def corpus_path(corpus):
 def profile_metadata(envelope, elapsed_ns):
     """Reject missing/unsupported timing metadata before accepting a measurement."""
     required = {'profile_schema', 'representation', 'phases_ns', 'result'}
-    optional = {'phase_detail_ns'}
+    optional = {'phase_detail_ns', 'phase_subdetail_ns'}
     if not isinstance(envelope, dict) or not required <= set(envelope) or set(envelope) - required - optional:
         raise ValueError('invalid profile envelope')
-    fields = ('profile_schema', 'representation', 'phases_ns') + (('phase_detail_ns',) if 'phase_detail_ns' in envelope else ())
+    if 'phase_subdetail_ns' in envelope and 'phase_detail_ns' not in envelope:
+        raise ValueError('phase_subdetail_ns requires phase_detail_ns')
+    fields = ('profile_schema', 'representation', 'phases_ns')
+    fields += ('phase_detail_ns',) if 'phase_detail_ns' in envelope else ()
+    fields += ('phase_subdetail_ns',) if 'phase_subdetail_ns' in envelope else ()
     for field in fields:
         import jsonschema
         jsonschema.validate(envelope[field], VALIDATORS['benchmark-record'].schema['properties'][field])
@@ -135,6 +139,14 @@ def profile_metadata(envelope, elapsed_ns):
             raise ValueError('decode+construct must equal load')
         if detail['materialize'] + detail['encode'] != phases['result']:
             raise ValueError('materialize+encode must equal result')
+    if 'phase_subdetail_ns' in envelope:
+        sub = envelope['phase_subdetail_ns']
+        if any(type(value) is not int for value in sub.values()):
+            raise ValueError('invalid phase subdetail duration')
+        if sub['read'] + sub['parse'] != envelope['phase_detail_ns']['decode']:
+            raise ValueError('read+parse must equal decode')
+        if sub['entities'] + sub['adjacency'] + sub['sort'] != phases['index']:
+            raise ValueError('entities+adjacency+sort must equal index')
     return {key: envelope[key] for key in fields}
 
 def unpack_profile(envelope, elapsed_ns):

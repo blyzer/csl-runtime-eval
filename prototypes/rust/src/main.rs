@@ -108,10 +108,9 @@ struct Store<'a> {
     inc: Index,
 }
 impl<'a> Store<'a> {
-    fn new(fx: &'a Fixture) -> Result<Self> {
-        if fx.schema != "csl.eval.fixture/v0.1" {
-            return Err("invalid fixture schema".into());
-        }
+    /// Entity map build + container-reference validation: the "entities"
+    /// index sub-phase (STEP 3 investigation).
+    fn build_entities(fx: &'a Fixture) -> Result<HashMap<u64, Entity>> {
         let mut entities = HashMap::new();
         for e in &fx.entities {
             if e.id == 0
@@ -126,6 +125,11 @@ impl<'a> Store<'a> {
                 return Err("invalid container".into());
             }
         }
+        Ok(entities)
+    }
+    /// Outgoing/incoming adjacency build + edge/evidence-reference
+    /// validation: the "adjacency" index sub-phase.
+    fn build_adjacency(fx: &'a Fixture, entities: &HashMap<u64, Entity>) -> Result<(Index, Index)> {
         let mut out: Index = HashMap::new();
         let mut inc: Index = HashMap::new();
         for e in &fx.relations {
@@ -143,17 +147,21 @@ impl<'a> Store<'a> {
                 return Err("invalid evidence".into());
             }
         }
-        for idx in [&mut out, &mut inc] {
+        Ok((out, inc))
+    }
+    /// Final adjacency-list sort: the "sort" index sub-phase.
+    fn sort_adjacency(out: &mut Index, inc: &mut Index) {
+        for idx in [out, inc] {
             for rows in idx.values_mut() {
                 rows.sort_unstable_by_key(|e| (e.subject, e.relation.as_str(), e.object));
             }
         }
-        Ok(Self {
-            fx,
-            entities,
-            out,
-            inc,
-        })
+    }
+    fn check_schema(fx: &Fixture) -> Result<()> {
+        if fx.schema != "csl.eval.fixture/v0.1" {
+            return Err("invalid fixture schema".into());
+        }
+        Ok(())
     }
     fn eval(&self, q: &Value, truncated: &mut bool) -> Result<Set> {
         let op = q["op"].as_str().ok_or("missing op")?;
@@ -411,17 +419,34 @@ fn main_run() -> Result<String> {
     })?;
     let start = std::time::Instant::now();
     let bytes = std::fs::read(path)?;
+    let read_ns = start.elapsed().as_nanos();
+    let start = std::time::Instant::now();
     let fx: Fixture = serde_json::from_slice(&bytes)?;
+    let parse_ns = start.elapsed().as_nanos();
     // decode and construct are fused: serde deserializes bytes directly into
     // the typed `Fixture`, with no intermediate generic representation to
     // isolate a separate construction pass from (see ADR-0004 fairness note;
     // Zig's `std.json.parseFromSlice` is fused the same way).
-    let decode_ns = start.elapsed().as_nanos();
+    let decode_ns = read_ns + parse_ns;
     let construct_ns: u128 = 0;
     let load_ns = decode_ns + construct_ns;
+    Store::check_schema(&fx)?;
     let start = std::time::Instant::now();
-    let store = Store::new(&fx)?;
-    let index_ns = start.elapsed().as_nanos();
+    let entities = Store::build_entities(&fx)?;
+    let entities_ns = start.elapsed().as_nanos();
+    let start = std::time::Instant::now();
+    let (mut out, mut inc) = Store::build_adjacency(&fx, &entities)?;
+    let adjacency_ns = start.elapsed().as_nanos();
+    let start = std::time::Instant::now();
+    Store::sort_adjacency(&mut out, &mut inc);
+    let sort_ns = start.elapsed().as_nanos();
+    let index_ns = entities_ns + adjacency_ns + sort_ns;
+    let store = Store {
+        fx: &fx,
+        entities,
+        out,
+        inc,
+    };
     match cmd {
         "load" => Ok(json!({"entities":store.entities.len(),"snapshot":fx.snapshot}).to_string()),
         "query" => {
@@ -456,6 +481,10 @@ fn main_run() -> Result<String> {
                     "phase_detail_ns": {
                         "decode": decode_ns, "construct": construct_ns,
                         "materialize": materialize_ns, "encode": encode_ns
+                    },
+                    "phase_subdetail_ns": {
+                        "read": read_ns, "parse": parse_ns,
+                        "entities": entities_ns, "adjacency": adjacency_ns, "sort": sort_ns
                     }
                 })
                 .to_string();

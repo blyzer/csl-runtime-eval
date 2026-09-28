@@ -173,6 +173,39 @@
       },
       "additionalProperties": false
     },
+    "phase_subdetail_ns": {
+      "type": "object",
+      "required": [
+        "read",
+        "parse",
+        "entities",
+        "adjacency",
+        "sort"
+      ],
+      "properties": {
+        "read": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parse": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "entities": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "adjacency": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sort": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
     "profile_schema": {
       "const": "csl.eval.profile/v0.1"
     }
@@ -188,6 +221,12 @@
       "representation"
     ],
     "phase_detail_ns": [
+      "phases_ns",
+      "representation",
+      "profile_schema"
+    ],
+    "phase_subdetail_ns": [
+      "phase_detail_ns",
       "phases_ns",
       "representation",
       "profile_schema"

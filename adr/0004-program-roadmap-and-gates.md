@@ -159,6 +159,17 @@ counted? "Layered IR is useful" does not imply "use MLIR" — an MLIR-inspired
 architecture without MLIR itself is a valid outcome. No code exists for this
 track.
 
+**MLIR and Mojo are independent decisions, not a package deal.** MLIR is
+compiler/IR infrastructure (dialects, operations, interfaces, lowering,
+rewrite patterns, pass infrastructure, verification) usable from any host
+language, including Rust; it does not require adopting Mojo. Mojo is a
+programming language *built on* MLIR infrastructure; adopting Mojo would pull
+in MLIR as a transitive dependency, but studying or even adopting an
+MLIR-inspired layered-IR architecture (SyntaxIR -> SemanticIR -> QueryIR ->
+ExecutionIR) implies nothing about Mojo. Investigating MLIR concepts must not
+be read as movement toward Mojo, and Mojo's status does not gate or follow
+from MLIR's.
+
 ## Mojo — deferred
 
 **Status: DEFERRED.** No dependency, no prototype. Reactivation trigger: a
