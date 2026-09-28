@@ -1,0 +1,43 @@
+{"state": "PASS", "validation": "schemas"}
+{"state": "PASS", "validation": "oracle"}
+{"architecture": "arm64", "cpu_count": 10, "hardware": "arm", "os": "macOS-27.0-arm64-arm-64bit-Mach-O", "runtime_python": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python", "sdk_workaround": true, "tools": {"cargo": {"path": "/Users/enverfrancisco/.cargo/bin/cargo", "state": "PASS", "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"}, "git": {"path": "/opt/homebrew/bin/git", "state": "PASS", "version": "git version 2.55.0"}, "python3": {"path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3", "state": "PASS", "version": "Python 3.14.7"}, "rustc": {"path": "/Users/enverfrancisco/.cargo/bin/rustc", "state": "PASS", "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"}, "zig": {"path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig", "state": "PASS", "version": "0.14.1"}}, "uname": ["Darwin", "Envers-MacBook-Pro.local", "27.0.0", "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000", "arm64", "arm"]}
+{"corpus": "SMOKE", "seed": 20260927, "state": "PASS"}
+test_missing_tool_is_not_pass (tests.test_harness.Harness.test_missing_tool_is_not_pass) ... ok
+test_process_exit_and_metrics (tests.test_harness.Harness.test_process_exit_and_metrics) ... ok
+test_cases (tests.test_semantics.Semantics.test_cases) ... ok
+test_digest_is_semantic (tests.test_semantics.Semantics.test_digest_is_semantic) ... ok
+test_generator (tests.test_semantics.Semantics.test_generator) ... ok
+test_golden (tests.test_semantics.Semantics.test_golden) ... ok
+test_malformed (tests.test_semantics.Semantics.test_malformed) ... ok
+test_empty (tests.test_shared_view.SharedViews.test_empty) ... ok
+test_lifetime_and_bounds (tests.test_shared_view.SharedViews.test_lifetime_and_bounds) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.198s
+
+OK
+{"artifact_bytes": 690368, "build_kind": "existing-cache", "candidate": "rust", "command": ["/Users/enverfrancisco/.cargo/bin/cargo", "build", "--release", "--manifest-path", "/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/rust/Cargo.toml"], "elapsed_ns": 163382667, "state": "PASS"}
+{"artifact_bytes": 261808, "build_kind": "existing-cache", "candidate": "zig", "command": ["/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig", "build", "-Doptimize=ReleaseFast"], "elapsed_ns": 4490290083, "state": "PASS"}
+{"artifact_bytes": 786496, "build_kind": "existing-cache", "candidate": "hybrid", "command": ["/Users/enverfrancisco/.cargo/bin/cargo", "build", "--release", "--manifest-path", "/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/hybrid/Cargo.toml"], "elapsed_ns": 1555139333, "state": "PASS"}
+{"counts": {"FAIL": 0, "PASS": 148, "SKIP": 0}, "state": "PASS"}
+[{"candidate": "rust", "records": 3, "state": "PASS", "workload": "W1"}, {"candidate": "zig", "records": 3, "state": "PASS", "workload": "W1"}, {"candidate": "hybrid", "records": 3, "state": "PASS", "workload": "W1"}]
+[{"candidate": "rust", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "hybrid", "records": 6, "state": "PASS", "workload": "W2"}]
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.07s
+     Running unittests src/main.rs (prototypes/hybrid/target/debug/build/csl-eval-hybrid/18d739063cc533cc/out/csl_eval_hybrid-18d739063cc533cc)
+
+running 1 test
+test tests::ffi_roundtrip ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling csl-eval-hybrid v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/hybrid/rust)
+    Finished `release` profile [optimized] target(s) in 1.40s
+     Running `prototypes/hybrid/target/release/csl-eval-hybrid info`
+{"abi_version":1,"candidate":"hybrid","semantic_kernel":"zig"}
+    Finished `release` profile [optimized] target(s) in 0.15s
+     Running `prototypes/hybrid/target/release/csl-eval-hybrid echo 'CSL Rust + Zig'`
+{"echo":"CSL Rust + Zig"}
+{"entities": 1000, "edges": 5000, "seed": 20260927, "output": "corpus/synthetic/SMOKE-cycle.json"}
+[{"candidate": "rust", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "hybrid", "records": 6, "state": "PASS", "workload": "W2"}]
+{"entities": 1000, "edges": 5000, "seed": 20260927, "output": "corpus/synthetic/SMOKE-fanout.json"}
+[{"candidate": "rust", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 6, "state": "PASS", "workload": "W2"}, {"candidate": "hybrid", "records": 6, "state": "PASS", "workload": "W2"}]

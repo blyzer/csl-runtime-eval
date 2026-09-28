@@ -1,0 +1,12 @@
+{
+  "candidate": "zig",
+  "state": "PASS",
+  "elapsed_ns": 5190114250,
+  "build_kind": "existing-cache",
+  "artifact_bytes": 263664,
+  "command": [
+    "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+    "build",
+    "-Doptimize=ReleaseFast"
+  ]
+}

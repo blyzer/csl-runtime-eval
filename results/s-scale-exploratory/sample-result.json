@@ -1,0 +1,43 @@
+{
+  "profile_schema": "csl.eval.profile/v0.1",
+  "representation": "typed-hash-v1",
+  "phases_ns": {
+    "index": 375223125,
+    "load": 389074292,
+    "query": 139637708,
+    "result": 1192364000
+  },
+  "elapsed_ns": 4229492500,
+  "rss_peak_bytes": 1739276288,
+  "result_digest": "sha256:f70855dc61ff024769cd40d6a952f5339926d59c0fbb58404870b6ae7de14d5e",
+  "conformance": true,
+  "conditions_before": {
+    "utc": "2026-09-28T07:11:44.201941+00:00",
+    "load_average": [
+      23.2119140625,
+      28.27978515625,
+      34.9951171875
+    ],
+    "cpu_count": 10,
+    "available_memory_bytes": 4755849216,
+    "swapout_pages": 195713594,
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37093475)\t79%; AC attached; not charging present: true",
+    "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded"
+  },
+  "conditions_after": {
+    "utc": "2026-09-28T07:11:48.488508+00:00",
+    "load_average": [
+      25.59716796875,
+      28.68994140625,
+      35.1005859375
+    ],
+    "cpu_count": 10,
+    "available_memory_bytes": 4750852096,
+    "swapout_pages": 195713594,
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37093475)\t79%; AC attached; not charging present: true",
+    "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded"
+  },
+  "condition_failures": [
+    "one-minute load exceeds declared per-CPU ceiling"
+  ]
+}

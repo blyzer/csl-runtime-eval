@@ -1,0 +1,1 @@
+{"state": "BLOCKED", "reasons": ["one-minute load exceeds declared per-CPU ceiling", "unmodified native toolchain/SDK probe failed", "project SDK overlay is present; build provenance is not native"], "output": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/s-scale-preflight/controlled"}

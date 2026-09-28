@@ -1,0 +1,94 @@
+{
+  "schema": "csl.eval.campaign/v0.1",
+  "state": "BLOCKED",
+  "started_utc": "2026-09-28T07:03:28.651250+00:00",
+  "environment": {
+    "tools": {
+      "python3": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.14.7"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/opt/homebrew/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "uname": [
+      "Darwin",
+      "Envers-MacBook-Pro.local",
+      "27.0.0",
+      "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+      "arm64",
+      "arm"
+    ],
+    "hardware": "arm",
+    "cpu_count": 10,
+    "runtime_python": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python",
+    "sdk_workaround": true
+  },
+  "preflight_machine": {
+    "utc": "2026-09-28T07:03:26.956651+00:00",
+    "load_average": [
+      48.13623046875,
+      51.3837890625,
+      43.591796875
+    ],
+    "cpu_count": 10,
+    "available_memory_bytes": 4420878336,
+    "swapout_pages": 195634753,
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37093475)\t79%; AC attached; not charging present: true",
+    "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded"
+  },
+  "native_probe": {
+    "state": "FAIL",
+    "command": [
+      "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+      "build-exe",
+      "/var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-sbnlfxs3/probe.zig",
+      "-lc",
+      "-femit-bin=/var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-sbnlfxs3/probe"
+    ],
+    "build_exit": 1,
+    "diagnostic": "error: undefined symbol: __availability_version_check\n    note: referenced by /Users/enverfrancisco/.cache/zig/o/0af9b8a0986e8ff6ed0fefde09e86521/libcompiler_rt.a(libcompiler_rt.a.o):___isPlatformVersionAtLeast\nerror: undefined symbol: _abort\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-sbnlfxs3/probe.o:_posix.abort\nerror: undefined symbol: _bzero\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-sbnlfxs3/probe.o:_hash_map.HashMapUnmanaged(usize,*debug.SelfInfo.Module__struct_6947,hash_map.AutoContext(usize),80).initMetadatas\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-sbnlfxs3/probe.o:_hash_map.HashMapUnmanaged([]const u8,u64,hash_map.StringContext,80).initMetadatas\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-sbnlfxs3/probe.o:_hash_map.HashMapUnmanaged([]const u8,debug.SelfInfo.Module__struct_6947.OFileInfo,hash_map.StringContext,80).initMetadatas\nerror: undefined symbol: _getenv\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-sbnlfxs3/probe.o:_posix.getenvZ\nerror: undefined symbol: _isatty\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-sbnlfxs3/probe.o:_posix.isatty\nerror: undefined symbol: _sigaction\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-sbnlfxs3/probe.o:_posix.sigaction\n",
+    "run_exit": null,
+    "sdk": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+  },
+  "preflight_failures": [
+    "one-minute load exceeds declared per-CPU ceiling",
+    "unmodified native toolchain/SDK probe failed",
+    "project SDK overlay is present; build provenance is not native"
+  ],
+  "classification": "controlled",
+  "preset": "S",
+  "shape": "mixed",
+  "repeat": 10,
+  "seed": 20260928,
+  "source_digest": "8f31a85a8600bfe34142a213c05797f363e3f16a43528f27e34ca9f7f227df22",
+  "policy": {
+    "max_one_minute_load_per_cpu": 0.5,
+    "minimum_available_memory_gib": 3,
+    "swapping": "reject controlled samples with increased swapout counter",
+    "cache": "one validated unmeasured warm-up per candidate/query; OS caches not flushed",
+    "order": "seeded query order; alternating paired candidate order",
+    "isolation": "serial native processes; oracle preparation and result verification outside native timing"
+  }
+}

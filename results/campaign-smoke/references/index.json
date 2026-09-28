@@ -1,0 +1,140 @@
+[
+  {
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/campaign-smoke/references/W1-lookup-first.json",
+    "file_digest": "48f84d9db6e6c6839266c403240df9d756c30e561db749d01d83b9d1238f6443",
+    "result_digest": "sha256:7dfae43129952c257e02b6573e4e6f2a5a204b1eb13eef0df02586afe1933aa0"
+  },
+  {
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/campaign-smoke/references/W1-lookup-missing.json",
+    "file_digest": "f6ea990c02370c54698948104fb3cf9990a4e2c86de61f87790251c94dda4b2a",
+    "result_digest": "sha256:a7f281f5ed0b90e5546c59475c93795a207830e09ecfbbc657bbddfe8b8d9c66"
+  },
+  {
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/campaign-smoke/references/W1-scan-type.json",
+    "file_digest": "8ce6518171201f6c537747588decffe2fca43868b732ed4d3dae0848387c8d07",
+    "result_digest": "sha256:6081f7a408cb2245e9991f67e101d260ecbaba6a5130998d95ba6a265c18fb0b"
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    },
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/campaign-smoke/references/W2-outgoing.json",
+    "file_digest": "91009dda3cc75696124fbb19a6fd18aa978dcf374cbb2188aab8f048ef7d1b2d",
+    "result_digest": "sha256:901544ef5fe919fe9ac172e330791de94fd4bc6e385c6cd0c2ffa7749c8c2cf6"
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    },
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/campaign-smoke/references/W2-incoming.json",
+    "file_digest": "3824c662ac27d7a819413d70f519a6f13ab4e8b8cfb06d355aec5925f391fcea",
+    "result_digest": "sha256:eff84a0b235c97d52e25935fcaa43b8f97be65da6f8a6690af9994a87ea756c6"
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    },
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/campaign-smoke/references/W2-depth-2.json",
+    "file_digest": "c0804100935190f7d57c397cc85431e81e4240427189a2b7a5a2252ccb476a3d",
+    "result_digest": "sha256:53ce9f50e9253519f316f56712ac0bf4cdf50fed29d34df48702dc470a889291"
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/campaign-smoke/references/W2-depth-4.json",
+    "file_digest": "5d1c8940e75bae3367accd921d403e4040ac5ec223dbdae7017cff3f8cbdb96a",
+    "result_digest": "sha256:1494aa8c1ee4fa72c027ebef719212b94852f1db60474be31c52f4b4b5b53325"
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    },
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/campaign-smoke/references/W2-depth-8.json",
+    "file_digest": "3843f93021d352ef370bfde24564a7bab1d52ffebb8afc8f9233044a65ff7c90",
+    "result_digest": "sha256:6067851534348e88e10da46d30d7fb5d136a6427a60709726d0ec587600839ef"
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    },
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/campaign-smoke/references/W2-mixed-relations.json",
+    "file_digest": "8f69dd76ae1ef38f7fbf6c243c48acc0f3c4408fd4ca3c50304cb92ba3b66c3a",
+    "result_digest": "sha256:d496974b31c02b69a7eedf29ea12ccd88b10964da8a17ab2f5e4150fc4ddfa5b"
+  }
+]

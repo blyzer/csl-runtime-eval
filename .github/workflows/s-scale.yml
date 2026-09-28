@@ -1,0 +1,86 @@
+name: S-scale paired evaluation
+
+on:
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: Native Linux architecture
+        type: choice
+        options: [ubuntu-24.04-arm, ubuntu-24.04]
+        default: ubuntu-24.04-arm
+      shape:
+        description: Corpus shape
+        type: choice
+        options: [mixed, cycle, fanout]
+        default: mixed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: s-scale-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    runs-on: ${{ inputs.runner }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned native toolchains
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install nightly-2026-08-08 --profile minimal --component rustfmt,clippy
+          rustup override set nightly-2026-08-08
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.txt ziglang==0.14.1
+          ln -s "$(.venv/bin/python -c 'import ziglang,pathlib; print(pathlib.Path(ziglang.__file__).parent / "zig")')" .venv/bin/zig
+          echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
+      - name: Validate source and native candidates
+        run: |
+          set -euo pipefail
+          ./ci/verify-manifest.sh
+          ./ci/smoke.sh > results-smoke.log 2>&1
+          ./ci/check-candidates.sh > results-checks.log 2>&1
+          # check-candidates also installs a debug Zig executable; restore release.
+          python harness/benchctl.py build rust
+          python harness/benchctl.py build zig
+          python harness/benchctl.py conformance --candidate rust --candidate zig --profile
+      - name: Record runner context
+        env:
+          RUNNER_LABEL: ${{ inputs.runner }}
+        run: |
+          mkdir -p results/hosted-context
+          uname -a > results/hosted-context/uname.txt
+          lscpu > results/hosted-context/cpu.txt
+          free -b > results/hosted-context/memory.txt
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          keys = ['GITHUB_REPOSITORY', 'GITHUB_SHA', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT',
+                  'RUNNER_OS', 'RUNNER_ARCH', 'RUNNER_LABEL', 'ImageOS', 'ImageVersion']
+          Path('results/hosted-context/run.json').write_text(json.dumps({k:os.environ.get(k) for k in keys},indent=2)+'\n')
+          PY
+      - name: Run paired S campaign
+        env:
+          CORPUS_SHAPE: ${{ inputs.shape }}
+        run: |
+          set -euo pipefail
+          python harness/campaign.py run --preset S --repeat 10 --seed 20260928 \
+            --shape "$CORPUS_SHAPE" --max-load-per-cpu 0.75 \
+            --output results/s-scale-hosted | tee results/s-scale-hosted.log
+      - name: Upload evidence, including failed or blocked attempts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: s-scale-${{ inputs.runner }}-${{ inputs.shape }}-${{ github.run_id }}
+          retention-days: 7
+          path: |
+            results/
+            results-smoke.log
+            results-checks.log
+          if-no-files-found: error

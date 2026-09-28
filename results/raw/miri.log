@@ -1,0 +1,2 @@
+error: 'cargo-miri' is not installed for the toolchain 'nightly-2026-08-08-aarch64-apple-darwin'.
+help: run `rustup component add miri` to install it

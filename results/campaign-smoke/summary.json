@@ -1,0 +1,260 @@
+{
+  "state": "PASS",
+  "classification": "exploratory",
+  "records": 36,
+  "condition_failure_samples": 36,
+  "groups": [
+    {
+      "workload": "W1",
+      "query": "lookup-first",
+      "candidate": "rust",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 2338541.5,
+        "index": 745771.0,
+        "query": 79875.0,
+        "result": 28833.5
+      },
+      "median_elapsed_ns": 11049770.5,
+      "median_peak_rss_bytes": 5013504.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-first",
+      "candidate": "zig",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 4061958.5,
+        "index": 750291.5,
+        "query": 38062.5,
+        "result": 12708.0
+      },
+      "median_elapsed_ns": 12738062.0,
+      "median_peak_rss_bytes": 4751360.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-missing",
+      "candidate": "rust",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 2357292.0,
+        "index": 738208.0,
+        "query": 2687.5,
+        "result": 11979.5
+      },
+      "median_elapsed_ns": 10644541.0,
+      "median_peak_rss_bytes": 4825088.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-missing",
+      "candidate": "zig",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 4028520.5,
+        "index": 716604.5,
+        "query": 6458.5,
+        "result": 3375.0
+      },
+      "median_elapsed_ns": 12690208.5,
+      "median_peak_rss_bytes": 4734976.0
+    },
+    {
+      "workload": "W1",
+      "query": "scan-type",
+      "candidate": "rust",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 2643354.0,
+        "index": 853833.0,
+        "query": 413041.5,
+        "result": 3649395.5
+      },
+      "median_elapsed_ns": 23322729.5,
+      "median_peak_rss_bytes": 11075584.0
+    },
+    {
+      "workload": "W1",
+      "query": "scan-type",
+      "candidate": "zig",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 4119687.0,
+        "index": 681459.0,
+        "query": 501916.5,
+        "result": 1603646.0
+      },
+      "median_elapsed_ns": 14469729.0,
+      "median_peak_rss_bytes": 6127616.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-2",
+      "candidate": "rust",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 2267145.5,
+        "index": 728000.0,
+        "query": 123104.0,
+        "result": 366667.0
+      },
+      "median_elapsed_ns": 12932792.0,
+      "median_peak_rss_bytes": 5267456.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-2",
+      "candidate": "zig",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 4062791.5,
+        "index": 720771.0,
+        "query": 151271.0,
+        "result": 187958.5
+      },
+      "median_elapsed_ns": 12844146.0,
+      "median_peak_rss_bytes": 4898816.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-4",
+      "candidate": "rust",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 2333416.5,
+        "index": 769062.5,
+        "query": 501750.5,
+        "result": 4491875.5
+      },
+      "median_elapsed_ns": 23923625.0,
+      "median_peak_rss_bytes": 12689408.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-4",
+      "candidate": "zig",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 4096812.5,
+        "index": 701083.0,
+        "query": 572125.0,
+        "result": 2300167.0
+      },
+      "median_elapsed_ns": 15767458.5,
+      "median_peak_rss_bytes": 6668288.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-8",
+      "candidate": "rust",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 4156541.5,
+        "index": 848313.0,
+        "query": 668604.5,
+        "result": 6761708.0
+      },
+      "median_elapsed_ns": 40909229.0,
+      "median_peak_rss_bytes": 15630336.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-8",
+      "candidate": "zig",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 4182708.5,
+        "index": 704375.0,
+        "query": 804500.0,
+        "result": 3049958.5
+      },
+      "median_elapsed_ns": 17256896.0,
+      "median_peak_rss_bytes": 7815168.0
+    },
+    {
+      "workload": "W2",
+      "query": "incoming",
+      "candidate": "rust",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 2250333.5,
+        "index": 708042.0,
+        "query": 91104.0,
+        "result": 76500.0
+      },
+      "median_elapsed_ns": 11264583.0,
+      "median_peak_rss_bytes": 4890624.0
+    },
+    {
+      "workload": "W2",
+      "query": "incoming",
+      "candidate": "zig",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 3973041.5,
+        "index": 683583.5,
+        "query": 131813.0,
+        "result": 37853.5
+      },
+      "median_elapsed_ns": 12754271.0,
+      "median_peak_rss_bytes": 4767744.0
+    },
+    {
+      "workload": "W2",
+      "query": "mixed-relations",
+      "candidate": "rust",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 2317916.5,
+        "index": 714812.5,
+        "query": 120312.5,
+        "result": 342749.5
+      },
+      "median_elapsed_ns": 11951458.5,
+      "median_peak_rss_bytes": 5521408.0
+    },
+    {
+      "workload": "W2",
+      "query": "mixed-relations",
+      "candidate": "zig",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 4118625.5,
+        "index": 723708.0,
+        "query": 144791.5,
+        "result": 193042.0
+      },
+      "median_elapsed_ns": 12523792.0,
+      "median_peak_rss_bytes": 4882432.0
+    },
+    {
+      "workload": "W2",
+      "query": "outgoing",
+      "candidate": "rust",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 2424166.5,
+        "index": 818916.5,
+        "query": 99084.0,
+        "result": 81229.5
+      },
+      "median_elapsed_ns": 13017062.5,
+      "median_peak_rss_bytes": 5144576.0
+    },
+    {
+      "workload": "W2",
+      "query": "outgoing",
+      "candidate": "zig",
+      "samples": 2,
+      "median_phases_ns": {
+        "load": 4159042.0,
+        "index": 751854.0,
+        "query": 153208.5,
+        "result": 39499.5
+      },
+      "median_elapsed_ns": 13516812.0,
+      "median_peak_rss_bytes": 4767744.0
+    }
+  ]
+}

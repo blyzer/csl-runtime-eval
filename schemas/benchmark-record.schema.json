@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "csl.eval.benchmark/v0.1",
+  "type": "object",
+  "required": [
+    "schema",
+    "candidate",
+    "workload",
+    "corpus",
+    "iteration",
+    "elapsed_ns",
+    "rss_peak_bytes",
+    "result_digest",
+    "conformance",
+    "candidate_commit",
+    "seed",
+    "mode",
+    "compiler",
+    "os",
+    "architecture",
+    "hardware"
+  ],
+  "properties": {
+    "schema": {
+      "const": "csl.eval.benchmark/v0.1"
+    },
+    "candidate": {
+      "enum": [
+        "rust",
+        "zig",
+        "hybrid",
+        "oracle"
+      ]
+    },
+    "candidate_commit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "workload": {
+      "type": "string"
+    },
+    "corpus": {
+      "type": "string"
+    },
+    "seed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "iteration": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "mode": {
+      "enum": [
+        "cold-process",
+        "cold-data",
+        "warm-process",
+        "warm-index",
+        "incremental"
+      ]
+    },
+    "elapsed_ns": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rss_start_bytes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "rss_peak_bytes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "artifact_bytes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "result_digest": {
+      "type": "string"
+    },
+    "conformance": {
+      "type": "boolean"
+    },
+    "compiler": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "os": {
+      "type": "string"
+    },
+    "hardware": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "architecture": {
+      "type": "string"
+    },
+    "representation": {
+      "enum": [
+        "typed-hash-v1"
+      ]
+    },
+    "phases_ns": {
+      "type": "object",
+      "required": [
+        "load",
+        "index",
+        "query",
+        "result"
+      ],
+      "properties": {
+        "load": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "query": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "result": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "profile_schema": {
+      "const": "csl.eval.profile/v0.1"
+    }
+  },
+  "additionalProperties": true,
+  "dependentRequired": {
+    "phases_ns": [
+      "representation",
+      "profile_schema"
+    ],
+    "profile_schema": [
+      "phases_ns",
+      "representation"
+    ]
+  }
+}

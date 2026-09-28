@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "csl.eval.query/v0.1",
+  "type": "object",
+  "required": [
+    "schema",
+    "query_id",
+    "op"
+  ],
+  "properties": {
+    "schema": {
+      "const": "csl.eval.query/v0.1"
+    },
+    "query_id": {
+      "type": "string"
+    },
+    "op": {
+      "enum": [
+        "RESOLVE",
+        "RELATED",
+        "TRAVERSE",
+        "FILTER"
+      ]
+    },
+    "entity_id": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 18446744073709551615
+    },
+    "input": {
+      "$ref": "#/$defs/node"
+    },
+    "relation": {
+      "enum": [
+        "CALLS",
+        "REFERENCES",
+        "IMPLEMENTS",
+        "OVERRIDES",
+        "CONTAINS"
+      ]
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "CALLS",
+          "REFERENCES",
+          "IMPLEMENTS",
+          "OVERRIDES",
+          "CONTAINS"
+        ]
+      }
+    },
+    "direction": {
+      "enum": [
+        "OUT",
+        "IN"
+      ]
+    },
+    "max_depth": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 64
+    },
+    "max_paths": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 18446744073709551615
+    },
+    "kind": {
+      "enum": [
+        "TYPE",
+        "METHOD",
+        "FUNCTION",
+        "FIELD",
+        "MODULE",
+        "FILE",
+        "VARIABLE"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "min_quality": {
+          "enum": [
+            "VERIFIED",
+            "EXACT",
+            "DERIVED",
+            "PROBABLE",
+            "LEXICAL"
+          ]
+        },
+        "freshness_epoch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        }
+      },
+      "additionalProperties": false
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": [
+        "op"
+      ],
+      "properties": {
+        "schema": {
+          "const": "csl.eval.query/v0.1"
+        },
+        "query_id": {
+          "type": "string"
+        },
+        "op": {
+          "enum": [
+            "RESOLVE",
+            "RELATED",
+            "TRAVERSE",
+            "FILTER"
+          ]
+        },
+        "entity_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "input": {
+          "$ref": "#/$defs/node"
+        },
+        "relation": {
+          "enum": [
+            "CALLS",
+            "REFERENCES",
+            "IMPLEMENTS",
+            "OVERRIDES",
+            "CONTAINS"
+          ]
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "CALLS",
+              "REFERENCES",
+              "IMPLEMENTS",
+              "OVERRIDES",
+              "CONTAINS"
+            ]
+          }
+        },
+        "direction": {
+          "enum": [
+            "OUT",
+            "IN"
+          ]
+        },
+        "max_depth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "max_paths": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "kind": {
+          "enum": [
+            "TYPE",
+            "METHOD",
+            "FUNCTION",
+            "FIELD",
+            "MODULE",
+            "FILE",
+            "VARIABLE"
+          ]
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "min_quality": {
+              "enum": [
+                "VERIFIED",
+                "EXACT",
+                "DERIVED",
+                "PROBABLE",
+                "LEXICAL"
+              ]
+            },
+            "freshness_epoch": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            }
+          },
+          "additionalProperties": false
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "RESOLVE"
+              }
+            }
+          },
+          "then": {
+            "oneOf": [
+              {
+                "required": [
+                  "entity_id"
+                ]
+              },
+              {
+                "required": [
+                  "name"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "enum": [
+                  "RELATED",
+                  "TRAVERSE"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "input"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "op": {
+            "const": "RESOLVE"
+          }
+        }
+      },
+      "then": {
+        "oneOf": [
+          {
+            "required": [
+              "entity_id"
+            ]
+          },
+          {
+            "required": [
+              "name"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "op": {
+            "enum": [
+              "RELATED",
+              "TRAVERSE"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "input"
+        ]
+      }
+    }
+  ]
+}

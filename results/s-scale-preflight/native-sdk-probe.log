@@ -1,0 +1,14 @@
+error: undefined symbol: __availability_version_check
+    note: referenced by /Users/enverfrancisco/.cache/zig/o/0af9b8a0986e8ff6ed0fefde09e86521/libcompiler_rt.a(libcompiler_rt.a.o):___isPlatformVersionAtLeast
+error: undefined symbol: _abort
+    note: referenced by /tmp/csl-native-probe.o:_posix.abort
+error: undefined symbol: _bzero
+    note: referenced by /tmp/csl-native-probe.o:_hash_map.HashMapUnmanaged(usize,*debug.SelfInfo.Module__struct_6947,hash_map.AutoContext(usize),80).initMetadatas
+    note: referenced by /tmp/csl-native-probe.o:_hash_map.HashMapUnmanaged([]const u8,u64,hash_map.StringContext,80).initMetadatas
+    note: referenced by /tmp/csl-native-probe.o:_hash_map.HashMapUnmanaged([]const u8,debug.SelfInfo.Module__struct_6947.OFileInfo,hash_map.StringContext,80).initMetadatas
+error: undefined symbol: _getenv
+    note: referenced by /tmp/csl-native-probe.o:_posix.getenvZ
+error: undefined symbol: _isatty
+    note: referenced by /tmp/csl-native-probe.o:_posix.isatty
+error: undefined symbol: _sigaction
+    note: referenced by /tmp/csl-native-probe.o:_posix.sigaction

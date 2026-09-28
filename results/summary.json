@@ -1,0 +1,214 @@
+{
+  "w1": {
+    "records": 90,
+    "candidates": {
+      "rust": {
+        "median_elapsed_ms": 18.968,
+        "rss_min_bytes": 12500992,
+        "rss_max_bytes": 18202624,
+        "records_mixed": 30
+      },
+      "zig": {
+        "median_elapsed_ms": 10.991,
+        "rss_min_bytes": 4702208,
+        "rss_max_bytes": 5685248,
+        "records_mixed": 30
+      },
+      "hybrid": {
+        "median_elapsed_ms": 24.448,
+        "rss_min_bytes": 22069248,
+        "rss_max_bytes": 24985600,
+        "records_mixed": 30
+      }
+    }
+  },
+  "w2": {
+    "records": 540,
+    "candidates": {
+      "rust": {
+        "median_elapsed_ms": 21.927,
+        "rss_min_bytes": 12648448,
+        "rss_max_bytes": 22740992,
+        "records_mixed": 60
+      },
+      "zig": {
+        "median_elapsed_ms": 11.11,
+        "rss_min_bytes": 4718592,
+        "rss_max_bytes": 7077888,
+        "records_mixed": 60
+      },
+      "hybrid": {
+        "median_elapsed_ms": 27.745,
+        "rss_min_bytes": 22069248,
+        "rss_max_bytes": 27869184,
+        "records_mixed": 60
+      }
+    }
+  },
+  "w10": [
+    {
+      "size": 0,
+      "strategy": "pure-rust",
+      "median_us": 0.041,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 0,
+      "strategy": "pure-zig",
+      "median_us": 0.0,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 0,
+      "strategy": "A",
+      "median_us": 0.0,
+      "boundary_tax_ns": 0.0
+    },
+    {
+      "size": 0,
+      "strategy": "B",
+      "median_us": 0.021,
+      "boundary_tax_ns": 20.5
+    },
+    {
+      "size": 1024,
+      "strategy": "pure-rust",
+      "median_us": 0.042,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 1024,
+      "strategy": "pure-zig",
+      "median_us": 0.042,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 1024,
+      "strategy": "A",
+      "median_us": 0.145,
+      "boundary_tax_ns": 103.5
+    },
+    {
+      "size": 1024,
+      "strategy": "B",
+      "median_us": 0.042,
+      "boundary_tax_ns": 0.0
+    },
+    {
+      "size": 65536,
+      "strategy": "pure-rust",
+      "median_us": 1.313,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 65536,
+      "strategy": "pure-zig",
+      "median_us": 1.0,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 65536,
+      "strategy": "A",
+      "median_us": 3.208,
+      "boundary_tax_ns": 2208.0
+    },
+    {
+      "size": 65536,
+      "strategy": "B",
+      "median_us": 1.479,
+      "boundary_tax_ns": 479.0
+    },
+    {
+      "size": 1048576,
+      "strategy": "pure-rust",
+      "median_us": 16.979,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 1048576,
+      "strategy": "pure-zig",
+      "median_us": 17.104,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 1048576,
+      "strategy": "A",
+      "median_us": 129.625,
+      "boundary_tax_ns": 112646.0
+    },
+    {
+      "size": 1048576,
+      "strategy": "B",
+      "median_us": 27.917,
+      "boundary_tax_ns": 10938.0
+    },
+    {
+      "size": 16777216,
+      "strategy": "pure-rust",
+      "median_us": 367.625,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 16777216,
+      "strategy": "pure-zig",
+      "median_us": 389.25,
+      "boundary_tax_ns": null
+    },
+    {
+      "size": 16777216,
+      "strategy": "A",
+      "median_us": 3001.125,
+      "boundary_tax_ns": 2633500.5
+    },
+    {
+      "size": 16777216,
+      "strategy": "B",
+      "median_us": 533.25,
+      "boundary_tax_ns": 165625.5
+    }
+  ],
+  "w11": [
+    {
+      "candidate": "rust",
+      "mode": "clean-output",
+      "state": "PASS",
+      "elapsed_ns": 5551794916,
+      "artifact_bytes": 690384
+    },
+    {
+      "candidate": "rust",
+      "mode": "no-op",
+      "state": "PASS",
+      "elapsed_ns": 201106875,
+      "artifact_bytes": 690384
+    },
+    {
+      "candidate": "zig",
+      "mode": "clean-output",
+      "state": "PASS",
+      "elapsed_ns": 8716829916,
+      "artifact_bytes": 261808
+    },
+    {
+      "candidate": "zig",
+      "mode": "no-op",
+      "state": "PASS",
+      "elapsed_ns": 824869958,
+      "artifact_bytes": 261808
+    },
+    {
+      "candidate": "hybrid",
+      "mode": "clean-output",
+      "state": "PASS",
+      "elapsed_ns": 4158785833,
+      "artifact_bytes": 786496
+    },
+    {
+      "candidate": "hybrid",
+      "mode": "no-op",
+      "state": "PASS",
+      "elapsed_ns": 221392041,
+      "artifact_bytes": 786496
+    }
+  ]
+}

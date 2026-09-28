@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "csl.eval.result/v0.1",
+  "type": "object",
+  "required": [
+    "schema",
+    "query_id",
+    "snapshot",
+    "entities",
+    "propositions",
+    "knowledge",
+    "completeness",
+    "digest"
+  ],
+  "properties": {
+    "schema": {
+      "const": "csl.eval.result/v0.1"
+    },
+    "query_id": {
+      "type": "string"
+    },
+    "snapshot": {
+      "type": "string"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 18446744073709551615
+      },
+      "uniqueItems": true
+    },
+    "propositions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "proposition",
+          "subject",
+          "relation",
+          "object",
+          "polarity",
+          "quality",
+          "freshness_epoch",
+          "lineage"
+        ],
+        "properties": {
+          "proposition": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "subject": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "relation": {
+            "enum": [
+              "CALLS",
+              "REFERENCES",
+              "IMPLEMENTS",
+              "OVERRIDES",
+              "CONTAINS"
+            ]
+          },
+          "object": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "polarity": {
+            "enum": [
+              "POSITIVE",
+              "NEGATIVE"
+            ]
+          },
+          "quality": {
+            "enum": [
+              "VERIFIED",
+              "EXACT",
+              "DERIVED",
+              "PROBABLE",
+              "LEXICAL"
+            ]
+          },
+          "freshness_epoch": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "lineage": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "knowledge": {
+      "type": "object",
+      "required": [
+        "model"
+      ],
+      "properties": {
+        "model": {
+          "const": "open-world"
+        }
+      },
+      "additionalProperties": false
+    },
+    "completeness": {
+      "type": "object",
+      "required": [
+        "entity_set"
+      ],
+      "properties": {
+        "entity_set": {
+          "enum": [
+            "OBSERVED",
+            "COMPLETE",
+            "TRUNCATED"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

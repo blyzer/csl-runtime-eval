@@ -1,0 +1,896 @@
+{
+  "gate": "gate1",
+  "state": "PARTIAL",
+  "decision": null,
+  "reason": "SMOKE correctness/build/ABI evidence only. S/M controlled measurements, representation tuning and remaining Gate workloads pending.",
+  "conformance": [
+    {
+      "candidate": "oracle",
+      "case": "resolve-known",
+      "state": "PASS",
+      "digest": "sha256:149b6d4f55b21b977bbfe0e1f1751973e2c1101e302e1c99ebd5b3973b62c32c"
+    },
+    {
+      "candidate": "rust",
+      "case": "resolve-known",
+      "state": "PASS",
+      "digest": "sha256:149b6d4f55b21b977bbfe0e1f1751973e2c1101e302e1c99ebd5b3973b62c32c"
+    },
+    {
+      "candidate": "zig",
+      "case": "resolve-known",
+      "state": "PASS",
+      "digest": "sha256:149b6d4f55b21b977bbfe0e1f1751973e2c1101e302e1c99ebd5b3973b62c32c"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "resolve-known",
+      "state": "PASS",
+      "digest": "sha256:149b6d4f55b21b977bbfe0e1f1751973e2c1101e302e1c99ebd5b3973b62c32c"
+    },
+    {
+      "candidate": "oracle",
+      "case": "resolve-missing",
+      "state": "PASS",
+      "digest": "sha256:a7f281f5ed0b90e5546c59475c93795a207830e09ecfbbc657bbddfe8b8d9c66"
+    },
+    {
+      "candidate": "rust",
+      "case": "resolve-missing",
+      "state": "PASS",
+      "digest": "sha256:a7f281f5ed0b90e5546c59475c93795a207830e09ecfbbc657bbddfe8b8d9c66"
+    },
+    {
+      "candidate": "zig",
+      "case": "resolve-missing",
+      "state": "PASS",
+      "digest": "sha256:a7f281f5ed0b90e5546c59475c93795a207830e09ecfbbc657bbddfe8b8d9c66"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "resolve-missing",
+      "state": "PASS",
+      "digest": "sha256:a7f281f5ed0b90e5546c59475c93795a207830e09ecfbbc657bbddfe8b8d9c66"
+    },
+    {
+      "candidate": "oracle",
+      "case": "resolve-ambiguous",
+      "state": "PASS",
+      "digest": "sha256:407dbd900008c36c6e981fc963bef0d0ea931a5738d3cc2b9c697f2ae0da8d38"
+    },
+    {
+      "candidate": "rust",
+      "case": "resolve-ambiguous",
+      "state": "PASS",
+      "digest": "sha256:407dbd900008c36c6e981fc963bef0d0ea931a5738d3cc2b9c697f2ae0da8d38"
+    },
+    {
+      "candidate": "zig",
+      "case": "resolve-ambiguous",
+      "state": "PASS",
+      "digest": "sha256:407dbd900008c36c6e981fc963bef0d0ea931a5738d3cc2b9c697f2ae0da8d38"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "resolve-ambiguous",
+      "state": "PASS",
+      "digest": "sha256:407dbd900008c36c6e981fc963bef0d0ea931a5738d3cc2b9c697f2ae0da8d38"
+    },
+    {
+      "candidate": "oracle",
+      "case": "outgoing",
+      "state": "PASS",
+      "digest": "sha256:ed35740010f086989890d0c611d2946ac951a37e76fac7b7b77a080943007b23"
+    },
+    {
+      "candidate": "rust",
+      "case": "outgoing",
+      "state": "PASS",
+      "digest": "sha256:ed35740010f086989890d0c611d2946ac951a37e76fac7b7b77a080943007b23"
+    },
+    {
+      "candidate": "zig",
+      "case": "outgoing",
+      "state": "PASS",
+      "digest": "sha256:ed35740010f086989890d0c611d2946ac951a37e76fac7b7b77a080943007b23"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "outgoing",
+      "state": "PASS",
+      "digest": "sha256:ed35740010f086989890d0c611d2946ac951a37e76fac7b7b77a080943007b23"
+    },
+    {
+      "candidate": "oracle",
+      "case": "incoming",
+      "state": "PASS",
+      "digest": "sha256:6a237479ba18dd952c66d14b7eb4884de6c4414360f2bdbd57a3ee878ac7978e"
+    },
+    {
+      "candidate": "rust",
+      "case": "incoming",
+      "state": "PASS",
+      "digest": "sha256:6a237479ba18dd952c66d14b7eb4884de6c4414360f2bdbd57a3ee878ac7978e"
+    },
+    {
+      "candidate": "zig",
+      "case": "incoming",
+      "state": "PASS",
+      "digest": "sha256:6a237479ba18dd952c66d14b7eb4884de6c4414360f2bdbd57a3ee878ac7978e"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "incoming",
+      "state": "PASS",
+      "digest": "sha256:6a237479ba18dd952c66d14b7eb4884de6c4414360f2bdbd57a3ee878ac7978e"
+    },
+    {
+      "candidate": "oracle",
+      "case": "depth-2",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "rust",
+      "case": "depth-2",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "zig",
+      "case": "depth-2",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "depth-2",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "oracle",
+      "case": "depth-4",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "rust",
+      "case": "depth-4",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "zig",
+      "case": "depth-4",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "depth-4",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "oracle",
+      "case": "depth-8",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "rust",
+      "case": "depth-8",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "zig",
+      "case": "depth-8",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "depth-8",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "oracle",
+      "case": "cycle",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "rust",
+      "case": "cycle",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "zig",
+      "case": "cycle",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "cycle",
+      "state": "PASS",
+      "digest": "sha256:1738968e5c2eedc2d90b3d9a946a394d54945f30cc409f961f182769414de63c"
+    },
+    {
+      "candidate": "oracle",
+      "case": "duplicate-paths",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "rust",
+      "case": "duplicate-paths",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "zig",
+      "case": "duplicate-paths",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "duplicate-paths",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "oracle",
+      "case": "relation-filter",
+      "state": "PASS",
+      "digest": "sha256:e2a9e88d86080a5306903e01c24ff173c9bdc195a2332296338f12e63150143f"
+    },
+    {
+      "candidate": "rust",
+      "case": "relation-filter",
+      "state": "PASS",
+      "digest": "sha256:e2a9e88d86080a5306903e01c24ff173c9bdc195a2332296338f12e63150143f"
+    },
+    {
+      "candidate": "zig",
+      "case": "relation-filter",
+      "state": "PASS",
+      "digest": "sha256:e2a9e88d86080a5306903e01c24ff173c9bdc195a2332296338f12e63150143f"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "relation-filter",
+      "state": "PASS",
+      "digest": "sha256:e2a9e88d86080a5306903e01c24ff173c9bdc195a2332296338f12e63150143f"
+    },
+    {
+      "candidate": "oracle",
+      "case": "entity-filter",
+      "state": "PASS",
+      "digest": "sha256:c7d583b8a99ef2c207fe05c6c864f71d4d163cc6e4af22e5b535de36df5f42d7"
+    },
+    {
+      "candidate": "rust",
+      "case": "entity-filter",
+      "state": "PASS",
+      "digest": "sha256:c7d583b8a99ef2c207fe05c6c864f71d4d163cc6e4af22e5b535de36df5f42d7"
+    },
+    {
+      "candidate": "zig",
+      "case": "entity-filter",
+      "state": "PASS",
+      "digest": "sha256:c7d583b8a99ef2c207fe05c6c864f71d4d163cc6e4af22e5b535de36df5f42d7"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "entity-filter",
+      "state": "PASS",
+      "digest": "sha256:c7d583b8a99ef2c207fe05c6c864f71d4d163cc6e4af22e5b535de36df5f42d7"
+    },
+    {
+      "candidate": "oracle",
+      "case": "scan-kind",
+      "state": "PASS",
+      "digest": "sha256:c7d583b8a99ef2c207fe05c6c864f71d4d163cc6e4af22e5b535de36df5f42d7"
+    },
+    {
+      "candidate": "rust",
+      "case": "scan-kind",
+      "state": "PASS",
+      "digest": "sha256:c7d583b8a99ef2c207fe05c6c864f71d4d163cc6e4af22e5b535de36df5f42d7"
+    },
+    {
+      "candidate": "zig",
+      "case": "scan-kind",
+      "state": "PASS",
+      "digest": "sha256:c7d583b8a99ef2c207fe05c6c864f71d4d163cc6e4af22e5b535de36df5f42d7"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "scan-kind",
+      "state": "PASS",
+      "digest": "sha256:c7d583b8a99ef2c207fe05c6c864f71d4d163cc6e4af22e5b535de36df5f42d7"
+    },
+    {
+      "candidate": "oracle",
+      "case": "minimum-quality",
+      "state": "PASS",
+      "digest": "sha256:20969d5933b18384fbbdaefcc51c1a78975fa9c1fe4114f4d4cdb280c8b38897"
+    },
+    {
+      "candidate": "rust",
+      "case": "minimum-quality",
+      "state": "PASS",
+      "digest": "sha256:20969d5933b18384fbbdaefcc51c1a78975fa9c1fe4114f4d4cdb280c8b38897"
+    },
+    {
+      "candidate": "zig",
+      "case": "minimum-quality",
+      "state": "PASS",
+      "digest": "sha256:20969d5933b18384fbbdaefcc51c1a78975fa9c1fe4114f4d4cdb280c8b38897"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "minimum-quality",
+      "state": "PASS",
+      "digest": "sha256:20969d5933b18384fbbdaefcc51c1a78975fa9c1fe4114f4d4cdb280c8b38897"
+    },
+    {
+      "candidate": "oracle",
+      "case": "current",
+      "state": "PASS",
+      "digest": "sha256:e2a9e88d86080a5306903e01c24ff173c9bdc195a2332296338f12e63150143f"
+    },
+    {
+      "candidate": "rust",
+      "case": "current",
+      "state": "PASS",
+      "digest": "sha256:e2a9e88d86080a5306903e01c24ff173c9bdc195a2332296338f12e63150143f"
+    },
+    {
+      "candidate": "zig",
+      "case": "current",
+      "state": "PASS",
+      "digest": "sha256:e2a9e88d86080a5306903e01c24ff173c9bdc195a2332296338f12e63150143f"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "current",
+      "state": "PASS",
+      "digest": "sha256:e2a9e88d86080a5306903e01c24ff173c9bdc195a2332296338f12e63150143f"
+    },
+    {
+      "candidate": "oracle",
+      "case": "stale",
+      "state": "PASS",
+      "digest": "sha256:20969d5933b18384fbbdaefcc51c1a78975fa9c1fe4114f4d4cdb280c8b38897"
+    },
+    {
+      "candidate": "rust",
+      "case": "stale",
+      "state": "PASS",
+      "digest": "sha256:20969d5933b18384fbbdaefcc51c1a78975fa9c1fe4114f4d4cdb280c8b38897"
+    },
+    {
+      "candidate": "zig",
+      "case": "stale",
+      "state": "PASS",
+      "digest": "sha256:20969d5933b18384fbbdaefcc51c1a78975fa9c1fe4114f4d4cdb280c8b38897"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "stale",
+      "state": "PASS",
+      "digest": "sha256:20969d5933b18384fbbdaefcc51c1a78975fa9c1fe4114f4d4cdb280c8b38897"
+    },
+    {
+      "candidate": "oracle",
+      "case": "conflict",
+      "state": "PASS",
+      "digest": "sha256:01e1008a3c156216e7f7f12b9b23d1edb68e3562964fbde281dd62f2d48d16f3"
+    },
+    {
+      "candidate": "rust",
+      "case": "conflict",
+      "state": "PASS",
+      "digest": "sha256:01e1008a3c156216e7f7f12b9b23d1edb68e3562964fbde281dd62f2d48d16f3"
+    },
+    {
+      "candidate": "zig",
+      "case": "conflict",
+      "state": "PASS",
+      "digest": "sha256:01e1008a3c156216e7f7f12b9b23d1edb68e3562964fbde281dd62f2d48d16f3"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "conflict",
+      "state": "PASS",
+      "digest": "sha256:01e1008a3c156216e7f7f12b9b23d1edb68e3562964fbde281dd62f2d48d16f3"
+    },
+    {
+      "candidate": "oracle",
+      "case": "empty-complete",
+      "state": "PASS",
+      "digest": "sha256:904ad8e812e213b5cc1ccc6d079c17d52a81cb33bc4ad0486e021fd1b00faa1a"
+    },
+    {
+      "candidate": "rust",
+      "case": "empty-complete",
+      "state": "PASS",
+      "digest": "sha256:904ad8e812e213b5cc1ccc6d079c17d52a81cb33bc4ad0486e021fd1b00faa1a"
+    },
+    {
+      "candidate": "zig",
+      "case": "empty-complete",
+      "state": "PASS",
+      "digest": "sha256:904ad8e812e213b5cc1ccc6d079c17d52a81cb33bc4ad0486e021fd1b00faa1a"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "empty-complete",
+      "state": "PASS",
+      "digest": "sha256:904ad8e812e213b5cc1ccc6d079c17d52a81cb33bc4ad0486e021fd1b00faa1a"
+    },
+    {
+      "candidate": "oracle",
+      "case": "empty-observed",
+      "state": "PASS",
+      "digest": "sha256:a7f281f5ed0b90e5546c59475c93795a207830e09ecfbbc657bbddfe8b8d9c66"
+    },
+    {
+      "candidate": "rust",
+      "case": "empty-observed",
+      "state": "PASS",
+      "digest": "sha256:a7f281f5ed0b90e5546c59475c93795a207830e09ecfbbc657bbddfe8b8d9c66"
+    },
+    {
+      "candidate": "zig",
+      "case": "empty-observed",
+      "state": "PASS",
+      "digest": "sha256:a7f281f5ed0b90e5546c59475c93795a207830e09ecfbbc657bbddfe8b8d9c66"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "empty-observed",
+      "state": "PASS",
+      "digest": "sha256:a7f281f5ed0b90e5546c59475c93795a207830e09ecfbbc657bbddfe8b8d9c66"
+    },
+    {
+      "candidate": "oracle",
+      "case": "ordering",
+      "state": "PASS",
+      "digest": "sha256:9d3ac9bb4040d38087e527ab0329ec91f84505cc8c61da359468551e95b339b8"
+    },
+    {
+      "candidate": "rust",
+      "case": "ordering",
+      "state": "PASS",
+      "digest": "sha256:9d3ac9bb4040d38087e527ab0329ec91f84505cc8c61da359468551e95b339b8"
+    },
+    {
+      "candidate": "zig",
+      "case": "ordering",
+      "state": "PASS",
+      "digest": "sha256:9d3ac9bb4040d38087e527ab0329ec91f84505cc8c61da359468551e95b339b8"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "ordering",
+      "state": "PASS",
+      "digest": "sha256:9d3ac9bb4040d38087e527ab0329ec91f84505cc8c61da359468551e95b339b8"
+    },
+    {
+      "candidate": "oracle",
+      "case": "insertion-independent",
+      "state": "PASS",
+      "digest": "sha256:01e1008a3c156216e7f7f12b9b23d1edb68e3562964fbde281dd62f2d48d16f3"
+    },
+    {
+      "candidate": "rust",
+      "case": "insertion-independent",
+      "state": "PASS",
+      "digest": "sha256:01e1008a3c156216e7f7f12b9b23d1edb68e3562964fbde281dd62f2d48d16f3"
+    },
+    {
+      "candidate": "zig",
+      "case": "insertion-independent",
+      "state": "PASS",
+      "digest": "sha256:01e1008a3c156216e7f7f12b9b23d1edb68e3562964fbde281dd62f2d48d16f3"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "insertion-independent",
+      "state": "PASS",
+      "digest": "sha256:01e1008a3c156216e7f7f12b9b23d1edb68e3562964fbde281dd62f2d48d16f3"
+    },
+    {
+      "candidate": "oracle",
+      "case": "persist-reload",
+      "state": "PASS",
+      "digest": "sha256:9d3ac9bb4040d38087e527ab0329ec91f84505cc8c61da359468551e95b339b8"
+    },
+    {
+      "candidate": "rust",
+      "case": "persist-reload",
+      "state": "PASS",
+      "digest": "sha256:9d3ac9bb4040d38087e527ab0329ec91f84505cc8c61da359468551e95b339b8"
+    },
+    {
+      "candidate": "zig",
+      "case": "persist-reload",
+      "state": "PASS",
+      "digest": "sha256:9d3ac9bb4040d38087e527ab0329ec91f84505cc8c61da359468551e95b339b8"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "persist-reload",
+      "state": "PASS",
+      "digest": "sha256:9d3ac9bb4040d38087e527ab0329ec91f84505cc8c61da359468551e95b339b8"
+    },
+    {
+      "candidate": "oracle",
+      "case": "cap",
+      "state": "PASS",
+      "digest": "sha256:47b34d00a6bf734b6dfcf7993208e19d59324c33eb49d7551c123b3cc9e8c068"
+    },
+    {
+      "candidate": "rust",
+      "case": "cap",
+      "state": "PASS",
+      "digest": "sha256:47b34d00a6bf734b6dfcf7993208e19d59324c33eb49d7551c123b3cc9e8c068"
+    },
+    {
+      "candidate": "zig",
+      "case": "cap",
+      "state": "PASS",
+      "digest": "sha256:47b34d00a6bf734b6dfcf7993208e19d59324c33eb49d7551c123b3cc9e8c068"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "cap",
+      "state": "PASS",
+      "digest": "sha256:47b34d00a6bf734b6dfcf7993208e19d59324c33eb49d7551c123b3cc9e8c068"
+    },
+    {
+      "candidate": "oracle",
+      "case": "incoming-traverse",
+      "state": "PASS",
+      "digest": "sha256:7eb100b3f99bb39df4ca4d4aaa030f85704fe3ded36b9dc5662882c40e9ecb3e"
+    },
+    {
+      "candidate": "rust",
+      "case": "incoming-traverse",
+      "state": "PASS",
+      "digest": "sha256:7eb100b3f99bb39df4ca4d4aaa030f85704fe3ded36b9dc5662882c40e9ecb3e"
+    },
+    {
+      "candidate": "zig",
+      "case": "incoming-traverse",
+      "state": "PASS",
+      "digest": "sha256:7eb100b3f99bb39df4ca4d4aaa030f85704fe3ded36b9dc5662882c40e9ecb3e"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "incoming-traverse",
+      "state": "PASS",
+      "digest": "sha256:7eb100b3f99bb39df4ca4d4aaa030f85704fe3ded36b9dc5662882c40e9ecb3e"
+    },
+    {
+      "candidate": "oracle",
+      "case": "mixed-relations",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "rust",
+      "case": "mixed-relations",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "zig",
+      "case": "mixed-relations",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "hybrid",
+      "case": "mixed-relations",
+      "state": "PASS",
+      "digest": "sha256:e6b7ae45abc4ffc8ef80d908f9ce65ee7f812ae87f0a3a65f11d5259ee5b223a"
+    },
+    {
+      "candidate": "oracle",
+      "case": "malformed-fixture",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "malformed-fixture",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "malformed-fixture",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "malformed-fixture",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "invalid-relation",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "invalid-relation",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "invalid-relation",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "invalid-relation",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "invalid-reference",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "invalid-reference",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "invalid-reference",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "invalid-reference",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "incompatible-fixture",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "incompatible-fixture",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "incompatible-fixture",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "incompatible-fixture",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "duplicate-id",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "duplicate-id",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "duplicate-id",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "duplicate-id",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "invalid-name-sid",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "invalid-name-sid",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "invalid-name-sid",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "invalid-name-sid",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "malformed-query",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "malformed-query",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "malformed-query",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "malformed-query",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "incompatible-query",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "incompatible-query",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "incompatible-query",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "incompatible-query",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "invalid-query-relation",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "invalid-query-relation",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "invalid-query-relation",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "invalid-query-relation",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "nested-version",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "nested-version",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "nested-version",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "nested-version",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "unused-invalid-input",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "unused-invalid-input",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "unused-invalid-input",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "unused-invalid-input",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "oracle",
+      "case": "invalid-bound",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "rust",
+      "case": "invalid-bound",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "zig",
+      "case": "invalid-bound",
+      "state": "PASS",
+      "rejected": true
+    },
+    {
+      "candidate": "hybrid",
+      "case": "invalid-bound",
+      "state": "PASS",
+      "rejected": true
+    }
+  ]
+}

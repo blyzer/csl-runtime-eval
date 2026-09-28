@@ -1,0 +1,320 @@
+[
+  {
+    "candidate": "rust",
+    "workload": "W11",
+    "state": "PASS",
+    "mode": "clean-output",
+    "elapsed_ns": 4293127042,
+    "artifact_bytes": 690368,
+    "cache_scope": "fresh candidate output for clean-output; downloaded dependencies and Zig global/kernel caches may be warm",
+    "environment": {
+      "tools": {
+        "python3": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+          "version": "Python 3.14.7"
+        },
+        "rustc": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+          "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+        },
+        "cargo": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+          "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+        },
+        "zig": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+          "version": "0.14.1"
+        },
+        "git": {
+          "state": "PASS",
+          "path": "/opt/homebrew/bin/git",
+          "version": "git version 2.55.0"
+        }
+      },
+      "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+      "architecture": "arm64",
+      "uname": [
+        "Darwin",
+        "Envers-MacBook-Pro.local",
+        "27.0.0",
+        "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+        "arm64",
+        "arm"
+      ],
+      "hardware": "arm",
+      "cpu_count": 10,
+      "runtime_python": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python",
+      "sdk_workaround": true
+    },
+    "source_digest": "0952220439d63ca44d9d65881e92de63919ae915e00898b3bc5996f0dc8ef18c"
+  },
+  {
+    "candidate": "rust",
+    "workload": "W11",
+    "state": "PASS",
+    "mode": "no-op",
+    "elapsed_ns": 185756750,
+    "artifact_bytes": 690368,
+    "cache_scope": "fresh candidate output for clean-output; downloaded dependencies and Zig global/kernel caches may be warm",
+    "environment": {
+      "tools": {
+        "python3": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+          "version": "Python 3.14.7"
+        },
+        "rustc": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+          "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+        },
+        "cargo": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+          "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+        },
+        "zig": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+          "version": "0.14.1"
+        },
+        "git": {
+          "state": "PASS",
+          "path": "/opt/homebrew/bin/git",
+          "version": "git version 2.55.0"
+        }
+      },
+      "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+      "architecture": "arm64",
+      "uname": [
+        "Darwin",
+        "Envers-MacBook-Pro.local",
+        "27.0.0",
+        "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+        "arm64",
+        "arm"
+      ],
+      "hardware": "arm",
+      "cpu_count": 10,
+      "runtime_python": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python",
+      "sdk_workaround": true
+    },
+    "source_digest": "0952220439d63ca44d9d65881e92de63919ae915e00898b3bc5996f0dc8ef18c"
+  },
+  {
+    "candidate": "zig",
+    "workload": "W11",
+    "state": "PASS",
+    "mode": "clean-output",
+    "elapsed_ns": 8407146708,
+    "artifact_bytes": 261808,
+    "cache_scope": "fresh candidate output for clean-output; downloaded dependencies and Zig global/kernel caches may be warm",
+    "environment": {
+      "tools": {
+        "python3": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+          "version": "Python 3.14.7"
+        },
+        "rustc": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+          "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+        },
+        "cargo": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+          "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+        },
+        "zig": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+          "version": "0.14.1"
+        },
+        "git": {
+          "state": "PASS",
+          "path": "/opt/homebrew/bin/git",
+          "version": "git version 2.55.0"
+        }
+      },
+      "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+      "architecture": "arm64",
+      "uname": [
+        "Darwin",
+        "Envers-MacBook-Pro.local",
+        "27.0.0",
+        "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+        "arm64",
+        "arm"
+      ],
+      "hardware": "arm",
+      "cpu_count": 10,
+      "runtime_python": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python",
+      "sdk_workaround": true
+    },
+    "source_digest": "0952220439d63ca44d9d65881e92de63919ae915e00898b3bc5996f0dc8ef18c"
+  },
+  {
+    "candidate": "zig",
+    "workload": "W11",
+    "state": "PASS",
+    "mode": "no-op",
+    "elapsed_ns": 697026084,
+    "artifact_bytes": 261808,
+    "cache_scope": "fresh candidate output for clean-output; downloaded dependencies and Zig global/kernel caches may be warm",
+    "environment": {
+      "tools": {
+        "python3": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+          "version": "Python 3.14.7"
+        },
+        "rustc": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+          "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+        },
+        "cargo": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+          "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+        },
+        "zig": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+          "version": "0.14.1"
+        },
+        "git": {
+          "state": "PASS",
+          "path": "/opt/homebrew/bin/git",
+          "version": "git version 2.55.0"
+        }
+      },
+      "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+      "architecture": "arm64",
+      "uname": [
+        "Darwin",
+        "Envers-MacBook-Pro.local",
+        "27.0.0",
+        "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+        "arm64",
+        "arm"
+      ],
+      "hardware": "arm",
+      "cpu_count": 10,
+      "runtime_python": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python",
+      "sdk_workaround": true
+    },
+    "source_digest": "0952220439d63ca44d9d65881e92de63919ae915e00898b3bc5996f0dc8ef18c"
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W11",
+    "state": "PASS",
+    "mode": "clean-output",
+    "elapsed_ns": 4607552750,
+    "artifact_bytes": 786496,
+    "cache_scope": "fresh candidate output for clean-output; downloaded dependencies and Zig global/kernel caches may be warm",
+    "environment": {
+      "tools": {
+        "python3": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+          "version": "Python 3.14.7"
+        },
+        "rustc": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+          "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+        },
+        "cargo": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+          "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+        },
+        "zig": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+          "version": "0.14.1"
+        },
+        "git": {
+          "state": "PASS",
+          "path": "/opt/homebrew/bin/git",
+          "version": "git version 2.55.0"
+        }
+      },
+      "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+      "architecture": "arm64",
+      "uname": [
+        "Darwin",
+        "Envers-MacBook-Pro.local",
+        "27.0.0",
+        "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+        "arm64",
+        "arm"
+      ],
+      "hardware": "arm",
+      "cpu_count": 10,
+      "runtime_python": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python",
+      "sdk_workaround": true
+    },
+    "source_digest": "0952220439d63ca44d9d65881e92de63919ae915e00898b3bc5996f0dc8ef18c"
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W11",
+    "state": "PASS",
+    "mode": "no-op",
+    "elapsed_ns": 168022750,
+    "artifact_bytes": 786496,
+    "cache_scope": "fresh candidate output for clean-output; downloaded dependencies and Zig global/kernel caches may be warm",
+    "environment": {
+      "tools": {
+        "python3": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+          "version": "Python 3.14.7"
+        },
+        "rustc": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+          "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+        },
+        "cargo": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+          "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+        },
+        "zig": {
+          "state": "PASS",
+          "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+          "version": "0.14.1"
+        },
+        "git": {
+          "state": "PASS",
+          "path": "/opt/homebrew/bin/git",
+          "version": "git version 2.55.0"
+        }
+      },
+      "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+      "architecture": "arm64",
+      "uname": [
+        "Darwin",
+        "Envers-MacBook-Pro.local",
+        "27.0.0",
+        "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+        "arm64",
+        "arm"
+      ],
+      "hardware": "arm",
+      "cpu_count": 10,
+      "runtime_python": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python",
+      "sdk_workaround": true
+    },
+    "source_digest": "0952220439d63ca44d9d65881e92de63919ae915e00898b3bc5996f0dc8ef18c"
+  }
+]

@@ -1,0 +1,31 @@
+name: smoke
+on: [push, pull_request]
+jobs:
+  e0:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.txt ziglang==0.14.1
+          ln -s "$(.venv/bin/python -c 'import ziglang,pathlib; print(pathlib.Path(ziglang.__file__).parent / "zig")')" .venv/bin/zig
+      - run: ./ci/verify-manifest.sh
+      - run: ./ci/smoke.sh
+      - run: |
+          export PATH="$PWD/.venv/bin:$PATH"
+          for candidate in rust hybrid; do
+            cargo fmt --manifest-path prototypes/$candidate/Cargo.toml --check
+            cargo clippy --manifest-path prototypes/$candidate/Cargo.toml --all-targets --all-features -- -D warnings
+            cargo test --manifest-path prototypes/$candidate/Cargo.toml
+          done
+          zig fmt --check prototypes/zig prototypes/hybrid/zig
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-evidence
+          path: results/

@@ -1,0 +1,57 @@
+RUN cargo fmt --manifest-path prototypes/rust/Cargo.toml --check
+PASS
+RUN cargo clippy --manifest-path prototypes/rust/Cargo.toml --all-targets --all-features -- -D warnings
+    Checking csl-eval-rust v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.21s
+PASS
+RUN cargo test --manifest-path prototypes/rust/Cargo.toml
+   Compiling serde_core v1.0.229
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling csl-eval-rust v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/rust)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.71s
+     Running unittests src/main.rs (prototypes/rust/target/debug/build/csl-eval-rust/bed0c9c678bf12ef/out/csl_eval_rust-bed0c9c678bf12ef)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+PASS
+RUN cargo build --manifest-path prototypes/rust/Cargo.toml
+   Compiling csl-eval-rust v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.58s
+PASS
+RUN cargo build --release --manifest-path prototypes/rust/Cargo.toml
+    Blocking waiting for file lock on package cache
+   Compiling csl-eval-rust v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/rust)
+    Finished `release` profile [optimized] target(s) in 3.84s
+PASS
+RUN cargo fmt --manifest-path prototypes/hybrid/Cargo.toml --check
+PASS
+RUN cargo clippy --manifest-path prototypes/hybrid/Cargo.toml --all-targets --all-features -- -D warnings
+   Compiling csl-eval-hybrid v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/hybrid/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.93s
+PASS
+RUN cargo test --manifest-path prototypes/hybrid/Cargo.toml
+   Compiling csl-eval-hybrid v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/hybrid/rust)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.98s
+     Running unittests src/main.rs (prototypes/hybrid/target/debug/build/csl-eval-hybrid/18d739063cc533cc/out/csl_eval_hybrid-18d739063cc533cc)
+
+running 1 test
+test tests::ffi_roundtrip ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+PASS
+RUN cargo build --manifest-path prototypes/hybrid/Cargo.toml
+   Compiling csl-eval-hybrid v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/hybrid/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.95s
+PASS
+RUN cargo build --release --manifest-path prototypes/hybrid/Cargo.toml
+   Compiling csl-eval-hybrid v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/hybrid/rust)
+    Finished `release` profile [optimized] target(s) in 1.76s
+PASS
+RUN zig fmt --check prototypes/zig prototypes/hybrid/zig
+PASS
+PASS prototypes/zig build/test
+PASS prototypes/hybrid/zig build/test

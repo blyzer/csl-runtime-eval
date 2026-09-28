@@ -1,0 +1,1 @@
+[{"candidate": "rust", "records": 30, "state": "PASS", "workload": "W1"}, {"candidate": "zig", "records": 30, "state": "PASS", "workload": "W1"}, {"candidate": "hybrid", "records": 30, "state": "PASS", "workload": "W1"}]

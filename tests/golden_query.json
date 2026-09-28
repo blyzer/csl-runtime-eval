@@ -1,0 +1,1 @@
+{"schema":"csl.eval.query/v0.1","query_id":"q1","op":"TRAVERSE","input":{"op":"RESOLVE","entity_id":1},"relations":["CALLS"],"direction":"OUT","max_depth":2,"max_paths":100,"evidence":{"min_quality":"EXACT","freshness_epoch":7}}

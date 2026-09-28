@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "csl.eval.fixture/v0.1",
+  "type": "object",
+  "required": [
+    "schema",
+    "snapshot",
+    "strings",
+    "entities",
+    "relations",
+    "evidence"
+  ],
+  "properties": {
+    "schema": {
+      "const": "csl.eval.fixture/v0.1"
+    },
+    "snapshot": {
+      "type": "string"
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "strings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "name_sid"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "kind": {
+            "enum": [
+              "TYPE",
+              "METHOD",
+              "FUNCTION",
+              "FIELD",
+              "MODULE",
+              "FILE",
+              "VARIABLE"
+            ]
+          },
+          "name_sid": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "container": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "subject",
+          "relation",
+          "object"
+        ],
+        "properties": {
+          "subject": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "relation": {
+            "enum": [
+              "CALLS",
+              "REFERENCES",
+              "IMPLEMENTS",
+              "OVERRIDES",
+              "CONTAINS"
+            ]
+          },
+          "object": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "proposition",
+          "subject",
+          "relation",
+          "object",
+          "polarity",
+          "quality",
+          "freshness_epoch",
+          "lineage"
+        ],
+        "properties": {
+          "proposition": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "subject": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "relation": {
+            "enum": [
+              "CALLS",
+              "REFERENCES",
+              "IMPLEMENTS",
+              "OVERRIDES",
+              "CONTAINS"
+            ]
+          },
+          "object": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "polarity": {
+            "enum": [
+              "POSITIVE",
+              "NEGATIVE"
+            ]
+          },
+          "quality": {
+            "enum": [
+              "VERIFIED",
+              "EXACT",
+              "DERIVED",
+              "PROBABLE",
+              "LEXICAL"
+            ]
+          },
+          "freshness_epoch": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "lineage": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "complete": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

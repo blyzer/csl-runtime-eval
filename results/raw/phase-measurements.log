@@ -1,0 +1,4 @@
+[{"candidate": "rust", "records": 30, "state": "PASS", "workload": "W1"}, {"candidate": "zig", "records": 30, "state": "PASS", "workload": "W1"}]
+[{"candidate": "rust", "records": 60, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 60, "state": "PASS", "workload": "W2"}]
+[{"candidate": "rust", "records": 60, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 60, "state": "PASS", "workload": "W2"}]
+[{"candidate": "rust", "records": 60, "state": "PASS", "workload": "W2"}, {"candidate": "zig", "records": 60, "state": "PASS", "workload": "W2"}]

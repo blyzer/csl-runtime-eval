@@ -1,0 +1,338 @@
+[
+  {
+    "schema": "csl.eval.benchmark/v0.1",
+    "candidate": "rust",
+    "candidate_commit": null,
+    "source_digest": "2be7198b6f08ca89a9af6a9430872ea8ed1fc3331b353f3d6387a2d75d8e4f97",
+    "working_tree_dirty": true,
+    "workload": "W2",
+    "query": "outgoing",
+    "corpus": "corpus/synthetic/SMOKE-fanout.json",
+    "corpus_digest": "bb403a202c82a058445fadea46b6df62dd277aca6f2fc2bbdf8d1d8607b123da",
+    "seed": 20260927,
+    "shape": "fanout",
+    "iteration": 0,
+    "mode": "cold-process",
+    "elapsed_ns": 48093083,
+    "rss_peak_bytes": 10534912,
+    "bytes_per_entity": 10534.912,
+    "memory_scope": "whole process, includes JSON, indexes and result",
+    "artifact_bytes": 769184,
+    "lookup_count": 0,
+    "result_digest": "sha256:ab52789fab6dbb73a7027135c908ff04da55fc7faaf8751ca7965e0b713cf11d",
+    "conformance": true,
+    "compiler": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)",
+    "toolchains": {
+      "python3": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.14.7"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/opt/homebrew/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "hardware": "arm",
+    "artifact_digest": "e39f78aecdb0df9c35f252f4a2e624976d2446a89fec3b9550307a5570bff2b5",
+    "sdk_workaround": true
+  },
+  {
+    "schema": "csl.eval.benchmark/v0.1",
+    "candidate": "rust",
+    "candidate_commit": null,
+    "source_digest": "2be7198b6f08ca89a9af6a9430872ea8ed1fc3331b353f3d6387a2d75d8e4f97",
+    "working_tree_dirty": true,
+    "workload": "W2",
+    "query": "incoming",
+    "corpus": "corpus/synthetic/SMOKE-fanout.json",
+    "corpus_digest": "bb403a202c82a058445fadea46b6df62dd277aca6f2fc2bbdf8d1d8607b123da",
+    "seed": 20260927,
+    "shape": "fanout",
+    "iteration": 0,
+    "mode": "cold-process",
+    "elapsed_ns": 48928417,
+    "rss_peak_bytes": 10338304,
+    "bytes_per_entity": 10338.304,
+    "memory_scope": "whole process, includes JSON, indexes and result",
+    "artifact_bytes": 769184,
+    "lookup_count": 0,
+    "result_digest": "sha256:8f0c19060a80c50fa32bb29e06357068ca78192fdd31489fb46fbb33929b026a",
+    "conformance": true,
+    "compiler": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)",
+    "toolchains": {
+      "python3": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.14.7"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/opt/homebrew/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "hardware": "arm",
+    "artifact_digest": "e39f78aecdb0df9c35f252f4a2e624976d2446a89fec3b9550307a5570bff2b5",
+    "sdk_workaround": true
+  },
+  {
+    "schema": "csl.eval.benchmark/v0.1",
+    "candidate": "rust",
+    "candidate_commit": null,
+    "source_digest": "2be7198b6f08ca89a9af6a9430872ea8ed1fc3331b353f3d6387a2d75d8e4f97",
+    "working_tree_dirty": true,
+    "workload": "W2",
+    "query": "depth-2",
+    "corpus": "corpus/synthetic/SMOKE-fanout.json",
+    "corpus_digest": "bb403a202c82a058445fadea46b6df62dd277aca6f2fc2bbdf8d1d8607b123da",
+    "seed": 20260927,
+    "shape": "fanout",
+    "iteration": 0,
+    "mode": "cold-process",
+    "elapsed_ns": 43112125,
+    "rss_peak_bytes": 10649600,
+    "bytes_per_entity": 10649.6,
+    "memory_scope": "whole process, includes JSON, indexes and result",
+    "artifact_bytes": 769184,
+    "lookup_count": 0,
+    "result_digest": "sha256:eb88452e625b0213ea163f6c1d3411e857db8df881a96829e522dcfc06eafb90",
+    "conformance": true,
+    "compiler": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)",
+    "toolchains": {
+      "python3": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.14.7"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/opt/homebrew/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "hardware": "arm",
+    "artifact_digest": "e39f78aecdb0df9c35f252f4a2e624976d2446a89fec3b9550307a5570bff2b5",
+    "sdk_workaround": true
+  },
+  {
+    "schema": "csl.eval.benchmark/v0.1",
+    "candidate": "rust",
+    "candidate_commit": null,
+    "source_digest": "2be7198b6f08ca89a9af6a9430872ea8ed1fc3331b353f3d6387a2d75d8e4f97",
+    "working_tree_dirty": true,
+    "workload": "W2",
+    "query": "depth-4",
+    "corpus": "corpus/synthetic/SMOKE-fanout.json",
+    "corpus_digest": "bb403a202c82a058445fadea46b6df62dd277aca6f2fc2bbdf8d1d8607b123da",
+    "seed": 20260927,
+    "shape": "fanout",
+    "iteration": 0,
+    "mode": "cold-process",
+    "elapsed_ns": 31499834,
+    "rss_peak_bytes": 10027008,
+    "bytes_per_entity": 10027.008,
+    "memory_scope": "whole process, includes JSON, indexes and result",
+    "artifact_bytes": 769184,
+    "lookup_count": 0,
+    "result_digest": "sha256:eb88452e625b0213ea163f6c1d3411e857db8df881a96829e522dcfc06eafb90",
+    "conformance": true,
+    "compiler": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)",
+    "toolchains": {
+      "python3": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.14.7"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/opt/homebrew/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "hardware": "arm",
+    "artifact_digest": "e39f78aecdb0df9c35f252f4a2e624976d2446a89fec3b9550307a5570bff2b5",
+    "sdk_workaround": true
+  },
+  {
+    "schema": "csl.eval.benchmark/v0.1",
+    "candidate": "rust",
+    "candidate_commit": null,
+    "source_digest": "2be7198b6f08ca89a9af6a9430872ea8ed1fc3331b353f3d6387a2d75d8e4f97",
+    "working_tree_dirty": true,
+    "workload": "W2",
+    "query": "depth-8",
+    "corpus": "corpus/synthetic/SMOKE-fanout.json",
+    "corpus_digest": "bb403a202c82a058445fadea46b6df62dd277aca6f2fc2bbdf8d1d8607b123da",
+    "seed": 20260927,
+    "shape": "fanout",
+    "iteration": 0,
+    "mode": "cold-process",
+    "elapsed_ns": 54196083,
+    "rss_peak_bytes": 10551296,
+    "bytes_per_entity": 10551.296,
+    "memory_scope": "whole process, includes JSON, indexes and result",
+    "artifact_bytes": 769184,
+    "lookup_count": 0,
+    "result_digest": "sha256:eb88452e625b0213ea163f6c1d3411e857db8df881a96829e522dcfc06eafb90",
+    "conformance": true,
+    "compiler": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)",
+    "toolchains": {
+      "python3": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.14.7"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/opt/homebrew/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "hardware": "arm",
+    "artifact_digest": "e39f78aecdb0df9c35f252f4a2e624976d2446a89fec3b9550307a5570bff2b5",
+    "sdk_workaround": true
+  },
+  {
+    "schema": "csl.eval.benchmark/v0.1",
+    "candidate": "rust",
+    "candidate_commit": null,
+    "source_digest": "2be7198b6f08ca89a9af6a9430872ea8ed1fc3331b353f3d6387a2d75d8e4f97",
+    "working_tree_dirty": true,
+    "workload": "W2",
+    "query": "mixed-relations",
+    "corpus": "corpus/synthetic/SMOKE-fanout.json",
+    "corpus_digest": "bb403a202c82a058445fadea46b6df62dd277aca6f2fc2bbdf8d1d8607b123da",
+    "seed": 20260927,
+    "shape": "fanout",
+    "iteration": 0,
+    "mode": "cold-process",
+    "elapsed_ns": 22507792,
+    "rss_peak_bytes": 6701056,
+    "bytes_per_entity": 6701.056,
+    "memory_scope": "whole process, includes JSON, indexes and result",
+    "artifact_bytes": 769184,
+    "lookup_count": 0,
+    "result_digest": "sha256:8100440fee34661a9cb806c5df1e664677b128a110ce65c535e9244963c2c0e8",
+    "conformance": true,
+    "compiler": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)",
+    "toolchains": {
+      "python3": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.14.7"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/opt/homebrew/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "hardware": "arm",
+    "artifact_digest": "e39f78aecdb0df9c35f252f4a2e624976d2446a89fec3b9550307a5570bff2b5",
+    "sdk_workaround": true
+  }
+]

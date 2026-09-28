@@ -1,0 +1,22 @@
+test_equality_preserves_json_types (tests.test_campaign.Campaign.test_equality_preserves_json_types) ... ok
+test_machine_guards (tests.test_campaign.Campaign.test_machine_guards) ... ok
+test_order_is_paired_balanced_and_reproducible (tests.test_campaign.Campaign.test_order_is_paired_balanced_and_reproducible) ... ok
+test_prepared_oracle_resets_query_state (tests.test_campaign.Campaign.test_prepared_oracle_resets_query_state) ... ok
+test_sample_compares_full_result_and_rejects_invalid_profile (tests.test_campaign.Campaign.test_sample_compares_full_result_and_rejects_invalid_profile) ... ok
+test_missing_tool_is_not_pass (tests.test_harness.Harness.test_missing_tool_is_not_pass) ... ok
+test_process_exit_and_metrics (tests.test_harness.Harness.test_process_exit_and_metrics) ... ok
+test_hybrid_profile_is_rejected (tests.test_harness.Profiles.test_hybrid_profile_is_rejected) ... ok
+test_profile_validation (tests.test_harness.Profiles.test_profile_validation) ... ok
+test_result_mismatch_is_never_accepted (tests.test_harness.Profiles.test_result_mismatch_is_never_accepted) ... ok
+test_cases (tests.test_semantics.Semantics.test_cases) ... ok
+test_digest_is_semantic (tests.test_semantics.Semantics.test_digest_is_semantic) ... ok
+test_generator (tests.test_semantics.Semantics.test_generator) ... ok
+test_golden (tests.test_semantics.Semantics.test_golden) ... ok
+test_malformed (tests.test_semantics.Semantics.test_malformed) ... ok
+test_empty (tests.test_shared_view.SharedViews.test_empty) ... ok
+test_lifetime_and_bounds (tests.test_shared_view.SharedViews.test_lifetime_and_bounds) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 3.901s
+
+OK

@@ -1,0 +1,14 @@
+{
+  "candidate": "hybrid",
+  "state": "PASS",
+  "elapsed_ns": 3517549042,
+  "build_kind": "existing-cache",
+  "artifact_bytes": 786480,
+  "command": [
+    "/Users/enverfrancisco/.cargo/bin/cargo",
+    "build",
+    "--release",
+    "--manifest-path",
+    "/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/hybrid/Cargo.toml"
+  ]
+}

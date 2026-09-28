@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+**/target/
+**/.zig-cache/
+**/zig-out/
+.DS_Store
+corpus/synthetic/*.json
+!corpus/synthetic/SMOKE.json
+results/s-scale-exploratory/references/

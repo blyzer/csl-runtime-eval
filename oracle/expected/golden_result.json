@@ -1,0 +1,38 @@
+{
+  "completeness": {
+    "entity_set": "OBSERVED"
+  },
+  "digest": "sha256:79477ee756290ed7e919a559f3e5e142a3fba6552785eee71230dccace23c64e",
+  "entities": [
+    2,
+    3
+  ],
+  "knowledge": {
+    "model": "open-world"
+  },
+  "propositions": [
+    {
+      "freshness_epoch": 7,
+      "lineage": 1,
+      "object": 2,
+      "polarity": "POSITIVE",
+      "proposition": 1,
+      "quality": "EXACT",
+      "relation": "CALLS",
+      "subject": 1
+    },
+    {
+      "freshness_epoch": 7,
+      "lineage": 1,
+      "object": 3,
+      "polarity": "POSITIVE",
+      "proposition": 2,
+      "quality": "EXACT",
+      "relation": "CALLS",
+      "subject": 2
+    }
+  ],
+  "query_id": "q1",
+  "schema": "csl.eval.result/v0.1",
+  "snapshot": "S7"
+}

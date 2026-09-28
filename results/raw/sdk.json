@@ -1,0 +1,6 @@
+{
+  "sdk": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+  "original_libSystem_sha256": "20cfce043f11a083e2eb6111efe3579919a8082fa4cc912a7bd839af2010ec57",
+  "overlay_libSystem_sha256": "f7f3be068917d4d2b13622e996f8201fe945ce77fa15fe800148bfa646deb02e",
+  "transformation": "arm64e-macos target labels replaced with arm64-macos for Zig 0.14.1 lookup; system SDK unchanged"
+}

@@ -1,0 +1,14 @@
+{
+  "candidate": "rust",
+  "state": "PASS",
+  "elapsed_ns": 615295541,
+  "build_kind": "existing-cache",
+  "artifact_bytes": 769184,
+  "command": [
+    "/Users/enverfrancisco/.cargo/bin/cargo",
+    "build",
+    "--release",
+    "--manifest-path",
+    "/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/rust/Cargo.toml"
+  ]
+}
