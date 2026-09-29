@@ -21,7 +21,7 @@ sys.path.insert(0, str(ROOT))
 from harness.benchctl import (environment, executable, load, profile_metadata,
                               queries, save, source_digest, tool)
 from harness.generate import generate, PRESETS
-from oracle.oracle import PreparedOracle
+from oracle.compact import CompactOracle
 from oracle.validation import VALIDATORS
 
 
@@ -137,20 +137,20 @@ def schedule(repeat, seed, workloads, candidates=('rust', 'zig')):
 
 
 def reference_worker(fixture, directory, workloads):
-    oracle = PreparedOracle(load(fixture))
+    # Streaming/columnar oracle (ADR-0006): the fixture is validated record by
+    # record and each reference is written as canonical JSON without ever
+    # materializing the fixture or the result as a Python object tree.
+    oracle = CompactOracle(fixture)
     index = []
     for workload in workloads:
         for query in queries(workload):
-            result = oracle.execute(query)
-            VALIDATORS['result'].validate(result)
             target = directory / f'{workload}-{query["query_id"]}.json'
-            with target.open('w') as stream:
-                json.dump(result, stream, separators=(',', ':'))
+            info = oracle.execute_to(query, target)
             index.append({'workload': workload, 'query': query,
                           'path': str(target), 'file_digest': digest(target),
-                          'result_digest': result['digest']})
-            print(json.dumps({'reference': target.name, 'state': 'PASS'}), flush=True)
-            del result
+                          'result_digest': info['digest'], 'propositions': info['propositions'],
+                          'bytes': info['bytes']})
+            print(json.dumps({'reference': target.name, 'state': 'PASS', 'bytes': info['bytes']}), flush=True)
     save(directory / 'index.json', index)
 
 
@@ -166,6 +166,70 @@ def strict_equal(actual, expected):
 
 
 PROFILE_CAPABLE = ('rust', 'zig')
+# Above this size a mismatching (or non-canonical) output is rejected instead of
+# being parsed into Python objects for the tolerant tree comparison.
+TREE_COMPARE_LIMIT = 128 * 1024 * 1024
+_RESULT_MARKER = b'"result":{'
+
+
+def _same_bytes(stream, start, end, reference_path, block=1 << 22):
+    """Compare stream[start:end] with the whole reference file without loading either."""
+    reference = Path(reference_path)
+    if reference.stat().st_size != end - start:
+        return False
+    stream.seek(start)
+    with reference.open('rb') as expected:
+        remaining = end - start
+        while remaining:
+            want = min(block, remaining)
+            if stream.read(want) != expected.read(want):
+                return False
+            remaining -= want
+    return True
+
+
+def verify_output(stream, reference_path, profiled):
+    """Return (envelope metadata, matched) for a candidate's stdout.
+
+    Candidates and the oracle both emit canonical JSON (sorted keys, compact
+    separators, UTF-8), so equal results are byte-identical and are compared
+    in constant memory, which is stricter than tree equality (it also pins key
+    order, number spelling and value types). Only when the bytes differ and both
+    sides are small is the tolerant JSON-tree comparison used, so semantically
+    equal but non-canonical output keeps passing at S scale and below.
+    """
+    stream.seek(0, 2)
+    size = stream.tell()
+    stream.seek(max(0, size - 64))
+    tail = stream.read()
+    trimmed = size - (len(tail) - len(tail.rstrip()))
+    start, end, envelope = 0, trimmed, {}
+    if profiled:
+        stream.seek(0)
+        head = stream.read(1 << 16)
+        marker = head.find(_RESULT_MARKER)
+        if marker >= 0 and head[:marker].rstrip().endswith(b',') and tail.rstrip().endswith(b'}}'):
+            envelope = json.loads(head[:marker].rstrip()[:-1] + b'}')
+            start, end = marker + len(_RESULT_MARKER) - 1, trimmed - 1
+    if envelope or not profiled:
+        if _same_bytes(stream, start, end, reference_path):
+            return ({**envelope, 'result': None} if profiled else {}), True
+    if size > TREE_COMPARE_LIMIT or Path(reference_path).stat().st_size > TREE_COMPARE_LIMIT:
+        return None, False
+    stream.seek(0)
+    payload = json.load(stream)
+    result = payload['result'] if profiled else payload
+    return (payload if profiled else {}), strict_equal(result, load(reference_path))
+
+
+def result_digest(reference_path):
+    with Path(reference_path).open('rb') as stream:
+        match = re.search(rb'"digest"\s*:\s*"(sha256:[0-9a-f]{64})"', stream.read(1 << 16))
+    if match:
+        return match[1].decode()
+    if Path(reference_path).stat().st_size > TREE_COMPARE_LIMIT:
+        raise ValueError('large reference has no digest near its start')
+    return load(reference_path)['digest']
 
 
 def sample_worker(spec_path, target):
@@ -191,22 +255,19 @@ def sample_worker(spec_path, target):
         if process.returncode:
             err.seek(0)
             raise RuntimeError(f'candidate exited {process.returncode}: {err.read(4096).decode(errors="replace")}')
-        out.seek(0)
-        payload = json.load(out)
-    metadata = profile_metadata(payload, elapsed) if profiled else {}
-    result = payload['result'] if profiled else payload
-    reference = load(spec['reference'])
-    # Reference schema was checked once before timing. Full equality also proves
+        payload, matched = verify_output(out, spec['reference'], profiled)
+    # Reference schema was sampled once before timing. Full equality also proves
     # the candidate result has that schema, without millions of repeated checks.
-    if not strict_equal(result, reference):
+    if not matched:
         raise ValueError('full oracle result mismatch; sample rejected')
+    metadata = profile_metadata(payload, elapsed) if profiled else {}
     failures = condition_failures(before, spec['max_load'], spec['min_memory'])
     failures += condition_failures(after, spec['max_load'], spec['min_memory'])
     if before['swapout_pages'] is not None and after['swapout_pages'] is not None and after['swapout_pages'] > before['swapout_pages']:
         failures.append('swapout counter increased during sample')
     record = {**metadata, 'elapsed_ns': elapsed,
               'rss_peak_bytes': int(usage.ru_maxrss * (1 if sys.platform == 'darwin' else 1024)),
-              'result_digest': reference['digest'], 'conformance': True,
+              'result_digest': spec.get('result_digest') or result_digest(spec['reference']), 'conformance': True,
               'conditions_before': before, 'conditions_after': after,
               'condition_failures': sorted(set(failures))}
     save(target, record)
@@ -275,7 +336,7 @@ def run_campaign(args):
                 candidate = job['candidate']
                 key = (job['workload'], job['query']['query_id'])
                 spec = {'job': job, 'binary': binaries[candidate]['path'], 'fixture': str(corpus),
-                        'reference': refs[key]['path'], 'max_load': args.max_load_per_cpu,
+                        'reference': refs[key]['path'], 'result_digest': refs[key]['result_digest'], 'max_load': args.max_load_per_cpu,
                         'min_memory': args.min_memory_gib * 1024**3}
                 for warmup in ([True, False] if (candidate, key) not in seen else [False]):
                     if digest(binaries[candidate]['path']) != binaries[candidate]['digest']:
