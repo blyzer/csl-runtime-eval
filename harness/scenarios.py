@@ -227,9 +227,15 @@ def _w4_names(spec, count, seed):
     return [name_of(k, spec['names']['length']) for k in ks]
 
 
+ARG_BUDGET = 100_000        # params travel in argv; Linux caps one argument at 128 KiB
+
+
 def _w4(count, rounds):
     def build(meta, oracle):
-        names = _w4_names(meta['spec'] | {'n': meta['entities']}, count, meta['seed'])
+        spec = meta['spec'] | {'n': meta['entities']}
+        # Long names would overflow the argument limit: shrink the name list, never the length.
+        count_here = min(count, ARG_BUDGET // (spec['names']['length'] + 4))
+        names = _w4_names(spec, count_here, meta['seed'])
         query = _q('resolve-primary', 'RESOLVE', name=names[0])
         return [_job('W4', query, {'names': names, 'rounds': rounds})]
     return build

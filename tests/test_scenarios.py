@@ -167,3 +167,16 @@ class ProfileBlocks(unittest.TestCase):
                 check_lookup({**self.INDEX, key: value}, expected)
         with self.assertRaises(ValueError):
             check_lookup(None, expected)
+
+
+class ArgumentBudget(unittest.TestCase):
+    def test_w4_params_fit_one_argv_argument_for_every_variant(self):
+        with tempfile.TemporaryDirectory() as directory:
+            for scenario_id, entry in scenarios.REGISTRY.items():
+                if not scenario_id.startswith('W4'):
+                    continue
+                for variant in entry['variants']:
+                    with self.subTest(scenario=scenario_id, variant=variant):
+                        _, variant, path, meta = build(directory, scenario_id, variant, n=300)
+                        job = scenarios.build_jobs(scenario_id, variant, meta)[0]
+                        self.assertLess(len(json.dumps({'query': job['query'], 'resolve': job['resolve']})), 120_000)

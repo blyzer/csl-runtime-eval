@@ -409,6 +409,7 @@ def run_campaign(args):
         if args.scenario:
             entry, variant = scenarios.resolve_scenario(args.scenario, args.variant)
             spec = entry['variants'][variant]
+            manifest['variant'] = variant
             n, m = scenarios.scale_for(entry['family'], args.preset)
             if spec['shape'] == 'chain':
                 m = n - 1
