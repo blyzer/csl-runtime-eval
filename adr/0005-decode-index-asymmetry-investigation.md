@@ -247,6 +247,25 @@ scale, or in a workload family W1/W2 does not cover) — BoundaryTax,
 copy/allocation, ownership-transition, and toolchain-complexity costs are
 real and must clear whatever margin remains.
 
+## S-pass3 frozen as baseline
+
+S-pass3 is now frozen: no further Rust/Zig tuning at S scale to chase these
+specific residual gaps. Established, but still open to future explanation,
+not further pursued this iteration:
+
+- Rust retains a large, unexplained decode advantage (~2x).
+- Zig retains a residual index advantage: ~4-7% overall, ~13-17% specifically
+  on the `adjacency` sub-phase.
+- The SipHash-vs-Wyhash experiment explains most, not all, of the index gap.
+- The pass-1 large-result serialization/RSS "Zig advantage" is falsified as
+  a language difference (pass 2: a Rust implementation defect).
+- Semantic digest equality against the oracle remains a hard gate and held
+  through every change in this pass.
+
+Work moves on to the W10 Hybrid boundary experiment (below) and, subject to
+its result, M scale. This section is the reference point for "the S-scale
+gaps we chose not to keep chasing, and why."
+
 ## STEP 10 — Methodological lesson
 
 **A material performance difference must not be attributed to a
