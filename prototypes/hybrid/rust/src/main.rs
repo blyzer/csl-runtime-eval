@@ -1,3 +1,4 @@
+mod session;
 use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
 use std::{ffi::c_void, ptr, slice, time::Instant};
@@ -185,6 +186,10 @@ fn run() -> Result<String, Box<dyn std::error::Error>> {
     Ok(String::from_utf8(response_bytes)?)
 }
 fn main() {
+    // The experimental persistent-session front end (W10) never touches the stable v1 kernel.
+    if std::env::args().nth(1).as_deref() == Some("session") {
+        std::process::exit(session::run());
+    }
     match run() {
         Ok(v) => println!("{v}"),
         Err(e) => {

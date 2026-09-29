@@ -23,3 +23,7 @@ clang++ -x c++ -std=c++17 -Wall -Wextra -Werror -fsyntax-only tests/abi_header.c
 clang -fsanitize=address,undefined -g tests/abi_header.c "$LIBRARY" -o "$TMP/abi-test"
 "$TMP/abi-test"
 echo 'PASS C/C++ header and C caller ASan/UBSan; Zig library is NOT sanitizer-instrumented'
+if [[ -x prototypes/hybrid/abi/run_session_smoke.sh ]]; then
+  prototypes/hybrid/abi/run_session_smoke.sh
+fi
+

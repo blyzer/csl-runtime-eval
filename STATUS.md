@@ -391,7 +391,7 @@ bytes read from disk and exclude the measurement arrays.
 ### Remaining Rust / Zig differences
 
 * **Decode/load: Rust ~2.0-2.3x faster**, stable in all 13 scenarios and both hosts.
-* **Index phase — status: `NO STABLE MATERIAL INDEX ADVANTAGE ESTABLISHED`.** Pass 3
+* **Index phase — status: see "Index-stability experiment" (Rust material advantage within controlled same-instance pairs; cross-instance stability unresolved; stable Zig advantage falsified).** Pass 3
   measured Zig 4-7% faster (kept as history; it is not surviving evidence); the rerun on the
   *same corpus digest* measured Rust 8-17% faster (Rust index ~400 to ~320 ms, Zig ~388 to ~360 ms),
   and in the extensions Zig ranges from 4% to 85% slower. Local same-machine A/B shows the Rust
@@ -414,10 +414,9 @@ bytes read from disk and exclude the measurement arrays.
   21 ms / 80 ns hosted (pass 2). ADR-0005's hasher result holds for u64 keys only; hasher
   choice must be made per key type. ID maps keep the Fx hasher; the name index uses SipHash.
 * **NOT REPRODUCED: "Zig keeps a ~4-7% index-construction advantage"** (the P4 premise).
-  Classification: `NO STABLE MATERIAL INDEX ADVANTAGE ESTABLISHED`. The same-corpus rerun
-  reversed it and the margin is below observed hosted-instance variance. One controlled
-  paired stability experiment on a single runner instance closes the question (no tuning);
-  see its preregistered protocol in `results/preregistration/`.
+  Classification: `STABLE ZIG INDEX ADVANTAGE FALSIFIED`. The same-corpus rerun reversed it,
+  and the preregistered same-instance paired experiment found a material Rust advantage (see
+  "Index-stability experiment").
 * **Held:** Rust fastest and Hybrid never faster than Zig in all 13 scenarios (Hybrid +2-14%,
   RSS +24-35% over Zig); no session/persistence result is used to rescue Hybrid.
 * **Held (refined):** pass 2's "encode asymmetry gone" is confirmed at phase level.
@@ -453,11 +452,23 @@ code between pass 3 and pass 5 differs only in Track A additions, none in the in
 same-machine A/B showed those additions cost Rust +1-2%), so the disagreement cannot be attributed
 to either.
 
-Status as instructed: **`NO STABLE MATERIAL INDEX ADVANTAGE ESTABLISHED`** (the historical 4-7% Zig
-advantage is not surviving evidence). It is recorded here that the preregistered rule returned a
-within-instance Rust advantage; whether that changes the program-level classification is left to
-review. Either way the P4 premise (a Zig index advantage worth a language boundary) is not
-supported.
+**Classification (2026-09-29, after review):**
+
+`RUST MATERIAL ADVANTAGE ESTABLISHED WITHIN CONTROLLED SAME-INSTANCE PAIRS; CROSS-INSTANCE STABILITY NOT ESTABLISHED.`
+
+`STABLE ZIG INDEX ADVANTAGE FALSIFIED.` (The historical 4-7% Zig advantage of pass 3 is kept as
+history and is closed as falsified.)
+
+Kept distinct on purpose:
+
+* within-instance material Rust advantage: **established** (120 interleaved pairs, median Zig/Rust
+  1.164, 95% CI [1.140, 1.197], Rust faster in 99% of pairs, entities/adjacency/sort all in the same
+  direction);
+* cross-instance stability / generalization: **unresolved** (historical results changed sign; build
+  and instance remain confounded);
+* stable Zig advantage: **falsified**.
+
+No further index tuning or winner-seeking experiments are run for Gate #1.
 
 ## S0 v0 implemented in Rust and Zig — 2026-09-29
 
@@ -489,6 +500,39 @@ results through chunked responses, and restore a snapshot in a fresh process. In
 full rebuild 0.79 s / 0.58 s; cold restore total time-to-first-query 1.08 s / 0.75 s. Two harness
 bugs found and fixed on the way (unbuffered pipe reads made chunked queries look 50x slower;
 `bool` accepted as an id in the model); neither touched candidate behavior.
+
+## Incremental mutation and the experimental persistent Hybrid boundary — 2026-09-29
+
+Implemented before any W5/W8 measurement (nothing here is a result):
+
+* **Incremental mutation** in Rust and Zig (`session --strategy incremental`): entity map with
+  reference counts, sorted adjacency, evidence slot store with a row index, in-place name index,
+  overlay validation, atomic apply; conforms to ADR-0008 section 14. `full-rebuild` stays the
+  correctness reference and baseline and is reported as such. Both pass the S0 runner
+  (845 checks per strategy, adversarial no-false-CURRENT deltas included, fuzz 1,000); injected
+  faults (stale name index, missing reference check) were caught by the runner. Every response now
+  carries `service_ns`; `stats` carries `derived_rebuilds_total` so a fallback rebuild is visible.
+* **Experimental persistent Hybrid boundary** (W10; **not** the stable ABI v1, not a production API):
+  `prototypes/hybrid/abi/csl_session_experimental.h`, a coarse C ABI with one call per S0 request
+  (create, open, query, mutate, state_digest, snapshot, restore, stats, cancel, close, plus a
+  request fallback). Zig owns the store (the same S0 Engine as pure Zig); Rust owns the process,
+  JSONL and chunk framing and never deserializes request bodies. Requests cross by pointer (no
+  copy); responses are Zig-allocated copies handed to Rust and released once. No per-entity calls,
+  no shared memory. It passes the S0 runner for both strategies (845 checks each); the stable v1
+  header, ABI diagnostics, hybrid conformance (53/53) and one-shot outputs are unchanged. It is
+  **not** to be optimized: if it consumes a material Zig advantage or Hybrid is Pareto-dominated
+  under the preregistered criteria, the result is recorded and Hybrid optimization stops.
+* **BoundaryTax as instrumented** (`stats.boundary`): FFI call wall time on the Rust side minus the
+  engine's `service_ns` for that call, per operation; plus bytes crossing, copies, allocations,
+  releases, ownership transitions and Rust-side wrapper time (`wrapper_ns_total`, *not* tax).
+  `heap_breakdown` splits `kernel_zig` and `wrapper_rust`.
+* **Boundary artifacts disclosed before measuring** (described, not fixed): (1) Rust copies inline
+  response lines to patch its own `service_ns`, which pure candidates do not; (2) chunk framing
+  (base64 + SHA-256) runs in Rust in the hybrid but in Zig/Rust in the pure candidates; (3) every
+  large result is copied once out of the Zig arena; (4) the Rust counting allocator is compiled
+  into the hybrid binary (off outside `session`); (5) both Zig-engine candidates parse whole
+  requests inside the engine, so there is no asymmetry there. If measurement shows one of these
+  makes the comparison unfair, that is the only permitted reason to touch the boundary.
 
 ## S-scale campaign protocol — 2026-09-28
 

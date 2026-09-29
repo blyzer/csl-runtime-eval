@@ -1,5 +1,5 @@
 const std = @import("std");
-const sem = @import("semantic");
+const sem = @import("session").sem;
 pub const Kernel = struct { reserved: u8 = 0 };
 // Bootstrap protocol: empty=no-op, 0x00 + bytes=echo, 0x01 + JSON=semantic batch.
 // Echo is explicitly not a CSL query or a semantic benchmark.

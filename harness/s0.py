@@ -40,6 +40,7 @@ class Response:
 
     ok = property(lambda self: self.message.get('ok') is True)
     code = property(lambda self: self.message.get('code'))
+    service_ns = property(lambda self: self.message.get('service_ns'))
     generation = property(lambda self: self.message.get('generation'))
 
     def result_bytes(self):
@@ -61,12 +62,13 @@ def _has_float(value):
 class Client:
     """One candidate `session` process."""
 
-    def __init__(self, exe, repository, max_line_bytes=1 << 20, request_chunk=None):
+    def __init__(self, exe, repository, max_line_bytes=1 << 20, request_chunk=None, strategy=None):
         self.exe, self.repository = str(exe), str(repository)
         self.max_line_bytes, self.request_chunk = max_line_bytes, request_chunk
         self.errors = tempfile.TemporaryFile()
         self.started = time.perf_counter_ns()
-        self.proc = subprocess.Popen([self.exe, 'session', '--repository', self.repository], stdin=subprocess.PIPE,
+        argv = [self.exe, 'session', '--repository', self.repository] + (['--strategy', strategy] if strategy else [])
+        self.proc = subprocess.Popen(argv, stdin=subprocess.PIPE,
                                      stdout=subprocess.PIPE, stderr=self.errors, bufsize=1 << 20)   # unbuffered readline() reads byte by byte
         self.next_id = 1
         self.opened = None
@@ -139,6 +141,8 @@ class Client:
                     raise ProtocolFault('unexpected frame')
         if message.get('id') != request['id']:
             raise ProtocolFault(f"response id {message.get('id')} for request {request['id']}")
+        if type(message.get('service_ns')) is not int or message['service_ns'] < 0:
+            raise ProtocolFault(f"response without a valid integer service_ns: {message}")
         if message.get('ok') is False and message.get('code') not in CODES:
             raise ProtocolFault(f"unknown error code {message.get('code')!r}")
         return Response(message, payload, time.perf_counter_ns() - start)
@@ -154,6 +158,27 @@ class Client:
                              source={'kind': 'empty', 'context': context})
         self.opened = response
         return response
+
+    def finish(self):
+        """Close politely, reap the child with wait4 and return its peak RSS in bytes (or None)."""
+        import os
+        try:
+            if self.proc.poll() is None:
+                self.call('close')
+        except (ProtocolFault, BrokenPipeError, OSError):
+            pass
+        for stream in (self.proc.stdin, self.proc.stdout):
+            try:
+                stream.close()
+            except OSError:
+                pass
+        try:
+            _, status, usage = os.wait4(self.proc.pid, 0)
+        except ChildProcessError:
+            self.proc.wait(timeout=30)
+            return None
+        self.proc.returncode = os.waitstatus_to_exitcode(status)
+        return int(usage.ru_maxrss * (1 if sys.platform == 'darwin' else 1024))
 
     def close(self):
         try:
@@ -299,8 +324,81 @@ def random_batch(rng, model, invalid_rate=0.25):
     return ops
 
 
+# -- adversarial deltas: no false CURRENT (ADR-0008 section 9.1) -----------------------------
+def targeted_queries(model, seed_id, names):
+    q = lambda qid, op, **kw: {'schema': 'csl.eval.query/v0.1', 'query_id': qid, 'op': op, **kw}     # noqa: E731
+    base = {'op': 'RESOLVE', 'entity_id': seed_id}
+    out = [q('t-out', 'RELATED', input=base), q('t-in', 'RELATED', input=base, direction='IN'),
+           q('t-d4', 'TRAVERSE', input=base, max_depth=4, max_paths=100000), q('t-d1', 'TRAVERSE', input=base, max_depth=1, max_paths=100000),
+           q('t-cap3', 'TRAVERSE', input=base, max_depth=6, max_paths=3), q('t-cap9', 'TRAVERSE', input=base, max_depth=6, max_paths=9),
+           q('t-type', 'FILTER', kind='TYPE'), q('t-method', 'FILTER', kind='METHOD'), q('t-function', 'FILTER', kind='FUNCTION'),
+           q('t-ev-exact', 'FILTER', evidence={'min_quality': 'EXACT'}), q('t-ev-verified', 'FILTER', evidence={'min_quality': 'VERIFIED'}),
+           q('t-ev-epoch2', 'FILTER', evidence={'freshness_epoch': 2}), q('t-hub-ev', 'RELATED', input=base, evidence={'min_quality': 'LEXICAL'})]
+    out += [q(f't-name-{i}', 'RESOLVE', name=n) for i, n in enumerate(names)]
+    return out
+
+
+def run_adversarial(report, session, small, small_fx):
+    """Deltas built to expose stale derived data: every derived structure must reflect each batch."""
+    model = SessionModel.from_fixture(small_fx)
+    ids = sorted(model.entities)
+    degree = {i: 0 for i in ids}
+    for (s_, _, o_), n in model.relations.items():
+        degree[s_] += n
+    seed_id = max(ids, key=lambda i: (degree[i], -i))
+    c = session()
+    try:
+        c.open_fixture(small)
+        names = ['adv-old', 'adv-new', 'adv-shared']
+        state = {'model': model}
+
+        def step(label, batch):
+            m = state['model']
+            expect, _ = expected_outcome(m, batch)
+            response = c.call('mutate', batch=batch)
+            if expect == 'ok':
+                report.check(f'adversarial {label}: accepted', response.ok, response.message)
+                if response.ok:
+                    m.mutate(batch)
+            else:
+                report.check(f'adversarial {label}: rejected {expect}', (not response.ok) and response.code == expect, response.message)
+            sync_check(report, f'adversarial {label}', c, m, targeted_queries(m, seed_id, names) + std_queries(m, 8))
+
+        step('baseline (no change)', [{'op': 'ADD_ENTITY', 'id': 9000, 'kind': 'METHOD', 'name': 'adv-old', 'container': None}])
+        step('rename to a new name', [{'op': 'UPDATE_ENTITY', 'id': 9000, 'set': {'name': 'adv-new'}}])
+        step('rename onto a shared name', [{'op': 'UPDATE_ENTITY', 'id': 9000, 'set': {'name': 'adv-shared'}},
+                                           {'op': 'ADD_ENTITY', 'id': 9001, 'kind': 'FIELD', 'name': 'adv-shared', 'container': None}])
+        step('kind change moves entities between FILTER results', [{'op': 'UPDATE_ENTITY', 'id': 9000, 'set': {'kind': 'TYPE'}},
+                                                                   {'op': 'UPDATE_ENTITY', 'id': ids[1], 'set': {'kind': 'FUNCTION'}}])
+        step('unrelated delta leaves other results correct', [{'op': 'ADD_ENTITY', 'id': 9002, 'kind': 'MODULE', 'name': 'iso', 'container': None},
+                                                              {'op': 'ADD_RELATION', 'subject': 9002, 'relation': 'CONTAINS', 'object': 9001}])
+        out_edges = sorted((r, o) for (s_, r, o) in model.relations if s_ == seed_id)
+        first_edge = [{'op': 'REMOVE_RELATION', 'subject': seed_id, 'relation': r, 'object': o} for r, o in out_edges[:1]]
+        step('remove the first edge of a traversal path', first_edge)
+        step('add a shortcut edge', [{'op': 'ADD_RELATION', 'subject': seed_id, 'relation': 'CALLS', 'object': ids[-1]}])
+        step('add an edge that sorts first, shifting the cap window', [{'op': 'ADD_RELATION', 'subject': seed_id, 'relation': 'CALLS', 'object': ids[0]}])
+        step('add and remove duplicates (multiplicity only)', [{'op': 'ADD_RELATION', 'subject': seed_id, 'relation': 'CALLS', 'object': ids[0]},
+                                                                {'op': 'ADD_RELATION', 'subject': seed_id, 'relation': 'CALLS', 'object': ids[0]}])
+        step('remove one duplicate', [{'op': 'REMOVE_RELATION', 'subject': seed_id, 'relation': 'CALLS', 'object': ids[0]}])
+        ev = (7001, seed_id, 'CALLS', ids[2], 'POSITIVE', 'VERIFIED', 2, 1)
+        step('evidence-only delta', [evidence_op('ADD_EVIDENCE', ev)])
+        step('duplicate evidence row', [evidence_op('ADD_EVIDENCE', ev)])
+        step('evidence removal', [evidence_op('REMOVE_EVIDENCE', ev), evidence_op('REMOVE_EVIDENCE', ev)])
+        step('container change', [{'op': 'UPDATE_ENTITY', 'id': 9001, 'set': {'container': 9000}}])
+        step('reject: remove a container still referenced', [{'op': 'REMOVE_ENTITY', 'id': 9000}])
+        step('reject: relation to a removed entity in the same batch', [{'op': 'REMOVE_ENTITY', 'id': 9002},
+                                                                       {'op': 'ADD_RELATION', 'subject': 9002, 'relation': 'CALLS', 'object': 9001}])
+        step('remove an entity together with its dependents', [{'op': 'REMOVE_ENTITY', 'id': 9002},
+                                                               {'op': 'REMOVE_RELATION', 'subject': 9002, 'relation': 'CONTAINS', 'object': 9001}])
+        step('re-add the same id with other attributes', [{'op': 'ADD_ENTITY', 'id': 9002, 'kind': 'FILE', 'name': 'adv-old', 'container': 9001}])
+        step('churn: many small changes in one batch', [{'op': 'UPDATE_ENTITY', 'id': i, 'set': {'name': f'churn{i % 3}'}} for i in ids[2:12]]
+             + [{'op': 'ADD_RELATION', 'subject': ids[3], 'relation': 'OVERRIDES', 'object': ids[4]}])
+    finally:
+        c.close()
+
+
 # -- scenarios ------------------------------------------------------------------
-def run_candidate(name, exe, repository, fuzz=200, seed=20260929):
+def run_candidate(name, exe, repository, fuzz=200, seed=20260929, strategy=None, adversarial=True):
     report = Report(name)
     small = Path(repository) / 'small.json'
     generate(small, 60, 240, 5, 'mixed')
@@ -313,7 +411,7 @@ def run_candidate(name, exe, repository, fuzz=200, seed=20260929):
     repo.mkdir()
 
     def session(**kw):
-        return Client(exe, repo, **kw)
+        return Client(exe, repo, strategy=strategy, **kw)
 
     # 1. lifecycle and handshake
     c = session()
@@ -323,6 +421,8 @@ def run_candidate(name, exe, repository, fuzz=200, seed=20260929):
         opened = c.open_fixture(small)
         m = opened.message
         report.check('open: fixture ok, generation 0', opened.ok and opened.generation == 0, m)
+        if strategy:
+            report.check('open: the requested mutation strategy is reported', m.get('strategy', {}).get('mutation') == strategy, m)
         report.check('open: handshake fields', m.get('semantics') == 'csl.eval.session/v0.1' and m.get('binding') == BINDING
                      and m.get('capabilities') == [] and m.get('strategy', {}).get('mutation') in ('full-rebuild', 'incremental')
                      and isinstance(m.get('artifact'), str) and isinstance(m.get('chunk_bytes'), int) and isinstance(m.get('max_line_bytes'), int), m)
@@ -519,23 +619,29 @@ def run_candidate(name, exe, repository, fuzz=200, seed=20260929):
         report.check(f'fuzz: {fuzz} seeded batches agree with the model', mismatches == 0)
     finally:
         c.close()
+    if adversarial:
+        run_adversarial(report, session, small, small_fx)
     return report
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--candidate', action='append', choices=('rust', 'zig'), required=True)
+    parser.add_argument('--candidate', action='append', choices=('rust', 'zig', 'hybrid'), required=True)
     parser.add_argument('--fuzz', type=int, default=200)
+    parser.add_argument('--strategy', action='append', choices=('full-rebuild', 'incremental'),
+                        help='mutation strategy to request (repeatable); default: whatever the candidate defaults to')
     parser.add_argument('--json')
     args = parser.parse_args()
     reports = []
     for name in args.candidate:
-        with tempfile.TemporaryDirectory(prefix=f's0-{name}-') as directory:
-            report = run_candidate(name, executable(name), directory, args.fuzz)
-        reports.append({'candidate': name, 'checks': len(report.results), 'failed': report.failed})
-        print(json.dumps({'candidate': name, 'checks': len(report.results), 'failed': len(report.failed)}))
-        for failure in report.failed[:15]:
-            print('  FAIL', failure['name'], failure['detail'])
+        for strategy in args.strategy or [None]:
+            with tempfile.TemporaryDirectory(prefix=f's0-{name}-') as directory:
+                report = run_candidate(name, executable(name), directory, args.fuzz, strategy=strategy)
+            label = name if strategy is None else f'{name}/{strategy}'
+            reports.append({'candidate': label, 'checks': len(report.results), 'failed': report.failed})
+            print(json.dumps({'candidate': label, 'checks': len(report.results), 'failed': len(report.failed)}))
+            for failure in report.failed[:15]:
+                print('  FAIL', failure['name'], failure['detail'])
     if args.json:
         Path(args.json).write_text(json.dumps(reports, indent=2) + '\n')
     sys.exit(1 if any(r['failed'] for r in reports) else 0)

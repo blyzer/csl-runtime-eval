@@ -293,6 +293,7 @@ generalized across key types. A same-corpus rerun of the S baseline also showed 
 index difference between Rust and Zig is not stable across hosted instances. See STATUS.md
 "Gate #1 Track A".
 
-Classification of the index-phase question (2026-09-29): `NO STABLE MATERIAL INDEX ADVANTAGE
-ESTABLISHED`. The 4-7% Zig index advantage recorded above is kept as history and is not
-surviving evidence.
+Classification of the index-phase question (2026-09-29, after the preregistered paired
+experiment): `STABLE ZIG INDEX ADVANTAGE FALSIFIED`; Rust shows a material advantage within
+controlled same-instance pairs (Zig/Rust 1.164, CI [1.140, 1.197]); cross-instance stability is
+unresolved. The 4-7% Zig advantage recorded above is history, not surviving evidence.

@@ -199,10 +199,17 @@ pub fn main() void {
     if (it.next()) |first| {
         if (std.mem.eql(u8, first, "session")) {
             var repo: []const u8 = ".";
+            var strategy: session.Strategy = .@"full-rebuild";
             while (it.next()) |value| {
                 if (std.mem.eql(u8, value, "--repository")) repo = it.next() orelse "";
+                if (std.mem.eql(u8, value, "--strategy")) {
+                    strategy = session.Strategy.parse(it.next() orelse "") orelse {
+                        std.debug.print("unknown --strategy (full-rebuild | incremental)\n", .{});
+                        std.process.exit(2);
+                    };
+                }
             }
-            session.serve(repo);
+            session.serve(repo, strategy);
             return;
         }
     }

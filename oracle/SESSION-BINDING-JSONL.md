@@ -24,7 +24,8 @@ version).
 
 ## 2. Process start and handshake
 
-The candidate is started as `<candidate> session --repository DIR`. `DIR` is the
+The candidate is started as `<candidate> session --repository DIR [--strategy full-rebuild|incremental]`.
+`--strategy` selects the mutation strategy (default `full-rebuild`); `open` reports the active one. `DIR` is the
 **snapshot repository** of the semantics document (a directory the candidate may create
 files in); it is process-level configuration, not part of any request. Process start is
 part of the cold-restore measurement (semantics 4.3).
@@ -212,3 +213,13 @@ set in the semantics document. A failed request leaves state and `generation` un
 * Abort: `{"id":N,"frame":"abort","ok":false,"code":"<code>","message":"..."}`.
 * Float values (only `state_digest_ms`) may print in any valid JSON number form; every other
   value, and every result payload, is canonical.
+
+**`service_ns` (required in every response).** Every response, success or error, and the `end`
+frame of a chunked response, carries `"service_ns": <integer>`: the candidate's own wall time, in
+nanoseconds, from having the complete request to having the complete response ready to write
+(excluding the time spent waiting to read the request). It lets the host separate process/protocol
+overhead from service time (W5 phases, W8 apply latency). A response without a valid non-negative
+integer `service_ns` is a binding fault. `stats` additionally reports `derived_rebuilds_total`
+(integer): the number of times all derived structures were rebuilt from the logical state since
+`open`. It is one per `mutate`/`restore` under `full-rebuild`; under `incremental` it counts only
+fallback rebuilds (compaction, resize), so a fallback masquerading as incremental is visible.

@@ -5,6 +5,7 @@ fn main() {
         "../zig/build.zig",
         "../abi",
         "../../zig/src/semantic.zig",
+        "../../zig/src/session.zig",
     ] {
         println!("cargo:rerun-if-changed={p}");
     }

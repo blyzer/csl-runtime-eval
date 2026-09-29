@@ -1,0 +1,145 @@
+name: Gate 1 persistence and mutation (W5.S1, W8.S1)
+
+# W5.S1 cold restore and W8.S1 incremental invalidation at S scale. One hosted job per workload
+# cell group; candidates alternate inside each job, so compare candidates within a job (different
+# jobs run on different runner instances).
+on:
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: Native Linux architecture
+        type: choice
+        options: [ubuntu-24.04-arm, ubuntu-24.04]
+        default: ubuntu-24.04-arm
+      candidates:
+        description: Candidates (space-separated)
+        type: string
+        default: rust zig hybrid
+      jobs:
+        description: JSON array of jobs
+        type: string
+        default: '["w5","w8-entity","w8-relation","w8-evidence","w8-mixed"]'
+      w5_repeat:
+        description: W5 cold restores per candidate and query (the preregistration needs >= 30 pairs)
+        type: string
+        default: '30'
+      w8_repeat:
+        description: W8 repeats per cell (the preregistration needs >= 30 pairs)
+        type: string
+        default: '30'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: persistence-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    runs-on: ${{ inputs.runner }}
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        job: ${{ fromJSON(inputs.jobs) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+      - name: Install pinned native toolchains
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install nightly-2026-08-08 --profile minimal --component rustfmt,clippy
+          rustup override set nightly-2026-08-08
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.txt ziglang==0.14.1
+          ln -s "$(.venv/bin/python -c 'import ziglang,pathlib; print(pathlib.Path(ziglang.__file__).parent / "zig")')" .venv/bin/zig
+          echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            prototypes/rust
+            prototypes/hybrid
+          key: ${{ inputs.runner }}
+      - uses: actions/cache@v4
+        with:
+          path: |
+            prototypes/zig/.zig-cache
+            prototypes/hybrid/zig/.zig-cache
+          key: zig-0.14.1-${{ inputs.runner }}-${{ hashFiles('prototypes/zig/**/*.zig', 'prototypes/hybrid/zig/**/*.zig', 'prototypes/hybrid/zig/build.zig') }}
+          restore-keys: |
+            zig-0.14.1-${{ inputs.runner }}-
+      - name: Validate source and native candidates
+        run: |
+          set -euo pipefail
+          ./ci/verify-manifest.sh
+          ./ci/smoke.sh > results-smoke.log 2>&1
+          ./ci/check-candidates.sh > results-checks.log 2>&1
+          # check-candidates also installs a debug Zig executable; restore release.
+          python harness/benchctl.py build rust
+          python harness/benchctl.py build zig
+          python harness/benchctl.py conformance --candidate rust --candidate zig --profile
+      - name: Disable swap for controlled memory measurements
+        # Hosted runners ship 3 GB of swap. A few pages of unrelated swap-out during
+        # a large-RSS sample (M/hybrid peaks ~10.7 GB) trip the strict "swap-out
+        # counter must not increase" rule without any real memory pressure. Removing
+        # swap keeps that rule strict and makes a genuine overrun fail loudly (OOM).
+        run: |
+          mkdir -p results/hosted-context
+          swapon --show > results/hosted-context/swap-before.txt || true
+          sudo swapoff -a
+          swapon --show > results/hosted-context/swap-after.txt || true
+          free -b
+      - name: Record runner context
+        env:
+          RUNNER_LABEL: ${{ inputs.runner }}
+        run: |
+          mkdir -p results/hosted-context
+          uname -a > results/hosted-context/uname.txt
+          lscpu > results/hosted-context/cpu.txt
+          free -b > results/hosted-context/memory.txt
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          keys = ['GITHUB_REPOSITORY', 'GITHUB_SHA', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT',
+                  'RUNNER_OS', 'RUNNER_ARCH', 'RUNNER_LABEL', 'ImageOS', 'ImageVersion']
+          Path('results/hosted-context/run.json').write_text(json.dumps({k:os.environ.get(k) for k in keys},indent=2)+'\n')
+          PY
+      - name: Run workload
+        env:
+          JOB: ${{ matrix.job }}
+          CANDIDATES: ${{ inputs.candidates }}
+          W5_REPEAT: ${{ inputs.w5_repeat }}
+          W8_REPEAT: ${{ inputs.w8_repeat }}
+        run: |
+          set -euo pipefail
+          read -ra candidate_args <<< "$CANDIDATES"
+          python harness/benchctl.py build hybrid
+          mkdir -p results/persistence
+          out="results/persistence/${JOB}-S-${GITHUB_RUN_ID}"
+          if [ "$JOB" = "w5" ]; then
+            python harness/w5.py run --candidates "${candidate_args[@]}" --repeat "$W5_REPEAT" --output "$out" | tee "$out.log"
+          else
+            composition="${JOB#w8-}"
+            python harness/w8.py run --candidates "${candidate_args[@]}" --compositions "$composition" \
+              --repeat "$W8_REPEAT" --output "$out" | tee "$out.log"
+          fi
+      - name: Upload evidence, including failed or blocked attempts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: persistence-${{ matrix.job }}-${{ inputs.runner }}-${{ github.run_id }}
+          retention-days: 7
+          path: |
+            results/
+            !results/**/references/**
+            !results/**/repos/**
+            !results/**/reference-*.json
+            results-smoke.log
+            results-checks.log
+          if-no-files-found: error

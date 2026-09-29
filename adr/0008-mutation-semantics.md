@@ -241,3 +241,25 @@ never dropped or counted as zero.
    workload (section 11).
 8. Optimistic preconditions (for example an expected `state_digest`) are deferred to the
    concurrency capability.
+
+## 14. What "incremental" means (v0 requirements, added with the W8 implementation)
+
+A candidate may report `strategy.mutation = "incremental"` only if all of these hold; otherwise
+it reports `full-rebuild`:
+
+1. **Work proportional to the delta.** Derived structures (entity map, adjacency indexes,
+   evidence store, name index) are updated in place, at a cost that depends on the batch (and on
+   local index sizes such as a node's degree), not on the total row count; `mutate` does not
+   rescan or rebuild them.
+2. **Validation proportional to the delta.** Final-state integrity (section 6) is decided from
+   the touched entities and reference counts, not by re-validating the whole state.
+3. **Atomic**: a rejected batch leaves every derived structure unchanged (validate first, or undo).
+4. **No stale derived data**: nothing derived is served without reflecting every applied batch
+   (section 9.1). Any cache or memo must be invalidated conservatively.
+5. **Fallbacks are counted**: any full rebuild (compaction, resize, corruption recovery) increments
+   `derived_rebuilds_total` (binding appendix). W8 results report that counter next to every
+   incremental measurement; a run with fallback rebuilds is reported as such, not as clean
+   incremental evidence.
+
+`full-rebuild` remains the reference path and a baseline: `mutate` returns only after every derived
+structure is rebuilt from the logical state.

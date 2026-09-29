@@ -8,6 +8,8 @@ pub const Entity = struct { id: u64, kind: Kind, name_sid: u32, container: ?u64 
 pub const Edge = struct { subject: u64, relation: Relation, object: u64 };
 // Alphabetical field order is canonical JSON order. Never add measurement fields here.
 pub const Evidence = struct { freshness_epoch: u64, lineage: u32, object: u64, polarity: Polarity, proposition: u64, quality: Quality, relation: Relation, subject: u64 };
+/// One evidence slot of an incrementally maintained store (`Store.slots`): a dead slot is a free-list entry.
+pub const EvSlot = struct { row: Evidence, live: bool };
 pub const Fixture = struct { schema: []const u8, snapshot: []const u8, epoch: u64 = 0, strings: [][]const u8, entities: []Entity, relations: []Edge, evidence: []Evidence, complete: bool = false };
 const Op = enum { RESOLVE, RELATED, TRAVERSE, FILTER };
 pub const Query = struct {
@@ -38,7 +40,7 @@ fn validateQuery(q: Query) anyerror!void {
     if (q.input) |input| try validateQuery(input.*);
 }
 const Set = std.AutoHashMap(u64, void);
-const Index = std.AutoHashMap(u64, std.ArrayList(Edge));
+pub const Index = std.AutoHashMap(u64, std.ArrayList(Edge));
 pub fn edgeLess(_: void, a: Edge, b: Edge) bool {
     if (a.subject != b.subject) return a.subject < b.subject;
     const order = std.mem.order(u8, @tagName(a.relation), @tagName(b.relation));
@@ -106,6 +108,17 @@ pub const NameCache = struct {
         return self.map.count();
     }
 };
+/// Evidence predicate shared by the one-shot and the incremental scan (selection + quality + epoch).
+fn keepEvidence(q: Query, outcome: Store.QueryOutcome, e: Evidence) bool {
+    if (!outcome.selected.contains(e.subject) and !outcome.selected.contains(e.object)) return false;
+    if (q.evidence.min_quality) |qual| {
+        if (@intFromEnum(e.quality) < @intFromEnum(qual)) return false;
+    }
+    if (q.evidence.freshness_epoch) |epoch| {
+        if (e.freshness_epoch != epoch) return false;
+    }
+    return true;
+}
 pub const Store = struct {
     a: A,
     fx: Fixture,
@@ -113,6 +126,9 @@ pub const Store = struct {
     out: Index,
     inc: Index,
     name_cache: ?*NameCache = null,
+    /// Set only by the incremental session store: evidence lives in slots (with tombstones) and the
+    /// entity set is the `entities` map. `null` keeps the one-shot behavior exactly as it was.
+    slots: ?[]const EvSlot = null,
     pub fn checkSchema(fx: Fixture) !void {
         if (!std.mem.eql(u8, fx.schema, "csl.eval.fixture/v0.1")) return error.InvalidFixture;
     }
@@ -188,7 +204,10 @@ pub const Store = struct {
         if (q.input) |input| {
             base = try self.eval(input.*, truncated);
         } else if (q.op == .FILTER) {
-            for (self.fx.entities) |e| try base.put(e.id, {});
+            if (self.slots != null) {
+                var keys = self.entities.keyIterator();
+                while (keys.next()) |k| try base.put(k.*, {});
+            } else for (self.fx.entities) |e| try base.put(e.id, {});
         } else return error.InvalidQuery;
         const ids = try sorted(self.a, base);
         if (q.op == .FILTER) {
@@ -244,15 +263,12 @@ pub const Store = struct {
     pub fn materialize(self: *const Store, q: Query, outcome: QueryOutcome) !Selection {
         const ids = try sorted(self.a, outcome.selected);
         var props = std.ArrayList(Evidence).init(self.a);
-        for (self.fx.evidence) |e| {
-            if (!outcome.selected.contains(e.subject) and !outcome.selected.contains(e.object)) continue;
-            if (q.evidence.min_quality) |qual| {
-                if (@intFromEnum(e.quality) < @intFromEnum(qual)) continue;
+        if (self.slots) |slots| {
+            for (slots) |slot| {
+                if (slot.live and keepEvidence(q, outcome, slot.row)) try props.append(slot.row);
             }
-            if (q.evidence.freshness_epoch) |epoch| {
-                if (e.freshness_epoch != epoch) continue;
-            }
-            try props.append(e);
+        } else for (self.fx.evidence) |e| {
+            if (keepEvidence(q, outcome, e)) try props.append(e);
         }
         std.mem.sort(Evidence, props.items, {}, evLess);
         return .{ .ids = ids, .props = props.items, .truncated = outcome.truncated };

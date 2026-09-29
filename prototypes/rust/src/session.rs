@@ -3,9 +3,11 @@
 //! `csl-eval-rust session --repository DIR` serves the JSONL binding on stdin/stdout. The
 //! store keeps the *logical state* (entities with resolved names, relation and evidence
 //! multisets) and derives the existing typed store from it. Mutation strategy is
-//! `full-rebuild`: `mutate` applies the batch to a working copy of the logical state,
+//! `full-rebuild` (default): `mutate` applies the batch to a working copy of the logical state,
 //! rebuilds every derived structure (entity map, adjacency indexes, name index) and only
 //! then swaps, so its latency includes the rebuild and a failed batch changes nothing.
+//! `--strategy incremental` instead updates the derived structures in place (see
+//! `session/incremental.rs`, ADR-0008 section 14).
 //!
 //! Snapshot file layout (candidate-native, little endian, `<repository>/<snapshot_id>.snap`):
 //!   magic `CSLSNAP1` | u32 format version (1) | str artifact | str snapshot label |
@@ -18,15 +20,19 @@
 //!   32-byte SHA-256 of everything before it.
 //! where `str` is u32 length + UTF-8 bytes. `snapshot_id` = `snap-` + first 16 hex digits of the
 //! SHA-256 of the whole file (opaque to the host).
+mod incremental;
+use self::incremental::IncStore;
 use super::{Store, heap_live, heap_snapshot};
 use crate::model::{Edge, Entity, Evidence, Fixture, Kind, Polarity, Quality, Relation};
 use serde::Serialize;
 use serde_json::{Map, Value, json};
 use sha2::{Digest, Sha256};
+use std::borrow::Cow;
 use std::cell::{Cell, OnceCell};
 use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use std::io::{BufRead, Write};
 use std::path::{Path, PathBuf};
+use std::time::Instant;
 
 const BINDING: &str = "csl.eval.session.jsonl/v0";
 const SEMANTICS: &str = "csl.eval.session/v0.1";
@@ -352,103 +358,13 @@ impl Logical {
     /// Apply one batch per ADR-0008 to a copy; mirrors `oracle/session_model.py::_applied`
     /// (same checks, same order, so error codes agree).
     fn applied(&self, batch: &Value) -> Result<Logical, Fail> {
-        let ops = batch
-            .as_array()
-            .ok_or_else(|| invalid_request("batch must be a list"))?;
-        if ops.is_empty() {
-            return Err(invalid_input("empty batch"));
-        }
-        let mut entity_ops: Vec<(&Map<String, Value>, &str)> = Vec::new();
-        let mut entity_ids: HashSet<String> = HashSet::new();
-        let mut rel_add: BTreeMap<RelKey, u64> = BTreeMap::new();
-        let mut rel_rem: BTreeMap<RelKey, u64> = BTreeMap::new();
-        let mut ev_add: BTreeMap<EvKey, u64> = BTreeMap::new();
-        let mut ev_rem: BTreeMap<EvKey, u64> = BTreeMap::new();
-        for op in ops {
-            let obj = op
-                .as_object()
-                .ok_or_else(|| invalid_request("unknown or malformed operation"))?;
-            let kind = obj.get("op").and_then(Value::as_str).unwrap_or("");
-            match kind {
-                "ADD_ENTITY" | "REMOVE_ENTITY" | "UPDATE_ENTITY" => {
-                    let allowed: &[&str] = match kind {
-                        "ADD_ENTITY" => &["op", "id", "kind", "name", "container"],
-                        "REMOVE_ENTITY" => &["op", "id"],
-                        _ => &["op", "id", "set"],
-                    };
-                    if obj.keys().any(|k| !allowed.contains(&k.as_str())) || !obj.contains_key("id")
-                    {
-                        return Err(invalid_request(format!("{kind} fields")));
-                    }
-                    if kind == "ADD_ENTITY"
-                        && !(obj.contains_key("kind") && obj.contains_key("name"))
-                    {
-                        return Err(invalid_request("ADD_ENTITY needs kind and name"));
-                    }
-                    if kind == "UPDATE_ENTITY" && !obj.get("set").is_some_and(Value::is_object) {
-                        return Err(invalid_request("UPDATE_ENTITY needs set"));
-                    }
-                    if !entity_ids.insert(obj["id"].to_string()) {
-                        return Err(invalid_input("two entity operations for one id"));
-                    }
-                    entity_ops.push((obj, kind));
-                }
-                "ADD_RELATION" | "REMOVE_RELATION" => {
-                    if obj.len() != 4
-                        || !["op", "subject", "relation", "object"]
-                            .iter()
-                            .all(|k| obj.contains_key(*k))
-                    {
-                        return Err(invalid_request(format!("{kind} fields")));
-                    }
-                    let key =
-                        relation_row(obj).ok_or_else(|| invalid_input("invalid relation row"))?;
-                    *(if kind == "ADD_RELATION" {
-                        &mut rel_add
-                    } else {
-                        &mut rel_rem
-                    })
-                    .entry(key)
-                    .or_default() += 1;
-                }
-                "ADD_EVIDENCE" | "REMOVE_EVIDENCE" => {
-                    if obj.len() != 9
-                        || ![
-                            "op",
-                            "proposition",
-                            "subject",
-                            "relation",
-                            "object",
-                            "polarity",
-                            "quality",
-                            "freshness_epoch",
-                            "lineage",
-                        ]
-                        .iter()
-                        .all(|k| obj.contains_key(*k))
-                    {
-                        return Err(invalid_request(format!("{kind} fields")));
-                    }
-                    let key =
-                        evidence_row(obj).ok_or_else(|| invalid_input("invalid evidence row"))?;
-                    *(if kind == "ADD_EVIDENCE" {
-                        &mut ev_add
-                    } else {
-                        &mut ev_rem
-                    })
-                    .entry(key)
-                    .or_default() += 1;
-                }
-                _ => return Err(invalid_request("unknown or malformed operation")),
-            }
-        }
-        if rel_add.keys().any(|k| rel_rem.contains_key(k))
-            || ev_add.keys().any(|k| ev_rem.contains_key(k))
-        {
-            return Err(invalid_input(
-                "a value is both added and removed in one batch",
-            ));
-        }
+        let Parsed {
+            entity_ops,
+            rel_add,
+            rel_rem,
+            ev_add,
+            ev_rem,
+        } = parse_batch(batch)?;
         let mut entities = self.entities.clone();
         for (obj, kind) in entity_ops {
             let id = obj["id"].as_u64().filter(|n| *n >= 1);
@@ -564,6 +480,118 @@ impl Logical {
             evidence,
         })
     }
+}
+
+/// The operations of a batch, checked for structure and for the conflicts that need no state.
+struct Parsed<'a> {
+    entity_ops: Vec<(&'a Map<String, Value>, &'a str)>,
+    rel_add: BTreeMap<RelKey, u64>,
+    rel_rem: BTreeMap<RelKey, u64>,
+    ev_add: BTreeMap<EvKey, u64>,
+    ev_rem: BTreeMap<EvKey, u64>,
+}
+
+/// Structural validation of a batch (same checks and order as `oracle/session_model.py`).
+fn parse_batch(batch: &Value) -> Result<Parsed<'_>, Fail> {
+    let ops = batch
+        .as_array()
+        .ok_or_else(|| invalid_request("batch must be a list"))?;
+    if ops.is_empty() {
+        return Err(invalid_input("empty batch"));
+    }
+    let mut entity_ops: Vec<(&Map<String, Value>, &str)> = Vec::new();
+    let mut entity_ids: HashSet<String> = HashSet::new();
+    let mut rel_add: BTreeMap<RelKey, u64> = BTreeMap::new();
+    let mut rel_rem: BTreeMap<RelKey, u64> = BTreeMap::new();
+    let mut ev_add: BTreeMap<EvKey, u64> = BTreeMap::new();
+    let mut ev_rem: BTreeMap<EvKey, u64> = BTreeMap::new();
+    for op in ops {
+        let obj = op
+            .as_object()
+            .ok_or_else(|| invalid_request("unknown or malformed operation"))?;
+        let kind = obj.get("op").and_then(Value::as_str).unwrap_or("");
+        match kind {
+            "ADD_ENTITY" | "REMOVE_ENTITY" | "UPDATE_ENTITY" => {
+                let allowed: &[&str] = match kind {
+                    "ADD_ENTITY" => &["op", "id", "kind", "name", "container"],
+                    "REMOVE_ENTITY" => &["op", "id"],
+                    _ => &["op", "id", "set"],
+                };
+                if obj.keys().any(|k| !allowed.contains(&k.as_str())) || !obj.contains_key("id") {
+                    return Err(invalid_request(format!("{kind} fields")));
+                }
+                if kind == "ADD_ENTITY" && !(obj.contains_key("kind") && obj.contains_key("name")) {
+                    return Err(invalid_request("ADD_ENTITY needs kind and name"));
+                }
+                if kind == "UPDATE_ENTITY" && !obj.get("set").is_some_and(Value::is_object) {
+                    return Err(invalid_request("UPDATE_ENTITY needs set"));
+                }
+                if !entity_ids.insert(obj["id"].to_string()) {
+                    return Err(invalid_input("two entity operations for one id"));
+                }
+                entity_ops.push((obj, kind));
+            }
+            "ADD_RELATION" | "REMOVE_RELATION" => {
+                if obj.len() != 4
+                    || !["op", "subject", "relation", "object"]
+                        .iter()
+                        .all(|k| obj.contains_key(*k))
+                {
+                    return Err(invalid_request(format!("{kind} fields")));
+                }
+                let key = relation_row(obj).ok_or_else(|| invalid_input("invalid relation row"))?;
+                *(if kind == "ADD_RELATION" {
+                    &mut rel_add
+                } else {
+                    &mut rel_rem
+                })
+                .entry(key)
+                .or_default() += 1;
+            }
+            "ADD_EVIDENCE" | "REMOVE_EVIDENCE" => {
+                if obj.len() != 9
+                    || ![
+                        "op",
+                        "proposition",
+                        "subject",
+                        "relation",
+                        "object",
+                        "polarity",
+                        "quality",
+                        "freshness_epoch",
+                        "lineage",
+                    ]
+                    .iter()
+                    .all(|k| obj.contains_key(*k))
+                {
+                    return Err(invalid_request(format!("{kind} fields")));
+                }
+                let key = evidence_row(obj).ok_or_else(|| invalid_input("invalid evidence row"))?;
+                *(if kind == "ADD_EVIDENCE" {
+                    &mut ev_add
+                } else {
+                    &mut ev_rem
+                })
+                .entry(key)
+                .or_default() += 1;
+            }
+            _ => return Err(invalid_request("unknown or malformed operation")),
+        }
+    }
+    if rel_add.keys().any(|k| rel_rem.contains_key(k))
+        || ev_add.keys().any(|k| ev_rem.contains_key(k))
+    {
+        return Err(invalid_input(
+            "a value is both added and removed in one batch",
+        ));
+    }
+    Ok(Parsed {
+        entity_ops,
+        rel_add,
+        rel_rem,
+        ev_add,
+        ev_rem,
+    })
 }
 
 /// `Some(None)` for absent/null, `Some(Some(id))` for a valid id, `None` for anything else.
@@ -901,14 +929,55 @@ enum Reply {
     Query { generation: u64, result: Vec<u8> },
 }
 
+#[derive(Clone, Copy, PartialEq)]
+pub enum Strategy {
+    FullRebuild,
+    Incremental,
+}
+impl Strategy {
+    fn name(self) -> &'static str {
+        match self {
+            Strategy::FullRebuild => "full-rebuild",
+            Strategy::Incremental => "incremental",
+        }
+    }
+}
+
+/// The store behind a session: the logical state plus a rebuilt-per-batch typed store, or the
+/// in-place incremental structures.
+enum Engine {
+    Rebuild { logical: Logical, derived: Derived },
+    Inc(IncStore),
+}
+
 struct Live {
-    logical: Logical,
-    derived: Derived,
+    engine: Engine,
     generation: u64,
+    /// Full rebuilds of all derived structures since `open` (a bulk build counts as one).
+    rebuilds: u64,
+}
+
+impl Live {
+    /// The logical state: borrowed when kept, derived (a checkpoint-time cost) otherwise.
+    fn logical(&self) -> Cow<'_, Logical> {
+        match &self.engine {
+            Engine::Rebuild { logical, .. } => Cow::Borrowed(logical),
+            Engine::Inc(store) => Cow::Owned(store.to_logical()),
+        }
+    }
+    fn context(&self) -> (String, Option<u64>, bool) {
+        match &self.engine {
+            Engine::Rebuild { logical, .. } => {
+                (logical.snapshot.clone(), logical.epoch, logical.complete)
+            }
+            Engine::Inc(store) => store.context(),
+        }
+    }
 }
 
 struct Session {
     repository: PathBuf,
+    strategy: Strategy,
     live: Option<Live>,
     max_line_bytes: u64,
     chunk_bytes: usize,
@@ -967,6 +1036,17 @@ impl Session {
                             .map_err(|e| invalid_input(format!("{path}: {e}")))?;
                         let fx: Fixture = serde_json::from_slice(&bytes)
                             .map_err(|e| invalid_input(format!("fixture: {e}")))?;
+                        if self.strategy == Strategy::Incremental {
+                            // Same validation as the one-shot store, without keeping its indexes.
+                            (|| -> super::Result<()> {
+                                Store::check_schema(&fx)?;
+                                let entities = Store::build_entities(&fx)?;
+                                Store::build_adjacency(&fx, &entities)?;
+                                Ok(())
+                            })()
+                            .map_err(|e| invalid_input(e.to_string()))?;
+                            return self.finish_open(id, max, Logical::from_fixture(&fx), None);
+                        }
                         let derived = Derived::build(fx)?;
                         let logical = Logical::from_fixture(derived.store().fx);
                         return self.finish_open(id, max, logical, Some(derived));
@@ -1001,11 +1081,11 @@ impl Session {
             "query" => {
                 check_fields(req, &["id", "op", "query"])?;
                 let live = self.live()?;
-                let bytes = live
-                    .derived
-                    .store()
-                    .execute(&req["query"])
-                    .map_err(|e| invalid_input(e.to_string()))?;
+                let bytes = match &live.engine {
+                    Engine::Rebuild { derived, .. } => derived.store().execute(&req["query"]),
+                    Engine::Inc(store) => store.execute(&req["query"]),
+                }
+                .map_err(|e| invalid_input(e.to_string()))?;
                 Ok(Reply::Query {
                     generation: live.generation,
                     result: bytes,
@@ -1014,10 +1094,18 @@ impl Session {
             "mutate" => {
                 check_fields(req, &["id", "op", "batch"])?;
                 let live = self.live()?;
-                let next = live.logical.applied(&req["batch"])?;
-                let derived = Derived::build(next.to_fixture())?;
-                live.logical = next;
-                live.derived = derived;
+                match &mut live.engine {
+                    Engine::Rebuild { logical, derived } => {
+                        let next = logical.applied(&req["batch"])?;
+                        *derived = Derived::build(next.to_fixture())?;
+                        *logical = next;
+                        live.rebuilds += 1;
+                    }
+                    Engine::Inc(store) => {
+                        let parsed = parse_batch(&req["batch"])?;
+                        store.apply(&parsed)?;
+                    }
+                }
                 live.generation += 1;
                 Ok(Reply::Value(ok(id, json!({"generation": live.generation}))))
             }
@@ -1025,7 +1113,7 @@ impl Session {
                 check_fields(req, &["id", "op"])?;
                 let live = self.live()?;
                 let start = std::time::Instant::now();
-                let (digest, bytes) = live.logical.digest()?;
+                let (digest, bytes) = live.logical().digest()?;
                 let ms = start.elapsed().as_secs_f64() * 1000.0;
                 Ok(Reply::Value(ok(
                     id,
@@ -1037,7 +1125,7 @@ impl Session {
                 check_fields(req, &["id", "op"])?;
                 let repository = self.repository.clone();
                 let live = self.live()?;
-                let data = encode_snapshot(&live.logical);
+                let data = encode_snapshot(&live.logical());
                 let snapshot_id = format!("snap-{}", &hex(&Sha256::digest(&data))[..16]);
                 std::fs::create_dir_all(&repository)
                     .map_err(|e| fail("INTERNAL", e.to_string()))?;
@@ -1069,29 +1157,36 @@ impl Session {
                 let restored = decode_snapshot(&data).ok_or_else(|| {
                     invalid_input("snapshot is corrupt or from an incompatible artifact")
                 })?;
-                if restored.snapshot != live.logical.snapshot
-                    || restored.epoch != live.logical.epoch
-                    || restored.complete != live.logical.complete
+                if (restored.snapshot.clone(), restored.epoch, restored.complete) != live.context()
                 {
                     return Err(invalid_input("context mismatch"));
                 }
-                let derived = Derived::build(restored.to_fixture())?;
-                live.logical = restored;
-                live.derived = derived;
+                live.engine = match live.engine {
+                    Engine::Rebuild { .. } => Engine::Rebuild {
+                        derived: Derived::build(restored.to_fixture())?,
+                        logical: restored,
+                    },
+                    Engine::Inc(_) => Engine::Inc(IncStore::from_logical(&restored)),
+                };
+                live.rebuilds += 1;
                 live.generation += 1;
                 Ok(Reply::Value(ok(id, json!({"generation": live.generation}))))
             }
             "stats" => {
                 check_fields(req, &["id", "op"])?;
                 let live = self.live()?;
-                let [entities, relations, evidence, unique] = live.logical.counts();
+                let [entities, relations, evidence, unique] = match &live.engine {
+                    Engine::Rebuild { logical, .. } => logical.counts(),
+                    Engine::Inc(store) => store.counts(),
+                };
                 let snap = heap_snapshot();
                 Ok(Reply::Value(ok(
                     id,
                     json!({"generation": live.generation, "stats": {
                         "schema": "csl.eval.session.stats/v0.1", "generation": live.generation,
                         "entities": entities, "relations": relations, "evidence": evidence,
-                        "unique_strings": unique, "live_heap_bytes": heap_live(),
+                        "unique_strings": unique, "derived_rebuilds_total": live.rebuilds,
+                        "live_heap_bytes": heap_live(),
                         "peak_heap_bytes": snap[4], "heap_breakdown": null,
                         "allocations_total": snap[0]}}),
                 )))
@@ -1116,24 +1211,30 @@ impl Session {
         logical: Logical,
         derived: Option<Derived>,
     ) -> Result<Reply, Fail> {
-        let derived = match derived {
-            Some(d) => d,
-            None => Derived::build(logical.to_fixture())?,
+        let engine = match self.strategy {
+            Strategy::FullRebuild => Engine::Rebuild {
+                derived: match derived {
+                    Some(d) => d,
+                    None => Derived::build(logical.to_fixture())?,
+                },
+                logical,
+            },
+            Strategy::Incremental => Engine::Inc(IncStore::from_logical(&logical)),
         };
         self.max_line_bytes = max;
         // A chunk line is `{"data":"<base64>","frame":"chunk","id":N,"seq":K}` plus a newline:
         // reserve 256 bytes for the envelope and take 3 raw bytes per 4 base64 characters.
         self.chunk_bytes = ((max as usize - 256) / 4) * 3;
         self.live = Some(Live {
-            logical,
-            derived,
+            engine,
             generation: 0,
+            rebuilds: 1,
         });
         Ok(Reply::Value(ok(
             id,
             json!({"generation": 0, "semantics": SEMANTICS, "binding": BINDING, "max_line_bytes": max,
                    "chunk_bytes": self.chunk_bytes, "capabilities": [],
-                   "strategy": {"mutation": "full-rebuild"}, "artifact": ARTIFACT}),
+                   "strategy": {"mutation": self.strategy.name()}, "artifact": ARTIFACT}),
         )))
     }
 }
@@ -1155,11 +1256,29 @@ fn write_line(out: &mut impl Write, value: &Value) {
     out.flush().expect("stdout");
 }
 
-fn send_query(out: &mut impl Write, session: &Session, id: u64, generation: u64, result: &[u8]) {
+/// Candidate-side service time so far, in nanoseconds (SESSION-BINDING `service_ns`).
+fn service(started: Instant) -> u64 {
+    started.elapsed().as_nanos() as u64
+}
+
+fn write_error(out: &mut impl Write, id: Option<u64>, f: &Fail, started: Instant) {
+    let mut value = error_value(id, f);
+    value["service_ns"] = json!(service(started));
+    write_line(out, &value);
+}
+
+fn send_query(
+    out: &mut impl Write,
+    session: &Session,
+    id: u64,
+    generation: u64,
+    result: &[u8],
+    started: Instant,
+) {
     let mut line =
         format!("{{\"generation\":{generation},\"id\":{id},\"ok\":true,\"result\":").into_bytes();
     line.extend_from_slice(result);
-    line.extend_from_slice(b"}\n");
+    line.extend_from_slice(format!(",\"service_ns\":{}}}\n", service(started)).as_bytes());
     if (line.len() as u64) <= session.max_line_bytes {
         out.write_all(&line).expect("stdout");
         out.flush().expect("stdout");
@@ -1168,7 +1287,10 @@ fn send_query(out: &mut impl Write, session: &Session, id: u64, generation: u64,
     write_line(out, &json!({"id": id, "frame": "begin"}));
     let mut hasher = Sha256::new();
     let mut chunks = 0u64;
+    // Service time counts building the result and producing the frames, not the pipe writes.
+    let mut spent = started.elapsed();
     for (seq, chunk) in result.chunks(session.chunk_bytes).enumerate() {
+        let produced = Instant::now();
         hasher.update(chunk);
         let mut data = Vec::with_capacity(chunk.len() / 3 * 4 + 4);
         b64_encode(chunk, &mut data);
@@ -1180,60 +1302,72 @@ fn send_query(out: &mut impl Write, session: &Session, id: u64, generation: u64,
         line.extend_from_slice(
             format!("\"frame\":\"chunk\",\"id\":{id},\"seq\":{seq}}}\n").as_bytes(),
         );
+        spent += produced.elapsed();
         out.write_all(&line).expect("stdout");
         chunks += 1;
     }
     out.flush().expect("stdout");
+    let produced = Instant::now();
+    let digest = hex(&hasher.finalize());
+    spent += produced.elapsed();
     write_line(
         out,
         &json!({"id": id, "frame": "end", "ok": true, "generation": generation, "chunks": chunks,
-                "bytes": result.len(), "sha256": hex(&hasher.finalize())}),
+                "bytes": result.len(), "sha256": digest, "service_ns": spent.as_nanos() as u64}),
     );
 }
 
-fn dispatch(session: &mut Session, out: &mut impl Write, req: Value) -> bool {
+fn dispatch(session: &mut Session, out: &mut impl Write, req: Value, started: Instant) -> bool {
     let Some(map) = req.as_object() else {
-        write_line(
+        write_error(
             out,
-            &error_value(None, &invalid_request("request must be an object")),
+            None,
+            &invalid_request("request must be an object"),
+            started,
         );
         return false;
     };
     let Some(id) = map.get("id").and_then(Value::as_u64) else {
-        write_line(
+        write_error(
             out,
-            &error_value(None, &invalid_request("id must be a non-negative integer")),
+            None,
+            &invalid_request("id must be a non-negative integer"),
+            started,
         );
         return false;
     };
     let Some(op) = map.get("op").and_then(Value::as_str) else {
-        write_line(
+        write_error(
             out,
-            &error_value(Some(id), &invalid_request("op must be a string")),
+            Some(id),
+            &invalid_request("op must be a string"),
+            started,
         );
         return false;
     };
     let closing = op == "close";
     match session.handle(id, op, map) {
-        Ok(Reply::Value(value)) => {
+        Ok(Reply::Value(mut value)) => {
+            value["service_ns"] = json!(service(started));
             write_line(out, &value);
             closing
         }
         Ok(Reply::Query { generation, result }) => {
-            send_query(out, session, id, generation, &result);
+            send_query(out, session, id, generation, &result, started);
             false
         }
         Err(f) => {
-            write_line(out, &error_value(Some(id), &f));
+            write_error(out, Some(id), &f, started);
             false
         }
     }
 }
 
 /// Serve the session on stdin/stdout until `close` or end of input; returns the exit code.
-pub fn run(repository: &Path) -> i32 {
+pub fn run(repository: &Path, strategy: Strategy) -> i32 {
     let mut session = Session {
         repository: repository.to_path_buf(),
+        strategy,
         live: None,
         max_line_bytes: MIN_LINE,
         chunk_bytes: 0,
@@ -1250,13 +1384,16 @@ pub fn run(repository: &Path) -> i32 {
             Ok(0) | Err(_) => return 0, // end of input while open is an implicit close
             Ok(_) => {}
         }
+        let started = Instant::now(); // the complete request line is in hand
         let text = line.strip_suffix(b"\n").unwrap_or(&line);
         let value: Value = match serde_json::from_slice(text) {
             Ok(v) => v,
             Err(e) => {
-                write_line(
+                write_error(
                     &mut out,
-                    &error_value(None, &invalid_request(format!("malformed JSON: {e}"))),
+                    None,
+                    &invalid_request(format!("malformed JSON: {e}")),
+                    started,
                 );
                 continue;
             }
@@ -1266,14 +1403,14 @@ pub fn run(repository: &Path) -> i32 {
             .and_then(Value::as_str)
             .map(str::to_string);
         let Some(frame) = frame else {
-            if dispatch(&mut session, &mut out, value) {
+            if dispatch(&mut session, &mut out, value, started) {
                 return 0;
             }
             continue;
         };
         let id = value.get("id").and_then(Value::as_u64);
         let reject = |out: &mut std::io::StdoutLock, a: &mut Option<Assembly>, message: &str| {
-            write_line(out, &error_value(id, &invalid_request(message)));
+            write_error(out, id, &invalid_request(message), started);
             if let Some(a) = a {
                 a.skipping = true;
             }
@@ -1281,9 +1418,11 @@ pub fn run(repository: &Path) -> i32 {
         match frame.as_str() {
             "begin" => {
                 let (Some(id), Some(op)) = (id, value.get("op").and_then(Value::as_str)) else {
-                    write_line(
+                    write_error(
                         &mut out,
-                        &error_value(id, &invalid_request("begin needs id and op")),
+                        id,
+                        &invalid_request("begin needs id and op"),
+                        started,
                     );
                     continue;
                 };
@@ -1311,9 +1450,11 @@ pub fn run(repository: &Path) -> i32 {
                         _ => reject(&mut out, &mut assembly, "bad chunk frame"),
                     }
                 }
-                _ => write_line(
+                _ => write_error(
                     &mut out,
-                    &error_value(id, &invalid_request("chunk without begin")),
+                    id,
+                    &invalid_request("chunk without begin"),
+                    started,
                 ),
             },
             "end" => match assembly.take() {
@@ -1338,31 +1479,24 @@ pub fn run(repository: &Path) -> i32 {
                         (true, Some(mut m)) => {
                             m.insert("id".into(), json!(a.id));
                             m.insert("op".into(), json!(a.op));
-                            if dispatch(&mut session, &mut out, Value::Object(m)) {
+                            if dispatch(&mut session, &mut out, Value::Object(m), started) {
                                 return 0;
                             }
                         }
-                        _ => write_line(
+                        _ => write_error(
                             &mut out,
-                            &error_value(
-                                Some(a.id),
-                                &invalid_request("chunked request failed verification"),
-                            ),
+                            Some(a.id),
+                            &invalid_request("chunked request failed verification"),
+                            started,
                         ),
                     }
                 }
                 other => {
                     assembly = other;
-                    write_line(
-                        &mut out,
-                        &error_value(id, &invalid_request("end without begin")),
-                    );
+                    write_error(&mut out, id, &invalid_request("end without begin"), started);
                 }
             },
-            _ => write_line(
-                &mut out,
-                &error_value(id, &invalid_request("unknown frame")),
-            ),
+            _ => write_error(&mut out, id, &invalid_request("unknown frame"), started),
         }
     }
 }

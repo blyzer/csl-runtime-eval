@@ -2,9 +2,11 @@ const std = @import("std");
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
-    const semantic = b.createModule(.{ .root_source_file = b.path("../../zig/src/semantic.zig"), .target = target, .optimize = optimize });
-    const root = b.createModule(.{ .root_source_file = b.path("src/abi.zig"), .target = target, .optimize = optimize, .link_libc = true });
-    root.addImport("semantic", semantic);
+    // The pure-Zig S0 session module. It imports semantic.zig by relative path, and a file can belong to
+    // only one module, so the hybrid reaches the semantic types as `@import("session").sem`.
+    const session = b.createModule(.{ .root_source_file = b.path("../../zig/src/session.zig"), .target = target, .optimize = optimize, .link_libc = true });
+    const root = b.createModule(.{ .root_source_file = b.path("src/lib.zig"), .target = target, .optimize = optimize, .link_libc = true });
+    root.addImport("session", session);
     const lib = b.addLibrary(.{ .name = "csl_kernel", .linkage = .static, .root_module = root });
     lib.bundle_compiler_rt = true;
     b.installArtifact(lib);

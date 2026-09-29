@@ -740,7 +740,19 @@ fn main() {
             eprintln!("missing --repository");
             std::process::exit(1);
         };
-        std::process::exit(session::run(std::path::Path::new(&repository)));
+        let strategy = match args
+            .windows(2)
+            .find(|w| w[0] == "--strategy")
+            .map(|w| w[1].as_str())
+        {
+            None | Some("full-rebuild") => session::Strategy::FullRebuild,
+            Some("incremental") => session::Strategy::Incremental,
+            Some(other) => {
+                eprintln!("unknown --strategy {other}");
+                std::process::exit(1);
+            }
+        };
+        std::process::exit(session::run(std::path::Path::new(&repository), strategy));
     }
     match main_run() {
         Ok(v) => println!("{v}"),
