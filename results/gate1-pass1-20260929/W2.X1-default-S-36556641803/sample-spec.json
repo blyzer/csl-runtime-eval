@@ -1,0 +1,24 @@
+{
+  "job": {
+    "candidate": "rust",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "tail-outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 100000
+      }
+    },
+    "iteration": 0
+  },
+  "binary": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust/target/release/csl-eval-rust",
+  "fixture": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W2.X1-default-S-20260929.json",
+  "reference": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/scenarios/W2.X1-default-S-36556641803/references/W2-tail-outgoing.json",
+  "result_digest": "sha256:c206c93271274c9a0d4d46d5ddad2209ab5a5ba2c707d25410b2f6f6aedcf9b2",
+  "expected_lookup": null,
+  "max_load": 0.75,
+  "min_memory": 3221225472,
+  "stats": true
+}

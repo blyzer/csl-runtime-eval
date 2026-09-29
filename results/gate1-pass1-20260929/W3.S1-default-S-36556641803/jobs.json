@@ -1,0 +1,88 @@
+[
+  {
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    }
+  },
+  {
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    }
+  },
+  {
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    }
+  },
+  {
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    }
+  },
+  {
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    }
+  },
+  {
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    }
+  },
+  {
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    }
+  },
+  {
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    }
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "job": {
+    "candidate": "zig",
+    "workload": "W4",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "resolve-primary",
+      "op": "RESOLVE",
+      "name": "0001df920001df920001df92"
+    },
+    "iteration": 0,
+    "resolve": {
+      "names": [
+        "0001df920001df920001df92"
+      ],
+      "rounds": 1
+    }
+  },
+  "binary": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/zig/zig-out/bin/csl-eval-zig",
+  "fixture": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S1-default-S-20260929.json",
+  "reference": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/scenarios/W4.S1-default-S-36558602577/references/W4-resolve-primary.json",
+  "result_digest": "sha256:11d727f6f50cfe0a891e04b8c4b6b57ee9c5abf8c1a945d445cac098abbcfc4a",
+  "expected_lookup": {
+    "lookup_digest": "sha256:897892a0f01b57c9a582141f403e793bd32f6d8def085a5db17220735860bcae",
+    "lookup_ids_total": 1,
+    "unique_strings": 200000,
+    "lookups": 1
+  },
+  "max_load": 0.75,
+  "min_memory": 3221225472,
+  "stats": true
+}

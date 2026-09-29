@@ -1,0 +1,8 @@
+{"reference": "W3-sel-100.json", "state": "PASS", "bytes": 151397824}
+{"reference": "W3-min-exact.json", "state": "PASS", "bytes": 60804626}
+{"reference": "W3-min-verified.json", "state": "PASS", "bytes": 31079627}
+{"reference": "W3-epoch-1.json", "state": "PASS", "bytes": 75510593}
+{"reference": "W3-epoch-2.json", "state": "PASS", "bytes": 15656974}
+{"reference": "W3-epoch-3.json", "state": "PASS", "bytes": 2106571}
+{"reference": "W3-epoch-4.json", "state": "PASS", "bytes": 739569}
+{"reference": "W3-verified-epoch-1.json", "state": "PASS", "bytes": 15790054}

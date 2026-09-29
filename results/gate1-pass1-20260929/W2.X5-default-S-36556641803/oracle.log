@@ -1,0 +1,10 @@
+{"reference": "W2-out-cap-1.json", "state": "PASS", "bytes": 4719}
+{"reference": "W2-out-cap-2.json", "state": "PASS", "bytes": 7829}
+{"reference": "W2-out-cap-below.json", "state": "PASS", "bytes": 20301314}
+{"reference": "W2-out-cap-exact.json", "state": "PASS", "bytes": 20304716}
+{"reference": "W2-out-cap-above.json", "state": "PASS", "bytes": 20304715}
+{"reference": "W2-in-cap-1.json", "state": "PASS", "bytes": 3079}
+{"reference": "W2-in-cap-2.json", "state": "PASS", "bytes": 6192}
+{"reference": "W2-in-cap-below.json", "state": "PASS", "bytes": 35614549}
+{"reference": "W2-in-cap-exact.json", "state": "PASS", "bytes": 35617206}
+{"reference": "W2-in-cap-above.json", "state": "PASS", "bytes": 35617205}

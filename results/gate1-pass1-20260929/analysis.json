@@ -1,0 +1,5839 @@
+[
+  {
+    "dir": "results/gate1-pass1-20260929/W2.X1-default-S-36556641803",
+    "scenario": "W2.X1",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 240,
+    "conformant": 240,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {},
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W2.X1-default-S-20260929.json",
+      "digest": "4e66c21dde72451b81c0dcd95e2699bc6f38999d9448d40071a2ed7e243acabf",
+      "entities": 100000,
+      "edges": 1000000,
+      "evidence": 1000000
+    },
+    "queries": [
+      {
+        "query": "tail-depth-4",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 792.0,
+          "rss_mb": 366,
+          "results_bytes_digest": "sha256:426a9d143d39",
+          "phases_ms": {
+            "load": 480.1,
+            "index": 265.9,
+            "query": 0.0,
+            "result": 3.3
+          },
+          "sub_ms": {
+            "read": 74.6,
+            "parse": 405.4,
+            "entities": 3.8,
+            "adjacency": 173.7,
+            "sort": 87.9
+          },
+          "detail_ms": {
+            "materialize": 3.2,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 364.9,
+            "peak_live_mb": 364.9,
+            "retained_mb": null,
+            "allocations": 459341,
+            "bytes_per_entity": 3649.2,
+            "bytes_per_record": 173.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1425.8,
+          "rss_mb": 511,
+          "results_bytes_digest": "sha256:426a9d143d39",
+          "phases_ms": {
+            "load": 1000.4,
+            "index": 389.1,
+            "query": 0.0,
+            "result": 13.3
+          },
+          "sub_ms": {
+            "read": 74.5,
+            "parse": 926.0,
+            "entities": 6.5,
+            "adjacency": 222.1,
+            "sort": 160.5
+          },
+          "detail_ms": {
+            "materialize": 13.3,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 554.9,
+            "peak_live_mb": 555.0,
+            "retained_mb": 1014.3,
+            "allocations": 301993,
+            "bytes_per_entity": 5549.0,
+            "bytes_per_record": 264.2
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1456.9,
+          "rss_mb": 676,
+          "results_bytes_digest": "sha256:426a9d143d39"
+        },
+        "zig_over_rust": 1.8,
+        "phase_zig_over_rust": {
+          "load": 2.08,
+          "index": 1.46,
+          "query": null,
+          "result": 4.03
+        },
+        "hybrid_over_zig": 1.02,
+        "hybrid_rss_over_zig": 1.32
+      },
+      {
+        "query": "incoming",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1040.6,
+          "rss_mb": 435,
+          "results_bytes_digest": "sha256:7da50c28b553",
+          "phases_ms": {
+            "load": 482.0,
+            "index": 278.6,
+            "query": 0.0,
+            "result": 210.7
+          },
+          "sub_ms": {
+            "read": 75.5,
+            "parse": 406.9,
+            "entities": 3.9,
+            "adjacency": 186.1,
+            "sort": 88.0
+          },
+          "detail_ms": {
+            "materialize": 50.1,
+            "encode": 160.7
+          },
+          "heap": {
+            "live_after_index_mb": 364.9,
+            "peak_live_mb": 409.0,
+            "retained_mb": null,
+            "allocations": 459381,
+            "bytes_per_entity": 3649.2,
+            "bytes_per_record": 173.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1654.9,
+          "rss_mb": 620,
+          "results_bytes_digest": "sha256:7da50c28b553",
+          "phases_ms": {
+            "load": 1003.0,
+            "index": 387.1,
+            "query": 0.0,
+            "result": 219.5
+          },
+          "sub_ms": {
+            "read": 75.7,
+            "parse": 926.9,
+            "entities": 6.5,
+            "adjacency": 219.9,
+            "sort": 160.6
+          },
+          "detail_ms": {
+            "materialize": 79.1,
+            "encode": 140.5
+          },
+          "heap": {
+            "live_after_index_mb": 554.9,
+            "peak_live_mb": 649.5,
+            "retained_mb": 1014.3,
+            "allocations": 301994,
+            "bytes_per_entity": 5549.0,
+            "bytes_per_record": 264.2
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1745.3,
+          "rss_mb": 785,
+          "results_bytes_digest": "sha256:7da50c28b553"
+        },
+        "zig_over_rust": 1.59,
+        "phase_zig_over_rust": {
+          "load": 2.08,
+          "index": 1.39,
+          "query": null,
+          "result": 1.04
+        },
+        "hybrid_over_zig": 1.05,
+        "hybrid_rss_over_zig": 1.27
+      },
+      {
+        "query": "outgoing",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1741.4,
+          "rss_mb": 644,
+          "results_bytes_digest": "sha256:8eff0183d3be",
+          "phases_ms": {
+            "load": 482.8,
+            "index": 251.2,
+            "query": 5.0,
+            "result": 857.7
+          },
+          "sub_ms": {
+            "read": 75.9,
+            "parse": 406.8,
+            "entities": 3.9,
+            "adjacency": 159.4,
+            "sort": 87.6
+          },
+          "detail_ms": {
+            "materialize": 187.1,
+            "encode": 669.7
+          },
+          "heap": {
+            "live_after_index_mb": 364.9,
+            "peak_live_mb": 675.9,
+            "retained_mb": null,
+            "allocations": 459400,
+            "bytes_per_entity": 3649.2,
+            "bytes_per_record": 173.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 2341.3,
+          "rss_mb": 965,
+          "results_bytes_digest": "sha256:8eff0183d3be",
+          "phases_ms": {
+            "load": 1002.3,
+            "index": 374.7,
+            "query": 4.4,
+            "result": 842.1
+          },
+          "sub_ms": {
+            "read": 75.7,
+            "parse": 927.9,
+            "entities": 6.6,
+            "adjacency": 209.1,
+            "sort": 159.4
+          },
+          "detail_ms": {
+            "materialize": 259.9,
+            "encode": 581.1
+          },
+          "heap": {
+            "live_after_index_mb": 554.9,
+            "peak_live_mb": 901.7,
+            "retained_mb": 1014.3,
+            "allocations": 302007,
+            "bytes_per_entity": 5549.0,
+            "bytes_per_record": 264.2
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2623.6,
+          "rss_mb": 1178,
+          "results_bytes_digest": "sha256:8eff0183d3be"
+        },
+        "zig_over_rust": 1.34,
+        "phase_zig_over_rust": {
+          "load": 2.08,
+          "index": 1.49,
+          "query": 0.88,
+          "result": 0.98
+        },
+        "hybrid_over_zig": 1.12,
+        "hybrid_rss_over_zig": 1.22
+      },
+      {
+        "query": "depth-4",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1646.3,
+          "rss_mb": 619,
+          "results_bytes_digest": "sha256:fe66e4800565",
+          "phases_ms": {
+            "load": 481.2,
+            "index": 250.1,
+            "query": 6.4,
+            "result": 778.8
+          },
+          "sub_ms": {
+            "read": 74.1,
+            "parse": 407.0,
+            "entities": 3.9,
+            "adjacency": 158.8,
+            "sort": 87.1
+          },
+          "detail_ms": {
+            "materialize": 172.7,
+            "encode": 606.0
+          },
+          "heap": {
+            "live_after_index_mb": 364.9,
+            "peak_live_mb": 541.6,
+            "retained_mb": null,
+            "allocations": 459430,
+            "bytes_per_entity": 3649.2,
+            "bytes_per_record": 173.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 2236.2,
+          "rss_mb": 927,
+          "results_bytes_digest": "sha256:fe66e4800565",
+          "phases_ms": {
+            "load": 1000.8,
+            "index": 365.0,
+            "query": 7.8,
+            "result": 759.2
+          },
+          "sub_ms": {
+            "read": 74.4,
+            "parse": 925.9,
+            "entities": 6.5,
+            "adjacency": 200.0,
+            "sort": 158.6
+          },
+          "detail_ms": {
+            "materialize": 233.0,
+            "encode": 526.7
+          },
+          "heap": {
+            "live_after_index_mb": 554.9,
+            "peak_live_mb": 890.9,
+            "retained_mb": 1014.3,
+            "allocations": 302035,
+            "bytes_per_entity": 5549.0,
+            "bytes_per_record": 264.2
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2522.5,
+          "rss_mb": 1165,
+          "results_bytes_digest": "sha256:fe66e4800565"
+        },
+        "zig_over_rust": 1.36,
+        "phase_zig_over_rust": {
+          "load": 2.08,
+          "index": 1.46,
+          "query": 1.22,
+          "result": 0.97
+        },
+        "hybrid_over_zig": 1.13,
+        "hybrid_rss_over_zig": 1.26
+      },
+      {
+        "query": "depth-2",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1673.7,
+          "rss_mb": 619,
+          "results_bytes_digest": "sha256:fe66e4800565",
+          "phases_ms": {
+            "load": 482.8,
+            "index": 270.5,
+            "query": 6.4,
+            "result": 776.7
+          },
+          "sub_ms": {
+            "read": 76.5,
+            "parse": 406.0,
+            "entities": 3.9,
+            "adjacency": 178.7,
+            "sort": 88.1
+          },
+          "detail_ms": {
+            "materialize": 173.0,
+            "encode": 603.6
+          },
+          "heap": {
+            "live_after_index_mb": 364.9,
+            "peak_live_mb": 541.6,
+            "retained_mb": null,
+            "allocations": 459430,
+            "bytes_per_entity": 3649.2,
+            "bytes_per_record": 173.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 2277.8,
+          "rss_mb": 927,
+          "results_bytes_digest": "sha256:fe66e4800565",
+          "phases_ms": {
+            "load": 1004.7,
+            "index": 386.4,
+            "query": 7.8,
+            "result": 771.4
+          },
+          "sub_ms": {
+            "read": 75.1,
+            "parse": 929.6,
+            "entities": 6.5,
+            "adjacency": 220.1,
+            "sort": 159.8
+          },
+          "detail_ms": {
+            "materialize": 244.3,
+            "encode": 527.2
+          },
+          "heap": {
+            "live_after_index_mb": 554.9,
+            "peak_live_mb": 890.9,
+            "retained_mb": 1014.3,
+            "allocations": 302035,
+            "bytes_per_entity": 5549.0,
+            "bytes_per_record": 264.2
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2529.7,
+          "rss_mb": 1165,
+          "results_bytes_digest": "sha256:fe66e4800565"
+        },
+        "zig_over_rust": 1.36,
+        "phase_zig_over_rust": {
+          "load": 2.08,
+          "index": 1.43,
+          "query": 1.22,
+          "result": 0.99
+        },
+        "hybrid_over_zig": 1.11,
+        "hybrid_rss_over_zig": 1.26
+      },
+      {
+        "query": "mixed-relations",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1704.3,
+          "rss_mb": 624,
+          "results_bytes_digest": "sha256:461d7382677c",
+          "phases_ms": {
+            "load": 483.0,
+            "index": 281.3,
+            "query": 9.4,
+            "result": 790.8
+          },
+          "sub_ms": {
+            "read": 76.2,
+            "parse": 406.8,
+            "entities": 4.0,
+            "adjacency": 188.9,
+            "sort": 88.3
+          },
+          "detail_ms": {
+            "materialize": 175.3,
+            "encode": 615.1
+          },
+          "heap": {
+            "live_after_index_mb": 364.9,
+            "peak_live_mb": 541.6,
+            "retained_mb": null,
+            "allocations": 459433,
+            "bytes_per_entity": 3649.2,
+            "bytes_per_record": 173.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 2280.0,
+          "rss_mb": 934,
+          "results_bytes_digest": "sha256:461d7382677c",
+          "phases_ms": {
+            "load": 1001.1,
+            "index": 388.5,
+            "query": 8.2,
+            "result": 781.2
+          },
+          "sub_ms": {
+            "read": 74.6,
+            "parse": 926.0,
+            "entities": 6.4,
+            "adjacency": 222.5,
+            "sort": 159.6
+          },
+          "detail_ms": {
+            "materialize": 246.0,
+            "encode": 534.7
+          },
+          "heap": {
+            "live_after_index_mb": 554.9,
+            "peak_live_mb": 892.9,
+            "retained_mb": 1014.3,
+            "allocations": 302035,
+            "bytes_per_entity": 5549.0,
+            "bytes_per_record": 264.2
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2560.1,
+          "rss_mb": 1172,
+          "results_bytes_digest": "sha256:461d7382677c"
+        },
+        "zig_over_rust": 1.34,
+        "phase_zig_over_rust": {
+          "load": 2.07,
+          "index": 1.38,
+          "query": 0.87,
+          "result": 0.99
+        },
+        "hybrid_over_zig": 1.12,
+        "hybrid_rss_over_zig": 1.25
+      },
+      {
+        "query": "depth-8",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1643.0,
+          "rss_mb": 619,
+          "results_bytes_digest": "sha256:fe66e4800565",
+          "phases_ms": {
+            "load": 481.8,
+            "index": 241.2,
+            "query": 6.3,
+            "result": 780.5
+          },
+          "sub_ms": {
+            "read": 74.8,
+            "parse": 406.6,
+            "entities": 4.0,
+            "adjacency": 150.5,
+            "sort": 87.0
+          },
+          "detail_ms": {
+            "materialize": 172.8,
+            "encode": 608.1
+          },
+          "heap": {
+            "live_after_index_mb": 364.9,
+            "peak_live_mb": 541.6,
+            "retained_mb": null,
+            "allocations": 459430,
+            "bytes_per_entity": 3649.2,
+            "bytes_per_record": 173.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 2251.3,
+          "rss_mb": 927,
+          "results_bytes_digest": "sha256:fe66e4800565",
+          "phases_ms": {
+            "load": 1003.9,
+            "index": 372.3,
+            "query": 7.9,
+            "result": 761.1
+          },
+          "sub_ms": {
+            "read": 75.5,
+            "parse": 927.2,
+            "entities": 6.5,
+            "adjacency": 206.5,
+            "sort": 159.2
+          },
+          "detail_ms": {
+            "materialize": 234.1,
+            "encode": 525.3
+          },
+          "heap": {
+            "live_after_index_mb": 554.9,
+            "peak_live_mb": 890.9,
+            "retained_mb": 1014.3,
+            "allocations": 302035,
+            "bytes_per_entity": 5549.0,
+            "bytes_per_record": 264.2
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2524.5,
+          "rss_mb": 1165,
+          "results_bytes_digest": "sha256:fe66e4800565"
+        },
+        "zig_over_rust": 1.37,
+        "phase_zig_over_rust": {
+          "load": 2.08,
+          "index": 1.54,
+          "query": 1.25,
+          "result": 0.98
+        },
+        "hybrid_over_zig": 1.12,
+        "hybrid_rss_over_zig": 1.26
+      },
+      {
+        "query": "tail-outgoing",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 780.3,
+          "rss_mb": 366,
+          "results_bytes_digest": "sha256:c206c9327127",
+          "phases_ms": {
+            "load": 482.6,
+            "index": 247.7,
+            "query": 0.0,
+            "result": 3.2
+          },
+          "sub_ms": {
+            "read": 75.8,
+            "parse": 406.2,
+            "entities": 3.9,
+            "adjacency": 156.4,
+            "sort": 87.3
+          },
+          "detail_ms": {
+            "materialize": 3.1,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 364.9,
+            "peak_live_mb": 364.9,
+            "retained_mb": null,
+            "allocations": 459335,
+            "bytes_per_entity": 3649.2,
+            "bytes_per_record": 173.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1405.2,
+          "rss_mb": 511,
+          "results_bytes_digest": "sha256:c206c9327127",
+          "phases_ms": {
+            "load": 1001.1,
+            "index": 367.3,
+            "query": 0.0,
+            "result": 10.7
+          },
+          "sub_ms": {
+            "read": 75.5,
+            "parse": 926.5,
+            "entities": 6.6,
+            "adjacency": 201.8,
+            "sort": 158.8
+          },
+          "detail_ms": {
+            "materialize": 10.7,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 554.9,
+            "peak_live_mb": 555.0,
+            "retained_mb": 1014.3,
+            "allocations": 301993,
+            "bytes_per_entity": 5549.0,
+            "bytes_per_record": 264.2
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1465.2,
+          "rss_mb": 676,
+          "results_bytes_digest": "sha256:c206c9327127"
+        },
+        "zig_over_rust": 1.8,
+        "phase_zig_over_rust": {
+          "load": 2.07,
+          "index": 1.48,
+          "query": null,
+          "result": 3.34
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.32
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W2.X2-default-S-36556641803",
+    "scenario": "W2.X2",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 210,
+    "conformant": 210,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {},
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W2.X2-default-S-20260929.json",
+      "digest": "3ec49c7ccf093790473a5a23480608781089815a6c5ff9fa4f623919f863b121",
+      "entities": 100000,
+      "edges": 99999,
+      "evidence": 99999
+    },
+    "queries": [
+      {
+        "query": "capped-depth-64",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 133.8,
+          "rss_mb": 81,
+          "results_bytes_digest": "sha256:2ed9f5ccfc08",
+          "phases_ms": {
+            "load": 67.5,
+            "index": 21.6,
+            "query": 0.0,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 10.8,
+            "parse": 56.7,
+            "entities": 4.1,
+            "adjacency": 17.2,
+            "sort": 0.3
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 77.3,
+            "peak_live_mb": 77.3,
+            "retained_mb": null,
+            "allocations": 300168,
+            "bytes_per_entity": 772.7,
+            "bytes_per_record": 257.6
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 186.0,
+          "rss_mb": 112,
+          "results_bytes_digest": "sha256:2ed9f5ccfc08",
+          "phases_ms": {
+            "load": 136.2,
+            "index": 40.2,
+            "query": 0.0,
+            "result": 1.8
+          },
+          "sub_ms": {
+            "read": 10.6,
+            "parse": 125.6,
+            "entities": 6.6,
+            "adjacency": 32.6,
+            "sort": 1.0
+          },
+          "detail_ms": {
+            "materialize": 1.8,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 109.5,
+            "peak_live_mb": 109.5,
+            "retained_mb": 142.8,
+            "allocations": 200064,
+            "bytes_per_entity": 1094.9,
+            "bytes_per_record": 365.0
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 194.3,
+          "rss_mb": 136,
+          "results_bytes_digest": "sha256:2ed9f5ccfc08"
+        },
+        "zig_over_rust": 1.39,
+        "phase_zig_over_rust": {
+          "load": 2.02,
+          "index": 1.86,
+          "query": null,
+          "result": 6.0
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.21
+      },
+      {
+        "query": "incoming",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 110.2,
+          "rss_mb": 81,
+          "results_bytes_digest": "sha256:a7f281f5ed0b",
+          "phases_ms": {
+            "load": 67.5,
+            "index": 21.6,
+            "query": 0.0,
+            "result": 0.0
+          },
+          "sub_ms": {
+            "read": 10.8,
+            "parse": 56.7,
+            "entities": 4.1,
+            "adjacency": 17.2,
+            "sort": 0.3
+          },
+          "detail_ms": {
+            "materialize": 0.0,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 77.3,
+            "peak_live_mb": 77.3,
+            "retained_mb": null,
+            "allocations": 300150,
+            "bytes_per_entity": 772.7,
+            "bytes_per_record": 257.6
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 186.8,
+          "rss_mb": 112,
+          "results_bytes_digest": "sha256:a7f281f5ed0b",
+          "phases_ms": {
+            "load": 136.5,
+            "index": 41.4,
+            "query": 0.0,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 10.6,
+            "parse": 125.9,
+            "entities": 6.7,
+            "adjacency": 33.8,
+            "sort": 1.0
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 109.5,
+            "peak_live_mb": 109.5,
+            "retained_mb": 142.8,
+            "allocations": 200058,
+            "bytes_per_entity": 1094.9,
+            "bytes_per_record": 365.0
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 192.5,
+          "rss_mb": 136,
+          "results_bytes_digest": "sha256:a7f281f5ed0b"
+        },
+        "zig_over_rust": 1.7,
+        "phase_zig_over_rust": {
+          "load": 2.02,
+          "index": 1.92,
+          "query": null,
+          "result": null
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.21
+      },
+      {
+        "query": "outgoing",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 123.4,
+          "rss_mb": 81,
+          "results_bytes_digest": "sha256:c1a3981442d4",
+          "phases_ms": {
+            "load": 67.5,
+            "index": 21.8,
+            "query": 0.0,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 10.6,
+            "parse": 56.8,
+            "entities": 4.1,
+            "adjacency": 17.4,
+            "sort": 0.3
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 77.3,
+            "peak_live_mb": 77.3,
+            "retained_mb": null,
+            "allocations": 300154,
+            "bytes_per_entity": 772.7,
+            "bytes_per_record": 257.6
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 184.9,
+          "rss_mb": 112,
+          "results_bytes_digest": "sha256:c1a3981442d4",
+          "phases_ms": {
+            "load": 136.2,
+            "index": 39.6,
+            "query": 0.0,
+            "result": 1.0
+          },
+          "sub_ms": {
+            "read": 10.8,
+            "parse": 125.4,
+            "entities": 6.7,
+            "adjacency": 32.0,
+            "sort": 1.0
+          },
+          "detail_ms": {
+            "materialize": 0.9,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 109.5,
+            "peak_live_mb": 109.5,
+            "retained_mb": 142.8,
+            "allocations": 200061,
+            "bytes_per_entity": 1094.9,
+            "bytes_per_record": 365.0
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 192.4,
+          "rss_mb": 136,
+          "results_bytes_digest": "sha256:c1a3981442d4"
+        },
+        "zig_over_rust": 1.5,
+        "phase_zig_over_rust": {
+          "load": 2.02,
+          "index": 1.82,
+          "query": null,
+          "result": 3.33
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.21
+      },
+      {
+        "query": "mixed-relations-64",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 121.0,
+          "rss_mb": 81,
+          "results_bytes_digest": "sha256:008a5962d45e",
+          "phases_ms": {
+            "load": 67.6,
+            "index": 21.6,
+            "query": 0.0,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 10.8,
+            "parse": 56.7,
+            "entities": 4.1,
+            "adjacency": 17.2,
+            "sort": 0.3
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 77.3,
+            "peak_live_mb": 77.3,
+            "retained_mb": null,
+            "allocations": 300161,
+            "bytes_per_entity": 772.7,
+            "bytes_per_record": 257.6
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 185.3,
+          "rss_mb": 112,
+          "results_bytes_digest": "sha256:008a5962d45e",
+          "phases_ms": {
+            "load": 136.3,
+            "index": 39.5,
+            "query": 0.0,
+            "result": 1.2
+          },
+          "sub_ms": {
+            "read": 10.6,
+            "parse": 125.6,
+            "entities": 6.7,
+            "adjacency": 31.9,
+            "sort": 1.0
+          },
+          "detail_ms": {
+            "materialize": 1.2,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 109.5,
+            "peak_live_mb": 109.5,
+            "retained_mb": 142.8,
+            "allocations": 200061,
+            "bytes_per_entity": 1094.9,
+            "bytes_per_record": 365.0
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 191.9,
+          "rss_mb": 136,
+          "results_bytes_digest": "sha256:008a5962d45e"
+        },
+        "zig_over_rust": 1.53,
+        "phase_zig_over_rust": {
+          "load": 2.02,
+          "index": 1.83,
+          "query": null,
+          "result": 4.0
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.21
+      },
+      {
+        "query": "depth-2",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 120.4,
+          "rss_mb": 81,
+          "results_bytes_digest": "sha256:008a5962d45e",
+          "phases_ms": {
+            "load": 67.6,
+            "index": 21.3,
+            "query": 0.0,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 10.7,
+            "parse": 56.9,
+            "entities": 4.1,
+            "adjacency": 17.0,
+            "sort": 0.3
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 77.3,
+            "peak_live_mb": 77.3,
+            "retained_mb": null,
+            "allocations": 300158,
+            "bytes_per_entity": 772.7,
+            "bytes_per_record": 257.6
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 185.4,
+          "rss_mb": 112,
+          "results_bytes_digest": "sha256:008a5962d45e",
+          "phases_ms": {
+            "load": 136.4,
+            "index": 39.7,
+            "query": 0.0,
+            "result": 1.2
+          },
+          "sub_ms": {
+            "read": 10.8,
+            "parse": 125.6,
+            "entities": 6.7,
+            "adjacency": 32.1,
+            "sort": 1.0
+          },
+          "detail_ms": {
+            "materialize": 1.2,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 109.5,
+            "peak_live_mb": 109.5,
+            "retained_mb": 142.8,
+            "allocations": 200061,
+            "bytes_per_entity": 1094.9,
+            "bytes_per_record": 365.0
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 192.3,
+          "rss_mb": 136,
+          "results_bytes_digest": "sha256:008a5962d45e"
+        },
+        "zig_over_rust": 1.54,
+        "phase_zig_over_rust": {
+          "load": 2.02,
+          "index": 1.86,
+          "query": null,
+          "result": 4.0
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.21
+      },
+      {
+        "query": "depth-64",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 123.0,
+          "rss_mb": 81,
+          "results_bytes_digest": "sha256:d6771fe989cd",
+          "phases_ms": {
+            "load": 67.5,
+            "index": 21.6,
+            "query": 0.0,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 10.7,
+            "parse": 56.7,
+            "entities": 4.1,
+            "adjacency": 17.1,
+            "sort": 0.3
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 77.3,
+            "peak_live_mb": 77.3,
+            "retained_mb": null,
+            "allocations": 300186,
+            "bytes_per_entity": 772.7,
+            "bytes_per_record": 257.6
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 187.4,
+          "rss_mb": 112,
+          "results_bytes_digest": "sha256:d6771fe989cd",
+          "phases_ms": {
+            "load": 137.1,
+            "index": 39.9,
+            "query": 0.0,
+            "result": 1.9
+          },
+          "sub_ms": {
+            "read": 10.9,
+            "parse": 126.3,
+            "entities": 6.7,
+            "adjacency": 32.2,
+            "sort": 1.0
+          },
+          "detail_ms": {
+            "materialize": 1.8,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 109.5,
+            "peak_live_mb": 109.5,
+            "retained_mb": 142.8,
+            "allocations": 200072,
+            "bytes_per_entity": 1094.9,
+            "bytes_per_record": 365.0
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 192.2,
+          "rss_mb": 136,
+          "results_bytes_digest": "sha256:d6771fe989cd"
+        },
+        "zig_over_rust": 1.52,
+        "phase_zig_over_rust": {
+          "load": 2.03,
+          "index": 1.85,
+          "query": null,
+          "result": 6.33
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.21
+      },
+      {
+        "query": "depth-8",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 135.2,
+          "rss_mb": 81,
+          "results_bytes_digest": "sha256:7f7ac5cccd3d",
+          "phases_ms": {
+            "load": 67.7,
+            "index": 22.0,
+            "query": 0.0,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 10.9,
+            "parse": 56.9,
+            "entities": 4.1,
+            "adjacency": 17.5,
+            "sort": 0.3
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 77.3,
+            "peak_live_mb": 77.3,
+            "retained_mb": null,
+            "allocations": 300168,
+            "bytes_per_entity": 772.7,
+            "bytes_per_record": 257.6
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 188.1,
+          "rss_mb": 112,
+          "results_bytes_digest": "sha256:7f7ac5cccd3d",
+          "phases_ms": {
+            "load": 136.6,
+            "index": 40.8,
+            "query": 0.0,
+            "result": 1.7
+          },
+          "sub_ms": {
+            "read": 10.9,
+            "parse": 125.6,
+            "entities": 6.7,
+            "adjacency": 33.2,
+            "sort": 1.0
+          },
+          "detail_ms": {
+            "materialize": 1.7,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 109.5,
+            "peak_live_mb": 109.5,
+            "retained_mb": 142.8,
+            "allocations": 200064,
+            "bytes_per_entity": 1094.9,
+            "bytes_per_record": 365.0
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 195.4,
+          "rss_mb": 136,
+          "results_bytes_digest": "sha256:7f7ac5cccd3d"
+        },
+        "zig_over_rust": 1.39,
+        "phase_zig_over_rust": {
+          "load": 2.02,
+          "index": 1.85,
+          "query": null,
+          "result": 5.67
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.21
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W2.X3-default-S-36556641803",
+    "scenario": "W2.X3",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 180,
+    "conformant": 180,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {},
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W2.X3-default-S-20260929.json",
+      "digest": "e63405e61d11cf1d73680acf39c0c978e684711345d8c68ebff968b0452e9149",
+      "entities": 100000,
+      "edges": 1000000,
+      "evidence": 1000000
+    },
+    "queries": [
+      {
+        "query": "outgoing",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 753.1,
+          "rss_mb": 362,
+          "results_bytes_digest": "sha256:75dee196b6d3",
+          "phases_ms": {
+            "load": 469.1,
+            "index": 227.5,
+            "query": 0.0,
+            "result": 3.3
+          },
+          "sub_ms": {
+            "read": 73.5,
+            "parse": 395.3,
+            "entities": 3.8,
+            "adjacency": 170.5,
+            "sort": 53.1
+          },
+          "detail_ms": {
+            "materialize": 3.2,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 356.8,
+            "peak_live_mb": 356.8,
+            "retained_mb": null,
+            "allocations": 539139,
+            "bytes_per_entity": 3568.2,
+            "bytes_per_record": 169.9
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1282.5,
+          "rss_mb": 487,
+          "results_bytes_digest": "sha256:75dee196b6d3",
+          "phases_ms": {
+            "load": 1005.0,
+            "index": 242.9,
+            "query": 0.0,
+            "result": 12.6
+          },
+          "sub_ms": {
+            "read": 74.7,
+            "parse": 930.5,
+            "entities": 6.4,
+            "adjacency": 163.5,
+            "sort": 73.0
+          },
+          "detail_ms": {
+            "materialize": 12.5,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 555.2,
+            "peak_live_mb": 555.3,
+            "retained_mb": 1031.5,
+            "allocations": 383251,
+            "bytes_per_entity": 5552.2,
+            "bytes_per_record": 264.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1326.0,
+          "rss_mb": 657,
+          "results_bytes_digest": "sha256:75dee196b6d3"
+        },
+        "zig_over_rust": 1.7,
+        "phase_zig_over_rust": {
+          "load": 2.14,
+          "index": 1.07,
+          "query": null,
+          "result": 3.82
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "incoming",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 759.6,
+          "rss_mb": 362,
+          "results_bytes_digest": "sha256:935e4bc79805",
+          "phases_ms": {
+            "load": 470.3,
+            "index": 231.5,
+            "query": 0.0,
+            "result": 3.4
+          },
+          "sub_ms": {
+            "read": 74.4,
+            "parse": 395.8,
+            "entities": 3.9,
+            "adjacency": 174.5,
+            "sort": 53.1
+          },
+          "detail_ms": {
+            "materialize": 3.2,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 356.8,
+            "peak_live_mb": 356.9,
+            "retained_mb": null,
+            "allocations": 539145,
+            "bytes_per_entity": 3568.2,
+            "bytes_per_record": 169.9
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1291.2,
+          "rss_mb": 487,
+          "results_bytes_digest": "sha256:935e4bc79805",
+          "phases_ms": {
+            "load": 1010.8,
+            "index": 247.4,
+            "query": 0.0,
+            "result": 11.9
+          },
+          "sub_ms": {
+            "read": 75.5,
+            "parse": 934.7,
+            "entities": 6.5,
+            "adjacency": 167.1,
+            "sort": 73.4
+          },
+          "detail_ms": {
+            "materialize": 11.8,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 555.2,
+            "peak_live_mb": 555.3,
+            "retained_mb": 1031.5,
+            "allocations": 383252,
+            "bytes_per_entity": 5552.2,
+            "bytes_per_record": 264.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1334.8,
+          "rss_mb": 657,
+          "results_bytes_digest": "sha256:935e4bc79805"
+        },
+        "zig_over_rust": 1.7,
+        "phase_zig_over_rust": {
+          "load": 2.15,
+          "index": 1.07,
+          "query": null,
+          "result": 3.5
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "mixed-relations",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 769.9,
+          "rss_mb": 362,
+          "results_bytes_digest": "sha256:dcdcfc298b94",
+          "phases_ms": {
+            "load": 471.7,
+            "index": 235.5,
+            "query": 0.0,
+            "result": 3.5
+          },
+          "sub_ms": {
+            "read": 75.5,
+            "parse": 395.9,
+            "entities": 4.0,
+            "adjacency": 177.7,
+            "sort": 53.7
+          },
+          "detail_ms": {
+            "materialize": 3.3,
+            "encode": 0.2
+          },
+          "heap": {
+            "live_after_index_mb": 356.8,
+            "peak_live_mb": 356.9,
+            "retained_mb": null,
+            "allocations": 539153,
+            "bytes_per_entity": 3568.2,
+            "bytes_per_record": 169.9
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1296.0,
+          "rss_mb": 487,
+          "results_bytes_digest": "sha256:dcdcfc298b94",
+          "phases_ms": {
+            "load": 1009.9,
+            "index": 246.6,
+            "query": 0.0,
+            "result": 15.1
+          },
+          "sub_ms": {
+            "read": 75.3,
+            "parse": 935.8,
+            "entities": 6.5,
+            "adjacency": 166.6,
+            "sort": 73.5
+          },
+          "detail_ms": {
+            "materialize": 15.0,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 555.2,
+            "peak_live_mb": 555.3,
+            "retained_mb": 1031.5,
+            "allocations": 383254,
+            "bytes_per_entity": 5552.2,
+            "bytes_per_record": 264.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1336.5,
+          "rss_mb": 657,
+          "results_bytes_digest": "sha256:dcdcfc298b94"
+        },
+        "zig_over_rust": 1.68,
+        "phase_zig_over_rust": {
+          "load": 2.14,
+          "index": 1.05,
+          "query": null,
+          "result": 4.31
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "depth-2",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 789.6,
+          "rss_mb": 362,
+          "results_bytes_digest": "sha256:bf001d50b634",
+          "phases_ms": {
+            "load": 473.0,
+            "index": 251.2,
+            "query": 0.0,
+            "result": 3.6
+          },
+          "sub_ms": {
+            "read": 76.4,
+            "parse": 396.5,
+            "entities": 4.0,
+            "adjacency": 193.1,
+            "sort": 54.2
+          },
+          "detail_ms": {
+            "materialize": 3.4,
+            "encode": 0.2
+          },
+          "heap": {
+            "live_after_index_mb": 356.8,
+            "peak_live_mb": 356.9,
+            "retained_mb": null,
+            "allocations": 539154,
+            "bytes_per_entity": 3568.2,
+            "bytes_per_record": 169.9
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1301.9,
+          "rss_mb": 487,
+          "results_bytes_digest": "sha256:bf001d50b634",
+          "phases_ms": {
+            "load": 1008.8,
+            "index": 257.3,
+            "query": 0.0,
+            "result": 12.5
+          },
+          "sub_ms": {
+            "read": 76.6,
+            "parse": 932.0,
+            "entities": 6.6,
+            "adjacency": 176.1,
+            "sort": 74.5
+          },
+          "detail_ms": {
+            "materialize": 12.3,
+            "encode": 0.2
+          },
+          "heap": {
+            "live_after_index_mb": 555.2,
+            "peak_live_mb": 555.3,
+            "retained_mb": 1031.5,
+            "allocations": 383256,
+            "bytes_per_entity": 5552.2,
+            "bytes_per_record": 264.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1347.2,
+          "rss_mb": 657,
+          "results_bytes_digest": "sha256:bf001d50b634"
+        },
+        "zig_over_rust": 1.65,
+        "phase_zig_over_rust": {
+          "load": 2.13,
+          "index": 1.02,
+          "query": null,
+          "result": 3.47
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "depth-8",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 876.3,
+          "rss_mb": 395,
+          "results_bytes_digest": "sha256:7e42d99ae0c3",
+          "phases_ms": {
+            "load": 475.6,
+            "index": 259.7,
+            "query": 1.2,
+            "result": 67.1
+          },
+          "sub_ms": {
+            "read": 78.7,
+            "parse": 396.5,
+            "entities": 4.1,
+            "adjacency": 201.2,
+            "sort": 54.3
+          },
+          "detail_ms": {
+            "materialize": 13.5,
+            "encode": 53.7
+          },
+          "heap": {
+            "live_after_index_mb": 356.8,
+            "peak_live_mb": 378.9,
+            "retained_mb": null,
+            "allocations": 539203,
+            "bytes_per_entity": 3568.2,
+            "bytes_per_record": 169.9
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1384.6,
+          "rss_mb": 523,
+          "results_bytes_digest": "sha256:7e42d99ae0c3",
+          "phases_ms": {
+            "load": 1011.9,
+            "index": 264.3,
+            "query": 1.1,
+            "result": 71.2
+          },
+          "sub_ms": {
+            "read": 77.7,
+            "parse": 934.1,
+            "entities": 6.7,
+            "adjacency": 182.7,
+            "sort": 75.3
+          },
+          "detail_ms": {
+            "materialize": 24.3,
+            "encode": 47.0
+          },
+          "heap": {
+            "live_after_index_mb": 555.2,
+            "peak_live_mb": 584.7,
+            "retained_mb": 1031.5,
+            "allocations": 383280,
+            "bytes_per_entity": 5552.2,
+            "bytes_per_record": 264.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1448.7,
+          "rss_mb": 693,
+          "results_bytes_digest": "sha256:7e42d99ae0c3"
+        },
+        "zig_over_rust": 1.58,
+        "phase_zig_over_rust": {
+          "load": 2.13,
+          "index": 1.02,
+          "query": 0.92,
+          "result": 1.06
+        },
+        "hybrid_over_zig": 1.05,
+        "hybrid_rss_over_zig": 1.33
+      },
+      {
+        "query": "depth-4",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 791.0,
+          "rss_mb": 363,
+          "results_bytes_digest": "sha256:bfadb727c44f",
+          "phases_ms": {
+            "load": 474.4,
+            "index": 245.8,
+            "query": 0.0,
+            "result": 7.6
+          },
+          "sub_ms": {
+            "read": 77.0,
+            "parse": 397.1,
+            "entities": 4.1,
+            "adjacency": 187.9,
+            "sort": 53.8
+          },
+          "detail_ms": {
+            "materialize": 6.2,
+            "encode": 1.3
+          },
+          "heap": {
+            "live_after_index_mb": 356.8,
+            "peak_live_mb": 357.4,
+            "retained_mb": null,
+            "allocations": 539170,
+            "bytes_per_entity": 3568.2,
+            "bytes_per_record": 169.9
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1317.0,
+          "rss_mb": 488,
+          "results_bytes_digest": "sha256:bfadb727c44f",
+          "phases_ms": {
+            "load": 1011.6,
+            "index": 252.8,
+            "query": 0.0,
+            "result": 27.1
+          },
+          "sub_ms": {
+            "read": 76.8,
+            "parse": 935.1,
+            "entities": 6.6,
+            "adjacency": 172.6,
+            "sort": 73.7
+          },
+          "detail_ms": {
+            "materialize": 25.9,
+            "encode": 1.2
+          },
+          "heap": {
+            "live_after_index_mb": 555.2,
+            "peak_live_mb": 556.0,
+            "retained_mb": 1031.5,
+            "allocations": 383263,
+            "bytes_per_entity": 5552.2,
+            "bytes_per_record": 264.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1363.6,
+          "rss_mb": 658,
+          "results_bytes_digest": "sha256:bfadb727c44f"
+        },
+        "zig_over_rust": 1.66,
+        "phase_zig_over_rust": {
+          "load": 2.13,
+          "index": 1.03,
+          "query": null,
+          "result": 3.57
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.35
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W2.X4-default-S-36556641803",
+    "scenario": "W2.X4",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 270,
+    "conformant": 270,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {},
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W2.X4-default-S-20260929.json",
+      "digest": "e79b1bb2ddaf179a7c5731e56d9ce57aecbc127eb385c3888eca20a9b73a8dc1",
+      "entities": 100000,
+      "edges": 1000000,
+      "evidence": 1000000
+    },
+    "queries": [
+      {
+        "query": "depth-2",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 821.2,
+          "rss_mb": 437,
+          "results_bytes_digest": "sha256:4aacef48824c",
+          "phases_ms": {
+            "load": 539.1,
+            "index": 235.4,
+            "query": 0.0,
+            "result": 6.2
+          },
+          "sub_ms": {
+            "read": 89.8,
+            "parse": 449.5,
+            "entities": 3.7,
+            "adjacency": 176.1,
+            "sort": 56.6
+          },
+          "detail_ms": {
+            "materialize": 5.0,
+            "encode": 1.2
+          },
+          "heap": {
+            "live_after_index_mb": 424.8,
+            "peak_live_mb": 425.4,
+            "retained_mb": null,
+            "allocations": 633235,
+            "bytes_per_entity": 4248.3,
+            "bytes_per_record": 202.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1590.8,
+          "rss_mb": 577,
+          "results_bytes_digest": "sha256:4aacef48824c",
+          "phases_ms": {
+            "load": 1226.3,
+            "index": 311.9,
+            "query": 0.0,
+            "result": 28.8
+          },
+          "sub_ms": {
+            "read": 90.3,
+            "parse": 1136.5,
+            "entities": 6.4,
+            "adjacency": 225.2,
+            "sort": 80.2
+          },
+          "detail_ms": {
+            "materialize": 27.7,
+            "encode": 1.1
+          },
+          "heap": {
+            "live_after_index_mb": 701.0,
+            "peak_live_mb": 701.7,
+            "retained_mb": 1341.1,
+            "allocations": 428404,
+            "bytes_per_entity": 7009.6,
+            "bytes_per_record": 333.8
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1649.9,
+          "rss_mb": 780,
+          "results_bytes_digest": "sha256:4aacef48824c"
+        },
+        "zig_over_rust": 1.94,
+        "phase_zig_over_rust": {
+          "load": 2.27,
+          "index": 1.32,
+          "query": null,
+          "result": 4.65
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "lookup-missing",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 826.8,
+          "rss_mb": 436,
+          "results_bytes_digest": "sha256:a7f281f5ed0b",
+          "phases_ms": {
+            "load": 539.7,
+            "index": 245.1,
+            "query": 0.0,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 89.8,
+            "parse": 449.9,
+            "entities": 3.8,
+            "adjacency": 182.4,
+            "sort": 59.1
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 424.8,
+            "peak_live_mb": 424.8,
+            "retained_mb": null,
+            "allocations": 633176,
+            "bytes_per_entity": 4248.3,
+            "bytes_per_record": 202.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1571.8,
+          "rss_mb": 576,
+          "results_bytes_digest": "sha256:a7f281f5ed0b",
+          "phases_ms": {
+            "load": 1226.4,
+            "index": 319.0,
+            "query": 0.0,
+            "result": 2.5
+          },
+          "sub_ms": {
+            "read": 89.9,
+            "parse": 1136.7,
+            "entities": 6.4,
+            "adjacency": 231.2,
+            "sort": 80.9
+          },
+          "detail_ms": {
+            "materialize": 2.5,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 701.0,
+            "peak_live_mb": 701.0,
+            "retained_mb": 1341.1,
+            "allocations": 428385,
+            "bytes_per_entity": 7009.6,
+            "bytes_per_record": 333.8
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1619.7,
+          "rss_mb": 779,
+          "results_bytes_digest": "sha256:a7f281f5ed0b"
+        },
+        "zig_over_rust": 1.9,
+        "phase_zig_over_rust": {
+          "load": 2.27,
+          "index": 1.3,
+          "query": null,
+          "result": 25.0
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "outgoing",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 840.1,
+          "rss_mb": 436,
+          "results_bytes_digest": "sha256:8ca970d85f24",
+          "phases_ms": {
+            "load": 539.3,
+            "index": 246.3,
+            "query": 0.0,
+            "result": 4.0
+          },
+          "sub_ms": {
+            "read": 89.5,
+            "parse": 450.1,
+            "entities": 3.8,
+            "adjacency": 183.1,
+            "sort": 59.3
+          },
+          "detail_ms": {
+            "materialize": 3.9,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 424.8,
+            "peak_live_mb": 424.9,
+            "retained_mb": null,
+            "allocations": 633207,
+            "bytes_per_entity": 4248.3,
+            "bytes_per_record": 202.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1597.4,
+          "rss_mb": 576,
+          "results_bytes_digest": "sha256:8ca970d85f24",
+          "phases_ms": {
+            "load": 1228.8,
+            "index": 321.5,
+            "query": 0.0,
+            "result": 22.7
+          },
+          "sub_ms": {
+            "read": 89.6,
+            "parse": 1139.2,
+            "entities": 6.6,
+            "adjacency": 233.6,
+            "sort": 81.0
+          },
+          "detail_ms": {
+            "materialize": 22.6,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 701.0,
+            "peak_live_mb": 701.0,
+            "retained_mb": 1341.1,
+            "allocations": 428393,
+            "bytes_per_entity": 7009.6,
+            "bytes_per_record": 333.8
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1647.7,
+          "rss_mb": 779,
+          "results_bytes_digest": "sha256:8ca970d85f24"
+        },
+        "zig_over_rust": 1.9,
+        "phase_zig_over_rust": {
+          "load": 2.28,
+          "index": 1.31,
+          "query": null,
+          "result": 5.67
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "scan-type",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1478.5,
+          "rss_mb": 640,
+          "results_bytes_digest": "sha256:876961793442",
+          "phases_ms": {
+            "load": 543.2,
+            "index": 254.8,
+            "query": 6.9,
+            "result": 550.9
+          },
+          "sub_ms": {
+            "read": 91.9,
+            "parse": 451.1,
+            "entities": 3.8,
+            "adjacency": 190.0,
+            "sort": 61.0
+          },
+          "detail_ms": {
+            "materialize": 86.7,
+            "encode": 464.1
+          },
+          "heap": {
+            "live_after_index_mb": 424.8,
+            "peak_live_mb": 601.3,
+            "retained_mb": null,
+            "allocations": 633252,
+            "bytes_per_entity": 4248.3,
+            "bytes_per_record": 202.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 2172.6,
+          "rss_mb": 900,
+          "results_bytes_digest": "sha256:876961793442",
+          "phases_ms": {
+            "load": 1230.0,
+            "index": 320.6,
+            "query": 15.8,
+            "result": 525.8
+          },
+          "sub_ms": {
+            "read": 91.2,
+            "parse": 1138.3,
+            "entities": 6.4,
+            "adjacency": 232.6,
+            "sort": 81.3
+          },
+          "detail_ms": {
+            "materialize": 134.2,
+            "encode": 391.4
+          },
+          "heap": {
+            "live_after_index_mb": 701.0,
+            "peak_live_mb": 941.2,
+            "retained_mb": 1341.1,
+            "allocations": 428417,
+            "bytes_per_entity": 7009.6,
+            "bytes_per_record": 333.8
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2379.3,
+          "rss_mb": 1103,
+          "results_bytes_digest": "sha256:876961793442"
+        },
+        "zig_over_rust": 1.47,
+        "phase_zig_over_rust": {
+          "load": 2.26,
+          "index": 1.26,
+          "query": 2.29,
+          "result": 0.95
+        },
+        "hybrid_over_zig": 1.1,
+        "hybrid_rss_over_zig": 1.23
+      },
+      {
+        "query": "incoming",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 863.4,
+          "rss_mb": 437,
+          "results_bytes_digest": "sha256:bcbcd09afbf6",
+          "phases_ms": {
+            "load": 540.4,
+            "index": 267.1,
+            "query": 0.0,
+            "result": 4.0
+          },
+          "sub_ms": {
+            "read": 90.0,
+            "parse": 450.6,
+            "entities": 3.8,
+            "adjacency": 201.3,
+            "sort": 61.7
+          },
+          "detail_ms": {
+            "materialize": 3.8,
+            "encode": 0.2
+          },
+          "heap": {
+            "live_after_index_mb": 424.8,
+            "peak_live_mb": 424.9,
+            "retained_mb": null,
+            "allocations": 633212,
+            "bytes_per_entity": 4248.3,
+            "bytes_per_record": 202.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1606.0,
+          "rss_mb": 576,
+          "results_bytes_digest": "sha256:bcbcd09afbf6",
+          "phases_ms": {
+            "load": 1226.9,
+            "index": 324.2,
+            "query": 0.0,
+            "result": 29.2
+          },
+          "sub_ms": {
+            "read": 90.5,
+            "parse": 1135.6,
+            "entities": 6.4,
+            "adjacency": 236.5,
+            "sort": 81.4
+          },
+          "detail_ms": {
+            "materialize": 29.0,
+            "encode": 0.2
+          },
+          "heap": {
+            "live_after_index_mb": 701.0,
+            "peak_live_mb": 701.1,
+            "retained_mb": 1341.1,
+            "allocations": 428393,
+            "bytes_per_entity": 7009.6,
+            "bytes_per_record": 333.8
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1663.4,
+          "rss_mb": 779,
+          "results_bytes_digest": "sha256:bcbcd09afbf6"
+        },
+        "zig_over_rust": 1.86,
+        "phase_zig_over_rust": {
+          "load": 2.27,
+          "index": 1.21,
+          "query": null,
+          "result": 7.3
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "depth-4",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1023.6,
+          "rss_mb": 489,
+          "results_bytes_digest": "sha256:8909f9eafd74",
+          "phases_ms": {
+            "load": 541.8,
+            "index": 259.5,
+            "query": 0.7,
+            "result": 153.3
+          },
+          "sub_ms": {
+            "read": 90.8,
+            "parse": 451.2,
+            "entities": 3.8,
+            "adjacency": 194.8,
+            "sort": 61.7
+          },
+          "detail_ms": {
+            "materialize": 38.5,
+            "encode": 114.8
+          },
+          "heap": {
+            "live_after_index_mb": 424.8,
+            "peak_live_mb": 468.9,
+            "retained_mb": null,
+            "allocations": 633272,
+            "bytes_per_entity": 4248.3,
+            "bytes_per_record": 202.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1729.3,
+          "rss_mb": 656,
+          "results_bytes_digest": "sha256:8909f9eafd74",
+          "phases_ms": {
+            "load": 1225.3,
+            "index": 324.2,
+            "query": 1.1,
+            "result": 141.7
+          },
+          "sub_ms": {
+            "read": 89.7,
+            "parse": 1135.4,
+            "entities": 6.4,
+            "adjacency": 236.5,
+            "sort": 81.3
+          },
+          "detail_ms": {
+            "materialize": 45.1,
+            "encode": 96.5
+          },
+          "heap": {
+            "live_after_index_mb": 701.0,
+            "peak_live_mb": 764.1,
+            "retained_mb": 1341.1,
+            "allocations": 428425,
+            "bytes_per_entity": 7009.6,
+            "bytes_per_record": 333.8
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1833.2,
+          "rss_mb": 859,
+          "results_bytes_digest": "sha256:8909f9eafd74"
+        },
+        "zig_over_rust": 1.69,
+        "phase_zig_over_rust": {
+          "load": 2.26,
+          "index": 1.25,
+          "query": 1.57,
+          "result": 0.92
+        },
+        "hybrid_over_zig": 1.06,
+        "hybrid_rss_over_zig": 1.31
+      },
+      {
+        "query": "mixed-relations",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 912.8,
+          "rss_mb": 441,
+          "results_bytes_digest": "sha256:47182aa750bf",
+          "phases_ms": {
+            "load": 542.8,
+            "index": 280.5,
+            "query": 0.1,
+            "result": 29.3
+          },
+          "sub_ms": {
+            "read": 91.4,
+            "parse": 451.2,
+            "entities": 3.9,
+            "adjacency": 213.8,
+            "sort": 62.9
+          },
+          "detail_ms": {
+            "materialize": 22.5,
+            "encode": 6.8
+          },
+          "heap": {
+            "live_after_index_mb": 424.8,
+            "peak_live_mb": 427.6,
+            "retained_mb": null,
+            "allocations": 633251,
+            "bytes_per_entity": 4248.3,
+            "bytes_per_record": 202.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1633.6,
+          "rss_mb": 581,
+          "results_bytes_digest": "sha256:47182aa750bf",
+          "phases_ms": {
+            "load": 1229.3,
+            "index": 340.4,
+            "query": 0.1,
+            "result": 30.4
+          },
+          "sub_ms": {
+            "read": 90.4,
+            "parse": 1137.6,
+            "entities": 6.4,
+            "adjacency": 252.3,
+            "sort": 81.9
+          },
+          "detail_ms": {
+            "materialize": 24.3,
+            "encode": 6.1
+          },
+          "heap": {
+            "live_after_index_mb": 701.0,
+            "peak_live_mb": 704.9,
+            "retained_mb": 1341.1,
+            "allocations": 428412,
+            "bytes_per_entity": 7009.6,
+            "bytes_per_record": 333.8
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1685.3,
+          "rss_mb": 784,
+          "results_bytes_digest": "sha256:47182aa750bf"
+        },
+        "zig_over_rust": 1.79,
+        "phase_zig_over_rust": {
+          "load": 2.26,
+          "index": 1.21,
+          "query": 1.0,
+          "result": 1.04
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "depth-8",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1933.4,
+          "rss_mb": 750,
+          "results_bytes_digest": "sha256:7e031ccf1335",
+          "phases_ms": {
+            "load": 545.6,
+            "index": 326.2,
+            "query": 10.0,
+            "result": 876.3
+          },
+          "sub_ms": {
+            "read": 93.2,
+            "parse": 451.9,
+            "entities": 3.9,
+            "adjacency": 259.2,
+            "sort": 63.4
+          },
+          "detail_ms": {
+            "materialize": 148.8,
+            "encode": 726.4
+          },
+          "heap": {
+            "live_after_index_mb": 424.8,
+            "peak_live_mb": 735.7,
+            "retained_mb": null,
+            "allocations": 633291,
+            "bytes_per_entity": 4248.3,
+            "bytes_per_record": 202.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 2566.7,
+          "rss_mb": 1083,
+          "results_bytes_digest": "sha256:7e031ccf1335",
+          "phases_ms": {
+            "load": 1229.9,
+            "index": 374.3,
+            "query": 11.4,
+            "result": 824.1
+          },
+          "sub_ms": {
+            "read": 92.4,
+            "parse": 1137.7,
+            "entities": 6.5,
+            "adjacency": 285.0,
+            "sort": 82.8
+          },
+          "detail_ms": {
+            "materialize": 211.2,
+            "encode": 612.3
+          },
+          "heap": {
+            "live_after_index_mb": 701.0,
+            "peak_live_mb": 1067.4,
+            "retained_mb": 1341.1,
+            "allocations": 428434,
+            "bytes_per_entity": 7009.6,
+            "bytes_per_record": 333.8
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2860.4,
+          "rss_mb": 1335,
+          "results_bytes_digest": "sha256:7e031ccf1335"
+        },
+        "zig_over_rust": 1.33,
+        "phase_zig_over_rust": {
+          "load": 2.25,
+          "index": 1.15,
+          "query": 1.14,
+          "result": 0.94
+        },
+        "hybrid_over_zig": 1.11,
+        "hybrid_rss_over_zig": 1.23
+      },
+      {
+        "query": "lookup-first",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 884.1,
+          "rss_mb": 436,
+          "results_bytes_digest": "sha256:94cdea4b97f8",
+          "phases_ms": {
+            "load": 541.0,
+            "index": 284.3,
+            "query": 0.0,
+            "result": 3.3
+          },
+          "sub_ms": {
+            "read": 90.1,
+            "parse": 450.8,
+            "entities": 3.9,
+            "adjacency": 217.7,
+            "sort": 62.5
+          },
+          "detail_ms": {
+            "materialize": 3.3,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 424.8,
+            "peak_live_mb": 424.8,
+            "retained_mb": null,
+            "allocations": 633190,
+            "bytes_per_entity": 4248.3,
+            "bytes_per_record": 202.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1605.1,
+          "rss_mb": 576,
+          "results_bytes_digest": "sha256:94cdea4b97f8",
+          "phases_ms": {
+            "load": 1229.4,
+            "index": 337.1,
+            "query": 0.0,
+            "result": 10.6
+          },
+          "sub_ms": {
+            "read": 91.2,
+            "parse": 1138.0,
+            "entities": 6.6,
+            "adjacency": 248.2,
+            "sort": 81.8
+          },
+          "detail_ms": {
+            "materialize": 10.6,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 701.0,
+            "peak_live_mb": 701.0,
+            "retained_mb": 1341.1,
+            "allocations": 428388,
+            "bytes_per_entity": 7009.6,
+            "bytes_per_record": 333.8
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1664.5,
+          "rss_mb": 779,
+          "results_bytes_digest": "sha256:94cdea4b97f8"
+        },
+        "zig_over_rust": 1.82,
+        "phase_zig_over_rust": {
+          "load": 2.27,
+          "index": 1.19,
+          "query": null,
+          "result": 3.21
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.35
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W2.X5-default-S-36556641803",
+    "scenario": "W2.X5",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 300,
+    "conformant": 300,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {},
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W2.X5-default-S-20260929.json",
+      "digest": "eba4347a6948e7e9c7ed02145ccfb75959492cc59e64f75602747e94c10f6711",
+      "entities": 100000,
+      "edges": 1000000,
+      "evidence": 1000000
+    },
+    "queries": [
+      {
+        "query": "out-cap-below",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 996.4,
+          "rss_mb": 422,
+          "results_bytes_digest": "sha256:fa21677b89c3",
+          "phases_ms": {
+            "load": 477.4,
+            "index": 311.5,
+            "query": 0.8,
+            "result": 138.6
+          },
+          "sub_ms": {
+            "read": 78.1,
+            "parse": 399.4,
+            "entities": 3.9,
+            "adjacency": 244.4,
+            "sort": 63.6
+          },
+          "detail_ms": {
+            "materialize": 38.9,
+            "encode": 99.7
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 409.4,
+            "retained_mb": null,
+            "allocations": 633274,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1537.4,
+          "rss_mb": 557,
+          "results_bytes_digest": "sha256:fa21677b89c3",
+          "phases_ms": {
+            "load": 1010.8,
+            "index": 358.4,
+            "query": 1.1,
+            "result": 132.1
+          },
+          "sub_ms": {
+            "read": 77.9,
+            "parse": 932.6,
+            "entities": 6.4,
+            "adjacency": 268.8,
+            "sort": 83.3
+          },
+          "detail_ms": {
+            "materialize": 45.5,
+            "encode": 86.6
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 608.0,
+            "retained_mb": 1032.7,
+            "allocations": 428425,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1603.1,
+          "rss_mb": 728,
+          "results_bytes_digest": "sha256:fa21677b89c3"
+        },
+        "zig_over_rust": 1.54,
+        "phase_zig_over_rust": {
+          "load": 2.12,
+          "index": 1.15,
+          "query": 1.38,
+          "result": 0.95
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.31
+      },
+      {
+        "query": "in-cap-below",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1077.3,
+          "rss_mb": 452,
+          "results_bytes_digest": "sha256:f085d79b543c",
+          "phases_ms": {
+            "load": 476.1,
+            "index": 301.2,
+            "query": 1.4,
+            "result": 221.2
+          },
+          "sub_ms": {
+            "read": 76.6,
+            "parse": 399.2,
+            "entities": 3.9,
+            "adjacency": 234.0,
+            "sort": 63.9
+          },
+          "detail_ms": {
+            "materialize": 45.7,
+            "encode": 175.5
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 443.0,
+            "retained_mb": null,
+            "allocations": 633279,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1634.1,
+          "rss_mb": 608,
+          "results_bytes_digest": "sha256:f085d79b543c",
+          "phases_ms": {
+            "load": 1012.0,
+            "index": 345.1,
+            "query": 1.6,
+            "result": 232.6
+          },
+          "sub_ms": {
+            "read": 78.5,
+            "parse": 933.0,
+            "entities": 6.4,
+            "adjacency": 255.7,
+            "sort": 83.2
+          },
+          "detail_ms": {
+            "materialize": 80.8,
+            "encode": 152.4
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 657.6,
+            "retained_mb": 1032.7,
+            "allocations": 428425,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1735.9,
+          "rss_mb": 778,
+          "results_bytes_digest": "sha256:f085d79b543c"
+        },
+        "zig_over_rust": 1.52,
+        "phase_zig_over_rust": {
+          "load": 2.13,
+          "index": 1.15,
+          "query": 1.14,
+          "result": 1.05
+        },
+        "hybrid_over_zig": 1.06,
+        "hybrid_rss_over_zig": 1.28
+      },
+      {
+        "query": "out-cap-1",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 847.7,
+          "rss_mb": 377,
+          "results_bytes_digest": "sha256:3fbd8a1768c7",
+          "phases_ms": {
+            "load": 478.9,
+            "index": 311.4,
+            "query": 0.0,
+            "result": 3.3
+          },
+          "sub_ms": {
+            "read": 79.5,
+            "parse": 399.6,
+            "entities": 3.9,
+            "adjacency": 243.9,
+            "sort": 63.6
+          },
+          "detail_ms": {
+            "materialize": 3.2,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 365.4,
+            "retained_mb": null,
+            "allocations": 633204,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1392.5,
+          "rss_mb": 490,
+          "results_bytes_digest": "sha256:3fbd8a1768c7",
+          "phases_ms": {
+            "load": 1011.5,
+            "index": 350.2,
+            "query": 0.0,
+            "result": 10.6
+          },
+          "sub_ms": {
+            "read": 77.8,
+            "parse": 933.2,
+            "entities": 6.5,
+            "adjacency": 261.0,
+            "sort": 82.9
+          },
+          "detail_ms": {
+            "materialize": 10.6,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 559.8,
+            "retained_mb": 1032.7,
+            "allocations": 428392,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1427.1,
+          "rss_mb": 660,
+          "results_bytes_digest": "sha256:3fbd8a1768c7"
+        },
+        "zig_over_rust": 1.64,
+        "phase_zig_over_rust": {
+          "load": 2.11,
+          "index": 1.12,
+          "query": null,
+          "result": 3.21
+        },
+        "hybrid_over_zig": 1.02,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "in-cap-above",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1068.5,
+          "rss_mb": 452,
+          "results_bytes_digest": "sha256:82e844b62763",
+          "phases_ms": {
+            "load": 477.8,
+            "index": 287.8,
+            "query": 1.3,
+            "result": 220.5
+          },
+          "sub_ms": {
+            "read": 77.8,
+            "parse": 399.8,
+            "entities": 3.9,
+            "adjacency": 220.9,
+            "sort": 63.0
+          },
+          "detail_ms": {
+            "materialize": 45.6,
+            "encode": 174.9
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 443.0,
+            "retained_mb": null,
+            "allocations": 633279,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1639.3,
+          "rss_mb": 608,
+          "results_bytes_digest": "sha256:82e844b62763",
+          "phases_ms": {
+            "load": 1012.2,
+            "index": 348.1,
+            "query": 1.6,
+            "result": 232.4
+          },
+          "sub_ms": {
+            "read": 79.1,
+            "parse": 933.2,
+            "entities": 6.5,
+            "adjacency": 258.2,
+            "sort": 83.3
+          },
+          "detail_ms": {
+            "materialize": 80.5,
+            "encode": 152.4
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 657.6,
+            "retained_mb": 1032.7,
+            "allocations": 428425,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1726.8,
+          "rss_mb": 778,
+          "results_bytes_digest": "sha256:82e844b62763"
+        },
+        "zig_over_rust": 1.53,
+        "phase_zig_over_rust": {
+          "load": 2.12,
+          "index": 1.21,
+          "query": 1.23,
+          "result": 1.05
+        },
+        "hybrid_over_zig": 1.05,
+        "hybrid_rss_over_zig": 1.28
+      },
+      {
+        "query": "out-cap-2",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 833.3,
+          "rss_mb": 377,
+          "results_bytes_digest": "sha256:5e5c17343f3c",
+          "phases_ms": {
+            "load": 477.4,
+            "index": 298.9,
+            "query": 0.0,
+            "result": 3.3
+          },
+          "sub_ms": {
+            "read": 77.7,
+            "parse": 399.9,
+            "entities": 4.0,
+            "adjacency": 231.7,
+            "sort": 63.0
+          },
+          "detail_ms": {
+            "materialize": 3.3,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 365.4,
+            "retained_mb": null,
+            "allocations": 633205,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1403.8,
+          "rss_mb": 490,
+          "results_bytes_digest": "sha256:5e5c17343f3c",
+          "phases_ms": {
+            "load": 1011.8,
+            "index": 354.7,
+            "query": 0.0,
+            "result": 13.0
+          },
+          "sub_ms": {
+            "read": 79.3,
+            "parse": 932.4,
+            "entities": 6.5,
+            "adjacency": 265.4,
+            "sort": 82.9
+          },
+          "detail_ms": {
+            "materialize": 12.9,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 559.8,
+            "retained_mb": 1032.7,
+            "allocations": 428392,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1433.8,
+          "rss_mb": 660,
+          "results_bytes_digest": "sha256:5e5c17343f3c"
+        },
+        "zig_over_rust": 1.68,
+        "phase_zig_over_rust": {
+          "load": 2.12,
+          "index": 1.19,
+          "query": null,
+          "result": 3.94
+        },
+        "hybrid_over_zig": 1.02,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "out-cap-exact",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1004.1,
+          "rss_mb": 422,
+          "results_bytes_digest": "sha256:a29e6154d1a6",
+          "phases_ms": {
+            "load": 480.0,
+            "index": 311.6,
+            "query": 0.8,
+            "result": 138.9
+          },
+          "sub_ms": {
+            "read": 79.7,
+            "parse": 400.3,
+            "entities": 4.0,
+            "adjacency": 244.3,
+            "sort": 63.4
+          },
+          "detail_ms": {
+            "materialize": 39.0,
+            "encode": 99.9
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 409.4,
+            "retained_mb": null,
+            "allocations": 633274,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1535.6,
+          "rss_mb": 557,
+          "results_bytes_digest": "sha256:a29e6154d1a6",
+          "phases_ms": {
+            "load": 1014.6,
+            "index": 350.2,
+            "query": 1.1,
+            "result": 132.2
+          },
+          "sub_ms": {
+            "read": 79.4,
+            "parse": 934.6,
+            "entities": 6.5,
+            "adjacency": 261.0,
+            "sort": 82.6
+          },
+          "detail_ms": {
+            "materialize": 45.5,
+            "encode": 86.8
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 608.0,
+            "retained_mb": 1032.7,
+            "allocations": 428425,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1605.7,
+          "rss_mb": 728,
+          "results_bytes_digest": "sha256:a29e6154d1a6"
+        },
+        "zig_over_rust": 1.53,
+        "phase_zig_over_rust": {
+          "load": 2.11,
+          "index": 1.12,
+          "query": 1.38,
+          "result": 0.95
+        },
+        "hybrid_over_zig": 1.05,
+        "hybrid_rss_over_zig": 1.31
+      },
+      {
+        "query": "in-cap-1",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 847.6,
+          "rss_mb": 377,
+          "results_bytes_digest": "sha256:5401fd8dafa2",
+          "phases_ms": {
+            "load": 477.5,
+            "index": 308.5,
+            "query": 0.0,
+            "result": 3.1
+          },
+          "sub_ms": {
+            "read": 78.4,
+            "parse": 399.2,
+            "entities": 3.9,
+            "adjacency": 241.6,
+            "sort": 63.3
+          },
+          "detail_ms": {
+            "materialize": 3.1,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 365.3,
+            "retained_mb": null,
+            "allocations": 633202,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1404.2,
+          "rss_mb": 490,
+          "results_bytes_digest": "sha256:5401fd8dafa2",
+          "phases_ms": {
+            "load": 1011.1,
+            "index": 357.1,
+            "query": 0.0,
+            "result": 10.6
+          },
+          "sub_ms": {
+            "read": 78.6,
+            "parse": 932.8,
+            "entities": 6.5,
+            "adjacency": 268.3,
+            "sort": 83.0
+          },
+          "detail_ms": {
+            "materialize": 10.6,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 559.8,
+            "retained_mb": 1032.7,
+            "allocations": 428392,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1441.8,
+          "rss_mb": 660,
+          "results_bytes_digest": "sha256:5401fd8dafa2"
+        },
+        "zig_over_rust": 1.66,
+        "phase_zig_over_rust": {
+          "load": 2.12,
+          "index": 1.16,
+          "query": null,
+          "result": 3.42
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "out-cap-above",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 977.7,
+          "rss_mb": 422,
+          "results_bytes_digest": "sha256:ccb7e19ae99d",
+          "phases_ms": {
+            "load": 478.3,
+            "index": 286.0,
+            "query": 0.8,
+            "result": 140.7
+          },
+          "sub_ms": {
+            "read": 78.2,
+            "parse": 400.2,
+            "entities": 4.0,
+            "adjacency": 218.4,
+            "sort": 63.1
+          },
+          "detail_ms": {
+            "materialize": 39.2,
+            "encode": 101.5
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 409.4,
+            "retained_mb": null,
+            "allocations": 633274,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1526.9,
+          "rss_mb": 557,
+          "results_bytes_digest": "sha256:ccb7e19ae99d",
+          "phases_ms": {
+            "load": 1013.1,
+            "index": 344.6,
+            "query": 1.1,
+            "result": 132.3
+          },
+          "sub_ms": {
+            "read": 79.3,
+            "parse": 932.7,
+            "entities": 6.6,
+            "adjacency": 255.1,
+            "sort": 82.5
+          },
+          "detail_ms": {
+            "materialize": 45.5,
+            "encode": 87.0
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 608.0,
+            "retained_mb": 1032.7,
+            "allocations": 428425,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1614.9,
+          "rss_mb": 728,
+          "results_bytes_digest": "sha256:ccb7e19ae99d"
+        },
+        "zig_over_rust": 1.56,
+        "phase_zig_over_rust": {
+          "load": 2.12,
+          "index": 1.2,
+          "query": 1.38,
+          "result": 0.94
+        },
+        "hybrid_over_zig": 1.06,
+        "hybrid_rss_over_zig": 1.31
+      },
+      {
+        "query": "in-cap-exact",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1060.8,
+          "rss_mb": 452,
+          "results_bytes_digest": "sha256:5aee4d39b3f4",
+          "phases_ms": {
+            "load": 479.4,
+            "index": 278.4,
+            "query": 1.3,
+            "result": 220.8
+          },
+          "sub_ms": {
+            "read": 78.6,
+            "parse": 400.3,
+            "entities": 3.9,
+            "adjacency": 210.9,
+            "sort": 63.4
+          },
+          "detail_ms": {
+            "materialize": 45.6,
+            "encode": 175.2
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 443.0,
+            "retained_mb": null,
+            "allocations": 633279,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1649.9,
+          "rss_mb": 608,
+          "results_bytes_digest": "sha256:5aee4d39b3f4",
+          "phases_ms": {
+            "load": 1011.5,
+            "index": 357.3,
+            "query": 1.6,
+            "result": 233.5
+          },
+          "sub_ms": {
+            "read": 78.5,
+            "parse": 932.8,
+            "entities": 6.6,
+            "adjacency": 266.7,
+            "sort": 83.3
+          },
+          "detail_ms": {
+            "materialize": 80.8,
+            "encode": 152.9
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 657.6,
+            "retained_mb": 1032.7,
+            "allocations": 428425,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1744.0,
+          "rss_mb": 778,
+          "results_bytes_digest": "sha256:5aee4d39b3f4"
+        },
+        "zig_over_rust": 1.56,
+        "phase_zig_over_rust": {
+          "load": 2.11,
+          "index": 1.28,
+          "query": 1.23,
+          "result": 1.06
+        },
+        "hybrid_over_zig": 1.06,
+        "hybrid_rss_over_zig": 1.28
+      },
+      {
+        "query": "in-cap-2",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 928.3,
+          "rss_mb": 377,
+          "results_bytes_digest": "sha256:3c327d8f57b4",
+          "phases_ms": {
+            "load": 482.3,
+            "index": 377.1,
+            "query": 0.0,
+            "result": 3.3
+          },
+          "sub_ms": {
+            "read": 81.8,
+            "parse": 400.5,
+            "entities": 4.2,
+            "adjacency": 307.8,
+            "sort": 65.0
+          },
+          "detail_ms": {
+            "materialize": 3.2,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 365.3,
+            "peak_live_mb": 365.4,
+            "retained_mb": null,
+            "allocations": 633205,
+            "bytes_per_entity": 3653.4,
+            "bytes_per_record": 174.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1460.0,
+          "rss_mb": 490,
+          "results_bytes_digest": "sha256:3c327d8f57b4",
+          "phases_ms": {
+            "load": 1017.0,
+            "index": 403.4,
+            "query": 0.0,
+            "result": 13.0
+          },
+          "sub_ms": {
+            "read": 81.7,
+            "parse": 934.7,
+            "entities": 6.6,
+            "adjacency": 313.4,
+            "sort": 83.8
+          },
+          "detail_ms": {
+            "materialize": 13.0,
+            "encode": 0.0
+          },
+          "heap": {
+            "live_after_index_mb": 559.8,
+            "peak_live_mb": 559.8,
+            "retained_mb": 1032.7,
+            "allocations": 428392,
+            "bytes_per_entity": 5598.1,
+            "bytes_per_record": 266.6
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1499.3,
+          "rss_mb": 660,
+          "results_bytes_digest": "sha256:3c327d8f57b4"
+        },
+        "zig_over_rust": 1.57,
+        "phase_zig_over_rust": {
+          "load": 2.11,
+          "index": 1.07,
+          "query": null,
+          "result": 3.94
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.35
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W3.S1-default-S-36556641803",
+    "scenario": "W3.S1",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 240,
+    "conformant": 240,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {},
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W3.S1-default-S-20260929.json",
+      "digest": "00632be7bab9192016a9a33cddf12f38c65345923b3891f86f531ee79c9220b4",
+      "entities": 100000,
+      "edges": 1000000,
+      "evidence": 1000000
+    },
+    "queries": [
+      {
+        "query": "verified-epoch-1",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 888.3,
+          "rss_mb": 430,
+          "results_bytes_digest": "sha256:c0c59f054d8a",
+          "phases_ms": {
+            "load": 486.4,
+            "index": 238.2,
+            "query": 4.5,
+            "result": 100.0
+          },
+          "sub_ms": {
+            "read": 75.2,
+            "parse": 410.8,
+            "entities": 3.7,
+            "adjacency": 177.2,
+            "sort": 57.1
+          },
+          "detail_ms": {
+            "materialize": 24.4,
+            "encode": 75.5
+          },
+          "heap": {
+            "live_after_index_mb": 368.1,
+            "peak_live_mb": 390.9,
+            "retained_mb": null,
+            "allocations": 633247,
+            "bytes_per_entity": 3680.8,
+            "bytes_per_record": 175.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1491.7,
+          "rss_mb": 556,
+          "results_bytes_digest": "sha256:c0c59f054d8a",
+          "phases_ms": {
+            "load": 1023.8,
+            "index": 318.4,
+            "query": 12.8,
+            "result": 107.0
+          },
+          "sub_ms": {
+            "read": 75.6,
+            "parse": 947.9,
+            "entities": 6.4,
+            "adjacency": 232.6,
+            "sort": 80.6
+          },
+          "detail_ms": {
+            "materialize": 39.0,
+            "encode": 68.0
+          },
+          "heap": {
+            "live_after_index_mb": 576.8,
+            "peak_live_mb": 623.9,
+            "retained_mb": 1058.3,
+            "allocations": 428418,
+            "bytes_per_entity": 5768.2,
+            "bytes_per_record": 274.7
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1545.3,
+          "rss_mb": 723,
+          "results_bytes_digest": "sha256:c0c59f054d8a"
+        },
+        "zig_over_rust": 1.68,
+        "phase_zig_over_rust": {
+          "load": 2.1,
+          "index": 1.34,
+          "query": 2.84,
+          "result": 1.07
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.3
+      },
+      {
+        "query": "min-exact",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1179.6,
+          "rss_mb": 508,
+          "results_bytes_digest": "sha256:cf5add23c8ab",
+          "phases_ms": {
+            "load": 486.5,
+            "index": 234.1,
+            "query": 4.5,
+            "result": 366.6
+          },
+          "sub_ms": {
+            "read": 74.9,
+            "parse": 411.0,
+            "entities": 3.8,
+            "adjacency": 174.3,
+            "sort": 56.9
+          },
+          "detail_ms": {
+            "materialize": 67.3,
+            "encode": 299.3
+          },
+          "heap": {
+            "live_after_index_mb": 368.1,
+            "peak_live_mb": 457.0,
+            "retained_mb": null,
+            "allocations": 633252,
+            "bytes_per_entity": 3680.8,
+            "bytes_per_record": 175.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1758.1,
+          "rss_mb": 703,
+          "results_bytes_digest": "sha256:cf5add23c8ab",
+          "phases_ms": {
+            "load": 1024.0,
+            "index": 307.7,
+            "query": 12.8,
+            "result": 356.7
+          },
+          "sub_ms": {
+            "read": 75.5,
+            "parse": 948.0,
+            "entities": 6.4,
+            "adjacency": 221.9,
+            "sort": 79.6
+          },
+          "detail_ms": {
+            "materialize": 94.2,
+            "encode": 263.3
+          },
+          "heap": {
+            "live_after_index_mb": 576.8,
+            "peak_live_mb": 733.9,
+            "retained_mb": 1058.3,
+            "allocations": 428418,
+            "bytes_per_entity": 5768.2,
+            "bytes_per_record": 274.7
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1895.3,
+          "rss_mb": 871,
+          "results_bytes_digest": "sha256:cf5add23c8ab"
+        },
+        "zig_over_rust": 1.49,
+        "phase_zig_over_rust": {
+          "load": 2.1,
+          "index": 1.31,
+          "query": 2.84,
+          "result": 0.97
+        },
+        "hybrid_over_zig": 1.08,
+        "hybrid_rss_over_zig": 1.24
+      },
+      {
+        "query": "sel-100",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1800.0,
+          "rss_mb": 689,
+          "results_bytes_digest": "sha256:321ab3fbe60d",
+          "phases_ms": {
+            "load": 487.1,
+            "index": 233.8,
+            "query": 4.2,
+            "result": 922.5
+          },
+          "sub_ms": {
+            "read": 75.2,
+            "parse": 411.1,
+            "entities": 3.8,
+            "adjacency": 174.4,
+            "sort": 56.7
+          },
+          "detail_ms": {
+            "materialize": 167.6,
+            "encode": 755.8
+          },
+          "heap": {
+            "live_after_index_mb": 368.1,
+            "peak_live_mb": 679.3,
+            "retained_mb": null,
+            "allocations": 633253,
+            "bytes_per_entity": 3680.8,
+            "bytes_per_record": 175.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 2341.7,
+          "rss_mb": 1000,
+          "results_bytes_digest": "sha256:321ab3fbe60d",
+          "phases_ms": {
+            "load": 1026.5,
+            "index": 309.5,
+            "query": 12.9,
+            "result": 882.8
+          },
+          "sub_ms": {
+            "read": 75.3,
+            "parse": 949.8,
+            "entities": 6.4,
+            "adjacency": 223.4,
+            "sort": 79.7
+          },
+          "detail_ms": {
+            "materialize": 223.0,
+            "encode": 659.0
+          },
+          "heap": {
+            "live_after_index_mb": 576.8,
+            "peak_live_mb": 939.8,
+            "retained_mb": 1058.3,
+            "allocations": 428418,
+            "bytes_per_entity": 5768.2,
+            "bytes_per_record": 274.7
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2669.0,
+          "rss_mb": 1240,
+          "results_bytes_digest": "sha256:321ab3fbe60d"
+        },
+        "zig_over_rust": 1.3,
+        "phase_zig_over_rust": {
+          "load": 2.11,
+          "index": 1.32,
+          "query": 3.07,
+          "result": 0.96
+        },
+        "hybrid_over_zig": 1.14,
+        "hybrid_rss_over_zig": 1.24
+      },
+      {
+        "query": "epoch-1",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1301.1,
+          "rss_mb": 538,
+          "results_bytes_digest": "sha256:ed0e3bdc24f6",
+          "phases_ms": {
+            "load": 487.8,
+            "index": 239.7,
+            "query": 4.5,
+            "result": 471.6
+          },
+          "sub_ms": {
+            "read": 76.2,
+            "parse": 411.3,
+            "entities": 3.8,
+            "adjacency": 177.5,
+            "sort": 57.1
+          },
+          "detail_ms": {
+            "materialize": 96.8,
+            "encode": 373.2
+          },
+          "heap": {
+            "live_after_index_mb": 368.1,
+            "peak_live_mb": 524.1,
+            "retained_mb": null,
+            "allocations": 633253,
+            "bytes_per_entity": 3680.8,
+            "bytes_per_record": 175.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1857.7,
+          "rss_mb": 751,
+          "results_bytes_digest": "sha256:ed0e3bdc24f6",
+          "phases_ms": {
+            "load": 1027.0,
+            "index": 311.3,
+            "query": 12.8,
+            "result": 439.9
+          },
+          "sub_ms": {
+            "read": 76.9,
+            "parse": 950.2,
+            "entities": 6.3,
+            "adjacency": 225.2,
+            "sort": 80.5
+          },
+          "detail_ms": {
+            "materialize": 112.7,
+            "encode": 327.0
+          },
+          "heap": {
+            "live_after_index_mb": 576.8,
+            "peak_live_mb": 794.7,
+            "retained_mb": 1058.3,
+            "allocations": 428418,
+            "bytes_per_entity": 5768.2,
+            "bytes_per_record": 274.7
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2020.0,
+          "rss_mb": 919,
+          "results_bytes_digest": "sha256:ed0e3bdc24f6"
+        },
+        "zig_over_rust": 1.43,
+        "phase_zig_over_rust": {
+          "load": 2.11,
+          "index": 1.3,
+          "query": 2.84,
+          "result": 0.93
+        },
+        "hybrid_over_zig": 1.09,
+        "hybrid_rss_over_zig": 1.22
+      },
+      {
+        "query": "min-verified",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 984.2,
+          "rss_mb": 449,
+          "results_bytes_digest": "sha256:88def33b1515",
+          "phases_ms": {
+            "load": 485.1,
+            "index": 237.5,
+            "query": 4.5,
+            "result": 187.3
+          },
+          "sub_ms": {
+            "read": 74.7,
+            "parse": 410.4,
+            "entities": 3.8,
+            "adjacency": 174.7,
+            "sort": 57.6
+          },
+          "detail_ms": {
+            "materialize": 35.8,
+            "encode": 151.6
+          },
+          "heap": {
+            "live_after_index_mb": 368.1,
+            "peak_live_mb": 412.9,
+            "retained_mb": null,
+            "allocations": 633249,
+            "bytes_per_entity": 3680.8,
+            "bytes_per_record": 175.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1568.3,
+          "rss_mb": 606,
+          "results_bytes_digest": "sha256:88def33b1515",
+          "phases_ms": {
+            "load": 1023.7,
+            "index": 307.1,
+            "query": 12.8,
+            "result": 188.8
+          },
+          "sub_ms": {
+            "read": 75.3,
+            "parse": 949.0,
+            "entities": 6.4,
+            "adjacency": 221.7,
+            "sort": 79.7
+          },
+          "detail_ms": {
+            "materialize": 55.4,
+            "encode": 133.0
+          },
+          "heap": {
+            "live_after_index_mb": 576.8,
+            "peak_live_mb": 652.9,
+            "retained_mb": 1058.3,
+            "allocations": 428418,
+            "bytes_per_entity": 5768.2,
+            "bytes_per_record": 274.7
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1666.2,
+          "rss_mb": 773,
+          "results_bytes_digest": "sha256:88def33b1515"
+        },
+        "zig_over_rust": 1.59,
+        "phase_zig_over_rust": {
+          "load": 2.11,
+          "index": 1.29,
+          "query": 2.84,
+          "result": 1.01
+        },
+        "hybrid_over_zig": 1.06,
+        "hybrid_rss_over_zig": 1.28
+      },
+      {
+        "query": "epoch-3",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 839.5,
+          "rss_mb": 389,
+          "results_bytes_digest": "sha256:e99c3939ef72",
+          "phases_ms": {
+            "load": 486.4,
+            "index": 257.6,
+            "query": 4.5,
+            "result": 40.1
+          },
+          "sub_ms": {
+            "read": 75.2,
+            "parse": 410.8,
+            "entities": 3.8,
+            "adjacency": 192.8,
+            "sort": 61.5
+          },
+          "detail_ms": {
+            "materialize": 30.0,
+            "encode": 10.1
+          },
+          "heap": {
+            "live_after_index_mb": 368.1,
+            "peak_live_mb": 373.7,
+            "retained_mb": null,
+            "allocations": 633238,
+            "bytes_per_entity": 3680.8,
+            "bytes_per_record": 175.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1412.7,
+          "rss_mb": 511,
+          "results_bytes_digest": "sha256:e99c3939ef72",
+          "phases_ms": {
+            "load": 1024.4,
+            "index": 316.4,
+            "query": 12.8,
+            "result": 34.2
+          },
+          "sub_ms": {
+            "read": 75.3,
+            "parse": 949.1,
+            "entities": 6.4,
+            "adjacency": 229.0,
+            "sort": 81.2
+          },
+          "detail_ms": {
+            "materialize": 24.0,
+            "encode": 10.2
+          },
+          "heap": {
+            "live_after_index_mb": 576.8,
+            "peak_live_mb": 586.2,
+            "retained_mb": 1058.3,
+            "allocations": 428418,
+            "bytes_per_entity": 5768.2,
+            "bytes_per_record": 274.7
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1461.9,
+          "rss_mb": 679,
+          "results_bytes_digest": "sha256:e99c3939ef72"
+        },
+        "zig_over_rust": 1.68,
+        "phase_zig_over_rust": {
+          "load": 2.11,
+          "index": 1.23,
+          "query": 2.84,
+          "result": 0.85
+        },
+        "hybrid_over_zig": 1.03,
+        "hybrid_rss_over_zig": 1.33
+      },
+      {
+        "query": "epoch-2",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 917.5,
+          "rss_mb": 429,
+          "results_bytes_digest": "sha256:9789edfa149a",
+          "phases_ms": {
+            "load": 486.8,
+            "index": 238.5,
+            "query": 4.5,
+            "result": 118.9
+          },
+          "sub_ms": {
+            "read": 76.1,
+            "parse": 410.6,
+            "entities": 3.8,
+            "adjacency": 176.9,
+            "sort": 58.2
+          },
+          "detail_ms": {
+            "materialize": 42.1,
+            "encode": 76.7
+          },
+          "heap": {
+            "live_after_index_mb": 368.1,
+            "peak_live_mb": 390.9,
+            "retained_mb": null,
+            "allocations": 633245,
+            "bytes_per_entity": 3680.8,
+            "bytes_per_record": 175.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1491.6,
+          "rss_mb": 556,
+          "results_bytes_digest": "sha256:9789edfa149a",
+          "phases_ms": {
+            "load": 1027.6,
+            "index": 309.3,
+            "query": 12.8,
+            "result": 106.8
+          },
+          "sub_ms": {
+            "read": 75.7,
+            "parse": 952.4,
+            "entities": 6.4,
+            "adjacency": 225.2,
+            "sort": 80.0
+          },
+          "detail_ms": {
+            "materialize": 38.0,
+            "encode": 69.0
+          },
+          "heap": {
+            "live_after_index_mb": 576.8,
+            "peak_live_mb": 623.8,
+            "retained_mb": 1058.3,
+            "allocations": 428418,
+            "bytes_per_entity": 5768.2,
+            "bytes_per_record": 274.7
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1555.1,
+          "rss_mb": 723,
+          "results_bytes_digest": "sha256:9789edfa149a"
+        },
+        "zig_over_rust": 1.63,
+        "phase_zig_over_rust": {
+          "load": 2.11,
+          "index": 1.3,
+          "query": 2.84,
+          "result": 0.9
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.3
+      },
+      {
+        "query": "epoch-4",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 811.9,
+          "rss_mb": 384,
+          "results_bytes_digest": "sha256:ff1070f87c69",
+          "phases_ms": {
+            "load": 488.9,
+            "index": 234.6,
+            "query": 4.5,
+            "result": 31.9
+          },
+          "sub_ms": {
+            "read": 77.0,
+            "parse": 411.5,
+            "entities": 3.8,
+            "adjacency": 176.1,
+            "sort": 55.0
+          },
+          "detail_ms": {
+            "materialize": 28.7,
+            "encode": 3.2
+          },
+          "heap": {
+            "live_after_index_mb": 368.1,
+            "peak_live_mb": 371.8,
+            "retained_mb": null,
+            "allocations": 633230,
+            "bytes_per_entity": 3680.8,
+            "bytes_per_record": 175.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1397.1,
+          "rss_mb": 507,
+          "results_bytes_digest": "sha256:ff1070f87c69",
+          "phases_ms": {
+            "load": 1025.8,
+            "index": 308.4,
+            "query": 12.8,
+            "result": 27.3
+          },
+          "sub_ms": {
+            "read": 76.0,
+            "parse": 949.3,
+            "entities": 6.5,
+            "adjacency": 221.9,
+            "sort": 79.5
+          },
+          "detail_ms": {
+            "materialize": 23.0,
+            "encode": 4.3
+          },
+          "heap": {
+            "live_after_index_mb": 576.8,
+            "peak_live_mb": 582.4,
+            "retained_mb": 1058.3,
+            "allocations": 428418,
+            "bytes_per_entity": 5768.2,
+            "bytes_per_record": 274.7
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1448.5,
+          "rss_mb": 674,
+          "results_bytes_digest": "sha256:ff1070f87c69"
+        },
+        "zig_over_rust": 1.72,
+        "phase_zig_over_rust": {
+          "load": 2.1,
+          "index": 1.31,
+          "query": 2.84,
+          "result": 0.86
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.33
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W3.S2-default-S-36556641803",
+    "scenario": "W3.S2",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 180,
+    "conformant": 180,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {},
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W3.S2-default-S-20260929.json",
+      "digest": "28149f6fb6d79c1ef1ce19d0520489e40e275d1263a38ca0e1f76e749366fe37",
+      "entities": 100000,
+      "edges": 1000000,
+      "evidence": 1000000
+    },
+    "queries": [
+      {
+        "query": "sel-100",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1959.0,
+          "rss_mb": 687,
+          "results_bytes_digest": "sha256:ce8166491e78",
+          "phases_ms": {
+            "load": 489.0,
+            "index": 372.8,
+            "query": 4.3,
+            "result": 920.6
+          },
+          "sub_ms": {
+            "read": 76.5,
+            "parse": 412.3,
+            "entities": 4.0,
+            "adjacency": 304.4,
+            "sort": 64.4
+          },
+          "detail_ms": {
+            "materialize": 169.5,
+            "encode": 750.8
+          },
+          "heap": {
+            "live_after_index_mb": 367.2,
+            "peak_live_mb": 678.3,
+            "retained_mb": null,
+            "allocations": 633253,
+            "bytes_per_entity": 3671.5,
+            "bytes_per_record": 174.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 2450.6,
+          "rss_mb": 990,
+          "results_bytes_digest": "sha256:ce8166491e78",
+          "phases_ms": {
+            "load": 1023.6,
+            "index": 401.9,
+            "query": 12.9,
+            "result": 896.9
+          },
+          "sub_ms": {
+            "read": 75.6,
+            "parse": 946.7,
+            "entities": 6.4,
+            "adjacency": 311.7,
+            "sort": 83.7
+          },
+          "detail_ms": {
+            "materialize": 245.2,
+            "encode": 652.5
+          },
+          "heap": {
+            "live_after_index_mb": 561.6,
+            "peak_live_mb": 923.7,
+            "retained_mb": 1039.5,
+            "allocations": 428418,
+            "bytes_per_entity": 5616.2,
+            "bytes_per_record": 267.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2776.1,
+          "rss_mb": 1235,
+          "results_bytes_digest": "sha256:ce8166491e78"
+        },
+        "zig_over_rust": 1.25,
+        "phase_zig_over_rust": {
+          "load": 2.09,
+          "index": 1.08,
+          "query": 3.0,
+          "result": 0.97
+        },
+        "hybrid_over_zig": 1.13,
+        "hybrid_rss_over_zig": 1.25
+      },
+      {
+        "query": "min-verified",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1093.9,
+          "rss_mb": 447,
+          "results_bytes_digest": "sha256:233bf2eb5ff2",
+          "phases_ms": {
+            "load": 487.1,
+            "index": 336.9,
+            "query": 4.5,
+            "result": 186.5
+          },
+          "sub_ms": {
+            "read": 74.1,
+            "parse": 412.5,
+            "entities": 3.9,
+            "adjacency": 269.7,
+            "sort": 63.3
+          },
+          "detail_ms": {
+            "materialize": 35.6,
+            "encode": 150.5
+          },
+          "heap": {
+            "live_after_index_mb": 367.2,
+            "peak_live_mb": 412.0,
+            "retained_mb": null,
+            "allocations": 633249,
+            "bytes_per_entity": 3671.5,
+            "bytes_per_record": 174.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1642.7,
+          "rss_mb": 599,
+          "results_bytes_digest": "sha256:233bf2eb5ff2",
+          "phases_ms": {
+            "load": 1020.5,
+            "index": 380.6,
+            "query": 12.8,
+            "result": 187.5
+          },
+          "sub_ms": {
+            "read": 74.6,
+            "parse": 946.3,
+            "entities": 6.5,
+            "adjacency": 291.0,
+            "sort": 83.0
+          },
+          "detail_ms": {
+            "materialize": 55.7,
+            "encode": 131.9
+          },
+          "heap": {
+            "live_after_index_mb": 561.6,
+            "peak_live_mb": 637.4,
+            "retained_mb": 1039.5,
+            "allocations": 428418,
+            "bytes_per_entity": 5616.2,
+            "bytes_per_record": 267.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1729.3,
+          "rss_mb": 771,
+          "results_bytes_digest": "sha256:233bf2eb5ff2"
+        },
+        "zig_over_rust": 1.5,
+        "phase_zig_over_rust": {
+          "load": 2.1,
+          "index": 1.13,
+          "query": 2.84,
+          "result": 1.01
+        },
+        "hybrid_over_zig": 1.05,
+        "hybrid_rss_over_zig": 1.29
+      },
+      {
+        "query": "hub-depth-4",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1018.0,
+          "rss_mb": 422,
+          "results_bytes_digest": "sha256:3429dd6da55f",
+          "phases_ms": {
+            "load": 487.4,
+            "index": 323.0,
+            "query": 0.8,
+            "result": 135.6
+          },
+          "sub_ms": {
+            "read": 74.5,
+            "parse": 413.0,
+            "entities": 3.9,
+            "adjacency": 256.0,
+            "sort": 63.0
+          },
+          "detail_ms": {
+            "materialize": 37.6,
+            "encode": 97.9
+          },
+          "heap": {
+            "live_after_index_mb": 367.2,
+            "peak_live_mb": 406.0,
+            "retained_mb": null,
+            "allocations": 633275,
+            "bytes_per_entity": 3671.5,
+            "bytes_per_record": 174.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1555.1,
+          "rss_mb": 557,
+          "results_bytes_digest": "sha256:3429dd6da55f",
+          "phases_ms": {
+            "load": 1021.6,
+            "index": 369.3,
+            "query": 1.1,
+            "result": 127.8
+          },
+          "sub_ms": {
+            "read": 74.9,
+            "parse": 947.0,
+            "entities": 6.6,
+            "adjacency": 280.1,
+            "sort": 82.9
+          },
+          "detail_ms": {
+            "materialize": 43.1,
+            "encode": 84.7
+          },
+          "heap": {
+            "live_after_index_mb": 561.6,
+            "peak_live_mb": 609.1,
+            "retained_mb": 1039.5,
+            "allocations": 428425,
+            "bytes_per_entity": 5616.2,
+            "bytes_per_record": 267.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1613.6,
+          "rss_mb": 729,
+          "results_bytes_digest": "sha256:3429dd6da55f"
+        },
+        "zig_over_rust": 1.53,
+        "phase_zig_over_rust": {
+          "load": 2.1,
+          "index": 1.14,
+          "query": 1.38,
+          "result": 0.94
+        },
+        "hybrid_over_zig": 1.04,
+        "hybrid_rss_over_zig": 1.31
+      },
+      {
+        "query": "min-exact",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1402.2,
+          "rss_mb": 537,
+          "results_bytes_digest": "sha256:b5370ed39a5d",
+          "phases_ms": {
+            "load": 488.5,
+            "index": 332.8,
+            "query": 4.5,
+            "result": 459.4
+          },
+          "sub_ms": {
+            "read": 75.6,
+            "parse": 413.1,
+            "entities": 3.9,
+            "adjacency": 266.0,
+            "sort": 63.4
+          },
+          "detail_ms": {
+            "materialize": 85.0,
+            "encode": 374.7
+          },
+          "heap": {
+            "live_after_index_mb": 367.2,
+            "peak_live_mb": 523.1,
+            "retained_mb": null,
+            "allocations": 633254,
+            "bytes_per_entity": 3671.5,
+            "bytes_per_record": 174.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1937.2,
+          "rss_mb": 745,
+          "results_bytes_digest": "sha256:b5370ed39a5d",
+          "phases_ms": {
+            "load": 1024.3,
+            "index": 384.7,
+            "query": 13.0,
+            "result": 445.6
+          },
+          "sub_ms": {
+            "read": 76.3,
+            "parse": 947.9,
+            "entities": 6.4,
+            "adjacency": 294.9,
+            "sort": 83.7
+          },
+          "detail_ms": {
+            "materialize": 119.6,
+            "encode": 325.8
+          },
+          "heap": {
+            "live_after_index_mb": 561.6,
+            "peak_live_mb": 779.4,
+            "retained_mb": 1039.5,
+            "allocations": 428418,
+            "bytes_per_entity": 5616.2,
+            "bytes_per_record": 267.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 2090.2,
+          "rss_mb": 917,
+          "results_bytes_digest": "sha256:b5370ed39a5d"
+        },
+        "zig_over_rust": 1.38,
+        "phase_zig_over_rust": {
+          "load": 2.1,
+          "index": 1.16,
+          "query": 2.89,
+          "result": 0.97
+        },
+        "hybrid_over_zig": 1.08,
+        "hybrid_rss_over_zig": 1.23
+      },
+      {
+        "query": "hub-outgoing",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 875.8,
+          "rss_mb": 379,
+          "results_bytes_digest": "sha256:41f10748a71e",
+          "phases_ms": {
+            "load": 489.3,
+            "index": 323.9,
+            "query": 0.0,
+            "result": 3.9
+          },
+          "sub_ms": {
+            "read": 75.8,
+            "parse": 413.3,
+            "entities": 4.0,
+            "adjacency": 256.9,
+            "sort": 63.2
+          },
+          "detail_ms": {
+            "materialize": 3.8,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 367.2,
+            "peak_live_mb": 367.2,
+            "retained_mb": null,
+            "allocations": 633210,
+            "bytes_per_entity": 3671.5,
+            "bytes_per_record": 174.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1443.7,
+          "rss_mb": 492,
+          "results_bytes_digest": "sha256:41f10748a71e",
+          "phases_ms": {
+            "load": 1023.8,
+            "index": 371.1,
+            "query": 0.0,
+            "result": 19.7
+          },
+          "sub_ms": {
+            "read": 75.7,
+            "parse": 948.8,
+            "entities": 6.4,
+            "adjacency": 281.5,
+            "sort": 83.0
+          },
+          "detail_ms": {
+            "materialize": 19.6,
+            "encode": 0.1
+          },
+          "heap": {
+            "live_after_index_mb": 561.6,
+            "peak_live_mb": 561.7,
+            "retained_mb": 1039.5,
+            "allocations": 428393,
+            "bytes_per_entity": 5616.2,
+            "bytes_per_record": 267.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1478.7,
+          "rss_mb": 664,
+          "results_bytes_digest": "sha256:41f10748a71e"
+        },
+        "zig_over_rust": 1.65,
+        "phase_zig_over_rust": {
+          "load": 2.09,
+          "index": 1.15,
+          "query": null,
+          "result": 5.05
+        },
+        "hybrid_over_zig": 1.02,
+        "hybrid_rss_over_zig": 1.35
+      },
+      {
+        "query": "epoch-1",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1238.7,
+          "rss_mb": 487,
+          "results_bytes_digest": "sha256:b1dfd659fe13",
+          "phases_ms": {
+            "load": 488.3,
+            "index": 322.0,
+            "query": 4.5,
+            "result": 325.9
+          },
+          "sub_ms": {
+            "read": 75.1,
+            "parse": 412.8,
+            "entities": 4.0,
+            "adjacency": 254.9,
+            "sort": 63.3
+          },
+          "detail_ms": {
+            "materialize": 72.0,
+            "encode": 253.4
+          },
+          "heap": {
+            "live_after_index_mb": 367.2,
+            "peak_live_mb": 456.0,
+            "retained_mb": null,
+            "allocations": 633251,
+            "bytes_per_entity": 3671.5,
+            "bytes_per_record": 174.8
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 1766.8,
+          "rss_mb": 664,
+          "results_bytes_digest": "sha256:b1dfd659fe13",
+          "phases_ms": {
+            "load": 1024.5,
+            "index": 370.7,
+            "query": 13.0,
+            "result": 303.3
+          },
+          "sub_ms": {
+            "read": 75.4,
+            "parse": 948.4,
+            "entities": 6.4,
+            "adjacency": 281.6,
+            "sort": 82.7
+          },
+          "detail_ms": {
+            "materialize": 82.6,
+            "encode": 220.7
+          },
+          "heap": {
+            "live_after_index_mb": 561.6,
+            "peak_live_mb": 708.5,
+            "retained_mb": 1039.5,
+            "allocations": 428418,
+            "bytes_per_entity": 5616.2,
+            "bytes_per_record": 267.4
+          }
+        },
+        "hybrid": {
+          "n": 10,
+          "elapsed_ms": 1887.9,
+          "rss_mb": 836,
+          "results_bytes_digest": "sha256:b1dfd659fe13"
+        },
+        "zig_over_rust": 1.43,
+        "phase_zig_over_rust": {
+          "load": 2.1,
+          "index": 1.15,
+          "query": 2.89,
+          "result": 0.93
+        },
+        "hybrid_over_zig": 1.07,
+        "hybrid_rss_over_zig": 1.26
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S1-default-S-36556641803",
+    "scenario": "W4.S1",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S1-default-S-20260929.json",
+      "digest": "042176ccfbd44510651d88162844c111b55fa88e7d7d12b3431e325c2e9ade70",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 152.4,
+          "rss_mb": 82,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 54.2,
+            "index": 14.8,
+            "query": 37.1,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 9.0,
+            "parse": 45.2,
+            "entities": 8.8,
+            "adjacency": 5.9,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10,
+            "p50_ns": 432,
+            "p95_ns": 544,
+            "p99_ns": 544,
+            "intern_ms": 37.0,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 80.1,
+            "retained_mb": null,
+            "allocations": 438299,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.1
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 179.7,
+          "rss_mb": 131,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 103.2,
+            "index": 21.7,
+            "query": 47.0,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 9.0,
+            "parse": 94.1,
+            "entities": 13.9,
+            "adjacency": 7.3,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10,
+            "p50_ns": 352,
+            "p95_ns": 448,
+            "p99_ns": 448,
+            "intern_ms": 47.0,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 108.9,
+            "retained_mb": 229.5,
+            "allocations": 238206,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.18,
+        "phase_zig_over_rust": {
+          "load": 1.9,
+          "index": 1.47,
+          "query": 1.27,
+          "result": 2.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S2-default-S-36556641803",
+    "scenario": "W4.S2",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S2-default-S-20260929.json",
+      "digest": "042176ccfbd44510651d88162844c111b55fa88e7d7d12b3431e325c2e9ade70",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 141.1,
+          "rss_mb": 82,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 53.6,
+            "index": 14.2,
+            "query": 32.5,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 8.4,
+            "parse": 45.2,
+            "entities": 8.7,
+            "adjacency": 5.3,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 200000,
+            "p50_ns": 72,
+            "p95_ns": 176,
+            "p99_ns": 280,
+            "intern_ms": 32.5,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 80.2,
+            "retained_mb": null,
+            "allocations": 439314,
+            "bytes_per_entity": 301.5,
+            "bytes_per_record": 251.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 177.9,
+          "rss_mb": 131,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 102.2,
+            "index": 21.4,
+            "query": 41.0,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 8.3,
+            "parse": 94.0,
+            "entities": 14.0,
+            "adjacency": 7.0,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 200000,
+            "p50_ns": 80,
+            "p95_ns": 168,
+            "p99_ns": 264,
+            "intern_ms": 41.0,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 108.9,
+            "retained_mb": 230.5,
+            "allocations": 238206,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.26,
+        "phase_zig_over_rust": {
+          "load": 1.91,
+          "index": 1.51,
+          "query": 1.26,
+          "result": 2.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S3-default-S-36556641803",
+    "scenario": "W4.S3",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S3-default-S-20260929.json",
+      "digest": "49657ff12e551467faeaaa292f19801c136bdee859df8a97387e891eae8e7f2d",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 90.3,
+          "rss_mb": 63,
+          "results_bytes_digest": "sha256:75a8f0310b67",
+          "phases_ms": {
+            "load": 53.3,
+            "index": 13.6,
+            "query": 5.6,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 8.1,
+            "parse": 45.1,
+            "entities": 8.4,
+            "adjacency": 5.0,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 200000,
+            "p50_ns": 56,
+            "p95_ns": 80,
+            "p99_ns": 120,
+            "intern_ms": 5.6,
+            "unique_strings": 2000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 62.6,
+            "retained_mb": null,
+            "allocations": 251320,
+            "bytes_per_entity": 301.5,
+            "bytes_per_record": 251.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 139.0,
+          "rss_mb": 81,
+          "results_bytes_digest": "sha256:75a8f0310b67",
+          "phases_ms": {
+            "load": 102.3,
+            "index": 20.9,
+            "query": 4.9,
+            "result": 1.0
+          },
+          "sub_ms": {
+            "read": 8.2,
+            "parse": 94.0,
+            "entities": 13.7,
+            "adjacency": 6.8,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 1.0,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 200000,
+            "p50_ns": 48,
+            "p95_ns": 72,
+            "p99_ns": 104,
+            "intern_ms": 4.9,
+            "unique_strings": 2000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 70.7,
+            "retained_mb": 112.3,
+            "allocations": 46205,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.54,
+        "phase_zig_over_rust": {
+          "load": 1.92,
+          "index": 1.54,
+          "query": 0.88,
+          "result": 5.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S4-r1-S-36556641803",
+    "scenario": "W4.S4",
+    "variant": "r1",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S4-r1-S-20260929.json",
+      "digest": "49657ff12e551467faeaaa292f19801c136bdee859df8a97387e891eae8e7f2d",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 88.1,
+          "rss_mb": 63,
+          "results_bytes_digest": "sha256:75a8f0310b67",
+          "phases_ms": {
+            "load": 54.7,
+            "index": 14.6,
+            "query": 5.6,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 9.2,
+            "parse": 45.4,
+            "entities": 8.9,
+            "adjacency": 5.5,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 48,
+            "p95_ns": 136,
+            "p99_ns": 200,
+            "intern_ms": 5.6,
+            "unique_strings": 2000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 62.5,
+            "retained_mb": null,
+            "allocations": 250516,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.2
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 138.3,
+          "rss_mb": 80,
+          "results_bytes_digest": "sha256:75a8f0310b67",
+          "phases_ms": {
+            "load": 103.6,
+            "index": 21.8,
+            "query": 5.0,
+            "result": 1.0
+          },
+          "sub_ms": {
+            "read": 9.2,
+            "parse": 94.3,
+            "entities": 14.2,
+            "adjacency": 7.2,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 1.0,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 48,
+            "p95_ns": 128,
+            "p99_ns": 184,
+            "intern_ms": 5.0,
+            "unique_strings": 2000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 70.7,
+            "retained_mb": 111.8,
+            "allocations": 46205,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.57,
+        "phase_zig_over_rust": {
+          "load": 1.89,
+          "index": 1.49,
+          "query": 0.89,
+          "result": 5.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S4-r10-S-36556641803",
+    "scenario": "W4.S4",
+    "variant": "r10",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S4-r10-S-20260929.json",
+      "digest": "042c777758fc42424273f9c91bc6f29cc1d5b8a446ee7cdb13eef38a1e12ed13",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 95.6,
+          "rss_mb": 64,
+          "results_bytes_digest": "sha256:56023eae0994",
+          "phases_ms": {
+            "load": 54.6,
+            "index": 14.7,
+            "query": 12.8,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 9.2,
+            "parse": 45.4,
+            "entities": 9.0,
+            "adjacency": 5.5,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 56,
+            "p95_ns": 176,
+            "p99_ns": 256,
+            "intern_ms": 12.8,
+            "unique_strings": 20000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 64.2,
+            "retained_mb": null,
+            "allocations": 298512,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.2
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 143.6,
+          "rss_mb": 82,
+          "results_bytes_digest": "sha256:56023eae0994",
+          "phases_ms": {
+            "load": 103.6,
+            "index": 22.0,
+            "query": 10.0,
+            "result": 0.5
+          },
+          "sub_ms": {
+            "read": 9.3,
+            "parse": 94.3,
+            "entities": 14.3,
+            "adjacency": 7.3,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.5,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 56,
+            "p95_ns": 145,
+            "p99_ns": 208,
+            "intern_ms": 10.0,
+            "unique_strings": 20000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 72.8,
+            "retained_mb": 111.8,
+            "allocations": 58205,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.5,
+        "phase_zig_over_rust": {
+          "load": 1.9,
+          "index": 1.5,
+          "query": 0.78,
+          "result": 2.5
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S4-r100-S-36556641803",
+    "scenario": "W4.S4",
+    "variant": "r100",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S4-r100-S-20260929.json",
+      "digest": "042176ccfbd44510651d88162844c111b55fa88e7d7d12b3431e325c2e9ade70",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 138.3,
+          "rss_mb": 82,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 54.1,
+            "index": 14.1,
+            "query": 32.7,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 8.9,
+            "parse": 45.1,
+            "entities": 8.6,
+            "adjacency": 5.4,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 64,
+            "p95_ns": 296,
+            "p99_ns": 448,
+            "intern_ms": 32.7,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 80.1,
+            "retained_mb": null,
+            "allocations": 438510,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.2
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 175.7,
+          "rss_mb": 131,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 103.3,
+            "index": 21.5,
+            "query": 40.7,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 9.1,
+            "parse": 94.2,
+            "entities": 14.0,
+            "adjacency": 7.1,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 64,
+            "p95_ns": 288,
+            "p99_ns": 376,
+            "intern_ms": 40.7,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 108.9,
+            "retained_mb": 229.7,
+            "allocations": 238206,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.27,
+        "phase_zig_over_rust": {
+          "load": 1.91,
+          "index": 1.52,
+          "query": 1.24,
+          "result": 2.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S4-r50-S-36556641803",
+    "scenario": "W4.S4",
+    "variant": "r50",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S4-r50-S-20260929.json",
+      "digest": "8d28fb4e4b493d0a0b65467b4229cc403ef717416f642c2e1f9cbbcf7ec2ac71",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 112.9,
+          "rss_mb": 71,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 54.3,
+            "index": 14.6,
+            "query": 21.9,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 9.1,
+            "parse": 45.3,
+            "entities": 8.9,
+            "adjacency": 5.5,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 64,
+            "p95_ns": 328,
+            "p99_ns": 520,
+            "intern_ms": 21.9,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 70.2,
+            "retained_mb": null,
+            "allocations": 338509,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.2
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 160.9,
+          "rss_mb": 103,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 103.3,
+            "index": 21.7,
+            "query": 27.4,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 9.2,
+            "parse": 94.1,
+            "entities": 14.0,
+            "adjacency": 7.3,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 64,
+            "p95_ns": 288,
+            "p99_ns": 400,
+            "intern_ms": 27.4,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 88.6,
+            "retained_mb": 229.7,
+            "allocations": 138205,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.43,
+        "phase_zig_over_rust": {
+          "load": 1.9,
+          "index": 1.49,
+          "query": 1.25,
+          "result": 3.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S5-len512-uniform-S-36558262587",
+    "scenario": "W4.S5",
+    "variant": "len512-uniform",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S5-len512-uniform-S-20260929.json",
+      "digest": "5a337135b5d8f838fcd6a3dc04409dbf4f3b2e5953a301c6b41f9152cfc90217",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 233.4,
+          "rss_mb": 268,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 121.6,
+            "index": 13.2,
+            "query": 69.4,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 35.1,
+            "parse": 86.7,
+            "entities": 8.1,
+            "adjacency": 4.8,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 9650,
+            "p50_ns": 217,
+            "p95_ns": 496,
+            "p99_ns": 616,
+            "intern_ms": 69.3,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 255.6,
+            "peak_live_mb": 265.6,
+            "retained_mb": null,
+            "allocations": 338502,
+            "bytes_per_entity": 1277.9,
+            "bytes_per_record": 1064.9
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 348.0,
+          "rss_mb": 218,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 264.4,
+            "index": 20.2,
+            "query": 53.5,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 35.2,
+            "parse": 229.4,
+            "entities": 13.2,
+            "adjacency": 6.5,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 9650,
+            "p50_ns": 152,
+            "p95_ns": 464,
+            "p99_ns": 584,
+            "intern_ms": 53.5,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 176.9,
+            "peak_live_mb": 197.2,
+            "retained_mb": 451.1,
+            "allocations": 138204,
+            "bytes_per_entity": 884.5,
+            "bytes_per_record": 737.1
+          }
+        },
+        "zig_over_rust": 1.49,
+        "phase_zig_over_rust": {
+          "load": 2.17,
+          "index": 1.53,
+          "query": 0.77,
+          "result": 3.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S5-len64-uniform-S-36558262587",
+    "scenario": "W4.S5",
+    "variant": "len64-uniform",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S5-len64-uniform-S-20260929.json",
+      "digest": "892b38b97d4441ec1ee13dedec714b70158a5bcc7b0b205a63ae3d8dd0d62d12",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 121.8,
+          "rss_mb": 89,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 61.0,
+            "index": 13.6,
+            "query": 26.7,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 11.8,
+            "parse": 49.2,
+            "entities": 8.3,
+            "adjacency": 5.1,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 96,
+            "p95_ns": 264,
+            "p99_ns": 344,
+            "intern_ms": 26.7,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 76.3,
+            "peak_live_mb": 86.3,
+            "retained_mb": null,
+            "allocations": 338811,
+            "bytes_per_entity": 381.5,
+            "bytes_per_record": 318.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 176.5,
+          "rss_mb": 113,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 117.9,
+            "index": 20.9,
+            "query": 29.0,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 11.7,
+            "parse": 106.2,
+            "entities": 13.8,
+            "adjacency": 6.8,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 88,
+            "p95_ns": 224,
+            "p99_ns": 288,
+            "intern_ms": 29.0,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 86.0,
+            "peak_live_mb": 106.3,
+            "retained_mb": 149.1,
+            "allocations": 138205,
+            "bytes_per_entity": 430.0,
+            "bytes_per_record": 358.3
+          }
+        },
+        "zig_over_rust": 1.45,
+        "phase_zig_over_rust": {
+          "load": 1.93,
+          "index": 1.54,
+          "query": 1.09,
+          "result": 3.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S5-len64-zipf-S-36558262587",
+    "scenario": "W4.S5",
+    "variant": "len64-zipf",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S5-len64-zipf-S-20260929.json",
+      "digest": "06c47d9990b666b688ac42aeead3aa6cb7730559c10c882321d637cdff48f618",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 365.5,
+          "rss_mb": 85,
+          "results_bytes_digest": "sha256:7745e91486a4",
+          "phases_ms": {
+            "load": 61.1,
+            "index": 13.5,
+            "query": 13.2,
+            "result": 0.7
+          },
+          "sub_ms": {
+            "read": 11.8,
+            "parse": 49.3,
+            "entities": 8.3,
+            "adjacency": 5.0,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.5
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 64,
+            "p95_ns": 640,
+            "p99_ns": 840,
+            "intern_ms": 13.2,
+            "unique_strings": 17865
+          },
+          "heap": {
+            "live_after_index_mb": 76.3,
+            "peak_live_mb": 80.6,
+            "retained_mb": null,
+            "allocations": 261438,
+            "bytes_per_entity": 381.5,
+            "bytes_per_record": 318.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 258.3,
+          "rss_mb": 96,
+          "results_bytes_digest": "sha256:7745e91486a4",
+          "phases_ms": {
+            "load": 118.7,
+            "index": 21.0,
+            "query": 11.7,
+            "result": 1.3
+          },
+          "sub_ms": {
+            "read": 11.8,
+            "parse": 106.8,
+            "entities": 13.7,
+            "adjacency": 6.8,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.8,
+            "encode": 0.5
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 56,
+            "p95_ns": 296,
+            "p99_ns": 432,
+            "intern_ms": 11.6,
+            "unique_strings": 17865
+          },
+          "heap": {
+            "live_after_index_mb": 86.0,
+            "peak_live_mb": 92.1,
+            "retained_mb": 149.1,
+            "allocations": 57607,
+            "bytes_per_entity": 430.0,
+            "bytes_per_record": 358.3
+          }
+        },
+        "zig_over_rust": 0.71,
+        "phase_zig_over_rust": {
+          "load": 1.94,
+          "index": 1.56,
+          "query": 0.89,
+          "result": 1.86
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S5-len8-uniform-S-36558262587",
+    "scenario": "W4.S5",
+    "variant": "len8-uniform",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S5-len8-uniform-S-20260929.json",
+      "digest": "44fdef9f888f502290e93db82e2c9333a9701b0841ff0ff7a5d4e063b58e4669",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 371.6,
+          "rss_mb": 68,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 51.8,
+            "index": 13.5,
+            "query": 282.4,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 7.2,
+            "parse": 44.6,
+            "entities": 8.3,
+            "adjacency": 5.0,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 1016,
+            "p95_ns": 2760,
+            "p99_ns": 3296,
+            "intern_ms": 282.4,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 53.9,
+            "peak_live_mb": 63.8,
+            "retained_mb": null,
+            "allocations": 338811,
+            "bytes_per_entity": 269.4,
+            "bytes_per_record": 224.5
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 146.7,
+          "rss_mb": 100,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 96.8,
+            "index": 21.0,
+            "query": 21.0,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 7.3,
+            "parse": 89.6,
+            "entities": 13.9,
+            "adjacency": 6.8,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 80,
+            "p95_ns": 168,
+            "p99_ns": 240,
+            "intern_ms": 21.0,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 65.1,
+            "peak_live_mb": 85.4,
+            "retained_mb": 218.0,
+            "allocations": 138205,
+            "bytes_per_entity": 325.7,
+            "bytes_per_record": 271.4
+          }
+        },
+        "zig_over_rust": 0.39,
+        "phase_zig_over_rust": {
+          "load": 1.87,
+          "index": 1.56,
+          "query": 0.07,
+          "result": 3.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass1-20260929/W4.S6-default-S-36556641803",
+    "scenario": "W4.S6",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S6-default-S-20260929.json",
+      "digest": "769c4b188263e042b3b601ddc8e4c7f27cf21918def58abcd0bcffbd8958707e",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1102.6,
+          "rss_mb": 69,
+          "results_bytes_digest": "sha256:7745e91486a4",
+          "phases_ms": {
+            "load": 53.5,
+            "index": 13.8,
+            "query": 9.5,
+            "result": 0.7
+          },
+          "sub_ms": {
+            "read": 8.3,
+            "parse": 45.1,
+            "entities": 8.5,
+            "adjacency": 5.1,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.5
+          },
+          "w4": {
+            "lookups": 1000000,
+            "p50_ns": 48,
+            "p95_ns": 64,
+            "p99_ns": 464,
+            "intern_ms": 9.5,
+            "unique_strings": 17865
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 64.7,
+            "retained_mb": null,
+            "allocations": 262942,
+            "bytes_per_entity": 301.7,
+            "bytes_per_record": 251.4
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 522.8,
+          "rss_mb": 88,
+          "results_bytes_digest": "sha256:7745e91486a4",
+          "phases_ms": {
+            "load": 102.6,
+            "index": 21.5,
+            "query": 9.9,
+            "result": 1.3
+          },
+          "sub_ms": {
+            "read": 8.3,
+            "parse": 94.3,
+            "entities": 14.1,
+            "adjacency": 7.1,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.8,
+            "encode": 0.5
+          },
+          "w4": {
+            "lookups": 1000000,
+            "p50_ns": 48,
+            "p95_ns": 64,
+            "p99_ns": 232,
+            "intern_ms": 9.8,
+            "unique_strings": 17865
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 74.5,
+            "retained_mb": 113.0,
+            "allocations": 57607,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 0.47,
+        "phase_zig_over_rust": {
+          "load": 1.92,
+          "index": 1.56,
+          "query": 1.04,
+          "result": 1.86
+        }
+      }
+    ]
+  }
+]

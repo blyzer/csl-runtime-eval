@@ -1,0 +1,6 @@
+{"reference": "W2-outgoing.json", "state": "PASS", "bytes": 14983}
+{"reference": "W2-incoming.json", "state": "PASS", "bytes": 20834}
+{"reference": "W2-depth-2.json", "state": "PASS", "bytes": 42247}
+{"reference": "W2-depth-4.json", "state": "PASS", "bytes": 287021}
+{"reference": "W2-depth-8.json", "state": "PASS", "bytes": 10960342}
+{"reference": "W2-mixed-relations.json", "state": "PASS", "bytes": 30489}

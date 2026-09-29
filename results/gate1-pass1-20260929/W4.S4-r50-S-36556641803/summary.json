@@ -1,0 +1,114 @@
+{
+  "state": "PASS",
+  "classification": "controlled",
+  "records": 20,
+  "condition_failure_samples": 0,
+  "groups": [
+    {
+      "workload": "W4",
+      "query": "resolve-primary",
+      "candidate": "rust",
+      "samples": 10,
+      "w4": {
+        "lookups": 10000,
+        "lookup_p50_ns": 64,
+        "lookup_p95_ns": 328,
+        "lookup_p99_ns": 520,
+        "median_intern_ns": 21893970.0,
+        "unique_strings": 100000
+      },
+      "median_phases_ns": {
+        "load": 54311653.0,
+        "index": 14596382.5,
+        "query": 21899294.0,
+        "result": 78062.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 54311653.0,
+        "construct": 0.0,
+        "materialize": 67830.0,
+        "encode": 10052.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 9112890.5,
+        "parse": 45307558.0,
+        "entities": 8889323.5,
+        "adjacency": 5483703.5,
+        "sort": 205778.5
+      },
+      "median_elapsed_ns": 112869942.0,
+      "median_peak_rss_bytes": 70991872.0
+    },
+    {
+      "workload": "W4",
+      "query": "resolve-primary",
+      "candidate": "zig",
+      "samples": 10,
+      "w4": {
+        "lookups": 10000,
+        "lookup_p50_ns": 64,
+        "lookup_p95_ns": 288,
+        "lookup_p99_ns": 400,
+        "median_intern_ns": 27394774.5,
+        "unique_strings": 100000
+      },
+      "median_phases_ns": {
+        "load": 103279219.5,
+        "index": 21734149.0,
+        "query": 27397750.5,
+        "result": 276633.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 103279219.5,
+        "construct": 0.0,
+        "materialize": 266041.0,
+        "encode": 10600.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 9233151.0,
+        "parse": 94100042.5,
+        "entities": 14039865.0,
+        "adjacency": 7276070.5,
+        "sort": 413053.0
+      },
+      "median_elapsed_ns": 160885796.0,
+      "median_peak_rss_bytes": 103067648.0
+    }
+  ],
+  "memory": [
+    {
+      "candidate": "rust",
+      "workload": "W4",
+      "query": "resolve-primary",
+      "host_rss_peak_bytes": 71004160,
+      "heap": {
+        "allocations": 338509,
+        "total_requested": 87158684,
+        "peak_live": 70195241,
+        "live_after_load": 43708717,
+        "live_after_index": 60280197,
+        "live_after_query": 68873293,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 301.4,
+      "live_after_index_bytes_per_record": 251.17
+    },
+    {
+      "candidate": "zig",
+      "workload": "W4",
+      "query": "resolve-primary",
+      "host_rss_peak_bytes": 103067648,
+      "heap": {
+        "allocations": 138205,
+        "total_requested": 121111602,
+        "peak_live": 88618617,
+        "live_after_load": 49800937,
+        "live_after_index": 68336257,
+        "live_after_query": 88618089,
+        "retained": 229715438
+      },
+      "live_after_index_bytes_per_entity": 341.68,
+      "live_after_index_bytes_per_record": 284.73
+    }
+  ]
+}

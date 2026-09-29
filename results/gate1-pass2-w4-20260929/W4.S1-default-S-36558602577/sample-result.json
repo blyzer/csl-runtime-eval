@@ -1,0 +1,76 @@
+{
+  "profile_schema": "csl.eval.profile/v0.1",
+  "representation": "typed-hash-v1",
+  "phases_ns": {
+    "load": 102407722,
+    "index": 20953621,
+    "query": 37640840,
+    "result": 220207
+  },
+  "phase_detail_ns": {
+    "decode": 102407722,
+    "construct": 0,
+    "materialize": 213566,
+    "encode": 6641
+  },
+  "phase_subdetail_ns": {
+    "read": 8432539,
+    "parse": 93975183,
+    "entities": 13632036,
+    "adjacency": 6944870,
+    "sort": 376715
+  },
+  "name_index": {
+    "intern_ns": 37638776,
+    "unique_strings": 200000,
+    "lookups": 1,
+    "lookup_ns": [
+      328
+    ],
+    "lookup_digest": "sha256:897892a0f01b57c9a582141f403e793bd32f6d8def085a5db17220735860bcae",
+    "lookup_ids_total": 1
+  },
+  "heap": {
+    "model": "requested-bytes",
+    "allocations": 238206,
+    "total_requested": 148843566,
+    "total_freed": 39964164,
+    "live": 108879402,
+    "peak_live": 108879447,
+    "live_after_load": 49800937,
+    "live_after_index": 68336257,
+    "live_after_query": 108878933,
+    "retained": 229513740
+  },
+  "elapsed_ns": 168902506,
+  "rss_peak_bytes": 130723840,
+  "result_digest": "sha256:11d727f6f50cfe0a891e04b8c4b6b57ee9c5abf8c1a945d445cac098abbcfc4a",
+  "conformance": true,
+  "conditions_before": {
+    "utc": "2026-09-29T10:57:59.535180+00:00",
+    "load_average": [
+      1.013671875,
+      0.3984375,
+      0.14013671875
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 15063752704,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "conditions_after": {
+    "utc": "2026-09-29T10:57:59.704384+00:00",
+    "load_average": [
+      1.013671875,
+      0.3984375,
+      0.14013671875
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 15063752704,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "condition_failures": []
+}

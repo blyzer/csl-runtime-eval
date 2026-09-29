@@ -1,0 +1,113 @@
+[
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 184467440737095
+      }
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 184467440737095
+      },
+      "direction": "IN"
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 184467440737095
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 184467440737095
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 184467440737095
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 184467440737095
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 4
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 184467440737095
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    }
+  }
+]

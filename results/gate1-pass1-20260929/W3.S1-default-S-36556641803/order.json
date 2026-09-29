@@ -1,0 +1,3062 @@
+[
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "verified-epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED",
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-exact",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "EXACT"
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "sel-100",
+      "op": "FILTER"
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-1",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 1
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "min-verified",
+      "op": "FILTER",
+      "evidence": {
+        "min_quality": "VERIFIED"
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-3",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 3
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-2",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 2
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "zig",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "hybrid",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 9
+  }
+]

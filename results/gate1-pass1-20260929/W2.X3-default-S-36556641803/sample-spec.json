@@ -1,0 +1,26 @@
+{
+  "job": {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 0
+  },
+  "binary": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/zig/zig-out/bin/csl-eval-zig",
+  "fixture": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W2.X3-default-S-20260929.json",
+  "reference": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/scenarios/W2.X3-default-S-36556641803/references/W2-depth-4.json",
+  "result_digest": "sha256:bfadb727c44ff23565d2d1600b4d80baf76f7aa4692b5c86de487217de036eb0",
+  "expected_lookup": null,
+  "max_load": 0.75,
+  "min_memory": 3221225472,
+  "stats": true
+}

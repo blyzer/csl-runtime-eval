@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/runner/work/csl-runtime-eval/csl-runtime-eval/harness/campaign.py", line 590, in <module>
+    main()
+  File "/home/runner/work/csl-runtime-eval/csl-runtime-eval/harness/campaign.py", line 572, in main
+    sample_worker(args.spec, args.output)
+  File "/home/runner/work/csl-runtime-eval/csl-runtime-eval/harness/campaign.py", line 285, in sample_worker
+    process = subprocess.Popen(command, stdout=out, stderr=err)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/arm64/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/opt/hostedtoolcache/Python/3.12.14/arm64/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+OSError: [Errno 7] Argument list too long: '/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust/target/release/csl-eval-rust'

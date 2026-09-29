@@ -1,0 +1,152 @@
+[
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "out-cap-1",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "OUT",
+      "max_depth": 4,
+      "max_paths": 1
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "out-cap-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "OUT",
+      "max_depth": 4,
+      "max_paths": 2
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "out-cap-below",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "OUT",
+      "max_depth": 4,
+      "max_paths": 7396
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "out-cap-exact",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "OUT",
+      "max_depth": 4,
+      "max_paths": 7397
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "out-cap-above",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "OUT",
+      "max_depth": 4,
+      "max_paths": 7398
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "in-cap-1",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN",
+      "max_depth": 4,
+      "max_paths": 1
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "in-cap-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN",
+      "max_depth": 4,
+      "max_paths": 2
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "in-cap-below",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN",
+      "max_depth": 4,
+      "max_paths": 13785
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "in-cap-exact",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN",
+      "max_depth": 4,
+      "max_paths": 13786
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "in-cap-above",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN",
+      "max_depth": 4,
+      "max_paths": 13787
+    }
+  }
+]

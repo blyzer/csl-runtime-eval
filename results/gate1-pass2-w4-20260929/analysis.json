@@ -1,0 +1,1358 @@
+[
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S1-default-S-36558602577",
+    "scenario": "W4.S1",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S1-default-S-20260929.json",
+      "digest": "042176ccfbd44510651d88162844c111b55fa88e7d7d12b3431e325c2e9ade70",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 130.0,
+          "rss_mb": 82,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 53.2,
+            "index": 13.5,
+            "query": 34.8,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 8.4,
+            "parse": 44.8,
+            "entities": 8.2,
+            "adjacency": 5.1,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10,
+            "p50_ns": 392,
+            "p95_ns": 728,
+            "p99_ns": 728,
+            "intern_ms": 34.8,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 80.1,
+            "retained_mb": null,
+            "allocations": 438299,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.1
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 167.9,
+          "rss_mb": 131,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 102.0,
+            "index": 20.8,
+            "query": 37.2,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 8.4,
+            "parse": 93.7,
+            "entities": 13.7,
+            "adjacency": 6.7,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10,
+            "p50_ns": 280,
+            "p95_ns": 336,
+            "p99_ns": 336,
+            "intern_ms": 37.2,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 108.9,
+            "retained_mb": 229.5,
+            "allocations": 238206,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.29,
+        "phase_zig_over_rust": {
+          "load": 1.92,
+          "index": 1.54,
+          "query": 1.07,
+          "result": 2.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S2-default-S-36558602577",
+    "scenario": "W4.S2",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S2-default-S-20260929.json",
+      "digest": "042176ccfbd44510651d88162844c111b55fa88e7d7d12b3431e325c2e9ade70",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 152.4,
+          "rss_mb": 82,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 53.7,
+            "index": 14.2,
+            "query": 39.5,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 8.8,
+            "parse": 44.9,
+            "entities": 8.6,
+            "adjacency": 5.4,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 200000,
+            "p50_ns": 80,
+            "p95_ns": 184,
+            "p99_ns": 304,
+            "intern_ms": 39.5,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 80.2,
+            "retained_mb": null,
+            "allocations": 439314,
+            "bytes_per_entity": 301.5,
+            "bytes_per_record": 251.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 177.5,
+          "rss_mb": 131,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 102.8,
+            "index": 21.4,
+            "query": 42.1,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 8.7,
+            "parse": 94.0,
+            "entities": 13.9,
+            "adjacency": 7.1,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 200000,
+            "p50_ns": 72,
+            "p95_ns": 176,
+            "p99_ns": 296,
+            "intern_ms": 42.1,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 108.9,
+            "retained_mb": 230.5,
+            "allocations": 238206,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.16,
+        "phase_zig_over_rust": {
+          "load": 1.91,
+          "index": 1.51,
+          "query": 1.07,
+          "result": 2.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S3-default-S-36558602577",
+    "scenario": "W4.S3",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S3-default-S-20260929.json",
+      "digest": "49657ff12e551467faeaaa292f19801c136bdee859df8a97387e891eae8e7f2d",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 96.4,
+          "rss_mb": 63,
+          "results_bytes_digest": "sha256:75a8f0310b67",
+          "phases_ms": {
+            "load": 53.4,
+            "index": 14.5,
+            "query": 7.7,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 8.8,
+            "parse": 44.6,
+            "entities": 8.6,
+            "adjacency": 5.7,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 200000,
+            "p50_ns": 64,
+            "p95_ns": 96,
+            "p99_ns": 136,
+            "intern_ms": 7.7,
+            "unique_strings": 2000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 62.6,
+            "retained_mb": null,
+            "allocations": 251320,
+            "bytes_per_entity": 301.5,
+            "bytes_per_record": 251.3
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 140.5,
+          "rss_mb": 81,
+          "results_bytes_digest": "sha256:75a8f0310b67",
+          "phases_ms": {
+            "load": 102.8,
+            "index": 21.5,
+            "query": 4.9,
+            "result": 1.0
+          },
+          "sub_ms": {
+            "read": 8.7,
+            "parse": 94.1,
+            "entities": 14.0,
+            "adjacency": 7.1,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 1.0,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 200000,
+            "p50_ns": 48,
+            "p95_ns": 72,
+            "p99_ns": 104,
+            "intern_ms": 4.9,
+            "unique_strings": 2000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 70.7,
+            "retained_mb": 112.3,
+            "allocations": 46205,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.46,
+        "phase_zig_over_rust": {
+          "load": 1.93,
+          "index": 1.48,
+          "query": 0.64,
+          "result": 5.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S4-r1-S-36558602577",
+    "scenario": "W4.S4",
+    "variant": "r1",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S4-r1-S-20260929.json",
+      "digest": "49657ff12e551467faeaaa292f19801c136bdee859df8a97387e891eae8e7f2d",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 89.0,
+          "rss_mb": 63,
+          "results_bytes_digest": "sha256:75a8f0310b67",
+          "phases_ms": {
+            "load": 54.1,
+            "index": 14.3,
+            "query": 7.7,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 9.2,
+            "parse": 44.9,
+            "entities": 8.8,
+            "adjacency": 5.3,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 64,
+            "p95_ns": 152,
+            "p99_ns": 216,
+            "intern_ms": 7.7,
+            "unique_strings": 2000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 62.5,
+            "retained_mb": null,
+            "allocations": 250516,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.2
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 139.3,
+          "rss_mb": 80,
+          "results_bytes_digest": "sha256:75a8f0310b67",
+          "phases_ms": {
+            "load": 104.1,
+            "index": 22.1,
+            "query": 5.0,
+            "result": 1.0
+          },
+          "sub_ms": {
+            "read": 9.3,
+            "parse": 94.6,
+            "entities": 14.3,
+            "adjacency": 7.3,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 1.0,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 48,
+            "p95_ns": 128,
+            "p99_ns": 200,
+            "intern_ms": 5.0,
+            "unique_strings": 2000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 70.7,
+            "retained_mb": 111.8,
+            "allocations": 46205,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.57,
+        "phase_zig_over_rust": {
+          "load": 1.92,
+          "index": 1.55,
+          "query": 0.65,
+          "result": 5.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S4-r10-S-36558602577",
+    "scenario": "W4.S4",
+    "variant": "r10",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S4-r10-S-20260929.json",
+      "digest": "042c777758fc42424273f9c91bc6f29cc1d5b8a446ee7cdb13eef38a1e12ed13",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 96.4,
+          "rss_mb": 64,
+          "results_bytes_digest": "sha256:56023eae0994",
+          "phases_ms": {
+            "load": 53.8,
+            "index": 14.3,
+            "query": 15.2,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 9.0,
+            "parse": 44.8,
+            "entities": 8.8,
+            "adjacency": 5.4,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 64,
+            "p95_ns": 192,
+            "p99_ns": 272,
+            "intern_ms": 15.2,
+            "unique_strings": 20000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 64.2,
+            "retained_mb": null,
+            "allocations": 298512,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.2
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 142.3,
+          "rss_mb": 82,
+          "results_bytes_digest": "sha256:56023eae0994",
+          "phases_ms": {
+            "load": 103.4,
+            "index": 21.7,
+            "query": 10.1,
+            "result": 0.5
+          },
+          "sub_ms": {
+            "read": 9.1,
+            "parse": 94.2,
+            "entities": 14.1,
+            "adjacency": 7.2,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.5,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 56,
+            "p95_ns": 144,
+            "p99_ns": 200,
+            "intern_ms": 10.1,
+            "unique_strings": 20000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 72.8,
+            "retained_mb": 111.8,
+            "allocations": 58205,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.48,
+        "phase_zig_over_rust": {
+          "load": 1.92,
+          "index": 1.52,
+          "query": 0.66,
+          "result": 2.5
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S4-r100-S-36558602577",
+    "scenario": "W4.S4",
+    "variant": "r100",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S4-r100-S-20260929.json",
+      "digest": "042176ccfbd44510651d88162844c111b55fa88e7d7d12b3431e325c2e9ade70",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 156.9,
+          "rss_mb": 82,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 53.6,
+            "index": 14.5,
+            "query": 42.1,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 8.8,
+            "parse": 44.9,
+            "entities": 8.7,
+            "adjacency": 5.6,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 72,
+            "p95_ns": 376,
+            "p99_ns": 504,
+            "intern_ms": 42.1,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 80.1,
+            "retained_mb": null,
+            "allocations": 438510,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.2
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 181.3,
+          "rss_mb": 131,
+          "results_bytes_digest": "sha256:11d727f6f50c",
+          "phases_ms": {
+            "load": 103.1,
+            "index": 21.5,
+            "query": 48.3,
+            "result": 0.2
+          },
+          "sub_ms": {
+            "read": 9.1,
+            "parse": 94.1,
+            "entities": 13.9,
+            "adjacency": 7.2,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 64,
+            "p95_ns": 360,
+            "p99_ns": 448,
+            "intern_ms": 48.3,
+            "unique_strings": 200000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 108.9,
+            "retained_mb": 229.7,
+            "allocations": 238206,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.16,
+        "phase_zig_over_rust": {
+          "load": 1.92,
+          "index": 1.48,
+          "query": 1.15,
+          "result": 2.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S4-r50-S-36558602577",
+    "scenario": "W4.S4",
+    "variant": "r50",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S4-r50-S-20260929.json",
+      "digest": "8d28fb4e4b493d0a0b65467b4229cc403ef717416f642c2e1f9cbbcf7ec2ac71",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 120.2,
+          "rss_mb": 71,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 53.7,
+            "index": 14.8,
+            "query": 27.8,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 8.7,
+            "parse": 44.9,
+            "entities": 9.0,
+            "adjacency": 5.6,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 72,
+            "p95_ns": 368,
+            "p99_ns": 520,
+            "intern_ms": 27.8,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 70.2,
+            "retained_mb": null,
+            "allocations": 338509,
+            "bytes_per_entity": 301.4,
+            "bytes_per_record": 251.2
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 161.3,
+          "rss_mb": 103,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 102.9,
+            "index": 21.9,
+            "query": 28.2,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 8.6,
+            "parse": 94.3,
+            "entities": 14.2,
+            "adjacency": 7.3,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 10000,
+            "p50_ns": 64,
+            "p95_ns": 288,
+            "p99_ns": 408,
+            "intern_ms": 28.2,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 88.6,
+            "retained_mb": 229.7,
+            "allocations": 138205,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 1.34,
+        "phase_zig_over_rust": {
+          "load": 1.92,
+          "index": 1.48,
+          "query": 1.01,
+          "result": 3.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S5-len512-uniform-S-36558602577",
+    "scenario": "W4.S5",
+    "variant": "len512-uniform",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S5-len512-uniform-S-20260929.json",
+      "digest": "5a337135b5d8f838fcd6a3dc04409dbf4f3b2e5953a301c6b41f9152cfc90217",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 230.3,
+          "rss_mb": 268,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 121.6,
+            "index": 12.7,
+            "query": 68.0,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 34.9,
+            "parse": 86.7,
+            "entities": 7.8,
+            "adjacency": 4.7,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 9650,
+            "p50_ns": 232,
+            "p95_ns": 448,
+            "p99_ns": 560,
+            "intern_ms": 68.0,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 255.6,
+            "peak_live_mb": 265.6,
+            "retained_mb": null,
+            "allocations": 338502,
+            "bytes_per_entity": 1277.9,
+            "bytes_per_record": 1064.9
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 345.4,
+          "rss_mb": 218,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 262.9,
+            "index": 20.1,
+            "query": 49.9,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 34.1,
+            "parse": 229.3,
+            "entities": 13.2,
+            "adjacency": 6.5,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 9650,
+            "p50_ns": 160,
+            "p95_ns": 424,
+            "p99_ns": 552,
+            "intern_ms": 49.9,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 176.9,
+            "peak_live_mb": 197.2,
+            "retained_mb": 451.1,
+            "allocations": 138204,
+            "bytes_per_entity": 884.5,
+            "bytes_per_record": 737.1
+          }
+        },
+        "zig_over_rust": 1.5,
+        "phase_zig_over_rust": {
+          "load": 2.16,
+          "index": 1.58,
+          "query": 0.73,
+          "result": 3.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S5-len64-uniform-S-36558602577",
+    "scenario": "W4.S5",
+    "variant": "len64-uniform",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S5-len64-uniform-S-20260929.json",
+      "digest": "892b38b97d4441ec1ee13dedec714b70158a5bcc7b0b205a63ae3d8dd0d62d12",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 120.2,
+          "rss_mb": 89,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 59.9,
+            "index": 13.1,
+            "query": 28.1,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 11.2,
+            "parse": 48.5,
+            "entities": 8.2,
+            "adjacency": 4.8,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 112,
+            "p95_ns": 232,
+            "p99_ns": 312,
+            "intern_ms": 28.1,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 76.3,
+            "peak_live_mb": 86.3,
+            "retained_mb": null,
+            "allocations": 338811,
+            "bytes_per_entity": 381.5,
+            "bytes_per_record": 318.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 173.4,
+          "rss_mb": 113,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 117.4,
+            "index": 20.6,
+            "query": 26.6,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 11.4,
+            "parse": 106.1,
+            "entities": 13.6,
+            "adjacency": 6.6,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 88,
+            "p95_ns": 192,
+            "p99_ns": 256,
+            "intern_ms": 26.6,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 86.0,
+            "peak_live_mb": 106.3,
+            "retained_mb": 149.1,
+            "allocations": 138205,
+            "bytes_per_entity": 430.0,
+            "bytes_per_record": 358.3
+          }
+        },
+        "zig_over_rust": 1.44,
+        "phase_zig_over_rust": {
+          "load": 1.96,
+          "index": 1.57,
+          "query": 0.95,
+          "result": 3.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S5-len64-zipf-S-36558602577",
+    "scenario": "W4.S5",
+    "variant": "len64-zipf",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S5-len64-zipf-S-20260929.json",
+      "digest": "06c47d9990b666b688ac42aeead3aa6cb7730559c10c882321d637cdff48f618",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 361.1,
+          "rss_mb": 85,
+          "results_bytes_digest": "sha256:7745e91486a4",
+          "phases_ms": {
+            "load": 58.7,
+            "index": 12.9,
+            "query": 15.8,
+            "result": 0.7
+          },
+          "sub_ms": {
+            "read": 10.5,
+            "parse": 48.2,
+            "entities": 8.0,
+            "adjacency": 4.7,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.5
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 72,
+            "p95_ns": 544,
+            "p99_ns": 752,
+            "intern_ms": 15.7,
+            "unique_strings": 17865
+          },
+          "heap": {
+            "live_after_index_mb": 76.3,
+            "peak_live_mb": 80.6,
+            "retained_mb": null,
+            "allocations": 261438,
+            "bytes_per_entity": 381.5,
+            "bytes_per_record": 318.0
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 255.9,
+          "rss_mb": 96,
+          "results_bytes_digest": "sha256:7745e91486a4",
+          "phases_ms": {
+            "load": 117.6,
+            "index": 20.7,
+            "query": 11.5,
+            "result": 1.3
+          },
+          "sub_ms": {
+            "read": 10.7,
+            "parse": 106.9,
+            "entities": 13.7,
+            "adjacency": 6.7,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.8,
+            "encode": 0.5
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 56,
+            "p95_ns": 184,
+            "p99_ns": 304,
+            "intern_ms": 11.4,
+            "unique_strings": 17865
+          },
+          "heap": {
+            "live_after_index_mb": 86.0,
+            "peak_live_mb": 92.1,
+            "retained_mb": 149.1,
+            "allocations": 57607,
+            "bytes_per_entity": 430.0,
+            "bytes_per_record": 358.3
+          }
+        },
+        "zig_over_rust": 0.71,
+        "phase_zig_over_rust": {
+          "load": 2.0,
+          "index": 1.6,
+          "query": 0.73,
+          "result": 1.86
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S5-len8-uniform-S-36558602577",
+    "scenario": "W4.S5",
+    "variant": "len8-uniform",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S5-len8-uniform-S-20260929.json",
+      "digest": "44fdef9f888f502290e93db82e2c9333a9701b0841ff0ff7a5d4e063b58e4669",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 102.0,
+          "rss_mb": 68,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 50.9,
+            "index": 13.1,
+            "query": 21.0,
+            "result": 0.1
+          },
+          "sub_ms": {
+            "read": 7.0,
+            "parse": 43.9,
+            "entities": 8.1,
+            "adjacency": 4.8,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.1,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 80,
+            "p95_ns": 192,
+            "p99_ns": 272,
+            "intern_ms": 21.0,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 53.9,
+            "peak_live_mb": 63.8,
+            "retained_mb": null,
+            "allocations": 338811,
+            "bytes_per_entity": 269.4,
+            "bytes_per_record": 224.5
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 143.4,
+          "rss_mb": 100,
+          "results_bytes_digest": "sha256:c225fb23d857",
+          "phases_ms": {
+            "load": 96.6,
+            "index": 20.4,
+            "query": 19.3,
+            "result": 0.3
+          },
+          "sub_ms": {
+            "read": 7.1,
+            "parse": 89.6,
+            "entities": 13.6,
+            "adjacency": 6.5,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.3,
+            "encode": 0.0
+          },
+          "w4": {
+            "lookups": 25000,
+            "p50_ns": 72,
+            "p95_ns": 160,
+            "p99_ns": 224,
+            "intern_ms": 19.3,
+            "unique_strings": 100000
+          },
+          "heap": {
+            "live_after_index_mb": 65.1,
+            "peak_live_mb": 85.4,
+            "retained_mb": 218.0,
+            "allocations": 138205,
+            "bytes_per_entity": 325.7,
+            "bytes_per_record": 271.4
+          }
+        },
+        "zig_over_rust": 1.41,
+        "phase_zig_over_rust": {
+          "load": 1.9,
+          "index": 1.56,
+          "query": 0.92,
+          "result": 3.0
+        }
+      }
+    ]
+  },
+  {
+    "dir": "results/gate1-pass2-w4-20260929/W4.S6-default-S-36558602577",
+    "scenario": "W4.S6",
+    "variant": "default",
+    "state": "PASS",
+    "classification": "controlled",
+    "records": 20,
+    "conformant": 20,
+    "condition_failure_samples": 0,
+    "sdk_workaround": [
+      false
+    ],
+    "candidates_not_run": {
+      "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+    },
+    "corpus": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S6-default-S-20260929.json",
+      "digest": "769c4b188263e042b3b601ddc8e4c7f27cf21918def58abcd0bcffbd8958707e",
+      "entities": 200000,
+      "edges": 20000,
+      "evidence": 20000
+    },
+    "queries": [
+      {
+        "query": "resolve-primary",
+        "rust": {
+          "n": 10,
+          "elapsed_ms": 1101.2,
+          "rss_mb": 69,
+          "results_bytes_digest": "sha256:7745e91486a4",
+          "phases_ms": {
+            "load": 53.2,
+            "index": 14.2,
+            "query": 12.5,
+            "result": 0.7
+          },
+          "sub_ms": {
+            "read": 8.3,
+            "parse": 44.8,
+            "entities": 8.7,
+            "adjacency": 5.3,
+            "sort": 0.2
+          },
+          "detail_ms": {
+            "materialize": 0.2,
+            "encode": 0.5
+          },
+          "w4": {
+            "lookups": 1000000,
+            "p50_ns": 64,
+            "p95_ns": 80,
+            "p99_ns": 544,
+            "intern_ms": 12.4,
+            "unique_strings": 17865
+          },
+          "heap": {
+            "live_after_index_mb": 60.3,
+            "peak_live_mb": 64.7,
+            "retained_mb": null,
+            "allocations": 262942,
+            "bytes_per_entity": 301.7,
+            "bytes_per_record": 251.4
+          }
+        },
+        "zig": {
+          "n": 10,
+          "elapsed_ms": 525.8,
+          "rss_mb": 88,
+          "results_bytes_digest": "sha256:7745e91486a4",
+          "phases_ms": {
+            "load": 102.5,
+            "index": 21.7,
+            "query": 10.0,
+            "result": 1.3
+          },
+          "sub_ms": {
+            "read": 8.3,
+            "parse": 94.0,
+            "entities": 14.2,
+            "adjacency": 7.1,
+            "sort": 0.4
+          },
+          "detail_ms": {
+            "materialize": 0.8,
+            "encode": 0.5
+          },
+          "w4": {
+            "lookups": 1000000,
+            "p50_ns": 48,
+            "p95_ns": 64,
+            "p99_ns": 272,
+            "intern_ms": 9.9,
+            "unique_strings": 17865
+          },
+          "heap": {
+            "live_after_index_mb": 68.3,
+            "peak_live_mb": 74.5,
+            "retained_mb": 113.0,
+            "allocations": 57607,
+            "bytes_per_entity": 341.7,
+            "bytes_per_record": 284.7
+          }
+        },
+        "zig_over_rust": 0.48,
+        "phase_zig_over_rust": {
+          "load": 1.93,
+          "index": 1.53,
+          "query": 0.8,
+          "result": 1.86
+        }
+      }
+    ]
+  }
+]

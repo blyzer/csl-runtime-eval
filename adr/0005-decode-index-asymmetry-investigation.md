@@ -282,3 +282,14 @@ treating any candidate's win/loss as evidence for Gate #1, identify what
 library/allocator/representation defaults differ between the two
 implementations and check whether the difference is attributable to one of
 those defaults before concluding it reflects the language or runtime itself.
+
+## Addendum (2026-09-29): limits of the hasher result
+
+The FxHash-style hasher isolated here was validated on `u64` ID keys only. Gate #1 W4 later
+showed it is pathological on short structured string keys: 8-character hex names made Rust's
+name-index build ~12x slower and lookups ~14x slower than Zig's (reproduced twice; std SipHash
+removes the effect), so the "hasher explains most of the index gap" conclusion must not be
+generalized across key types. A same-corpus rerun of the S baseline also showed the residual
+index difference between Rust and Zig is not stable across hosted instances. See STATUS.md
+"Gate #1 Track A".
+

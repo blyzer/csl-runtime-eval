@@ -1,0 +1,54 @@
+{
+  "profile_schema": "csl.eval.profile/v0.1",
+  "representation": "typed-hash-v1",
+  "phases_ns": {
+    "index": 355136641,
+    "load": 464532324,
+    "query": 122105,
+    "result": 16993376
+  },
+  "phase_detail_ns": {
+    "construct": 0,
+    "decode": 464532324,
+    "encode": 5159041,
+    "materialize": 11834335
+  },
+  "phase_subdetail_ns": {
+    "adjacency": 287346346,
+    "entities": 3980144,
+    "parse": 399252484,
+    "read": 65279840,
+    "sort": 63810151
+  },
+  "elapsed_ns": 897248298,
+  "rss_peak_bytes": 379396096,
+  "result_digest": "sha256:700cde7050b195069de5940c58b80465e8663db9643c2835549a7f98b2cadee5",
+  "conformance": true,
+  "conditions_before": {
+    "utc": "2026-09-29T11:04:38.877839+00:00",
+    "load_average": [
+      1.0,
+      0.91943359375,
+      0.546875
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 14190497792,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "conditions_after": {
+    "utc": "2026-09-29T11:04:39.775410+00:00",
+    "load_average": [
+      1.0,
+      0.91943359375,
+      0.546875
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 14165069824,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "condition_failures": []
+}

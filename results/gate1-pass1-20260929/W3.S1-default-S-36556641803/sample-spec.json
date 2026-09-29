@@ -1,0 +1,23 @@
+{
+  "job": {
+    "candidate": "rust",
+    "workload": "W3",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "epoch-4",
+      "op": "FILTER",
+      "evidence": {
+        "freshness_epoch": 4
+      }
+    },
+    "iteration": 0
+  },
+  "binary": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust/target/release/csl-eval-rust",
+  "fixture": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W3.S1-default-S-20260929.json",
+  "reference": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/scenarios/W3.S1-default-S-36556641803/references/W3-epoch-4.json",
+  "result_digest": "sha256:ff1070f87c697b69ab22d6ff770cb6f9d1f89b336803184f714bcb5f22a629f8",
+  "expected_lookup": null,
+  "max_load": 0.75,
+  "min_memory": 3221225472,
+  "stats": true
+}

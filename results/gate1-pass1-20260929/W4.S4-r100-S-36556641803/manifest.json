@@ -1,0 +1,127 @@
+{
+  "schema": "csl.eval.campaign/v0.1",
+  "state": "PASS",
+  "started_utc": "2026-09-29T10:39:03.219656+00:00",
+  "environment": {
+    "tools": {
+      "python3": {
+        "state": "PASS",
+        "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.12.14"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/home/runner/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/home/runner/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/usr/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "Linux-6.17.0-1022-azure-aarch64-with-glibc2.39",
+    "architecture": "aarch64",
+    "uname": [
+      "Linux",
+      "runnervmoyp6c",
+      "6.17.0-1022-azure",
+      "#22-Ubuntu SMP Mon Jul 27 17:12:01 UTC 2026",
+      "aarch64",
+      "aarch64"
+    ],
+    "hardware": "aarch64",
+    "cpu_count": 4,
+    "runtime_python": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/python",
+    "sdk_workaround": false
+  },
+  "preflight_machine": {
+    "utc": "2026-09-29T10:39:01.614425+00:00",
+    "load_average": [
+      1.07568359375,
+      0.5380859375,
+      0.21240234375
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 15253983232,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "native_probe": {
+    "state": "PASS",
+    "command": [
+      "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/zig",
+      "build-exe",
+      "/tmp/csl-native-probe-dbattt1c/probe.zig",
+      "-lc",
+      "-femit-bin=/tmp/csl-native-probe-dbattt1c/probe"
+    ],
+    "build_exit": 0,
+    "diagnostic": "",
+    "run_exit": 0,
+    "sdk": null
+  },
+  "preflight_failures": [],
+  "classification": "controlled",
+  "preset": "S",
+  "shape": "mixed",
+  "repeat": 10,
+  "scenario": "W4.S4",
+  "variant": "r100",
+  "seed": 20260929,
+  "source_digest": "b260af7aaf1237bf6adabb47d74ae4d3894cd2dc0801107846b3fd4978781352",
+  "policy": {
+    "max_one_minute_load_per_cpu": 0.75,
+    "minimum_available_memory_gib": 3,
+    "swapping": "reject controlled samples with increased swapout counter",
+    "cache": "one validated unmeasured warm-up per candidate/query; OS caches not flushed",
+    "order": "seeded query order; candidate group rotated by one position per repeat",
+    "isolation": "serial native processes; oracle preparation and result verification outside native timing"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust/target/release/csl-eval-rust",
+      "digest": "5cbcb1e8c02803038ce2a0c7cbe3201bf00d2273ca52af2ca691db162b46d51e",
+      "bytes": 917520
+    },
+    "zig": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/zig/zig-out/bin/csl-eval-zig",
+      "digest": "1b21b32b98cc47aecda56a88d1ce78f18d2c9dc9ce67a565a4b75c05a203fa91",
+      "bytes": 2155480
+    }
+  },
+  "corpus": {
+    "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/W4.S4-r100-S-20260929.json",
+    "digest": "042176ccfbd44510651d88162844c111b55fa88e7d7d12b3431e325c2e9ade70",
+    "entities": 200000,
+    "edges": 20000,
+    "evidence": 20000
+  },
+  "scenario_spec": {
+    "shape": "mixed",
+    "dup_factor": 1,
+    "sparse_ids": false,
+    "evidence": "default",
+    "names": {
+      "unique_ratio": 1.0,
+      "length": 24,
+      "zipf": null
+    }
+  },
+  "candidates_not_run": {
+    "hybrid": "W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)"
+  },
+  "finished_utc": "2026-09-29T10:39:19.763104+00:00",
+  "records": 20
+}

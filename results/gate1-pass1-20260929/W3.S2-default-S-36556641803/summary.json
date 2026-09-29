@@ -1,0 +1,586 @@
+{
+  "state": "PASS",
+  "classification": "controlled",
+  "records": 180,
+  "condition_failure_samples": 0,
+  "groups": [
+    {
+      "workload": "W3",
+      "query": "epoch-1",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1887910397.0,
+      "median_peak_rss_bytes": 835514368.0
+    },
+    {
+      "workload": "W3",
+      "query": "epoch-1",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 488269332.5,
+        "index": 321999657.5,
+        "query": 4505590.0,
+        "result": 325916287.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 488269332.5,
+        "construct": 0.0,
+        "materialize": 72048154.0,
+        "encode": 253405927.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 75148851.5,
+        "parse": 412811308.0,
+        "entities": 3956689.5,
+        "adjacency": 254854245.0,
+        "sort": 63260830.5
+      },
+      "median_elapsed_ns": 1238665608.5,
+      "median_peak_rss_bytes": 487008256.0
+    },
+    {
+      "workload": "W3",
+      "query": "epoch-1",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1024532653.5,
+        "index": 370747667.0,
+        "query": 12994281.0,
+        "result": 303341497.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 1024532653.5,
+        "construct": 0.0,
+        "materialize": 82600822.5,
+        "encode": 220688984.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 75421012.5,
+        "parse": 948398978.5,
+        "entities": 6449176.5,
+        "adjacency": 281649628.0,
+        "sort": 82673375.0
+      },
+      "median_elapsed_ns": 1766819172.5,
+      "median_peak_rss_bytes": 663531520.0
+    },
+    {
+      "workload": "W3",
+      "query": "hub-depth-4",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1613612687.5,
+      "median_peak_rss_bytes": 728858624.0
+    },
+    {
+      "workload": "W3",
+      "query": "hub-depth-4",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 487435162.5,
+        "index": 323038885.5,
+        "query": 777005.5,
+        "result": 135583910.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 487435162.5,
+        "construct": 0.0,
+        "materialize": 37623904.0,
+        "encode": 97922691.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 74479776.5,
+        "parse": 412983012.0,
+        "entities": 3918528.5,
+        "adjacency": 256019480.0,
+        "sort": 63009073.5
+      },
+      "median_elapsed_ns": 1018042715.0,
+      "median_peak_rss_bytes": 422178816.0
+    },
+    {
+      "workload": "W3",
+      "query": "hub-depth-4",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1021599133.5,
+        "index": 369266407.5,
+        "query": 1108363.0,
+        "result": 127774488.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 1021599133.5,
+        "construct": 0.0,
+        "materialize": 43116065.5,
+        "encode": 84720744.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 74910891.0,
+        "parse": 947047584.5,
+        "entities": 6562066.0,
+        "adjacency": 280080015.0,
+        "sort": 82851755.0
+      },
+      "median_elapsed_ns": 1555094196.5,
+      "median_peak_rss_bytes": 556838912.0
+    },
+    {
+      "workload": "W3",
+      "query": "hub-outgoing",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1478721747.5,
+      "median_peak_rss_bytes": 663971840.0
+    },
+    {
+      "workload": "W3",
+      "query": "hub-outgoing",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 489288363.0,
+        "index": 323949714.0,
+        "query": 6555.0,
+        "result": 3943783.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 489288363.0,
+        "construct": 0.0,
+        "materialize": 3812451.0,
+        "encode": 131523.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 75756106.5,
+        "parse": 413314338.0,
+        "entities": 3997275.0,
+        "adjacency": 256854491.5,
+        "sort": 63185650.5
+      },
+      "median_elapsed_ns": 875809193.0,
+      "median_peak_rss_bytes": 378714112.0
+    },
+    {
+      "workload": "W3",
+      "query": "hub-outgoing",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1023781982.0,
+        "index": 371104713.5,
+        "query": 3196.0,
+        "result": 19667601.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 1023781982.0,
+        "construct": 0.0,
+        "materialize": 19576511.5,
+        "encode": 89842.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 75675795.5,
+        "parse": 948755116.5,
+        "entities": 6447055.0,
+        "adjacency": 281549828.5,
+        "sort": 83026799.0
+      },
+      "median_elapsed_ns": 1443688674.5,
+      "median_peak_rss_bytes": 491958272.0
+    },
+    {
+      "workload": "W3",
+      "query": "min-exact",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 2090234782.5,
+      "median_peak_rss_bytes": 916543488.0
+    },
+    {
+      "workload": "W3",
+      "query": "min-exact",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 488514685.5,
+        "index": 332754714.5,
+        "query": 4532880.0,
+        "result": 459381025.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 488514685.5,
+        "construct": 0.0,
+        "materialize": 84983249.0,
+        "encode": 374736676.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 75636457.5,
+        "parse": 413091507.0,
+        "entities": 3933042.0,
+        "adjacency": 266042473.0,
+        "sort": 63387898.0
+      },
+      "median_elapsed_ns": 1402165509.0,
+      "median_peak_rss_bytes": 536512512.0
+    },
+    {
+      "workload": "W3",
+      "query": "min-exact",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1024281622.5,
+        "index": 384748244.5,
+        "query": 12973988.0,
+        "result": 445575358.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 1024281622.5,
+        "construct": 0.0,
+        "materialize": 119601294.5,
+        "encode": 325827325.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 76313970.0,
+        "parse": 947908913.5,
+        "entities": 6431600.5,
+        "adjacency": 294874818.0,
+        "sort": 83747586.0
+      },
+      "median_elapsed_ns": 1937193022.5,
+      "median_peak_rss_bytes": 744534016.0
+    },
+    {
+      "workload": "W3",
+      "query": "min-verified",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1729253389.5,
+      "median_peak_rss_bytes": 770537472.0
+    },
+    {
+      "workload": "W3",
+      "query": "min-verified",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 487075172.0,
+        "index": 336894900.0,
+        "query": 4514854.5,
+        "result": 186453211.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 487075172.0,
+        "construct": 0.0,
+        "materialize": 35645605.0,
+        "encode": 150488465.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 74125773.5,
+        "parse": 412507861.5,
+        "entities": 3883232.5,
+        "adjacency": 269729595.5,
+        "sort": 63336821.0
+      },
+      "median_elapsed_ns": 1093895015.0,
+      "median_peak_rss_bytes": 447172608.0
+    },
+    {
+      "workload": "W3",
+      "query": "min-verified",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1020455926.5,
+        "index": 380580356.5,
+        "query": 12835475.5,
+        "result": 187462870.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 1020455926.5,
+        "construct": 0.0,
+        "materialize": 55742903.0,
+        "encode": 131901476.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 74642617.5,
+        "parse": 946259475.0,
+        "entities": 6481085.0,
+        "adjacency": 290994457.0,
+        "sort": 82962149.5
+      },
+      "median_elapsed_ns": 1642681829.0,
+      "median_peak_rss_bytes": 598519808.0
+    },
+    {
+      "workload": "W3",
+      "query": "sel-100",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 2776132470.5,
+      "median_peak_rss_bytes": 1235279872.0
+    },
+    {
+      "workload": "W3",
+      "query": "sel-100",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 488995700.5,
+        "index": 372770606.0,
+        "query": 4251768.5,
+        "result": 920622313.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 488995700.5,
+        "construct": 0.0,
+        "materialize": 169460482.0,
+        "encode": 750822644.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 76468930.5,
+        "parse": 412346199.5,
+        "entities": 3961743.5,
+        "adjacency": 304365568.0,
+        "sort": 64416284.5
+      },
+      "median_elapsed_ns": 1958977280.5,
+      "median_peak_rss_bytes": 686561280.0
+    },
+    {
+      "workload": "W3",
+      "query": "sel-100",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1023581753.5,
+        "index": 401943451.5,
+        "query": 12914253.5,
+        "result": 896900245.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 1023581753.5,
+        "construct": 0.0,
+        "materialize": 245205972.0,
+        "encode": 652451893.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 75622281.0,
+        "parse": 946698833.5,
+        "entities": 6446540.0,
+        "adjacency": 311670439.0,
+        "sort": 83674799.0
+      },
+      "median_elapsed_ns": 2450625806.0,
+      "median_peak_rss_bytes": 990418944.0
+    }
+  ],
+  "memory": [
+    {
+      "candidate": "zig",
+      "workload": "W3",
+      "query": "sel-100",
+      "host_rss_peak_bytes": 990408704,
+      "heap": {
+        "allocations": 428418,
+        "total_requested": 1100062939,
+        "peak_live": 923692951,
+        "live_after_load": 477028868,
+        "live_after_index": 561623308,
+        "live_after_query": 564782748,
+        "retained": 1039524010
+      },
+      "live_after_index_bytes_per_entity": 5616.23,
+      "live_after_index_bytes_per_record": 267.44
+    },
+    {
+      "candidate": "rust",
+      "workload": "W3",
+      "query": "sel-100",
+      "host_rss_peak_bytes": 686608384,
+      "heap": {
+        "allocations": 633253,
+        "total_requested": 965130280,
+        "peak_live": 678330904,
+        "live_after_load": 287593812,
+        "live_after_index": 367151020,
+        "live_after_query": 368331993,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3671.51,
+      "live_after_index_bytes_per_record": 174.83
+    },
+    {
+      "candidate": "zig",
+      "workload": "W3",
+      "query": "min-verified",
+      "host_rss_peak_bytes": 598519808,
+      "heap": {
+        "allocations": 428418,
+        "total_requested": 800505313,
+        "peak_live": 637351912,
+        "live_after_load": 477028868,
+        "live_after_index": 561623308,
+        "live_after_query": 564782748,
+        "retained": 1039524229
+      },
+      "live_after_index_bytes_per_entity": 5616.23,
+      "live_after_index_bytes_per_record": 267.44
+    },
+    {
+      "candidate": "rust",
+      "workload": "W3",
+      "query": "min-verified",
+      "host_rss_peak_bytes": 447090688,
+      "heap": {
+        "allocations": 633249,
+        "total_requested": 463911662,
+        "peak_live": 411993310,
+        "live_after_load": 287593858,
+        "live_after_index": 367151066,
+        "live_after_query": 368332703,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3671.51,
+      "live_after_index_bytes_per_record": 174.83
+    },
+    {
+      "candidate": "rust",
+      "workload": "W3",
+      "query": "hub-depth-4",
+      "host_rss_peak_bytes": 422182912,
+      "heap": {
+        "allocations": 633275,
+        "total_requested": 454013566,
+        "peak_live": 406008122,
+        "live_after_load": 287593940,
+        "live_after_index": 367151148,
+        "live_after_query": 367227539,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3671.51,
+      "live_after_index_bytes_per_record": 174.83
+    },
+    {
+      "candidate": "zig",
+      "workload": "W3",
+      "query": "hub-depth-4",
+      "host_rss_peak_bytes": 556969984,
+      "heap": {
+        "allocations": 428425,
+        "total_requested": 770669007,
+        "peak_live": 609057555,
+        "live_after_load": 477028868,
+        "live_after_index": 561623308,
+        "live_after_query": 562084620,
+        "retained": 1039524618
+      },
+      "live_after_index_bytes_per_entity": 5616.23,
+      "live_after_index_bytes_per_record": 267.44
+    },
+    {
+      "candidate": "zig",
+      "workload": "W3",
+      "query": "min-exact",
+      "host_rss_peak_bytes": 744525824,
+      "heap": {
+        "allocations": 428418,
+        "total_requested": 975631315,
+        "peak_live": 779404920,
+        "live_after_load": 477028868,
+        "live_after_index": 561623308,
+        "live_after_query": 564782748,
+        "retained": 1039524200
+      },
+      "live_after_index_bytes_per_entity": 5616.23,
+      "live_after_index_bytes_per_record": 267.44
+    },
+    {
+      "candidate": "rust",
+      "workload": "W3",
+      "query": "min-exact",
+      "host_rss_peak_bytes": 536494080,
+      "heap": {
+        "allocations": 633254,
+        "total_requested": 675724002,
+        "peak_live": 523142354,
+        "live_after_load": 287593852,
+        "live_after_index": 367151060,
+        "live_after_query": 368332691,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3671.51,
+      "live_after_index_bytes_per_record": 174.83
+    },
+    {
+      "candidate": "rust",
+      "workload": "W3",
+      "query": "hub-outgoing",
+      "host_rss_peak_bytes": 378699776,
+      "heap": {
+        "allocations": 633210,
+        "total_requested": 381249623,
+        "peak_live": 367191763,
+        "live_after_load": 287593903,
+        "live_after_index": 367151111,
+        "live_after_query": 367153828,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3671.51,
+      "live_after_index_bytes_per_record": 174.83
+    },
+    {
+      "candidate": "zig",
+      "workload": "W3",
+      "query": "hub-outgoing",
+      "host_rss_peak_bytes": 491958272,
+      "heap": {
+        "allocations": 428393,
+        "total_requested": 720499597,
+        "peak_live": 561670141,
+        "live_after_load": 477028868,
+        "live_after_index": 561623308,
+        "live_after_query": 561624068,
+        "retained": 1039524444
+      },
+      "live_after_index_bytes_per_entity": 5616.23,
+      "live_after_index_bytes_per_record": 267.44
+    },
+    {
+      "candidate": "rust",
+      "workload": "W3",
+      "query": "epoch-1",
+      "host_rss_peak_bytes": 486948864,
+      "heap": {
+        "allocations": 633251,
+        "total_requested": 541506267,
+        "peak_live": 456033483,
+        "live_after_load": 287593848,
+        "live_after_index": 367151056,
+        "live_after_query": 368332684,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3671.51,
+      "live_after_index_bytes_per_record": 174.83
+    },
+    {
+      "candidate": "zig",
+      "workload": "W3",
+      "query": "epoch-1",
+      "host_rss_peak_bytes": 663531520,
+      "heap": {
+        "allocations": 428418,
+        "total_requested": 892676899,
+        "peak_live": 708512412,
+        "live_after_load": 477028868,
+        "live_after_index": 561623308,
+        "live_after_query": 564782748,
+        "retained": 1039524181
+      },
+      "live_after_index_bytes_per_entity": 5616.23,
+      "live_after_index_bytes_per_record": 267.44
+    }
+  ]
+}

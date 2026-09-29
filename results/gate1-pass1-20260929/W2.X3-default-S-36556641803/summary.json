@@ -1,0 +1,586 @@
+{
+  "state": "PASS",
+  "classification": "controlled",
+  "records": 180,
+  "condition_failure_samples": 0,
+  "groups": [
+    {
+      "workload": "W2",
+      "query": "depth-2",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1347175686.5,
+      "median_peak_rss_bytes": 657025024.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-2",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 472970169.5,
+        "index": 251182170.5,
+        "query": 15907.0,
+        "result": 3632462.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 472970169.5,
+        "construct": 0.0,
+        "materialize": 3408196.5,
+        "encode": 221980.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 76449568.0,
+        "parse": 396531446.5,
+        "entities": 4016541.5,
+        "adjacency": 193081431.0,
+        "sort": 54155984.5
+      },
+      "median_elapsed_ns": 789622603.0,
+      "median_peak_rss_bytes": 362418176.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-2",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1008802876.5,
+        "index": 257290290.5,
+        "query": 7132.0,
+        "result": 12493833.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 1008802876.5,
+        "construct": 0.0,
+        "materialize": 12302144.0,
+        "encode": 191505.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 76570239.0,
+        "parse": 932046107.0,
+        "entities": 6582705.0,
+        "adjacency": 176058083.5,
+        "sort": 74512109.5
+      },
+      "median_elapsed_ns": 1301941234.5,
+      "median_peak_rss_bytes": 487108608.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-4",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1363636505.0,
+      "median_peak_rss_bytes": 657817600.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-4",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 474425870.5,
+        "index": 245750625.5,
+        "query": 44902.0,
+        "result": 7582558.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 474425870.5,
+        "construct": 0.0,
+        "materialize": 6230846.0,
+        "encode": 1341757.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 77015090.5,
+        "parse": 397135515.0,
+        "entities": 4129662.5,
+        "adjacency": 187910986.0,
+        "sort": 53754033.0
+      },
+      "median_elapsed_ns": 791039504.0,
+      "median_peak_rss_bytes": 363008000.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-4",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1011577209.5,
+        "index": 252788532.0,
+        "query": 39522.0,
+        "result": 27134517.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 1011577209.5,
+        "construct": 0.0,
+        "materialize": 25896466.0,
+        "encode": 1231407.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 76778340.5,
+        "parse": 935139808.5,
+        "entities": 6554863.5,
+        "adjacency": 172573774.5,
+        "sort": 73720514.0
+      },
+      "median_elapsed_ns": 1317026225.5,
+      "median_peak_rss_bytes": 487895040.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-8",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1448744887.0,
+      "median_peak_rss_bytes": 693207040.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-8",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 475580845.0,
+        "index": 259661708.5,
+        "query": 1182418.0,
+        "result": 67135237.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 475580845.0,
+        "construct": 0.0,
+        "materialize": 13517778.0,
+        "encode": 53691344.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 78718826.5,
+        "parse": 396463989.0,
+        "entities": 4137722.0,
+        "adjacency": 201240784.5,
+        "sort": 54300616.0
+      },
+      "median_elapsed_ns": 876324410.5,
+      "median_peak_rss_bytes": 395284480.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-8",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1011869247.5,
+        "index": 264313473.0,
+        "query": 1059159.5,
+        "result": 71222004.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 1011869247.5,
+        "construct": 0.0,
+        "materialize": 24334511.5,
+        "encode": 47036329.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 77718812.5,
+        "parse": 934060319.0,
+        "entities": 6706648.0,
+        "adjacency": 182712454.5,
+        "sort": 75318826.5
+      },
+      "median_elapsed_ns": 1384623156.5,
+      "median_peak_rss_bytes": 523284480.0
+    },
+    {
+      "workload": "W2",
+      "query": "incoming",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1334845829.0,
+      "median_peak_rss_bytes": 656891904.0
+    },
+    {
+      "workload": "W2",
+      "query": "incoming",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 470251854.5,
+        "index": 231516067.0,
+        "query": 7339.0,
+        "result": 3356076.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 470251854.5,
+        "construct": 0.0,
+        "materialize": 3243338.5,
+        "encode": 112497.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 74403293.0,
+        "parse": 395800391.0,
+        "entities": 3881030.5,
+        "adjacency": 174492873.0,
+        "sort": 53120804.0
+      },
+      "median_elapsed_ns": 759566854.0,
+      "median_peak_rss_bytes": 362405888.0
+    },
+    {
+      "workload": "W2",
+      "query": "incoming",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1010784127.5,
+        "index": 247362672.0,
+        "query": 3767.5,
+        "result": 11898875.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 1010784127.5,
+        "construct": 0.0,
+        "materialize": 11801944.5,
+        "encode": 96138.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 75504809.0,
+        "parse": 934713623.0,
+        "entities": 6522231.0,
+        "adjacency": 167108384.5,
+        "sort": 73389067.0
+      },
+      "median_elapsed_ns": 1291150920.0,
+      "median_peak_rss_bytes": 487108608.0
+    },
+    {
+      "workload": "W2",
+      "query": "mixed-relations",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1336534838.5,
+      "median_peak_rss_bytes": 657031168.0
+    },
+    {
+      "workload": "W2",
+      "query": "mixed-relations",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 471708444.0,
+        "index": 235458511.0,
+        "query": 17195.0,
+        "result": 3495532.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 471708444.0,
+        "construct": 0.0,
+        "materialize": 3337297.5,
+        "encode": 156767.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 75465580.5,
+        "parse": 395903008.0,
+        "entities": 4012142.5,
+        "adjacency": 177680775.5,
+        "sort": 53696692.5
+      },
+      "median_elapsed_ns": 769947770.0,
+      "median_peak_rss_bytes": 362352640.0
+    },
+    {
+      "workload": "W2",
+      "query": "mixed-relations",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1009927799.0,
+        "index": 246585341.0,
+        "query": 7771.0,
+        "result": 15125468.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 1009927799.0,
+        "construct": 0.0,
+        "materialize": 14989508.5,
+        "encode": 136912.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 75347765.5,
+        "parse": 935842634.0,
+        "entities": 6511062.0,
+        "adjacency": 166622946.0,
+        "sort": 73508763.5
+      },
+      "median_elapsed_ns": 1295981648.0,
+      "median_peak_rss_bytes": 487108608.0
+    },
+    {
+      "workload": "W2",
+      "query": "outgoing",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1325998162.0,
+      "median_peak_rss_bytes": 656898048.0
+    },
+    {
+      "workload": "W2",
+      "query": "outgoing",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 469084421.5,
+        "index": 227523729.5,
+        "query": 7519.5,
+        "result": 3310326.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 469084421.5,
+        "construct": 0.0,
+        "materialize": 3227547.5,
+        "encode": 83667.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 73456305.0,
+        "parse": 395299895.0,
+        "entities": 3837552.0,
+        "adjacency": 170485085.5,
+        "sort": 53089433.5
+      },
+      "median_elapsed_ns": 753067953.0,
+      "median_peak_rss_bytes": 362352640.0
+    },
+    {
+      "workload": "W2",
+      "query": "outgoing",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 1005047209.5,
+        "index": 242944393.0,
+        "query": 3264.0,
+        "result": 12607823.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 1005047209.5,
+        "construct": 0.0,
+        "materialize": 12531396.0,
+        "encode": 72592.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 74730444.5,
+        "parse": 930470258.5,
+        "entities": 6428435.5,
+        "adjacency": 163451117.0,
+        "sort": 73034628.5
+      },
+      "median_elapsed_ns": 1282483894.5,
+      "median_peak_rss_bytes": 487108608.0
+    }
+  ],
+  "memory": [
+    {
+      "candidate": "zig",
+      "workload": "W2",
+      "query": "outgoing",
+      "host_rss_peak_bytes": 487100416,
+      "heap": {
+        "allocations": 383251,
+        "total_requested": 714485345,
+        "peak_live": 555264129,
+        "live_after_load": 474886135,
+        "live_after_index": 555221223,
+        "live_after_query": 555221911,
+        "retained": 1031488981
+      },
+      "live_after_index_bytes_per_entity": 5552.21,
+      "live_after_index_bytes_per_record": 264.39
+    },
+    {
+      "candidate": "rust",
+      "workload": "W2",
+      "query": "outgoing",
+      "host_rss_peak_bytes": 362352640,
+      "heap": {
+        "allocations": 539139,
+        "total_requested": 370884974,
+        "peak_live": 356843498,
+        "live_after_load": 285451125,
+        "live_after_index": 356819917,
+        "live_after_query": 356821971,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3568.2,
+      "live_after_index_bytes_per_record": 169.91
+    },
+    {
+      "candidate": "zig",
+      "workload": "W2",
+      "query": "incoming",
+      "host_rss_peak_bytes": 487108608,
+      "heap": {
+        "allocations": 383252,
+        "total_requested": 714488337,
+        "peak_live": 555272876,
+        "live_after_load": 474886135,
+        "live_after_index": 555221223,
+        "live_after_query": 555221983,
+        "retained": 1031489070
+      },
+      "live_after_index_bytes_per_entity": 5552.21,
+      "live_after_index_bytes_per_record": 264.39
+    },
+    {
+      "candidate": "rust",
+      "workload": "W2",
+      "query": "incoming",
+      "host_rss_peak_bytes": 362401792,
+      "heap": {
+        "allocations": 539145,
+        "total_requested": 370923068,
+        "peak_live": 356865056,
+        "live_after_load": 285451144,
+        "live_after_index": 356819936,
+        "live_after_query": 356822073,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3568.2,
+      "live_after_index_bytes_per_record": 169.91
+    },
+    {
+      "candidate": "rust",
+      "workload": "W2",
+      "query": "mixed-relations",
+      "host_rss_peak_bytes": 362418176,
+      "heap": {
+        "allocations": 539153,
+        "total_requested": 370923765,
+        "peak_live": 356865281,
+        "live_after_load": 285451187,
+        "live_after_index": 356819979,
+        "live_after_query": 356822274,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3568.2,
+      "live_after_index_bytes_per_record": 169.91
+    },
+    {
+      "candidate": "zig",
+      "workload": "W2",
+      "query": "mixed-relations",
+      "host_rss_peak_bytes": 487108608,
+      "heap": {
+        "allocations": 383254,
+        "total_requested": 714511005,
+        "peak_live": 555293898,
+        "live_after_load": 474886135,
+        "live_after_index": 555221223,
+        "live_after_query": 555222263,
+        "retained": 1031489276
+      },
+      "live_after_index_bytes_per_entity": 5552.21,
+      "live_after_index_bytes_per_record": 264.39
+    },
+    {
+      "candidate": "zig",
+      "workload": "W2",
+      "query": "depth-2",
+      "host_rss_peak_bytes": 487108608,
+      "heap": {
+        "allocations": 383256,
+        "total_requested": 714549047,
+        "peak_live": 555326765,
+        "live_after_load": 474886135,
+        "live_after_index": 555221223,
+        "live_after_query": 555222535,
+        "retained": 1031489156
+      },
+      "live_after_index_bytes_per_entity": 5552.21,
+      "live_after_index_bytes_per_record": 264.39
+    },
+    {
+      "candidate": "rust",
+      "workload": "W2",
+      "query": "depth-2",
+      "host_rss_peak_bytes": 362418176,
+      "heap": {
+        "allocations": 539154,
+        "total_requested": 370999685,
+        "peak_live": 356908137,
+        "live_after_load": 285451162,
+        "live_after_index": 356819954,
+        "live_after_query": 356822098,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3568.2,
+      "live_after_index_bytes_per_record": 169.91
+    },
+    {
+      "candidate": "rust",
+      "workload": "W2",
+      "query": "depth-8",
+      "host_rss_peak_bytes": 395280384,
+      "heap": {
+        "allocations": 539203,
+        "total_requested": 410034949,
+        "peak_live": 378872257,
+        "live_after_load": 285451162,
+        "live_after_index": 356819954,
+        "live_after_query": 356895682,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3568.2,
+      "live_after_index_bytes_per_record": 169.91
+    },
+    {
+      "candidate": "zig",
+      "workload": "W2",
+      "query": "depth-8",
+      "host_rss_peak_bytes": 523276288,
+      "heap": {
+        "allocations": 383280,
+        "total_requested": 747670567,
+        "peak_live": 584662104,
+        "live_after_load": 474886135,
+        "live_after_index": 555221223,
+        "live_after_query": 555442727,
+        "retained": 1031489156
+      },
+      "live_after_index_bytes_per_entity": 5552.21,
+      "live_after_index_bytes_per_record": 264.39
+    },
+    {
+      "candidate": "rust",
+      "workload": "W2",
+      "query": "depth-4",
+      "host_rss_peak_bytes": 363003904,
+      "heap": {
+        "allocations": 539170,
+        "total_requested": 371984829,
+        "peak_live": 357428953,
+        "live_after_load": 285451162,
+        "live_after_index": 356819954,
+        "live_after_query": 356823106,
+        "retained": null
+      },
+      "live_after_index_bytes_per_entity": 3568.2,
+      "live_after_index_bytes_per_record": 169.91
+    },
+    {
+      "candidate": "zig",
+      "workload": "W2",
+      "query": "depth-4",
+      "host_rss_peak_bytes": 488026112,
+      "heap": {
+        "allocations": 383263,
+        "total_requested": 715296777,
+        "peak_live": 555987004,
+        "live_after_load": 474886135,
+        "live_after_index": 555221223,
+        "live_after_query": 555225623,
+        "retained": 1031489156
+      },
+      "live_after_index_bytes_per_entity": 5552.21,
+      "live_after_index_bytes_per_record": 264.39
+    }
+  ]
+}

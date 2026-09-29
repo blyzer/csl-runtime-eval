@@ -301,6 +301,120 @@ claim from this run. Repeat on a quiet machine or a large native runner before
 treating any M number as controlled. Gate #1 remains **OPEN**; W3-W9 and W12 are
 still pending (see [ADR-0007](adr/0007-gate1-remaining-workloads.md)).
 
+## Gate #1 Track A: W2.X, W3, W4 and X-MEM — 2026-09-29
+
+Scope and definitions: [ADR-0007](adr/0007-gate1-remaining-workloads.md). All runs are
+controlled hosted `ubuntu-24.04-arm`, S scale, 10 repeats, `sdk_workaround: false`, swap
+disabled, **0 condition failures**. Every accepted record is byte-identical to the streaming
+oracle. Evidence (each pass archived separately, nothing overwritten):
+
+* [results/gate1-pass1-20260929](results/gate1-pass1-20260929/): W2.X1-X5, W3.S1-S2, W4.S1-S6
+  (19 scenario cells, **1,860 records, all conformant**; run 36556641803, W4.S5 completed by
+  run 36558262587 after the first attempt hit the 128 KiB argv limit, kept under `attempts/`).
+  Analysis: `analysis.md` / `analysis.json`.
+* [results/gate1-pass2-w4-20260929](results/gate1-pass2-w4-20260929/): W4 rerun after the Rust
+  name-index hasher fix below (12 cells, **240 records, all conformant**; run 36558602577).
+* [results/s-scale-hosted-pass5-20260929](results/s-scale-hosted-pass5-20260929/): paired W1/W2
+  S baseline with the current binaries on the *same corpus* as pass 3 (270 records; run 36558359483).
+
+Semantic gates unchanged: normal conformance **212 PASS**, profile **159 PASS**, Python **42 tests**.
+New candidate options (W3/W4 ids, lazy interned name index, in-process repeated resolution,
+opt-in counting allocator) leave every existing output byte-identical when unused. The Rust
+counting-allocator wrapper costs about **1.4-1.9%** of Rust elapsed even when off (local
+same-machine A/B, 12 interleaved runs); that bias is against Rust and changes no ordering.
+
+### W2.X1-X5 (elapsed medians; Zig/Rust, Hybrid/Zig)
+
+| Scenario | Rust ms | Zig ms | Zig/Rust | Hybrid/Zig |
+|---|---|---|---|---|
+| X1 power-law (hub out / depth / mixed) | 1,640-1,740 | 2,240-2,340 | 1.34-1.37 | 1.11-1.13 |
+| X1 power-law (incoming to hub) | 1,041 | 1,655 | 1.59 | 1.05 |
+| X1 power-law (tail entity) | 780-790 | 1,410-1,430 | 1.80 | 1.02-1.04 |
+| X2 single chain (depth up to 64) | 110-135 | 185-188 | 1.39-1.70 | 1.03-1.04 |
+| X3 duplicates x4 | 750-880 | 1,280-1,385 | 1.58-1.70 | 1.03-1.05 |
+| X4 sparse u64 IDs | 820-1,930 | 1,570-2,570 | 1.33-1.94 | 1.03-1.11 |
+| X5 cap boundary | 830-1,080 | 1,390-1,650 | 1.52-1.68 | 1.02-1.06 |
+
+Rust is faster on every query of every W2 extension (1.33-1.94x) and Hybrid is never faster
+than Zig. X5 places `max_paths` at 1, 2, exact-1, exact and exact+1 of the inspected-edge
+count in both directions: all three candidates match the oracle byte-for-byte at the boundary,
+including the conservative TRUNCATED-at-exactly-the-cap rule.
+
+### W3 evidence (W3.S1 selectivity; Rust | Zig ms; result phase = materialize + encode)
+
+| Selected evidence | Rust elapsed | Zig elapsed | Zig/Rust | Rust result | Zig result | Hybrid/Zig |
+|---|---|---|---|---|---|---|
+| ~0.1% (epoch-4) | 812 | 1,397 | 1.72 | 32 | 27 | 1.04 |
+| ~1% (epoch-3) | 840 | 1,413 | 1.68 | 40 | 34 | 1.03 |
+| ~20% (min VERIFIED) | 984 | 1,568 | 1.59 | 187 | 189 | 1.06 |
+| 100% | 1,800 | 2,342 | 1.30 | 923 | 883 | 1.14 |
+
+Elapsed grows with the selected evidence and the Rust lead shrinks from 1.72x to 1.30x. On the
+result phase alone the candidates are level: Rust materializes faster (168 vs 223 ms at 100%),
+Zig encodes faster (659 vs 756 ms). W3.S2 (30% NEGATIVE, skewed lineage, duplicate and
+conflicting rows) shows the same shape (100% selection: Rust 1,959, Zig 2,451, Hybrid/Zig 1.13).
+
+### W4 string interning (pass 2 after the hasher fix; Rust | Zig)
+
+| Cell | Intern ms | Lookup p50 / p99 ns | Live heap after index | Allocations |
+|---|---|---|---|---|
+| S1/S2 all-unique names (200k) | 35-40 \| 37-42 | 80 / 304 \| 72 / 296 | 60.3 \| 68.3 MB | 438k \| 238k |
+| S3 ~100 entities per name | 7.7 \| 4.9 | 64 / 136 \| 48 / 104 | 60.3 \| 68.3 MB | 251k \| 46k |
+| S4 unique 100% / 50% / 10% / 1% | 42 / 28 / 15 / 7.7 \| 48 / 28 / 10 / 5.0 | 72 / 72 / 64 / 64 \| 64 / 64 / 56 / 48 | 60.3 \| 68.3 MB | 439k-251k \| 238k-46k |
+| S5 name length 8 / 64 / 512 | 21 / 28 / 68 \| 19 / 27 / 50 | 80 / 112 / 232 \| 72 / 88 / 160 | 54 / 76 / 256 \| 65 / 86 / 177 MB | 339k-339k \| 138k |
+| S6 1M lookups, zipf hot names | 12 \| 9.9 | 64 / 544 \| 48 / 272 | 60.3 \| 68.3 MB | 263k \| 58k |
+
+Load is ~2x faster in Rust (54 vs 102 ms) in every cell (512-char names: 122 vs 264 ms).
+Rust makes 1.8-5.5x more allocations.
+
+### X-MEM
+
+Host RSS (every timed record): Zig is 1.3-1.5x Rust, Hybrid ~1.8x Rust, in all 13 scenarios.
+Candidate-reported live heap (untimed `--stats` pass, requested-bytes model): Zig 68.3 vs Rust
+60.3 MB after index on the 200k-entity W4 corpus (+13%); peak 108.9 vs 80.1 MB with 200k unique
+names (+36%). Zig's arena additionally retains 229 MB (`retained`), which the requested-bytes
+figure does not show; Rust's system allocator internals are not observable (`null`).
+Derived from the W4 sweeps: name-index cost per unique string **89 B (Rust) vs 193 B (Zig)**
+(peak-live delta between 100% and 1% unique, 198,000 strings, ~0.95 allocations each in both);
+live heap per entity grows with name length at **2.0 B/char in Rust vs 1.0 B/char in Zig**
+(64 to 512 chars: 382 to 1,278 vs 430 to 885 B per entity), which fits Rust holding an owned copy
+of every name in addition to the input buffer (source reading, not profiled). Hybrid has no
+in-process counters (`null`, reason recorded; ADR-0007). Heap counters include the fixture
+bytes read from disk and exclude the measurement arrays.
+
+### Remaining Rust / Zig differences
+
+* **Decode/load: Rust ~2.0-2.3x faster**, stable in all 13 scenarios and both hosts.
+* **Index phase: no stable ordering.** Pass 3 measured Zig 4-7% faster; the rerun on the *same
+  corpus digest* measured Rust 8-17% faster (Rust index ~400 to ~320 ms, Zig ~388 to ~360 ms),
+  and in the extensions Zig ranges from 4% to 85% slower. Local same-machine A/B shows the Rust
+  code changes since pass 3 cost +1-2%, so the flip is not code-attributable: hosted-instance
+  variance in this phase (about +/-20%) exceeds the margin P4 depends on.
+* **Result phase: level** (Rust materialize faster, Zig encode faster).
+* **Memory: Zig higher** (RSS 1.3-1.5x, peak heap +36%, arena retention) but Zig makes 1.8-5.5x
+  fewer allocations; string ownership differs 2x per character.
+* **Lookup latency: p50 level (48-112 ns); Rust tails worse on hot-name workloads** (p95 544 vs
+  184 ns len64-zipf; p99 544 vs 272 ns S6).
+* W4 and W3 `elapsed` includes oracle-check bookkeeping (round-0 digest, `lookup_ns` output
+  serialization; Rust builds a JSON tree for 1M numbers), so compare phases and lookup
+  percentiles there, not elapsed (S6: Rust 1,101 vs Zig 526 ms elapsed with equal p50).
+
+### Hypotheses tested
+
+* **FALSIFIED: "the Fx-style hasher is a safe general fix".** With 8-character structured names
+  it made Rust's name-index build 12x slower (282 vs 23 ms Zig) and lookup p50 ~14x slower
+  (1,016 vs 72 ns); reproduced in two independent runs. Std SipHash: 12 ms / 42 ns locally,
+  21 ms / 80 ns hosted (pass 2). ADR-0005's hasher result holds for u64 keys only; hasher
+  choice must be made per key type. ID maps keep the Fx hasher; the name index uses SipHash.
+* **NOT REPRODUCED: "Zig keeps a ~4-7% index-construction advantage"** (the P4 premise). The
+  same-corpus rerun reversed it; the margin is below run-to-run variance and is not a stable
+  property. This weakens P4's remaining rationale further; it does not by itself settle Gate #1.
+* **Held:** Rust fastest and Hybrid never faster than Zig in all 13 scenarios (Hybrid +2-14%,
+  RSS +24-35% over Zig); no session/persistence result is used to rescue Hybrid.
+* **Held (refined):** pass 2's "encode asymmetry gone" is confirmed at phase level.
+
+Gate #1 remains **OPEN**; nothing here selects Rust, Zig or Hybrid.
+
 ## S-scale campaign protocol — 2026-09-28
 
 [ADR-0003](adr/0003-s-scale-campaign.md) defines the serial paired runner in

@@ -1,0 +1,6 @@
+{"reference": "W3-sel-100.json", "state": "PASS", "bytes": 150465944}
+{"reference": "W3-min-verified.json", "state": "PASS", "bytes": 30753463}
+{"reference": "W3-min-exact.json", "state": "PASS", "bytes": 75392847}
+{"reference": "W3-epoch-1.json", "state": "PASS", "bytes": 50643625}
+{"reference": "W3-hub-outgoing.json", "state": "PASS", "bytes": 18818}
+{"reference": "W3-hub-depth-4.json", "state": "PASS", "bytes": 19572378}

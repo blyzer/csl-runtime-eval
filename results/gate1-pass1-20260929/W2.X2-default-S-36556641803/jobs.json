@@ -1,0 +1,100 @@
+[
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "outgoing",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      }
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "incoming",
+      "op": "RELATED",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "direction": "IN"
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-2",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 2,
+      "max_paths": 100000
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-8",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 8,
+      "max_paths": 100000
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-64",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 64,
+      "max_paths": 100000
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "capped-depth-64",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 64,
+      "max_paths": 10
+    }
+  },
+  {
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "mixed-relations-64",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "relations": [
+        "CALLS",
+        "REFERENCES"
+      ],
+      "max_depth": 64
+    }
+  }
+]

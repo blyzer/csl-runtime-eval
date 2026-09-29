@@ -1,0 +1,66 @@
+{
+  "profile_schema": "csl.eval.profile/v0.1",
+  "representation": "typed-hash-v1",
+  "phases_ns": {
+    "load": 1060743791,
+    "index": 435761992,
+    "query": 13024698,
+    "result": 307287794
+  },
+  "phase_detail_ns": {
+    "decode": 1060743791,
+    "construct": 0,
+    "materialize": 86176562,
+    "encode": 221111232
+  },
+  "phase_subdetail_ns": {
+    "read": 79283838,
+    "parse": 981459953,
+    "entities": 6671042,
+    "adjacency": 344328665,
+    "sort": 84762285
+  },
+  "heap": {
+    "model": "requested-bytes",
+    "allocations": 428418,
+    "total_requested": 892676899,
+    "total_freed": 207142862,
+    "live": 685534037,
+    "peak_live": 708512412,
+    "live_after_load": 477028868,
+    "live_after_index": 561623308,
+    "live_after_query": 564782748,
+    "retained": 1039524181
+  },
+  "elapsed_ns": 1875179524,
+  "rss_peak_bytes": 663531520,
+  "result_digest": "sha256:b1dfd659fe13496eb15335bda41367f1dbe7787cd8f917190e7d5c4646b37b94",
+  "conformance": true,
+  "conditions_before": {
+    "utc": "2026-09-29T10:46:57.045573+00:00",
+    "load_average": [
+      1.0,
+      0.90234375,
+      0.52587890625
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 14229880832,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "conditions_after": {
+    "utc": "2026-09-29T10:46:58.921069+00:00",
+    "load_average": [
+      1.0,
+      0.90234375,
+      0.52587890625
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 14160826368,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "condition_failures": []
+}

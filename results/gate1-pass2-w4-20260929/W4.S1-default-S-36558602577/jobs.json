@@ -1,0 +1,17 @@
+[
+  {
+    "workload": "W4",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "resolve-primary",
+      "op": "RESOLVE",
+      "name": "0001df920001df920001df92"
+    },
+    "resolve": {
+      "names": [
+        "0001df920001df920001df92"
+      ],
+      "rounds": 1
+    }
+  }
+]
