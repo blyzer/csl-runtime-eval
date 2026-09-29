@@ -1,7 +1,7 @@
 # S0 reference transport binding: JSONL v0
 
-Status: FINAL DRAFT FOR REVIEW. Not implemented. JSONL remains the **reference
-control binding**. It maps [SESSION-SEMANTICS.md](SESSION-SEMANTICS.md) to bytes and
+Status: **FINAL v0** (approved 2026-09-29; implementation authorized). JSONL remains the
+**reference control binding**. It maps [SESSION-SEMANTICS.md](SESSION-SEMANTICS.md) to bytes and
 **defines no semantics**: state, ordering, atomicity, cancellation and error meaning
 live in the semantics document. Any other binding (length-prefixed, in-process, ...)
 must preserve every outcome defined there. If this file and the semantics disagree,
@@ -22,7 +22,12 @@ version).
   (negotiated in section 2). A logical message that would exceed it is **chunked**
   (section 4). Chunking is purely a transport device.
 
-## 2. Handshake
+## 2. Process start and handshake
+
+The candidate is started as `<candidate> session --repository DIR`. `DIR` is the
+**snapshot repository** of the semantics document (a directory the candidate may create
+files in); it is process-level configuration, not part of any request. Process start is
+part of the cold-restore measurement (semantics 4.3).
 
 The `open` request carries `binding` (the identifier above) and the host's
 `max_line_bytes` (minimum accepted value: 65536). The `open` response echoes
@@ -126,3 +131,68 @@ behavior the semantics document does not.
 * Reading the next request while a long one runs is not required by the baseline
   (semantics section 6); it is needed only with the cancellation or concurrency
   capabilities.
+
+## Appendix A. v0 wire messages
+
+All requests carry `id` and `op`; all responses carry `id` and `ok`. Unknown fields are
+`INVALID_REQUEST`. Fields not listed for an operation are not allowed. `generation` is
+present in every successful response except `open` failures and `close`.
+
+**open**
+```
+{"id":1,"op":"open","binding":"csl.eval.session.jsonl/v0","max_line_bytes":1048576,
+ "source":{"kind":"fixture","path":"<fixture file>"}}
+{"id":1,"op":"open","binding":"...","max_line_bytes":1048576,
+ "source":{"kind":"empty","context":{"snapshot":"S0","epoch":1,"complete":false}}}
+-> {"id":1,"ok":true,"generation":0,"semantics":"csl.eval.session/v0.1",
+    "binding":"csl.eval.session.jsonl/v0","max_line_bytes":<n>,"chunk_bytes":<n>,
+    "capabilities":[],"strategy":{"mutation":"full-rebuild"|"incremental"},
+    "artifact":"<candidate build identifier>"}
+```
+`epoch` is an integer or `null`; `complete` a boolean. `artifact` identifies the candidate
+build for snapshot compatibility.
+
+**query**
+```
+{"id":2,"op":"query","query":<query IR>}
+-> {"id":2,"ok":true,"generation":<g>,"result":<canonical result>}    (or chunked, section 4)
+```
+
+**mutate** (operations as defined in ADR-0008)
+```
+{"id":3,"op":"mutate","batch":[
+  {"op":"ADD_ENTITY","id":9,"kind":"METHOD","name":"n","container":null},
+  {"op":"REMOVE_ENTITY","id":9},
+  {"op":"UPDATE_ENTITY","id":9,"set":{"kind":"TYPE","name":"m","container":null}},
+  {"op":"ADD_RELATION","subject":1,"relation":"CALLS","object":2},
+  {"op":"REMOVE_RELATION","subject":1,"relation":"CALLS","object":2},
+  {"op":"ADD_EVIDENCE","proposition":7,"subject":1,"relation":"CALLS","object":2,
+   "polarity":"POSITIVE","quality":"EXACT","freshness_epoch":1,"lineage":0},
+  {"op":"REMOVE_EVIDENCE", ...the same eight fields...}]}
+-> {"id":3,"ok":true,"generation":<g+1>}
+```
+
+**state_digest** (explicit checkpoint)
+```
+{"id":4,"op":"state_digest"}
+-> {"id":4,"ok":true,"generation":<g>,"state_digest":"sha256:<hex>","state_digest_ms":<number>,
+    "bytes_processed":<integer|null>}
+```
+
+**snapshot / restore**
+```
+{"id":5,"op":"snapshot"}
+-> {"id":5,"ok":true,"generation":<g>,"snapshot_id":"<opaque>","captured_generation":<g>}
+{"id":6,"op":"restore","snapshot_id":"<opaque>"}
+-> {"id":6,"ok":true,"generation":<g+1>}
+```
+
+**stats / cancel / close**
+```
+{"id":7,"op":"stats"}   -> {"id":7,"ok":true,"generation":<g>,"stats":{ csl.eval.session.stats/v0.1 }}
+{"id":8,"op":"cancel","target":<id>} -> {"id":8,"ok":false,"code":"UNSUPPORTED","message":"..."}
+{"id":9,"op":"close"}   -> {"id":9,"ok":true}   (the process then exits)
+```
+
+**errors**: `{"id":N,"ok":false,"code":"<code>","message":"<free text>"}`, code from the closed
+set in the semantics document. A failed request leaves state and `generation` unchanged.

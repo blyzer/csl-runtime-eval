@@ -1,7 +1,8 @@
 # ADR-0008: Mutation semantics and the W8 correctness invariant
 
-Status: PROPOSED for review. Design only; nothing here is implemented. It is a
-prerequisite of W8.S1 ([ADR-0007](0007-gate1-remaining-workloads.md)) and completes
+Status: **ACCEPTED** (approved 2026-09-29 with the decisions in section 13). Design; the
+mutation operations are implemented as part of S0, the incremental strategies as part of W8.S1.
+It is a prerequisite of W8.S1 ([ADR-0007](0007-gate1-remaining-workloads.md)) and completes
 the mutation rules that
 [S0 session semantics](../oracle/SESSION-SEMANTICS.md) deliberately defer. Query and
 result semantics remain those of [SEMANTICS.md](../oracle/SEMANTICS.md).
@@ -28,7 +29,7 @@ measures.
 Relations and evidence are *value objects* identified by their full value. Identical
 rows are indistinguishable, so "which duplicate" is never a question.
 
-## 3. Operation set (v0 proposal)
+## 3. Operation set (v0)
 
 | Operation | Fields | Precondition (on the pre-batch state) |
 |---|---|---|
@@ -125,7 +126,8 @@ ColdBuild(S + Δ)  ≡  IncrementalApply(S, Δ)
   A candidate may implement this by a full internal rebuild (correct, but it will show
   no gain) or by true incremental update; both are measured honestly.
 
-`≡` requires, at minimum, equality of:
+`≡` requires equality of the canonical logical `state_digest` and of canonical semantic
+query results, and in full, at minimum:
 
 1. **`state_digest`** (canonical logical state), from the explicit checkpoint;
 2. **canonical query results**, byte-identical, over a fixed query set `Q` (the W1/W2
@@ -183,40 +185,59 @@ as valid at the present generation without recomputation.
 * The oracle produces expected outcomes for the entire scenario script, including
   expected `INVALID_INPUT` steps.
 
-## 11. W8.S1 — incremental 1% invalidation (scenario definition)
+## 11. W8.S1 — incremental invalidation (scenario definition)
 
-* **Sizes**: S (100k entities / 1M relations / 1M evidence rows, about 21k touched
-  rows for 1%) and M (1M / 10M / 10M, about 210k touched rows for 1%).
-* **Delta mix** (proposal; touches about 1% of all rows): relation adds 40%, relation
+* **Sizes**: S (100k entities / 1M relations / 1M evidence rows) and, if S is clean, M
+  (1M / 10M / 10M).
+* **Mutation sweep** (fraction of all rows touched): **0.01%, 0.1%, 1% (the primary
+  comparison point), 5%**.
+* **Compositions**, each run across the sweep: *entity-only* (adds, `UPDATE_ENTITY`,
+  removals with dependents removed in the same batch), *relation-only* (adds/removes),
+  *evidence-only* (adds/removes), and *mixed* (the proposal below). Deliberate duplicate
+  adds are included in relation and evidence compositions.
+* **Mixed composition** (touches about the target fraction): relation adds 40%, relation
   removes 20%, evidence adds 20%, evidence removes 10%, entity adds 5% (each with its
-  relations), entity updates 3% (rename and `kind`), entity removes 2% (each with its
-  dependents removed in the same batch). Also included: deliberate duplicate adds.
-* **Runs**: (a) one 1% batch; (b) ten sequential 0.1% batches; (c) the adversarial
-  correctness deltas of section 9.1 (untimed, run at SMOKE and S). An optional sweep
-  (0.1%, 1%, 5%, 20%) locates the break-even against a cold rebuild.
+  relations), entity updates 3% (name and `kind`), entity removes 2% (each with its
+  dependents removed in the same batch).
+* **Untimed correctness gate**: the adversarial deltas of section 9.1, run at SMOKE and S.
 * **Metrics**: apply latency (`mutate`) versus cold rebuild latency (`open` of the
-  serialized `S + Δ`), with their ratio and the break-even fraction; time to first
-  query after each path; live/peak heap and host RSS after apply versus after a cold
-  build (X-MEM); and the correctness verdict of section 9, which is a **hard gate**: a
-  sample whose incremental state fails any of the five equalities above is invalid, not slow.
-* **Measured vs excluded**: timed intervals cover only the `mutate` and `open`
-  operations themselves (request fully sent to terminal response received). The
-  `state_digest` checkpoint is timed as its own metric and is **excluded** from
-  mutate, restore, cold-build and query timing. Oracle work, fixture serialization of
-  `S + Δ`, and harness comparisons are outside all timed intervals.
+  serialized `S + Δ`), their ratio and the break-even fraction; time to first query after
+  each path; live/peak heap and host RSS after apply versus after a cold build (X-MEM); and
+  the correctness verdict of section 9, a **hard gate**: a sample whose incremental state
+  fails any of the equalities of section 9 is invalid, not slow.
+* **Mutation strategy is always recorded** (`open` reports `full-rebuild` or `incremental`).
+  A `full-rebuild` fallback is reported explicitly as such: it serves as the correctness
+  reference path and as a performance baseline, and is an allowed fallback, but it does
+  **not** by itself satisfy the incremental-invalidation workload.
+* **Measured vs excluded**: timed intervals cover only the `mutate` and `open` operations
+  themselves (request fully sent to terminal response received). The `state_digest`
+  checkpoint is timed as its own metric and is **excluded** from mutate, restore,
+  cold-build and query timing. Oracle work, fixture serialization of `S + Δ`, and harness
+  comparisons are outside all timed intervals.
 
-## 12. Open questions
+## 12. Batch size
 
-1. Confirm `UPDATE_ENTITY` as the only way to change entity attributes, and that
-   remove-plus-add of the same entity id in one batch is rejected as a conflict
-   (section 5, rule 1).
-2. Context (`snapshot`, `epoch`, `complete`) is immutable in v0. Is that acceptable
-   given that adding facts to an entity set flagged `complete` could make the flag
-   stale? A separate `SET_CONTEXT` operation may be needed later.
-3. Batch size limits and the `LIMIT_EXCEEDED` boundary for very large batches
-   (relevant for 10M-row deltas).
-4. Approval of the W8.S1 delta proportions and of the sweep points in section 11.
-5. Whether a candidate that implements `IncrementalApply` as a full rebuild counts as
-   a valid W8 participant or is reported as "no incremental strategy".
-6. Optimistic preconditions (for example an expected `state_digest`) are deferred to
-   the concurrency capability.
+There is **no universal semantic batch-size limit**. Workloads define their batch sizes
+(section 11), and an implementation may answer `LIMIT_EXCEEDED` according to resource
+constraints preregistered before the measurement; a `LIMIT_EXCEEDED` outcome is recorded,
+never dropped or counted as zero.
+
+## 13. Decisions recorded at approval (2026-09-29)
+
+1. `UPDATE_ENTITY` is the **only** entity modification operation in v0; there is no
+   separate rename operation. Remove-plus-add of the same entity id in one batch is a
+   conflict (section 5, rule 1).
+2. Context (`snapshot`, `epoch`, `complete`) is immutable in v0 (S0 semantics 3.3).
+3. No universal batch-size limit (section 12).
+4. The W8.S1 sweep is 0.01%, 0.1%, 1% (primary), 5%, across entity, relation, evidence and
+   mixed compositions (section 11).
+5. Atomic final-state validation, no implicit cascade, multiset semantics with
+   one-occurrence removal, and rejection equivalence are preserved.
+6. The hard invariant `ColdBuild(S + Δ) ≡ IncrementalApply(S, Δ)` requires equality of the
+   canonical logical `state_digest` and of canonical semantic query results (section 9);
+   the remaining equalities listed there stay as further checks.
+7. A full rebuild is the correctness reference path, a performance baseline and an allowed,
+   explicitly reported fallback, but does not by itself satisfy the incremental-invalidation
+   workload (section 11).
+8. Optimistic preconditions (for example an expected `state_digest`) are deferred to the
+   concurrency capability.

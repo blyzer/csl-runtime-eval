@@ -375,18 +375,25 @@ Candidate-reported live heap (untimed `--stats` pass, requested-bytes model): Zi
 names (+36%). Zig's arena additionally retains 229 MB (`retained`), which the requested-bytes
 figure does not show; Rust's system allocator internals are not observable (`null`).
 Derived from the W4 sweeps: name-index cost per unique string **89 B (Rust) vs 193 B (Zig)**
-(peak-live delta between 100% and 1% unique, 198,000 strings, ~0.95 allocations each in both);
-live heap per entity grows with name length at **2.0 B/char in Rust vs 1.0 B/char in Zig**
-(64 to 512 chars: 382 to 1,278 vs 430 to 885 B per entity), which fits Rust holding an owned copy
-of every name in addition to the input buffer (source reading, not profiled). Hybrid has no
+(peak-live delta between 100% and 1% unique, 198,000 strings, ~0.95 allocations each in both).
+Heap versus name length, recorded as four separate items:
+
+1. **Observed slope**: live heap per entity grows at 2.0 B/char in Rust vs 1.0 B/char in Zig
+   (64 to 512 chars: 382 to 1,278 vs 430 to 885 B per entity).
+2. **Code evidence**: Rust's `Fixture` decodes `strings` into owned `String`s
+   (`prototypes/rust/src/model.rs`) while Zig's decode is in `std.json` (ADR-0005).
+3. **Hypothesis**: owned decoded strings contribute to the Rust slope.
+4. **Causal status**: **not isolated / not profiled.** No W4 tuning is authorized from this
+   hypothesis alone. Hybrid has no
 in-process counters (`null`, reason recorded; ADR-0007). Heap counters include the fixture
 bytes read from disk and exclude the measurement arrays.
 
 ### Remaining Rust / Zig differences
 
 * **Decode/load: Rust ~2.0-2.3x faster**, stable in all 13 scenarios and both hosts.
-* **Index phase: no stable ordering.** Pass 3 measured Zig 4-7% faster; the rerun on the *same
-  corpus digest* measured Rust 8-17% faster (Rust index ~400 to ~320 ms, Zig ~388 to ~360 ms),
+* **Index phase — status: `NO STABLE MATERIAL INDEX ADVANTAGE ESTABLISHED`.** Pass 3
+  measured Zig 4-7% faster (kept as history; it is not surviving evidence); the rerun on the
+  *same corpus digest* measured Rust 8-17% faster (Rust index ~400 to ~320 ms, Zig ~388 to ~360 ms),
   and in the extensions Zig ranges from 4% to 85% slower. Local same-machine A/B shows the Rust
   code changes since pass 3 cost +1-2%, so the flip is not code-attributable: hosted-instance
   variance in this phase (about +/-20%) exceeds the margin P4 depends on.
@@ -406,9 +413,11 @@ bytes read from disk and exclude the measurement arrays.
   (1,016 vs 72 ns); reproduced in two independent runs. Std SipHash: 12 ms / 42 ns locally,
   21 ms / 80 ns hosted (pass 2). ADR-0005's hasher result holds for u64 keys only; hasher
   choice must be made per key type. ID maps keep the Fx hasher; the name index uses SipHash.
-* **NOT REPRODUCED: "Zig keeps a ~4-7% index-construction advantage"** (the P4 premise). The
-  same-corpus rerun reversed it; the margin is below run-to-run variance and is not a stable
-  property. This weakens P4's remaining rationale further; it does not by itself settle Gate #1.
+* **NOT REPRODUCED: "Zig keeps a ~4-7% index-construction advantage"** (the P4 premise).
+  Classification: `NO STABLE MATERIAL INDEX ADVANTAGE ESTABLISHED`. The same-corpus rerun
+  reversed it and the margin is below observed hosted-instance variance. One controlled
+  paired stability experiment on a single runner instance closes the question (no tuning);
+  see its preregistered protocol in `results/preregistration/`.
 * **Held:** Rust fastest and Hybrid never faster than Zig in all 13 scenarios (Hybrid +2-14%,
   RSS +24-35% over Zig); no session/persistence result is used to rescue Hybrid.
 * **Held (refined):** pass 2's "encode asymmetry gone" is confirmed at phase level.
