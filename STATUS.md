@@ -575,7 +575,7 @@ so process start (~1 ms) and restore dominate. Warm OS page cache; a cold-cache 
 | evidence | 0.5 / 0.7 / 0.7 | 5.0 / 6.2 / 6.6 | 48.4 / 57.1 / 61.0 | 240 / 271 / 298 |
 | mixed | 0.7 / 0.8 / 0.8 | 5.3 / 6.0 / 6.3 | **49.2 / 53.7 / 56.7** | 237 / 268 / 289 |
 
-For scale, the same batches under `full-rebuild` take 0.82-1.17 s (Rust) / 0.86-1.83 s (Zig) /
+For scale, the same batches under `full-rebuild` take 0.82-1.13 s (Rust) / 0.87-1.82 s (Zig) /
 0.89-1.87 s (Hybrid) and a cold build of `S + delta` (`open`) takes ~1.29-1.41 s in all three;
 incremental is faster than both at every measured point (break-even is above 5%). Deltas were 210
 to 115,498 operations. `derived_rebuilds_total` stayed at its post-`open` value in every
