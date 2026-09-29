@@ -4,6 +4,35 @@ use serde::Serialize;
 use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
 use std::collections::{HashMap, HashSet};
+use std::hash::{BuildHasherDefault, Hasher};
+
+/// Rust's `std::collections::HashMap` defaults to SipHash-1-3 (randomized,
+/// HashDoS-resistant, deliberately not optimized for raw speed). Zig's
+/// `std.AutoHashMap` defaults to Wyhash (fast, non-cryptographic). This is
+/// an FxHash-style hasher (the same algorithm `rustc` itself uses
+/// internally): rotate-xor-multiply, no crate dependency. It isolates the
+/// hasher choice as a single experimental variable for the index cause
+/// analysis (ADR-0005 STEP 3) without changing any data structure,
+/// algorithm, or Zig's code at all.
+#[derive(Default)]
+struct FxHasher(u64);
+const FX_SEED: u64 = 0x51_7c_c1_b7_27_22_0a_95;
+impl Hasher for FxHasher {
+    fn write(&mut self, bytes: &[u8]) {
+        for chunk in bytes.chunks(8) {
+            let mut buf = [0u8; 8];
+            buf[..chunk.len()].copy_from_slice(chunk);
+            self.write_u64(u64::from_ne_bytes(buf));
+        }
+    }
+    fn write_u64(&mut self, n: u64) {
+        self.0 = (self.0.rotate_left(5) ^ n).wrapping_mul(FX_SEED);
+    }
+    fn finish(&self) -> u64 {
+        self.0
+    }
+}
+type FxBuild = BuildHasherDefault<FxHasher>;
 const REL: [&str; 5] = ["CALLS", "REFERENCES", "IMPLEMENTS", "OVERRIDES", "CONTAINS"];
 const KIND: [&str; 7] = [
     "TYPE", "METHOD", "FUNCTION", "FIELD", "MODULE", "FILE", "VARIABLE",
@@ -94,8 +123,8 @@ fn valid_query(q: &Value) -> Result<()> {
     }
     Ok(())
 }
-type Set = HashSet<u64>;
-type Index = HashMap<u64, Vec<Edge>>;
+type Set = HashSet<u64, FxBuild>;
+type Index = HashMap<u64, Vec<Edge>, FxBuild>;
 struct Selection {
     ids: Vec<u64>,
     props: Vec<Evidence>,
@@ -103,15 +132,15 @@ struct Selection {
 }
 struct Store<'a> {
     fx: &'a Fixture,
-    entities: HashMap<u64, Entity>,
+    entities: HashMap<u64, Entity, FxBuild>,
     out: Index,
     inc: Index,
 }
 impl<'a> Store<'a> {
     /// Entity map build + container-reference validation: the "entities"
     /// index sub-phase (STEP 3 investigation).
-    fn build_entities(fx: &'a Fixture) -> Result<HashMap<u64, Entity>> {
-        let mut entities = HashMap::new();
+    fn build_entities(fx: &'a Fixture) -> Result<HashMap<u64, Entity, FxBuild>> {
+        let mut entities = HashMap::default();
         for e in &fx.entities {
             if e.id == 0
                 || e.name_sid as usize >= fx.strings.len()
@@ -129,9 +158,12 @@ impl<'a> Store<'a> {
     }
     /// Outgoing/incoming adjacency build + edge/evidence-reference
     /// validation: the "adjacency" index sub-phase.
-    fn build_adjacency(fx: &'a Fixture, entities: &HashMap<u64, Entity>) -> Result<(Index, Index)> {
-        let mut out: Index = HashMap::new();
-        let mut inc: Index = HashMap::new();
+    fn build_adjacency(
+        fx: &'a Fixture,
+        entities: &HashMap<u64, Entity, FxBuild>,
+    ) -> Result<(Index, Index)> {
+        let mut out: Index = HashMap::default();
+        let mut inc: Index = HashMap::default();
         for e in &fx.relations {
             if !entities.contains_key(&e.subject) || !entities.contains_key(&e.object) {
                 return Err("invalid edge".into());
@@ -215,7 +247,7 @@ impl<'a> Store<'a> {
         }
         let incoming = q["direction"] == "IN";
         let idx = if incoming { &self.inc } else { &self.out };
-        let mut result = Set::new();
+        let mut result = Set::default();
         let mut seen = base;
         let mut queue: Vec<_> = seeds.into_iter().map(|i| (i, 0)).collect();
         let mut pos = 0;
