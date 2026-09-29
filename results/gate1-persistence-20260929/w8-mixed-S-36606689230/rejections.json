@@ -1,0 +1,170 @@
+[
+  {
+    "candidate": "rust",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.0001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "rust",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.0001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "zig",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.0001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "zig",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.0001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "hybrid",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.0001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "hybrid",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.0001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "rust",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "rust",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "zig",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "zig",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "hybrid",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "hybrid",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.001,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "rust",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.01,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "rust",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.01,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "zig",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.01,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "zig",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.01,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "hybrid",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.01,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "hybrid",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.01,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "rust",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.05,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "rust",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.05,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "zig",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.05,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "zig",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.05,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "hybrid",
+    "strategy": "incremental",
+    "composition": "mixed",
+    "fraction": 0.05,
+    "rejection_equivalence": true
+  },
+  {
+    "candidate": "hybrid",
+    "strategy": "full-rebuild",
+    "composition": "mixed",
+    "fraction": 0.05,
+    "rejection_equivalence": true
+  }
+]

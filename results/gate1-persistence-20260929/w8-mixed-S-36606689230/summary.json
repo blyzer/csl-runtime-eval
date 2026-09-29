@@ -1,0 +1,365 @@
+{
+  "state": "PASS",
+  "classification": "controlled",
+  "records": 780,
+  "rejection_checks": 24,
+  "condition_failure_samples": 0,
+  "cells": {
+    "mixed@0.0001": {
+      "hybrid": {
+        "cold_build_open_service_ms": 1336.567048,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 262,
+          "mutate_service_ms": 985.8074785,
+          "mutate_roundtrip_ms": 986.9594225,
+          "first_query_service_ms": 12.1664435,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 174.747947,
+          "peak_rss_mb": 905.089024,
+          "state_digest_ms": 675.7127065,
+          "mutate_over_cold_open": 0.7375667984446673
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 262,
+          "mutate_service_ms": 0.809671,
+          "mutate_roundtrip_ms": 1.7624355,
+          "first_query_service_ms": 12.1989595,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.131068,
+          "peak_rss_mb": 806.617088,
+          "state_digest_ms": 655.966756,
+          "mutate_over_cold_open": 0.0006057840504234847
+        }
+      },
+      "rust": {
+        "cold_build_open_service_ms": 1361.954384,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 262,
+          "mutate_service_ms": 922.843715,
+          "mutate_roundtrip_ms": 924.0216895,
+          "first_query_service_ms": 3.1428705,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 380.968311,
+          "peak_rss_mb": 789.497856,
+          "state_digest_ms": 801.4745614999999,
+          "mutate_over_cold_open": 0.6775878295495101
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 262,
+          "mutate_service_ms": 0.695347,
+          "mutate_roundtrip_ms": 1.650567,
+          "first_query_service_ms": 3.262866,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 288.225295,
+          "peak_rss_mb": 884.310016,
+          "state_digest_ms": 1217.1227640000002,
+          "mutate_over_cold_open": 0.0005105508731928279
+        }
+      },
+      "zig": {
+        "cold_build_open_service_ms": 1323.86634,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 262,
+          "mutate_service_ms": 961.0730885,
+          "mutate_roundtrip_ms": 962.2984315,
+          "first_query_service_ms": 12.213427,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 174.747947,
+          "peak_rss_mb": 898.43712,
+          "state_digest_ms": 674.9753075,
+          "mutate_over_cold_open": 0.7259593053026788
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 262,
+          "mutate_service_ms": 0.781109,
+          "mutate_roundtrip_ms": 1.839175,
+          "first_query_service_ms": 12.246745,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.131068,
+          "peak_rss_mb": 805.736448,
+          "state_digest_ms": 653.004278,
+          "mutate_over_cold_open": 0.0005900210439673237
+        }
+      }
+    },
+    "mixed@0.001": {
+      "hybrid": {
+        "cold_build_open_service_ms": 1347.328509,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 2311,
+          "mutate_service_ms": 987.2710605,
+          "mutate_roundtrip_ms": 995.045859,
+          "first_query_service_ms": 12.1681515,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 174.826531,
+          "peak_rss_mb": 905.945088,
+          "state_digest_ms": 673.8891269999999,
+          "mutate_over_cold_open": 0.732761946255232
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 2311,
+          "mutate_service_ms": 6.2972125,
+          "mutate_roundtrip_ms": 13.92401,
+          "first_query_service_ms": 12.3091825,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.234099,
+          "peak_rss_mb": 806.555648,
+          "state_digest_ms": 652.7353,
+          "mutate_over_cold_open": 0.004673850852212613
+        }
+      },
+      "rust": {
+        "cold_build_open_service_ms": 1374.854037,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 2311,
+          "mutate_service_ms": 905.1708155,
+          "mutate_roundtrip_ms": 912.6879165,
+          "first_query_service_ms": 3.16812,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 381.352542,
+          "peak_rss_mb": 791.7568,
+          "state_digest_ms": 800.1283364999999,
+          "mutate_over_cold_open": 0.6583759374741538
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 2311,
+          "mutate_service_ms": 5.2793445,
+          "mutate_roundtrip_ms": 12.8846935,
+          "first_query_service_ms": 3.2829905,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 288.525878,
+          "peak_rss_mb": 884.310016,
+          "state_digest_ms": 1213.4751959999999,
+          "mutate_over_cold_open": 0.0038399309002429033
+        }
+      },
+      "zig": {
+        "cold_build_open_service_ms": 1327.535042,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 2311,
+          "mutate_service_ms": 961.227645,
+          "mutate_roundtrip_ms": 969.558664,
+          "first_query_service_ms": 12.22631,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 174.826531,
+          "peak_rss_mb": 909.938688,
+          "state_digest_ms": 675.0864349999999,
+          "mutate_over_cold_open": 0.7240695082156634
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 2311,
+          "mutate_service_ms": 6.047484,
+          "mutate_roundtrip_ms": 14.262776,
+          "first_query_service_ms": 12.4590255,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.234099,
+          "peak_rss_mb": 805.797888,
+          "state_digest_ms": 651.204694,
+          "mutate_over_cold_open": 0.004555423253377292
+        }
+      }
+    },
+    "mixed@0.01": {
+      "hybrid": {
+        "cold_build_open_service_ms": 1319.711235,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 23096,
+          "mutate_service_ms": 1005.5814055,
+          "mutate_roundtrip_ms": 1084.7197035,
+          "first_query_service_ms": 12.118832,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 175.541995,
+          "peak_rss_mb": 929.333248,
+          "state_digest_ms": 677.3136015,
+          "mutate_over_cold_open": 0.7619707848437011
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 23096,
+          "mutate_service_ms": 56.7382495,
+          "mutate_roundtrip_ms": 134.9418575,
+          "first_query_service_ms": 12.2307305,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 462.182864,
+          "peak_rss_mb": 806.551552,
+          "state_digest_ms": 655.4550805,
+          "mutate_over_cold_open": 0.042992927539940204
+        }
+      },
+      "rust": {
+        "cold_build_open_service_ms": 1361.770742,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 23096,
+          "mutate_service_ms": 960.1682595,
+          "mutate_roundtrip_ms": 1038.905439,
+          "first_query_service_ms": 3.1563155,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 386.654931,
+          "peak_rss_mb": 815.214592,
+          "state_digest_ms": 804.2885795,
+          "mutate_over_cold_open": 0.7050880371315835
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 23096,
+          "mutate_service_ms": 49.2073575,
+          "mutate_roundtrip_ms": 127.472641,
+          "first_query_service_ms": 3.313084,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 293.149587,
+          "peak_rss_mb": 884.310016,
+          "state_digest_ms": 1226.457799,
+          "mutate_over_cold_open": 0.03613483237841513
+        }
+      },
+      "zig": {
+        "cold_build_open_service_ms": 1337.16116,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 23096,
+          "mutate_service_ms": 1001.209897,
+          "mutate_roundtrip_ms": 1085.679129,
+          "first_query_service_ms": 12.252216,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 175.541995,
+          "peak_rss_mb": 930.228224,
+          "state_digest_ms": 679.3502375,
+          "mutate_over_cold_open": 0.7487578363403855
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 23096,
+          "mutate_service_ms": 53.745454,
+          "mutate_roundtrip_ms": 138.132371,
+          "first_query_service_ms": 12.284682,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 462.182864,
+          "peak_rss_mb": 805.736448,
+          "state_digest_ms": 652.484668,
+          "mutate_over_cold_open": 0.04019369961359033
+        }
+      }
+    },
+    "mixed@0.05": {
+      "hybrid": {
+        "cold_build_open_service_ms": 1364.373574,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 115498,
+          "mutate_service_ms": 1171.1999505,
+          "mutate_roundtrip_ms": 1566.1424055,
+          "first_query_service_ms": 12.193736,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 190.597212,
+          "peak_rss_mb": 1090.92864,
+          "state_digest_ms": 685.6462655,
+          "mutate_over_cold_open": 0.8584158861024671
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 115498,
+          "mutate_service_ms": 288.7828985,
+          "mutate_roundtrip_ms": 684.314262,
+          "first_query_service_ms": 12.346111,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 484.321379,
+          "peak_rss_mb": 806.555648,
+          "state_digest_ms": 665.4701955,
+          "mutate_over_cold_open": 0.21165969790323716
+        }
+      },
+      "rust": {
+        "cold_build_open_service_ms": 1430.508364,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 115498,
+          "mutate_service_ms": 1131.4790235,
+          "mutate_roundtrip_ms": 1528.2715575,
+          "first_query_service_ms": 3.2236995,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 405.564918,
+          "peak_rss_mb": 920.14592,
+          "state_digest_ms": 816.861724,
+          "mutate_over_cold_open": 0.7909628856249036
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 115498,
+          "mutate_service_ms": 237.1390175,
+          "mutate_roundtrip_ms": 632.7815235,
+          "first_query_service_ms": 3.4649835,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 308.457654,
+          "peak_rss_mb": 884.310016,
+          "state_digest_ms": 1258.3021469999999,
+          "mutate_over_cold_open": 0.1657725487440771
+        }
+      },
+      "zig": {
+        "cold_build_open_service_ms": 1385.204601,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 115498,
+          "mutate_service_ms": 1127.9456405,
+          "mutate_roundtrip_ms": 1550.9263575,
+          "first_query_service_ms": 12.4467505,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 190.597212,
+          "peak_rss_mb": 1096.077312,
+          "state_digest_ms": 690.5584675,
+          "mutate_over_cold_open": 0.8142808937291424
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 115498,
+          "mutate_service_ms": 267.9610275,
+          "mutate_roundtrip_ms": 692.4499515,
+          "first_query_service_ms": 12.420165,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 484.321379,
+          "peak_rss_mb": 805.797888,
+          "state_digest_ms": 665.141552,
+          "mutate_over_cold_open": 0.19344508912730649
+        }
+      }
+    }
+  }
+}

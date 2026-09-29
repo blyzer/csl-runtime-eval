@@ -1,0 +1,365 @@
+{
+  "state": "PASS",
+  "classification": "controlled",
+  "records": 780,
+  "rejection_checks": 24,
+  "condition_failure_samples": 0,
+  "cells": {
+    "relation@0.0001": {
+      "hybrid": {
+        "cold_build_open_service_ms": 1341.628948,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 210,
+          "mutate_service_ms": 984.271527,
+          "mutate_roundtrip_ms": 985.0032705,
+          "first_query_service_ms": 12.0393665,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 174.747668,
+          "peak_rss_mb": 899.182592,
+          "state_digest_ms": 669.3227825,
+          "mutate_over_cold_open": 0.7336391544527109
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 210,
+          "mutate_service_ms": 0.620803,
+          "mutate_roundtrip_ms": 1.1828895,
+          "first_query_service_ms": 12.1974225,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.132206,
+          "peak_rss_mb": 806.555648,
+          "state_digest_ms": 646.5157075,
+          "mutate_over_cold_open": 0.0004627233192347606
+        }
+      },
+      "rust": {
+        "cold_build_open_service_ms": 1307.604462,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 210,
+          "mutate_service_ms": 936.8923785,
+          "mutate_roundtrip_ms": 937.6378815,
+          "first_query_service_ms": 3.0898465,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 380.951625,
+          "peak_rss_mb": 789.286912,
+          "state_digest_ms": 801.912576,
+          "mutate_over_cold_open": 0.7164952443394156
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 210,
+          "mutate_service_ms": 0.5464675,
+          "mutate_roundtrip_ms": 1.1151145,
+          "first_query_service_ms": 3.3472655,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 288.209201,
+          "peak_rss_mb": 884.310016,
+          "state_digest_ms": 1207.35003,
+          "mutate_over_cold_open": 0.0004179149856709498
+        }
+      },
+      "zig": {
+        "cold_build_open_service_ms": 1353.236085,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 210,
+          "mutate_service_ms": 962.835103,
+          "mutate_roundtrip_ms": 963.5958875,
+          "first_query_service_ms": 12.2511375,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 174.747668,
+          "peak_rss_mb": 898.277376,
+          "state_digest_ms": 672.463009,
+          "mutate_over_cold_open": 0.7115056372443689
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 210,
+          "mutate_service_ms": 0.585769,
+          "mutate_roundtrip_ms": 1.235382,
+          "first_query_service_ms": 12.241172,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.132206,
+          "peak_rss_mb": 805.736448,
+          "state_digest_ms": 643.3983085,
+          "mutate_over_cold_open": 0.00043286534145296605
+        }
+      }
+    },
+    "relation@0.001": {
+      "hybrid": {
+        "cold_build_open_service_ms": 1362.002928,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 2100,
+          "mutate_service_ms": 984.100848,
+          "mutate_roundtrip_ms": 989.2976055,
+          "first_query_service_ms": 12.069836,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 174.784964,
+          "peak_rss_mb": 901.066752,
+          "state_digest_ms": 672.8852075,
+          "mutate_over_cold_open": 0.7225394511046161
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 2100,
+          "mutate_service_ms": 5.1864225,
+          "mutate_roundtrip_ms": 10.4053955,
+          "first_query_service_ms": 12.278745,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.208598,
+          "peak_rss_mb": 806.569984,
+          "state_digest_ms": 650.499759,
+          "mutate_over_cold_open": 0.003807937849014668
+        }
+      },
+      "rust": {
+        "cold_build_open_service_ms": 1357.613377,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 2100,
+          "mutate_service_ms": 904.413089,
+          "mutate_roundtrip_ms": 909.823031,
+          "first_query_service_ms": 3.1479705,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 381.275913,
+          "peak_rss_mb": 791.3472,
+          "state_digest_ms": 800.251188,
+          "mutate_over_cold_open": 0.6661786811489262
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 2100,
+          "mutate_service_ms": 4.5783505,
+          "mutate_roundtrip_ms": 9.734103,
+          "first_query_service_ms": 3.2117735,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 288.528305,
+          "peak_rss_mb": 884.310016,
+          "state_digest_ms": 1207.905493,
+          "mutate_over_cold_open": 0.003372352230439167
+        }
+      },
+      "zig": {
+        "cold_build_open_service_ms": 1322.154455,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 2100,
+          "mutate_service_ms": 955.517533,
+          "mutate_roundtrip_ms": 961.023205,
+          "first_query_service_ms": 12.2231325,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 174.784964,
+          "peak_rss_mb": 900.251648,
+          "state_digest_ms": 665.9235735,
+          "mutate_over_cold_open": 0.7226973591372121
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 2100,
+          "mutate_service_ms": 4.9745785,
+          "mutate_roundtrip_ms": 10.535769,
+          "first_query_service_ms": 12.418112,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.208598,
+          "peak_rss_mb": 805.797888,
+          "state_digest_ms": 647.3708505,
+          "mutate_over_cold_open": 0.0037624790970431665
+        }
+      }
+    },
+    "relation@0.01": {
+      "hybrid": {
+        "cold_build_open_service_ms": 1325.923574,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 21000,
+          "mutate_service_ms": 1022.6098005,
+          "mutate_roundtrip_ms": 1078.530648,
+          "first_query_service_ms": 12.0702015,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 175.140956,
+          "peak_rss_mb": 920.00256,
+          "state_digest_ms": 677.2159515,
+          "mutate_over_cold_open": 0.7712433963407306
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 21000,
+          "mutate_service_ms": 45.2300535,
+          "mutate_roundtrip_ms": 100.6373335,
+          "first_query_service_ms": 12.4186225,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.858854,
+          "peak_rss_mb": 806.555648,
+          "state_digest_ms": 644.677098,
+          "mutate_over_cold_open": 0.03411211203037257
+        }
+      },
+      "rust": {
+        "cold_build_open_service_ms": 1364.758723,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 21000,
+          "mutate_service_ms": 925.675958,
+          "mutate_roundtrip_ms": 980.293059,
+          "first_query_service_ms": 3.1614115,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 383.692633,
+          "peak_rss_mb": 810.176512,
+          "state_digest_ms": 802.1192605,
+          "mutate_over_cold_open": 0.6782707759252768
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 21000,
+          "mutate_service_ms": 40.863,
+          "mutate_roundtrip_ms": 96.9878025,
+          "first_query_service_ms": 3.3331245,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 291.039729,
+          "peak_rss_mb": 884.310016,
+          "state_digest_ms": 1214.6132335000002,
+          "mutate_over_cold_open": 0.02994155619696303
+        }
+      },
+      "zig": {
+        "cold_build_open_service_ms": 1344.117011,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 21000,
+          "mutate_service_ms": 981.5197635,
+          "mutate_roundtrip_ms": 1041.3528255,
+          "first_query_service_ms": 12.255621,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 175.140956,
+          "peak_rss_mb": 929.488896,
+          "state_digest_ms": 675.035718,
+          "mutate_over_cold_open": 0.7302338676375847
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 21000,
+          "mutate_service_ms": 43.2589385,
+          "mutate_roundtrip_ms": 103.2068435,
+          "first_query_service_ms": 12.501102,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 461.858854,
+          "peak_rss_mb": 805.736448,
+          "state_digest_ms": 642.678202,
+          "mutate_over_cold_open": 0.032183908205890566
+        }
+      }
+    },
+    "relation@0.05": {
+      "hybrid": {
+        "cold_build_open_service_ms": 1353.831966,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 105000,
+          "mutate_service_ms": 1112.725507,
+          "mutate_roundtrip_ms": 1396.586555,
+          "first_query_service_ms": 12.164502,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 176.627156,
+          "peak_rss_mb": 1034.006528,
+          "state_digest_ms": 671.1458,
+          "mutate_over_cold_open": 0.8219081355329735
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 105000,
+          "mutate_service_ms": 221.3925745,
+          "mutate_roundtrip_ms": 506.0614505,
+          "first_query_service_ms": 12.438318,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 464.04043,
+          "peak_rss_mb": 806.555648,
+          "state_digest_ms": 648.5537045000001,
+          "mutate_over_cold_open": 0.16353031990677638
+        }
+      },
+      "rust": {
+        "cold_build_open_service_ms": 1409.423303,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 105000,
+          "mutate_service_ms": 1048.6141415,
+          "mutate_roundtrip_ms": 1328.2898945,
+          "first_query_service_ms": 3.223277,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 392.532049,
+          "peak_rss_mb": 892.563456,
+          "state_digest_ms": 807.6024950000001,
+          "mutate_over_cold_open": 0.744002273318451
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 105000,
+          "mutate_service_ms": 190.1930065,
+          "mutate_roundtrip_ms": 473.261143,
+          "first_query_service_ms": 3.372076,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 299.474769,
+          "peak_rss_mb": 884.310016,
+          "state_digest_ms": 1220.579748,
+          "mutate_over_cold_open": 0.13494384979669943
+        }
+      },
+      "zig": {
+        "cold_build_open_service_ms": 1347.73079,
+        "full-rebuild": {
+          "n": 30,
+          "operations": 105000,
+          "mutate_service_ms": 1072.1433335,
+          "mutate_roundtrip_ms": 1375.2799925,
+          "first_query_service_ms": 12.289176,
+          "derived_rebuilds_total_after": 2.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 176.627156,
+          "peak_rss_mb": 1011.41504,
+          "state_digest_ms": 675.932464,
+          "mutate_over_cold_open": 0.7955174293376498
+        },
+        "incremental": {
+          "n": 30,
+          "operations": 105000,
+          "mutate_service_ms": 207.173816,
+          "mutate_roundtrip_ms": 510.651765,
+          "first_query_service_ms": 12.4821675,
+          "derived_rebuilds_total_after": 1.0,
+          "derived_rebuilds_total_before": 1.0,
+          "live_heap_after_mb": 464.04043,
+          "peak_rss_mb": 805.75488,
+          "state_digest_ms": 651.280204,
+          "mutate_over_cold_open": 0.15372047410150805
+        }
+      }
+    }
+  }
+}

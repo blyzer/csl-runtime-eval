@@ -1,0 +1,165 @@
+{
+  "cells": {
+    "hybrid/depth-4": {
+      "n": 30,
+      "process_start_ns": 938200.5,
+      "open_service_ns": 42833.0,
+      "restore_service_ns": 454970396.0,
+      "first_query_service_ns": 278137638.0,
+      "restore_roundtrip_ns": 455146335.5,
+      "first_query_roundtrip_ns": 408731396.0,
+      "ttfq_ns": 864857453.0,
+      "peak_rss_bytes": 371220480.0,
+      "live_heap_bytes": 174743444.0,
+      "peak_heap_bytes": 174743510.0,
+      "state_digest_ms": 631.826141
+    },
+    "hybrid/lookup-first": {
+      "n": 30,
+      "process_start_ns": 943808.5,
+      "open_service_ns": 43401.5,
+      "restore_service_ns": 465275103.0,
+      "first_query_service_ns": 11982359.5,
+      "restore_roundtrip_ns": 465544590.5,
+      "first_query_roundtrip_ns": 12262392.0,
+      "ttfq_ns": 478922242.0,
+      "peak_rss_bytes": 371220480.0,
+      "live_heap_bytes": 174743444.0,
+      "peak_heap_bytes": 174743510.0,
+      "state_digest_ms": 632.2056265
+    },
+    "rust/depth-4": {
+      "n": 30,
+      "process_start_ns": 924253.5,
+      "open_service_ns": 18390.5,
+      "restore_service_ns": 741846220.0,
+      "first_query_service_ns": 245690571.0,
+      "restore_roundtrip_ns": 742067441.5,
+      "first_query_roundtrip_ns": 375060950.0,
+      "ttfq_ns": 1119282294.0,
+      "peak_rss_bytes": 585179136.0,
+      "live_heap_bytes": 433181842.0,
+      "peak_heap_bytes": 522380868.0,
+      "state_digest_ms": 832.0791340000001
+    },
+    "rust/lookup-first": {
+      "n": 30,
+      "process_start_ns": 950948.5,
+      "open_service_ns": 18590.5,
+      "restore_service_ns": 746030373.5,
+      "first_query_service_ns": 3080380.5,
+      "restore_roundtrip_ns": 746287752.0,
+      "first_query_roundtrip_ns": 3323404.5,
+      "ttfq_ns": 750714122.5,
+      "peak_rss_bytes": 585179136.0,
+      "live_heap_bytes": 433181677.0,
+      "peak_heap_bytes": 493791608.0,
+      "state_digest_ms": 833.331
+    },
+    "zig/depth-4": {
+      "n": 30,
+      "process_start_ns": 759845.5,
+      "open_service_ns": 22454.5,
+      "restore_service_ns": 455929099.0,
+      "first_query_service_ns": 211388287.5,
+      "restore_roundtrip_ns": 456209132.5,
+      "first_query_roundtrip_ns": 439318488.5,
+      "ttfq_ns": 896251492.0,
+      "peak_rss_bytes": 391741440.0,
+      "live_heap_bytes": 174743444.0,
+      "peak_heap_bytes": 174743510.0,
+      "state_digest_ms": 633.912229
+    },
+    "zig/lookup-first": {
+      "n": 30,
+      "process_start_ns": 761296.0,
+      "open_service_ns": 22371.0,
+      "restore_service_ns": 455405556.5,
+      "first_query_service_ns": 12149462.0,
+      "restore_roundtrip_ns": 455571042.0,
+      "first_query_roundtrip_ns": 18024231.5,
+      "ttfq_ns": 475007424.0,
+      "peak_rss_bytes": 370380800.0,
+      "live_heap_bytes": 174743444.0,
+      "peak_heap_bytes": 174743510.0,
+      "state_digest_ms": 633.285893
+    }
+  },
+  "snapshot": {
+    "hybrid": {
+      "write_service_ns": 98280049,
+      "write_roundtrip_ns": 98573820,
+      "bytes": 58988999,
+      "fixture_open_service_ns": 1399589970,
+      "state_digest_ms": 634.76145
+    },
+    "rust": {
+      "write_service_ns": 708210684,
+      "write_roundtrip_ns": 708461859,
+      "bytes": 59289011,
+      "fixture_open_service_ns": 1489920752,
+      "state_digest_ms": 864.7472160000001
+    },
+    "zig": {
+      "write_service_ns": 94992810,
+      "write_roundtrip_ns": 97594531,
+      "bytes": 58988996,
+      "fixture_open_service_ns": 1382236266,
+      "state_digest_ms": 638.239004
+    }
+  },
+  "paired_ttfq_ratio": {
+    "depth-4: ttfq rust/zig": {
+      "median": 1.254421666433895,
+      "ci95": [
+        1.242990095683088,
+        1.2606153698568794
+      ],
+      "pairs": 30
+    },
+    "depth-4: ttfq hybrid/rust": {
+      "median": 0.7719095617301158,
+      "ci95": [
+        0.7689922077670777,
+        0.7802231784767906
+      ],
+      "pairs": 30
+    },
+    "depth-4: ttfq hybrid/zig": {
+      "median": 0.9661569241232768,
+      "ci95": [
+        0.9587552229284053,
+        0.9697449984598618
+      ],
+      "pairs": 30
+    },
+    "lookup-first: ttfq rust/zig": {
+      "median": 1.5776459665332783,
+      "ci95": [
+        1.5653866947269672,
+        1.6002785996844786
+      ],
+      "pairs": 30
+    },
+    "lookup-first: ttfq hybrid/rust": {
+      "median": 0.6301180757304645,
+      "ci95": [
+        0.6213621444258577,
+        0.6528774303512028
+      ],
+      "pairs": 30
+    },
+    "lookup-first: ttfq hybrid/zig": {
+      "median": 1.0004358336777848,
+      "ci95": [
+        0.9790991983899613,
+        1.022307918832345
+      ],
+      "pairs": 30
+    }
+  },
+  "state": "PASS",
+  "classification": "controlled",
+  "records": 180,
+  "condition_failure_samples": 0
+}

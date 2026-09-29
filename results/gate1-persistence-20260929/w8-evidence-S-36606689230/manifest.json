@@ -1,0 +1,125 @@
+{
+  "schema": "csl.eval.w8/v0.1",
+  "workload": "W8.S1",
+  "started_utc": "2026-09-29T17:43:16.241111+00:00",
+  "classification": "controlled",
+  "environment": {
+    "tools": {
+      "python3": {
+        "state": "PASS",
+        "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.12.14"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/home/runner/.cargo/bin/rustc",
+        "version": "rustc 1.99.0-nightly (1a98b1e13 2026-08-07)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/home/runner/.cargo/bin/cargo",
+        "version": "cargo 1.99.0-nightly (c79e8f894 2026-08-04)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/usr/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "Linux-6.17.0-1022-azure-aarch64-with-glibc2.39",
+    "architecture": "aarch64",
+    "uname": [
+      "Linux",
+      "runnervmoyp6c",
+      "6.17.0-1022-azure",
+      "#22-Ubuntu SMP Mon Jul 27 17:12:01 UTC 2026",
+      "aarch64",
+      "aarch64"
+    ],
+    "hardware": "aarch64",
+    "cpu_count": 4,
+    "runtime_python": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/python",
+    "sdk_workaround": false
+  },
+  "preflight_machine": {
+    "utc": "2026-09-29T17:43:16.240834+00:00",
+    "load_average": [
+      1.05615234375,
+      0.41015625,
+      0.15234375
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 15289868288,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "preflight_failures": [],
+  "repeat": 30,
+  "candidates": [
+    "rust",
+    "zig",
+    "hybrid"
+  ],
+  "strategies": [
+    "incremental",
+    "full-rebuild"
+  ],
+  "compositions": [
+    "evidence"
+  ],
+  "fractions": [
+    0.0001,
+    0.001,
+    0.01,
+    0.05
+  ],
+  "source_digest": "e4b0e77b557a9ebeaf60f15c8611aa9b329f83e07bccf75fc7e496be56698366",
+  "protocol": "csl.eval.session.jsonl/v0",
+  "note": "timed intervals cover mutate/open only; oracle work, state_digest and query comparison are excluded",
+  "corpus": {
+    "path": "corpus/synthetic/S-campaign-mixed-20260928.json",
+    "digest": "7ea1c7884968206fff29bfd3f0a0102018df2e82cd6377061870b18ab369c4d5"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust/target/release/csl-eval-rust",
+      "digest": "cd6c5e1c1a16e3f9dea7e72cd808e2e6da29b26ef076b192a4feef240af42c9c"
+    },
+    "zig": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/zig/zig-out/bin/csl-eval-zig",
+      "digest": "afe040a12941b8657758e573ccd1a7ca763c38f18ba7e8402b2898beb77a9524"
+    },
+    "hybrid": {
+      "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/hybrid/target/release/csl-eval-hybrid",
+      "digest": "3ce37851a4918df9a2c795e1c1a9d49bcdc371ab631a7e0e009b813d23842776"
+    }
+  },
+  "cases": {
+    "evidence@0.0001": {
+      "operations": 210,
+      "expected_state_digest": "sha256:b387ce063fc18a40f3e661aef33879f9773e2720efe28498043ed3039e23a7a7"
+    },
+    "evidence@0.001": {
+      "operations": 2100,
+      "expected_state_digest": "sha256:57b9bed1d3f70e99e24cb55be8c4657f96bbca63964401dd0042cbec88ef8774"
+    },
+    "evidence@0.01": {
+      "operations": 21000,
+      "expected_state_digest": "sha256:b1358cb0cfc9b98525bced2c06a7a86880d99caacdbe64408071a84ac2a6ac46"
+    },
+    "evidence@0.05": {
+      "operations": 105000,
+      "expected_state_digest": "sha256:feb16f19cdae44ae21cb31dc8c1d08d69e62bbe9cf4ae07c05ace2d68e7c96d8"
+    }
+  },
+  "base_state_digest": "sha256:008f868d5819ba276d7807969e96472a87be6eb9d855b97b6923673b4d75ba7c",
+  "state": "PASS",
+  "finished_utc": "2026-09-29T18:38:11.388057+00:00",
+  "records": 780
+}

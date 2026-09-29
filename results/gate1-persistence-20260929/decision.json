@@ -1,0 +1,1385 @@
+{
+  "hybrid_vs_best_other": [
+    {
+      "dimension": "latency",
+      "cell": "W5.S1/depth-4 first-query",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.3153489654346116,
+      "ci95": [
+        1.312307066996869,
+        1.3213656937042457
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W5.S1/depth-4 restore",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 0.9987240163968938,
+      "ci95": [
+        0.9839198370693916,
+        1.003944219190294
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W5.S1/depth-4 time-to-first-query",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 0.9661569241232768,
+      "ci95": [
+        0.9587552229284053,
+        0.9697449984598618
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W5.S1/lookup-first first-query",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 3.9008514169367494,
+      "ci95": [
+        3.7817445450123097,
+        3.9297084758009904
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W5.S1/lookup-first restore",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.015047450909785,
+      "ci95": [
+        0.9908610810699945,
+        1.0343487871194887
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W5.S1/lookup-first time-to-first-query",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0004358336777848,
+      "ci95": [
+        0.9790991983899613,
+        1.022307918832345
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/entity@0.0001/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0886454078206667,
+      "ci95": [
+        1.0851012565933726,
+        1.095911733416922
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/entity@0.0001/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0802722112509575,
+      "ci95": [
+        1.0712786173078221,
+        1.0842398537917235
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/entity@0.001/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.073192612139601,
+      "ci95": [
+        1.070180099005841,
+        1.0761321188080037
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/entity@0.001/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1380337145446915,
+      "ci95": [
+        1.1276905280993703,
+        1.1577501875582878
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/entity@0.01/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0599250866071626,
+      "ci95": [
+        1.0541735154289733,
+        1.0638351757190931
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/entity@0.01/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.8063717679379083,
+      "ci95": [
+        1.7967979935619987,
+        1.8197168289051704
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/entity@0.05/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.785524428497359,
+      "ci95": [
+        1.7712900476351026,
+        1.79111498289691
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/entity@0.05/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.4553411615226413,
+      "ci95": [
+        1.4437805212268175,
+        1.4618667123791191
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/evidence@0.0001/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1015471330381454,
+      "ci95": [
+        1.0911279674306247,
+        1.112708550027803
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/evidence@0.0001/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.3120629387892722,
+      "ci95": [
+        1.2903750904155111,
+        1.3293488402648173
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/evidence@0.001/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0857558314055424,
+      "ci95": [
+        1.0823655496360614,
+        1.096919401851863
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/evidence@0.001/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.3276173143203813,
+      "ci95": [
+        1.322963611317864,
+        1.3338291194027512
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/evidence@0.01/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1032617602701449,
+      "ci95": [
+        1.0948750857648548,
+        1.1062692723209555
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/evidence@0.01/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.2605801942121766,
+      "ci95": [
+        1.2547966317491557,
+        1.272553744487663
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/evidence@0.05/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0703274775601377,
+      "ci95": [
+        1.0631508966606487,
+        1.078193352609543
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/evidence@0.05/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.2411695447609399,
+      "ci95": [
+        1.2300630229465286,
+        1.2561948918966435
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/mixed@0.0001/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.064375541909428,
+      "ci95": [
+        1.0451555759568651,
+        1.0826779182383304
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/mixed@0.0001/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1655331860220581,
+      "ci95": [
+        1.1477489502751705,
+        1.1703269221232873
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/mixed@0.001/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.092429747056467,
+      "ci95": [
+        1.0609014309147429,
+        1.1062953361660153
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/mixed@0.001/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1926986921518004,
+      "ci95": [
+        1.1832339764073236,
+        1.2048069134087425
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/mixed@0.01/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0471092432956604,
+      "ci95": [
+        1.0388211445265183,
+        1.0640946008789807
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/mixed@0.01/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.149055357209145,
+      "ci95": [
+        1.1433556282713901,
+        1.1554597981067385
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/mixed@0.05/full-rebuild mutate",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0349088065320804,
+      "ci95": [
+        1.0201924999668779,
+        1.0528911767845948
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/mixed@0.05/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.2198974526196031,
+      "ci95": [
+        1.2124017821361688,
+        1.2256182667907964
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/relation@0.0001/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0487086026290973,
+      "ci95": [
+        1.014884914540766,
+        1.082425044308386
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/relation@0.0001/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1348183787004305,
+      "ci95": [
+        1.1037768353305997,
+        1.1527145213303782
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/relation@0.001/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0784808864138826,
+      "ci95": [
+        1.065953697382297,
+        1.0983277882293154
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/relation@0.001/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1283097812454033,
+      "ci95": [
+        1.1123163356496368,
+        1.1422474328549628
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/relation@0.01/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0817234582458695,
+      "ci95": [
+        1.0584940126085356,
+        1.1090978815414814
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/relation@0.01/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.0932440007846913,
+      "ci95": [
+        1.0805154628800255,
+        1.1064967615907806
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/relation@0.05/full-rebuild mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.067787479384959,
+      "ci95": [
+        1.044470578966393,
+        1.082318399193888
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "latency",
+      "cell": "W8.S1/relation@0.05/incremental mutate",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.143784091539819,
+      "ci95": [
+        1.1244134272756408,
+        1.1681710802397822
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W5.S1/depth-4 live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W5.S1/depth-4 peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 0.9476347289739167,
+      "ci95": [
+        0.9476253953827478,
+        0.9477129001949843
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W5.S1/lookup-first live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W5.S1/lookup-first peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0023667330421941,
+      "ci95": [
+        1.0022448799044543,
+        1.002411184356059
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.0001/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.0001/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1391742012563393,
+      "ci95": [
+        1.139172395900895,
+        1.139204250534273
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.0001/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.599932550633543,
+      "ci95": [
+        1.599932550633543,
+        1.599932550633543
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.0001/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010166321011753,
+      "ci95": [
+        1.0009556171754443,
+        1.0010294341924661
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.001/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.001/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1385362548527442,
+      "ci95": [
+        1.1385236829311183,
+        1.1385388408902108
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.001/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5986975803385817,
+      "ci95": [
+        1.5986975803385817,
+        1.5986975803385817
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.001/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010167122069076,
+      "ci95": [
+        1.0009989248278426,
+        1.001024342762229
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.01/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.01/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.2088195651847138,
+      "ci95": [
+        1.208813508367572,
+        1.2088327253778008
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.01/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.6552602672873524,
+      "ci95": [
+        1.6552602672873524,
+        1.6552602672873524
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.01/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.000953065698751,
+      "ci95": [
+        1.0009327552114837,
+        1.0010141678485915
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.05/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.05/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1399597266272532,
+      "ci95": [
+        1.1399550881330363,
+        1.1400120516275738
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.05/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5084073866373862,
+      "ci95": [
+        1.5084073866373862,
+        1.5084073866373862
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/entity@0.05/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.001011626074535,
+      "ci95": [
+        1.0009403846935871,
+        1.0010217152616812
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.0001/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.0001/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.146684308841843,
+      "ci95": [
+        1.1466761449814267,
+        1.1467262002807863
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.0001/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5997496840131002,
+      "ci95": [
+        1.5997496840131002,
+        1.5997496840131002
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.0001/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010166269334972,
+      "ci95": [
+        1.0009556633736238,
+        1.0010268975741912
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.001/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.001/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1401579200471588,
+      "ci95": [
+        1.1401527491222354,
+        1.1401667636298827
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.001/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5973341775097856,
+      "ci95": [
+        1.5973341775097856,
+        1.5973341775097856
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.001/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010217152616812,
+      "ci95": [
+        1.0010141678485915,
+        1.0010294341924661
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.01/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.01/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1607316486402501,
+      "ci95": [
+        1.1607237279013716,
+        1.1607690611279295
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.01/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5784366510657675,
+      "ci95": [
+        1.5784366510657675,
+        1.5784366510657675
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.01/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.001011626074535,
+      "ci95": [
+        1.0009378407362024,
+        1.0010243038206632
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.05/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.05/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1910252003067403,
+      "ci95": [
+        1.1910199512567043,
+        1.1910635032674555
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.05/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.4396841315907496,
+      "ci95": [
+        1.4396841315907496,
+        1.4396841315907496
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/evidence@0.05/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010166295173364,
+      "ci95": [
+        1.0010040033107819,
+        1.0010268976000347
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.0001/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.0001/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1464084026604093,
+      "ci95": [
+        1.1464065681672548,
+        1.146418843549768
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.0001/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5998979825833815,
+      "ci95": [
+        1.5998979825833815,
+        1.5998979825833815
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.0001/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010217568134019,
+      "ci95": [
+        1.0010141316467183,
+        1.001077695997278
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.001/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.001/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1442214174857734,
+      "ci95": [
+        1.1442214174857734,
+        1.1442288292264473
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.001/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5985883214260594,
+      "ci95": [
+        1.5985883214260594,
+        1.5985883214260594
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.001/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.001011626074535,
+      "ci95": [
+        1.0009403846935871,
+        1.0010217568134019
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.01/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.01/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1400175855931018,
+      "ci95": [
+        1.1399863837236541,
+        1.14006677502833
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.01/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5766110016726715,
+      "ci95": [
+        1.5766110016726715,
+        1.5766110016726715
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.01/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.001009086858895,
+      "ci95": [
+        1.000935303910237,
+        1.001019215246517
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.05/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.05/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.185608817478197,
+      "ci95": [
+        1.18554608382114,
+        1.1856173073070846
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.05/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5701389565778128,
+      "ci95": [
+        1.5701389565778128,
+        1.5701389565778128
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/mixed@0.05/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010040109473457,
+      "ci95": [
+        1.0009429286768348,
+        1.0010166295173364
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.0001/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.0001/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1392433638823913,
+      "ci95": [
+        1.1392263501669864,
+        1.1393027467880872
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.0001/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5999912716180078,
+      "ci95": [
+        1.5999912716180078,
+        1.5999912716180078
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.0001/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010166682780728,
+      "ci95": [
+        1.001011633788575,
+        1.0010167096226483
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.001/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.001/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1386520151391977,
+      "ci95": [
+        1.1386490683229813,
+        1.1386579088289268
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.001/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.598486491645941,
+      "ci95": [
+        1.598486491645941,
+        1.598486491645941
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.001/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010192176107096,
+      "ci95": [
+        1.0010115849366823,
+        1.0010218035595366
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.01/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.01/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1355642570239026,
+      "ci95": [
+        1.1355538029115113,
+        1.1355794241727373
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.01/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5869271717195697,
+      "ci95": [
+        1.5869271717195697,
+        1.5869271717195697
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.01/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0010167225441022,
+      "ci95": [
+        1.0010141265040162,
+        1.001024342762229
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.05/full-rebuild live-heap",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.05/full-rebuild peak-rss",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.1584683655253751,
+      "ci95": [
+        1.1584630493043064,
+        1.15851039396008
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.05/incremental live-heap",
+      "best_other": "rust",
+      "pairs": 30,
+      "median_ratio": 1.5495142764431016,
+      "ci95": [
+        1.5495142764431016,
+        1.5495142764431016
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "memory",
+      "cell": "W8.S1/relation@0.05/incremental peak-rss",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.001009086858895,
+      "ci95": [
+        1.0009429286768348,
+        1.0010192539938854
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "startup",
+      "cell": "W5.S1/depth-4 cold time-to-first-query",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 0.9661569241232768,
+      "ci95": [
+        0.9587552229284053,
+        0.9697449984598618
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "startup",
+      "cell": "W5.S1/depth-4 process-start",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.2246291805926335,
+      "ci95": [
+        1.2030303632975865,
+        1.2550092154679657
+      ],
+      "verdict": "worse"
+    },
+    {
+      "dimension": "startup",
+      "cell": "W5.S1/lookup-first cold time-to-first-query",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.0004358336777848,
+      "ci95": [
+        0.9790991983899613,
+        1.022307918832345
+      ],
+      "verdict": "equivalent"
+    },
+    {
+      "dimension": "startup",
+      "cell": "W5.S1/lookup-first process-start",
+      "best_other": "zig",
+      "pairs": 30,
+      "median_ratio": 1.2151343501124572,
+      "ci95": [
+        1.17997556898547,
+        1.265338375648851
+      ],
+      "verdict": "worse"
+    }
+  ],
+  "hybrid_costs": {
+    "boundary_tax_fraction_median": 0.012740743279069613,
+    "boundary_tax_worse": false,
+    "ownership_fraction_median": 5.153638592136095e-06,
+    "ownership_worse": false,
+    "toolchain_complexity_worse": true
+  },
+  "pareto": {
+    "rust vs zig": {
+      "verdicts": {
+        "latency": "mixed",
+        "startup": "worse",
+        "memory": "mixed"
+      },
+      "dominates": false
+    },
+    "rust vs hybrid": {
+      "verdicts": {
+        "latency": "mixed",
+        "startup": "worse",
+        "memory": "mixed",
+        "complexity": "better"
+      },
+      "dominates": false
+    },
+    "zig vs rust": {
+      "verdicts": {
+        "latency": "mixed",
+        "startup": "better",
+        "memory": "mixed"
+      },
+      "dominates": false
+    },
+    "zig vs hybrid": {
+      "verdicts": {
+        "latency": "better",
+        "startup": "better",
+        "memory": "equivalent",
+        "complexity": "better"
+      },
+      "dominates": true
+    },
+    "hybrid vs rust": {
+      "verdicts": {
+        "latency": "mixed",
+        "startup": "better",
+        "memory": "mixed",
+        "complexity": "worse"
+      },
+      "dominates": false
+    },
+    "hybrid vs zig": {
+      "verdicts": {
+        "latency": "worse",
+        "startup": "worse",
+        "memory": "equivalent",
+        "complexity": "worse"
+      },
+      "dominates": false
+    }
+  }
+}

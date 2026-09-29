@@ -1,0 +1,11 @@
+{
+  "GITHUB_REPOSITORY": "blyzer/csl-runtime-eval",
+  "GITHUB_SHA": "0f31108f7786df25ea8dd6a6ef079424a05fb3c9",
+  "GITHUB_RUN_ID": "36606689230",
+  "GITHUB_RUN_ATTEMPT": "1",
+  "RUNNER_OS": "Linux",
+  "RUNNER_ARCH": "ARM64",
+  "RUNNER_LABEL": "ubuntu-24.04-arm",
+  "ImageOS": "ubuntu24-arm64",
+  "ImageVersion": "20260920.129.1"
+}

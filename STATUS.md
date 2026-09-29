@@ -534,6 +534,94 @@ Implemented before any W5/W8 measurement (nothing here is a result):
   requests inside the engine, so there is no asymmetry there. If measurement shows one of these
   makes the comparison unfair, that is the only permitted reason to touch the boundary.
 
+## Persistence and mutation: W5.S1, W8.S1, X-MEM and the Hybrid falsification — 2026-09-29
+
+Evidence: [results/gate1-persistence-20260929](results/gate1-persistence-20260929/) (run
+36606689230, commit `0f31108`): hosted `ubuntu-24.04-arm`, S corpus (digest `7ea1c788...`), **controlled,
+0 condition failures, `sdk_workaround: false`**, swap disabled. Every accepted sample equals the
+oracle (digest and query bytes); every W8 cell also passed its rejection-equivalence check (96/96).
+A first attempt of the same workloads (runs 36601684395 / 36602465925) is **discarded**: it failed
+CI validation (Zig test build needed libc on Linux), and then its RSS was found invalid because on
+Linux `exec` folds the parent harness's RSS high-water mark into the child's (all candidates
+reported 2,299 MB); the peak RSS is now read from the child's own `VmHWM`, and runs abort if
+candidates share one RSS value. The exploratory local S-scale S0 numbers remain exploratory only.
+
+### W5.S1 cold restore (`process start -> open(empty) -> restore(snapshot_id) -> first query`), 30 per candidate and query, medians, ms
+
+| Candidate / first query | process start | open | restore | first query (service) | time-to-first-query | peak RSS | live heap |
+|---|---|---|---|---|---|---|---|
+| Rust / lookup-first | 1.0 | 0.0 | 746 | 3.1 | **751** | 585 MB | 433 MB |
+| Zig / lookup-first | 0.8 | 0.0 | 455 | 12.1 | **475** | 370 MB | 175 MB |
+| Hybrid / lookup-first | 0.9 | 0.0 | 465 | 12.0 | **479** | 371 MB | 175 MB |
+| Rust / depth-4 (26 MB result) | 0.9 | 0.0 | 742 | 246 | **1,119** | 585 MB | 433 MB |
+| Zig / depth-4 | 0.8 | 0.0 | 456 | 211 | **896** | 392 MB | 175 MB |
+| Hybrid / depth-4 | 0.9 | 0.0 | 455 | 278 | **865** | 371 MB | 175 MB |
+
+Snapshot (write service time; bytes; `state_digest` checkpoint, always excluded from the phases):
+Rust 708 ms, 59.3 MB, 865 ms; Zig 95 ms, 59.0 MB, 638 ms; Hybrid 98 ms, 59.0 MB, 635 ms.
+Paired time-to-first-query ratios (30 pairs, 95% CI): lookup-first Rust/Zig **1.578** [1.565, 1.600],
+Hybrid/Zig **1.000** [0.979, 1.022], Hybrid/Rust 0.630 [0.621, 0.653]; depth-4 Rust/Zig 1.254
+[1.243, 1.261], Hybrid/Zig 0.966 [0.959, 0.970], Hybrid/Rust 0.772 [0.769, 0.780].
+The Zig restore/snapshot/digest advantage over Rust is observed; its cause is **not isolated or
+profiled** (the two writers and restorers are independent implementations). `open(empty)` is ~0
+so process start (~1 ms) and restore dominate. Warm OS page cache; a cold-cache restore was not attempted.
+
+### W8.S1 incremental invalidation: `mutate` service time, median of 30, ms (Rust / Zig / Hybrid)
+
+| Delta | 0.01% | 0.1% | **1% (primary)** | 5% |
+|---|---|---|---|---|
+| entity | 0.4 / 0.5 / 0.5 | 3.5 / 3.7 / 4.0 | 33.0 / 57.2 / 59.6 | 188 / 254 / 274 |
+| relation | 0.5 / 0.6 / 0.6 | 4.6 / 5.0 / 5.2 | 40.9 / 43.3 / 45.2 | 190 / 207 / 221 |
+| evidence | 0.5 / 0.7 / 0.7 | 5.0 / 6.2 / 6.6 | 48.4 / 57.1 / 61.0 | 240 / 271 / 298 |
+| mixed | 0.7 / 0.8 / 0.8 | 5.3 / 6.0 / 6.3 | **49.2 / 53.7 / 56.7** | 237 / 268 / 289 |
+
+For scale, the same batches under `full-rebuild` take 0.82-1.17 s (Rust) / 0.86-1.83 s (Zig) /
+0.89-1.87 s (Hybrid) and a cold build of `S + delta` (`open`) takes ~1.29-1.41 s in all three;
+incremental is faster than both at every measured point (break-even is above 5%). Deltas were 210
+to 115,498 operations. `derived_rebuilds_total` stayed at its post-`open` value in every
+incremental run: no fallback rebuild. The hard invariant `ColdBuild(S + delta) == IncrementalApply(S,
+delta)` held for every cell and repeat (digest, oracle query bytes, evidence-predicate queries,
+rejection equivalence, no stale results in the adversarial deltas).
+Primary cell (mixed, 1%, incremental), paired 30 pairs: mutate Zig/Rust **1.094** [1.075, 1.101],
+Hybrid/Rust 1.149 [1.143, 1.155], Hybrid/Zig **1.055** [1.051, 1.063]; peak RSS Zig 806 MB vs Rust
+884 MB (0.911), Hybrid 807 MB (1.001 vs Zig); live heap Rust 293 MB vs Zig/Hybrid 462 MB (1.577).
+`state_digest` checkpoint: Rust 1,226 ms, Zig 652 ms, Hybrid 655 ms.
+
+### BoundaryTax and ownership (Hybrid, as instrumented)
+
+W5 cold restore: boundary 10.4 ms vs kernel 577 ms vs wrapper (Rust protocol/framing) 47.8 ms, i.e.
+BoundaryTax **1.7%** of hybrid service work; 13.1 MB copied out of the Zig arena per session (4
+copies) = 7.5% of the live heap. W8 mutate (1% mixed): the 2.4 MB request crosses by pointer with no
+copy; boundary 0.01 ms vs kernel 53.9 ms (0.02%). Both are below the preregistered cost thresholds
+(5% and 10%). Disclosed artifacts: hybrid `first query` service time includes Rust-side chunk
+framing and one arena copy (depth-4: 278 vs 211 ms), yet its end-to-end time-to-first-query is
+level with Zig's (0.966) because the two front ends frame and the host reads chunks differently.
+
+### Preregistered outcome (`harness/gate1_decision.py`)
+
+Hybrid vs the best other candidate per cell: latency 38 cells (17 materially worse, 21 equivalent),
+memory 68 (21 worse, 47 equivalent), startup 4 (2 worse, 2 equivalent), and **no cell where Hybrid is
+materially better than either pure candidate**. The "worse" startup verdicts are ratios of ~0.9 vs
+~0.8 ms, a threshold artifact on sub-millisecond phases that the fixed ratio rule does not filter.
+Pareto: **Zig dominates Hybrid** (Hybrid is never better, equivalent in memory, worse in latency,
+startup and toolchain complexity); Rust and Zig do **not** dominate each other; Rust does not dominate
+Hybrid. Hard requirements R1 (oracle conformance) and R2 (controlled) hold for all three; R3 (boundary
+safety) holds for Hybrid's ASan/UBSan smoke; **R4 (reproducible clean builds, W11) is still pending**,
+so "qualifying" is provisional.
+
+**Hybrid kill rule: HIT** (criterion: Hybrid is Pareto-dominated by a qualifying pure candidate
+under the preregistered framework). The boundary did *not* consume the Zig advantage over Rust
+(Hybrid keeps it: W5 time-to-first-query Hybrid/Zig 1.000), but it adds nothing Zig lacks and costs a
+second toolchain. Hybrid optimization stops; no second boundary was built; no artifact was found that
+makes the experiment unfair enough to justify touching the boundary.
+
+### Rust vs Zig, current picture (trade-offs, no dominance)
+
+Rust: ~2x faster decode/load, fastest incremental mutation (1.05-1.7x), faster small first queries,
+lower live heap under incremental (0.63x). Zig: faster restore (1.64x), snapshot write (7.5x) and
+digest checkpoint (1.9x), lower cold-restore peak RSS (0.63x), lower incremental-run peak RSS at 1%
+(0.91x). Causes for the persistence gaps are not isolated. Gate #1 remains **OPEN**.
+
 ## S-scale campaign protocol — 2026-09-28
 
 [ADR-0003](adr/0003-s-scale-campaign.md) defines the serial paired runner in

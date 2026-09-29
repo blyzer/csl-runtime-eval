@@ -1,0 +1,2 @@
+NAME      TYPE SIZE USED PRIO
+/swapfile file   3G   0B   -2
