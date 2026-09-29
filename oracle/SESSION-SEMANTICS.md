@@ -230,6 +230,18 @@ Closed set of codes; only the code is compared across candidates, never message 
 Any failed request leaves logical state and `generation` unchanged (except that
 `INTERNAL` ends the session).
 
+### 8.1 Error-code clarifications fixed by the v0 implementations
+
+The two independent implementations had to choose a code where the text was silent; both
+chose the same, and v0 now fixes them: `open(empty)` with a malformed context, `open` with
+`max_line_bytes` below 65536, and `cancel` without `target` -> `INVALID_REQUEST`; `close` (or any
+other operation) before `open` -> `INVALID_STATE`; an unreadable or invalid fixture in `open`, a
+query whose IR is invalid, and an unknown, corrupt or incompatible `snapshot_id` -> `INVALID_INPUT`;
+an unknown operation or unknown/missing fields are rejected as `INVALID_REQUEST` *before* the
+lifecycle check; malformed JSON or a non-object line -> `INVALID_REQUEST` with `"id": null`.
+Integer-valued fields must be JSON integers: float spellings such as `1.0` are rejected by the
+candidates, and a boolean is never an id.
+
 ## 9. Ownership and determinism
 
 * The candidate owns the store. The host holds only opaque `session` and `snapshot_id`

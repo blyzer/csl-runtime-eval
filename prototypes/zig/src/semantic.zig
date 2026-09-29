@@ -2,8 +2,8 @@ const std = @import("std");
 const A = std.mem.Allocator;
 pub const Kind = enum { TYPE, METHOD, FUNCTION, FIELD, MODULE, FILE, VARIABLE };
 pub const Relation = enum { CALLS, REFERENCES, IMPLEMENTS, OVERRIDES, CONTAINS };
-const Quality = enum { LEXICAL, PROBABLE, DERIVED, EXACT, VERIFIED };
-const Polarity = enum { POSITIVE, NEGATIVE };
+pub const Quality = enum { LEXICAL, PROBABLE, DERIVED, EXACT, VERIFIED };
+pub const Polarity = enum { POSITIVE, NEGATIVE };
 pub const Entity = struct { id: u64, kind: Kind, name_sid: u32, container: ?u64 = null };
 pub const Edge = struct { subject: u64, relation: Relation, object: u64 };
 // Alphabetical field order is canonical JSON order. Never add measurement fields here.
@@ -39,13 +39,13 @@ fn validateQuery(q: Query) anyerror!void {
 }
 const Set = std.AutoHashMap(u64, void);
 const Index = std.AutoHashMap(u64, std.ArrayList(Edge));
-fn edgeLess(_: void, a: Edge, b: Edge) bool {
+pub fn edgeLess(_: void, a: Edge, b: Edge) bool {
     if (a.subject != b.subject) return a.subject < b.subject;
     const order = std.mem.order(u8, @tagName(a.relation), @tagName(b.relation));
     if (order != .eq) return order == .lt;
     return a.object < b.object;
 }
-fn evLess(_: void, a: Evidence, b: Evidence) bool {
+pub fn evLess(_: void, a: Evidence, b: Evidence) bool {
     inline for (.{ "subject", "relation", "object", "proposition", "lineage", "polarity", "quality", "freshness_epoch" }) |field| {
         const x = @field(a, field);
         const y = @field(b, field);

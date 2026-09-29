@@ -1,4 +1,5 @@
 mod model;
+mod session;
 use model::{Edge, Entity, Evidence, Fixture};
 use serde::Serialize;
 use serde_json::{Value, json};
@@ -724,8 +725,22 @@ fn main_run() -> Result<String> {
 fn main() {
     // Decided before anything else allocates in `main_run`; args_os temporaries are
     // allocated and freed while counting is still off, so they cancel out.
-    if std::env::args_os().any(|a| a == "--stats") {
+    if std::env::args_os().any(|a| a == "--stats")
+        || std::env::args_os().nth(1).is_some_and(|a| a == "session")
+    {
         STATS_ON.store(true, Relaxed);
+    }
+    let args: Vec<String> = std::env::args().collect();
+    if args.get(1).map(String::as_str) == Some("session") {
+        let Some(repository) = args
+            .windows(2)
+            .find(|w| w[0] == "--repository")
+            .map(|w| w[1].clone())
+        else {
+            eprintln!("missing --repository");
+            std::process::exit(1);
+        };
+        std::process::exit(session::run(std::path::Path::new(&repository)));
     }
     match main_run() {
         Ok(v) => println!("{v}"),

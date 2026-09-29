@@ -1,4 +1,7 @@
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Deserializer, Serialize};
+fn present_epoch<'de, D: Deserializer<'de>>(d: D) -> Result<Option<u64>, D::Error> {
+    u64::deserialize(d).map(Some)
+}
 #[derive(Clone, Copy, Deserialize, Serialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Kind {
@@ -109,8 +112,10 @@ pub struct Evidence {
 pub struct Fixture {
     pub schema: String,
     pub snapshot: String,
-    #[serde(default, rename = "epoch")]
-    pub _epoch: u64,
+    /// `None` when the fixture has no `epoch`; a present value must be an integer
+    /// (`null` is still rejected, as it was with a plain `u64`).
+    #[serde(default, rename = "epoch", deserialize_with = "present_epoch")]
+    pub _epoch: Option<u64>,
     pub strings: Vec<String>,
     pub entities: Vec<Entity>,
     pub relations: Vec<Edge>,

@@ -1,5 +1,6 @@
 const std = @import("std");
 const sem = @import("semantic.zig");
+const session = @import("session.zig");
 fn arg(args: [][:0]u8, key: []const u8) ![]const u8 {
     for (args, 0..) |v, i| {
         if (std.mem.eql(u8, v, key) and i + 1 < args.len) return args[i + 1];
@@ -192,6 +193,19 @@ fn run(arena: *std.heap.ArenaAllocator) ![]const u8 {
     return store.execute(q.value);
 }
 pub fn main() void {
+    // S0 session mode is a separate command; every one-shot command below is unchanged.
+    var it = std.process.args();
+    _ = it.skip();
+    if (it.next()) |first| {
+        if (std.mem.eql(u8, first, "session")) {
+            var repo: []const u8 = ".";
+            while (it.next()) |value| {
+                if (std.mem.eql(u8, value, "--repository")) repo = it.next() orelse "";
+            }
+            session.serve(repo);
+            return;
+        }
+    }
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena.deinit();
     const output = run(&arena) catch |e| {

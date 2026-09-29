@@ -424,6 +424,72 @@ bytes read from disk and exclude the measurement arrays.
 
 Gate #1 remains **OPEN**; nothing here selects Rust, Zig or Hybrid.
 
+## Index-stability experiment (preregistered, single run) — 2026-09-29
+
+Protocol fixed before the run: [preregistration](results/preregistration/gate1-materiality-and-index-stability-20260929.md)
+Part A. One hosted instance, the same S corpus as pass 3 (digest `7ea1c788...`), Rust and Zig
+interleaved, W1 x 40 repeats = **120 pairs**, 240 records, all byte-identical to the oracle, 0
+condition failures, `sdk_workaround: false`. Evidence: [results/index-stability-20260929](results/index-stability-20260929/)
+(run 36588754955, commit `ee8be24`). No implementation was changed for it.
+
+| Phase | Median Zig/Rust | 95% CI | Pairs with Rust faster |
+|---|---|---|---|
+| index (total) | **1.164** | [1.140, 1.197] | 99% |
+| entities | 1.655 | [1.637, 1.671] | 100% |
+| adjacency | 1.113 | [1.094, 1.149] | 90% |
+| sort | 1.316 | [1.312, 1.318] | 100% |
+
+Absolute index time varies a lot run to run inside the instance (per-repeat-block medians: Rust
+262-377 ms, CV 17%; Zig 331-405 ms, CV 11.5%), but the interleaved pairs cancel most of it.
+
+**Preregistered outcome: `Rust materially faster within this instance (cross-instance stability
+not established)`.** This is not the "difference within run variance" case, so the investigation is
+*not* closed as within-variance by me; nothing was tuned and nothing further will be searched.
+
+Across hosted instances on the same corpus: pass 3 measured Zig/Rust 0.93-0.96 (Zig 4-7% faster);
+pass 5 measured 1.08-1.17; this experiment 1.164. Two later instances agree on the sign and
+magnitude (Rust ~13-16% faster); the earlier one disagrees. Instance and build are confounded (the
+code between pass 3 and pass 5 differs only in Track A additions, none in the index path; a local
+same-machine A/B showed those additions cost Rust +1-2%), so the disagreement cannot be attributed
+to either.
+
+Status as instructed: **`NO STABLE MATERIAL INDEX ADVANTAGE ESTABLISHED`** (the historical 4-7% Zig
+advantage is not surviving evidence). It is recorded here that the preregistered rule returned a
+within-instance Rust advantage; whether that changes the program-level classification is left to
+review. Either way the P4 premise (a Zig index advantage worth a language boundary) is not
+supported.
+
+## S0 v0 implemented in Rust and Zig — 2026-09-29
+
+Contract: [S0 semantics](oracle/SESSION-SEMANTICS.md) and [JSONL binding](oracle/SESSION-BINDING-JSONL.md)
+(final v0), mutation rules in [ADR-0008](adr/0008-mutation-semantics.md). `csl-eval-{rust,zig} session
+--repository DIR` implements open (fixture | empty), query, mutate, state_digest, snapshot, restore,
+stats, close, and answers `cancel` with `UNSUPPORTED` (no optional capability advertised). Mutation
+strategy in both is **`full-rebuild`** (explicitly reported at `open`; every derived structure is
+rebuilt inside `mutate`); it is the correctness reference and a baseline, **not** an incremental
+implementation, so it does not satisfy W8. Snapshots are candidate-native binary files in the
+snapshot repository. **Hybrid has no S0 implementation:** it would need a persistent Zig kernel ABI
+that does not exist (decision requested, see the report).
+
+Conformance is enforced by an independent oracle-side model
+([oracle/session_model.py](oracle/session_model.py), never sharing code with a candidate) and the
+runner [harness/s0.py](harness/s0.py): **Rust 312 checks, Zig 312 checks, 0 failures each** (digest,
+generation, error codes, byte-identical query results, restore, cold restore in a fresh process,
+context mismatch, chunked responses and requests, 200 seeded fuzz batches; Zig also passes 1,000).
+Existing behavior is unchanged: normal conformance 212 PASS, profile 159 PASS, one-shot outputs
+byte-identical, **49 Python tests**. Minor spec gaps the two implementations resolved identically are
+now fixed in SESSION-SEMANTICS section 8.1.
+
+S-scale conformance check ([results/s0-scale-sanity-20260929](results/s0-scale-sanity-20260929/),
+100k entities / 1M relations / 1M evidence rows, one run each, **local Mac, exploratory; not a W5/W8
+measurement**): both candidates reproduce the oracle model's `state_digest` over 209,554,927
+canonical bytes before mutation, after a small mutation and after restore, reproduce oracle query
+results through chunked responses, and restore a snapshot in a fresh process. Informal figures:
+`state_digest` 0.93 s (Rust) / 0.70 s (Zig); snapshot ~59 MB in both; small-batch `mutate` under
+full rebuild 0.79 s / 0.58 s; cold restore total time-to-first-query 1.08 s / 0.75 s. Two harness
+bugs found and fixed on the way (unbuffered pipe reads made chunked queries look 50x slower;
+`bool` accepted as an id in the model); neither touched candidate behavior.
+
 ## S-scale campaign protocol — 2026-09-28
 
 [ADR-0003](adr/0003-s-scale-campaign.md) defines the serial paired runner in

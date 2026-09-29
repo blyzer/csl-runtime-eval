@@ -196,3 +196,19 @@ build for snapshot compatibility.
 
 **errors**: `{"id":N,"ok":false,"code":"<code>","message":"<free text>"}`, code from the closed
 set in the semantics document. A failed request leaves state and `generation` unchanged.
+
+**Chunked frames, exactly (v0)**
+
+* Chunked *response* to a `query`: `{"id":N,"frame":"begin"}`, then
+  `{"id":N,"frame":"chunk","seq":k,"data":"<base64>"}` for `k = 0..C-1`, then the terminal
+  `{"id":N,"frame":"end","ok":true,"generation":g,"chunks":C,"bytes":T,"sha256":"<hex>"}`. The
+  concatenated decoded chunk bytes are the canonical `result` object and nothing else.
+* Chunked *request*: `{"id":N,"op":"<op>","frame":"begin"}`, chunks as above, then
+  `{"id":N,"frame":"end","chunks":C,"bytes":T,"sha256":"<hex>"}`. The concatenated bytes are the
+  canonical JSON object of the operation's remaining fields (for `mutate`: `{"batch":[...]}`);
+  the candidate merges it with `id` and `op` and acts only after `end` verifies.
+* A candidate chunks a response when the single-line response would exceed the negotiated
+  `max_line_bytes`; it must accept chunked requests whatever their size.
+* Abort: `{"id":N,"frame":"abort","ok":false,"code":"<code>","message":"..."}`.
+* Float values (only `state_digest_ms`) may print in any valid JSON number form; every other
+  value, and every result payload, is canonical.
