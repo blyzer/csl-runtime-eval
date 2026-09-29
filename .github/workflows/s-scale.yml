@@ -22,6 +22,14 @@ on:
         description: Candidates (space-separated; add hybrid for the W10 boundary experiment)
         type: string
         default: rust zig
+      workloads:
+        description: Workloads (space-separated)
+        type: string
+        default: W1 W2
+      repeat:
+        description: Repeats per query and candidate
+        type: string
+        default: '10'
 
 permissions:
   contents: read
@@ -106,15 +114,19 @@ jobs:
           PRESET: ${{ inputs.preset }}
           CORPUS_SHAPE: ${{ inputs.shape }}
           CANDIDATES: ${{ inputs.candidates }}
+          WORKLOADS: ${{ inputs.workloads }}
+          REPEAT: ${{ inputs.repeat }}
           # campaign.py refuses an existing output directory (ADR-0003): never
           # reuse a path a prior committed run already created.
           OUTPUT_DIR: results/${{ inputs.preset }}-scale-hosted-${{ github.run_id }}
         run: |
           set -euo pipefail
           read -ra candidate_args <<< "$CANDIDATES"
+          workload_args=()
+          for w in $WORKLOADS; do workload_args+=(--workload "$w"); done
           if [[ "$CANDIDATES" == *hybrid* ]]; then python harness/benchctl.py build hybrid; fi
-          python harness/campaign.py run --preset "$PRESET" --repeat 10 --seed 20260928 \
-            --shape "$CORPUS_SHAPE" --max-load-per-cpu 0.75 --candidates "${candidate_args[@]}" \
+          python harness/campaign.py run --preset "$PRESET" --repeat "$REPEAT" --seed 20260928 \
+            "${workload_args[@]}" --shape "$CORPUS_SHAPE" --max-load-per-cpu 0.75 --candidates "${candidate_args[@]}" \
             --output "$OUTPUT_DIR" | tee "$OUTPUT_DIR.log"
       - name: Upload evidence, including failed or blocked attempts
         if: always()
