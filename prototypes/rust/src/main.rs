@@ -208,7 +208,10 @@ struct Selection {
 }
 /// Interned name -> entity ids (ascending). Keys borrow the fixture's strings, so
 /// interning copies no string data; only strings referenced by entities appear.
-type NameMap<'a> = HashMap<&'a str, Vec<u64>, FxBuild>;
+/// Deliberately the std default hasher (SipHash), not `FxBuild`: the Fx-style hasher
+/// that suits the u64 ID maps degrades badly on short, structured string keys (8-char
+/// hex names: ~12x slower index build, ~9x slower lookups in the W4.S5 pass-1 run).
+type NameMap<'a> = HashMap<&'a str, Vec<u64>>;
 struct Store<'a> {
     fx: &'a Fixture,
     entities: HashMap<u64, Entity, FxBuild>,
