@@ -154,7 +154,9 @@ fn run() -> Result<Value, Box<dyn std::error::Error>> {
     // for Rust's result encoding, applied to the much larger input side.
     let fixture_bytes = std::fs::read(arg(if workload { "--corpus" } else { "--fixture" })?)?;
     let query_bytes: Vec<u8> = if cmd == "load" {
-        serde_json::to_vec(&json!({"schema":"csl.eval.query/v0.1","query_id":"load","op":"FILTER"}))?
+        serde_json::to_vec(
+            &json!({"schema":"csl.eval.query/v0.1","query_id":"load","op":"FILTER"}),
+        )?
     } else if workload {
         let id = arg("--id")?;
         if !["W1", "W2"].contains(&id) {
