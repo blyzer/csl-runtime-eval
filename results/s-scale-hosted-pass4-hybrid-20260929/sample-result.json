@@ -1,0 +1,54 @@
+{
+  "profile_schema": "csl.eval.profile/v0.1",
+  "representation": "typed-hash-v1",
+  "phases_ns": {
+    "index": 404616774,
+    "load": 485210737,
+    "query": 144742,
+    "result": 16974377
+  },
+  "phase_detail_ns": {
+    "construct": 0,
+    "decode": 485210737,
+    "encode": 5128382,
+    "materialize": 11845995
+  },
+  "phase_subdetail_ns": {
+    "adjacency": 335837918,
+    "entities": 4163166,
+    "parse": 411082587,
+    "read": 74128150,
+    "sort": 64615690
+  },
+  "elapsed_ns": 981806723,
+  "rss_peak_bytes": 379330560,
+  "result_digest": "sha256:700cde7050b195069de5940c58b80465e8663db9643c2835549a7f98b2cadee5",
+  "conformance": true,
+  "conditions_before": {
+    "utc": "2026-09-29T04:04:24.016392+00:00",
+    "load_average": [
+      1.0,
+      1.0,
+      0.7451171875
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 14233243648,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "conditions_after": {
+    "utc": "2026-09-29T04:04:24.998490+00:00",
+    "load_average": [
+      1.0,
+      1.0,
+      0.7451171875
+    ],
+    "cpu_count": 4,
+    "available_memory_bytes": 14280933376,
+    "swapout_pages": 0,
+    "power": null,
+    "thermal": null
+  },
+  "condition_failures": []
+}

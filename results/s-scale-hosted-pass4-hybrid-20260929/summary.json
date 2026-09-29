@@ -1,0 +1,566 @@
+{
+  "state": "PASS",
+  "classification": "controlled",
+  "records": 270,
+  "condition_failure_samples": 0,
+  "groups": [
+    {
+      "workload": "W1",
+      "query": "lookup-first",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1431620295.5,
+      "median_peak_rss_bytes": 660295680.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-first",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 478439299.5,
+        "index": 361969555.5,
+        "query": 3632.0,
+        "result": 3211424.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 478439299.5,
+        "construct": 0.0,
+        "materialize": 3177570.5,
+        "encode": 34069.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 71563497.0,
+        "parse": 406683970.5,
+        "entities": 4121961.5,
+        "adjacency": 294219092.0,
+        "sort": 63714154.5
+      },
+      "median_elapsed_ns": 909605212.5,
+      "median_peak_rss_bytes": 376774656.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-first",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 995853486.0,
+        "index": 344949807.0,
+        "query": 1891.0,
+        "result": 6506909.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 995853486.0,
+        "construct": 0.0,
+        "materialize": 6477624.5,
+        "encode": 28454.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 71262514.0,
+        "parse": 924343588.0,
+        "entities": 5416579.0,
+        "adjacency": 256411654.5,
+        "sort": 82866785.5
+      },
+      "median_elapsed_ns": 1375987649.5,
+      "median_peak_rss_bytes": 490106880.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-missing",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1427185205.5,
+      "median_peak_rss_bytes": 660303872.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-missing",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 478551066.5,
+        "index": 374308751.0,
+        "query": 2643.5,
+        "result": 84546.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 478551066.5,
+        "construct": 0.0,
+        "materialize": 74487.0,
+        "encode": 9991.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 71960528.0,
+        "parse": 407615831.5,
+        "entities": 4138885.5,
+        "adjacency": 306299740.5,
+        "sort": 63582559.0
+      },
+      "median_elapsed_ns": 916286847.5,
+      "median_peak_rss_bytes": 376774656.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-missing",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 995810560.0,
+        "index": 349729481.0,
+        "query": 1260.0,
+        "result": 2564993.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 995810560.0,
+        "construct": 0.0,
+        "materialize": 2558646.0,
+        "encode": 6580.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 70092150.5,
+        "parse": 924729386.0,
+        "entities": 5453154.0,
+        "adjacency": 260961496.5,
+        "sort": 83440891.5
+      },
+      "median_elapsed_ns": 1376140983.5,
+      "median_peak_rss_bytes": 490106880.0
+    },
+    {
+      "workload": "W1",
+      "query": "scan-type",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 2086963669.5,
+      "median_peak_rss_bytes": 934236160.0
+    },
+    {
+      "workload": "W1",
+      "query": "scan-type",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 475185517.5,
+        "index": 367091720.0,
+        "query": 5538245.5,
+        "result": 493784608.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 475185517.5,
+        "construct": 0.0,
+        "materialize": 88079407.5,
+        "encode": 405766815.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 68861762.5,
+        "parse": 406114565.0,
+        "entities": 3929285.5,
+        "adjacency": 299130495.5,
+        "sort": 63789261.0
+      },
+      "median_elapsed_ns": 1461700238.5,
+      "median_peak_rss_bytes": 547330048.0
+    },
+    {
+      "workload": "W1",
+      "query": "scan-type",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 992295501.5,
+        "index": 331055457.5,
+        "query": 14120931.5,
+        "result": 483367938.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 992295501.5,
+        "construct": 0.0,
+        "materialize": 135851028.0,
+        "encode": 347674878.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 69372397.0,
+        "parse": 923280322.0,
+        "entities": 5532431.5,
+        "adjacency": 242299171.0,
+        "sort": 82839380.5
+      },
+      "median_elapsed_ns": 1892978450.5,
+      "median_peak_rss_bytes": 763916288.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-2",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1439608257.5,
+      "median_peak_rss_bytes": 661344256.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-2",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 477970819.0,
+        "index": 353077526.0,
+        "query": 27130.0,
+        "result": 17857418.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 477970819.0,
+        "construct": 0.0,
+        "materialize": 16474335.5,
+        "encode": 1383687.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 70684324.0,
+        "parse": 407435391.0,
+        "entities": 4017788.5,
+        "adjacency": 285583216.5,
+        "sort": 63377058.0
+      },
+      "median_elapsed_ns": 912571656.0,
+      "median_peak_rss_bytes": 377556992.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-2",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 993036684.0,
+        "index": 328622996.5,
+        "query": 26622.5,
+        "result": 30374994.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 993036684.0,
+        "construct": 0.0,
+        "materialize": 29104885.0,
+        "encode": 1250619.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 70355963.5,
+        "parse": 922815328.5,
+        "entities": 5631084.5,
+        "adjacency": 240196666.5,
+        "sort": 82777266.0
+      },
+      "median_elapsed_ns": 1383494651.5,
+      "median_peak_rss_bytes": 491155456.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-4",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1638465574.0,
+      "median_peak_rss_bytes": 747208704.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-4",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 478292693.0,
+        "index": 351513723.5,
+        "query": 1090115.5,
+        "result": 158240679.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 478292693.0,
+        "construct": 0.0,
+        "materialize": 28545283.5,
+        "encode": 129722735.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 70403480.0,
+        "parse": 407313609.0,
+        "entities": 4091344.0,
+        "adjacency": 284383514.0,
+        "sort": 63052209.0
+      },
+      "median_elapsed_ns": 1075530500.0,
+      "median_peak_rss_bytes": 433627136.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-4",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 993305533.5,
+        "index": 336271616.5,
+        "query": 1090400.0,
+        "result": 163559129.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 993305533.5,
+        "construct": 0.0,
+        "materialize": 51549623.5,
+        "encode": 111768814.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 70443023.5,
+        "parse": 922358026.5,
+        "entities": 5485052.0,
+        "adjacency": 247909415.0,
+        "sort": 82954192.0
+      },
+      "median_elapsed_ns": 1537635140.5,
+      "median_peak_rss_bytes": 577007616.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-8",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 2497985846.0,
+      "median_peak_rss_bytes": 1161658368.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-8",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 476408137.5,
+        "index": 345429513.0,
+        "query": 10084521.5,
+        "result": 781055757.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 476408137.5,
+        "construct": 0.0,
+        "materialize": 149333102.5,
+        "encode": 630578600.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 69196754.5,
+        "parse": 407319146.0,
+        "entities": 4162389.5,
+        "adjacency": 277800648.5,
+        "sort": 63303328.0
+      },
+      "median_elapsed_ns": 1769079542.5,
+      "median_peak_rss_bytes": 638234624.0
+    },
+    {
+      "workload": "W2",
+      "query": "depth-8",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 990860061.0,
+        "index": 340098495.5,
+        "query": 10070890.5,
+        "result": 753598400.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 990860061.0,
+        "construct": 0.0,
+        "materialize": 208112131.5,
+        "encode": 546420905.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 69721286.5,
+        "parse": 921366109.5,
+        "entities": 5672750.0,
+        "adjacency": 251267512.0,
+        "sort": 83069352.5
+      },
+      "median_elapsed_ns": 2206091085.0,
+      "median_peak_rss_bytes": 918581248.0
+    },
+    {
+      "workload": "W2",
+      "query": "incoming",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1429827714.5,
+      "median_peak_rss_bytes": 660373504.0
+    },
+    {
+      "workload": "W2",
+      "query": "incoming",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 477597460.0,
+        "index": 359169078.0,
+        "query": 7015.5,
+        "result": 5828991.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 477597460.0,
+        "construct": 0.0,
+        "materialize": 5625012.0,
+        "encode": 199619.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 70923441.0,
+        "parse": 407749575.5,
+        "entities": 4004993.0,
+        "adjacency": 291725258.0,
+        "sort": 63362530.0
+      },
+      "median_elapsed_ns": 906064821.0,
+      "median_peak_rss_bytes": 376905728.0
+    },
+    {
+      "workload": "W2",
+      "query": "incoming",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 996314287.5,
+        "index": 342176641.5,
+        "query": 15879.0,
+        "result": 16905310.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 996314287.5,
+        "construct": 0.0,
+        "materialize": 16732373.5,
+        "encode": 174133.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 71238435.5,
+        "parse": 924799061.5,
+        "entities": 5444620.0,
+        "adjacency": 252859795.5,
+        "sort": 83030365.5
+      },
+      "median_elapsed_ns": 1385540999.0,
+      "median_peak_rss_bytes": 490237952.0
+    },
+    {
+      "workload": "W2",
+      "query": "mixed-relations",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1475501438.0,
+      "median_peak_rss_bytes": 663977984.0
+    },
+    {
+      "workload": "W2",
+      "query": "mixed-relations",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 479824386.0,
+        "index": 381154051.5,
+        "query": 128596.0,
+        "result": 16981494.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 479824386.0,
+        "construct": 0.0,
+        "materialize": 11846415.0,
+        "encode": 5130825.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 72598961.0,
+        "parse": 407279229.0,
+        "entities": 4128840.0,
+        "adjacency": 313429863.0,
+        "sort": 63844304.0
+      },
+      "median_elapsed_ns": 945747619.0,
+      "median_peak_rss_bytes": 379265024.0
+    },
+    {
+      "workload": "W2",
+      "query": "mixed-relations",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 995586741.5,
+        "index": 349935376.5,
+        "query": 91766.5,
+        "result": 33507180.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 995586741.5,
+        "construct": 0.0,
+        "materialize": 28820567.0,
+        "encode": 4712273.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 72325091.0,
+        "parse": 923705848.5,
+        "entities": 5521685.5,
+        "adjacency": 261176800.5,
+        "sort": 83433538.0
+      },
+      "median_elapsed_ns": 1413419537.5,
+      "median_peak_rss_bytes": 493776896.0
+    },
+    {
+      "workload": "W2",
+      "query": "outgoing",
+      "candidate": "hybrid",
+      "samples": 10,
+      "median_elapsed_ns": 1395173247.0,
+      "median_peak_rss_bytes": 660430848.0
+    },
+    {
+      "workload": "W2",
+      "query": "outgoing",
+      "candidate": "rust",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 472589226.0,
+        "index": 309043173.5,
+        "query": 6688.0,
+        "result": 3678930.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 472589226.0,
+        "construct": 0.0,
+        "materialize": 3545134.5,
+        "encode": 134279.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 67813905.5,
+        "parse": 405163863.5,
+        "entities": 3828038.5,
+        "adjacency": 242501216.0,
+        "sort": 62730970.0
+      },
+      "median_elapsed_ns": 840744573.0,
+      "median_peak_rss_bytes": 376905728.0
+    },
+    {
+      "workload": "W2",
+      "query": "outgoing",
+      "candidate": "zig",
+      "samples": 10,
+      "median_phases_ns": {
+        "load": 989820458.5,
+        "index": 314003594.5,
+        "query": 3343.5,
+        "result": 17053670.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 989820458.5,
+        "construct": 0.0,
+        "materialize": 16936066.0,
+        "encode": 117088.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 68039119.0,
+        "parse": 921846971.0,
+        "entities": 5287803.5,
+        "adjacency": 226291956.0,
+        "sort": 82356463.0
+      },
+      "median_elapsed_ns": 1341991805.0,
+      "median_peak_rss_bytes": 490237952.0
+    }
+  ]
+}

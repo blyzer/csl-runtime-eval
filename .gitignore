@@ -8,3 +8,4 @@ corpus/synthetic/*.json
 !corpus/synthetic/SMOKE.json
 results/s-scale-exploratory/references/
 results/s-scale-hosted/references/
+results/s-scale-hosted-pass4-hybrid-20260929/references/

@@ -206,6 +206,34 @@ the original 35-45%. P4 is not closed, but has no large demonstrated
 advantage to carry across a boundary right now. Language Gate #1 remains
 **OPEN**.
 
+## Hybrid at S scale (pass 4) — 2026-09-29
+
+First controlled S-scale run including hybrid (run [36518543247](https://github.com/blyzer/csl-runtime-eval/actions/runs/36518543247),
+commit `75e54c5`, same corpus/oracle/10-repeat protocol as pass 3): **270 records
+(90 per candidate), all conformant, 0 condition failures**. Evidence:
+[results/s-scale-hosted-pass4-hybrid-20260929](results/s-scale-hosted-pass4-hybrid-20260929/).
+This run follows the fix of the Value-tree defect on both the fixture (input) and
+response (output) sides of hybrid's Rust wrapper; the earlier hybrid run
+(~5-7.7 s, ~4.25 GB regardless of query) was invalid for comparison and is not archived.
+
+Median elapsed / peak RSS:
+
+| Query | Rust | Zig | Hybrid | Hybrid vs Zig |
+|---|---|---|---|---|
+| lookup / depth-2 / incoming / outgoing | 841-916 ms / 377 MB | 1342-1386 ms / 490 MB | 1395-1440 ms / 660 MB | +3-4% time, +35% RSS |
+| depth-4 | 1076 ms / 434 MB | 1538 ms / 577 MB | 1638 ms / 747 MB | +6.5%, +29% |
+| depth-8 | 1769 ms / 638 MB | 2206 ms / 919 MB | 2498 ms / 1162 MB | +13%, +26% |
+| scan-type | 1462 ms / 547 MB | 1893 ms / 764 MB | 2087 ms / 934 MB | +10%, +22% |
+
+Reading: hybrid is never faster than pure Zig, and pure Rust (post-hasher) leads
+both on every query. The residual cost of the boundary (fixture/response copies,
+extra buffers) grows with result size. The narrowed P4 hypothesis — Zig's
+index-construction edge surviving an FFI boundary — is **not supported**: that edge
+is ~4-7% and the boundary costs 3-13% plus ~25-35% more memory. This is one runner
+instance and a bootstrap hybrid (whole-fixture batch, no persistent kernel store),
+so it does not rule out a persistent-store hybrid design. Gate #1 remains **OPEN**;
+M scale and W3-W9/W12 are still pending.
+
 ## S-scale campaign protocol — 2026-09-28
 
 [ADR-0003](adr/0003-s-scale-campaign.md) defines the serial paired runner in
