@@ -264,8 +264,8 @@ cliff). The local exploratory M run agrees on ordering and time ratios; its RSS
 numbers (swap active) do not agree and should be disregarded. Absolute times differ
 between the Mac (faster) and this runner, so compare ratios, not seconds. Still one
 runner instance and a bootstrap hybrid (whole-fixture batch), so it does not rule out
-a persistent-store hybrid. Gate #1 remains **OPEN**: W3-W9 and W12 are not defined
-or run yet.
+a persistent-store hybrid. Gate #1 remains **OPEN**: W3-W9 and W12 are defined in the program map but not
+implemented or run; scope and ordering are proposed in [ADR-0007](adr/0007-gate1-remaining-workloads.md).
 
 ## M-scale, local exploratory (pass 5) — 2026-09-29
 
@@ -299,7 +299,7 @@ higher than Zig's here (5.2-5.5 GB vs 7.4 GB on `scan-type`) unlike S; with swap
 activity during samples, peak RSS is less trustworthy than at S, so I make no RSS
 claim from this run. Repeat on a quiet machine or a large native runner before
 treating any M number as controlled. Gate #1 remains **OPEN**; W3-W9 and W12 are
-still pending.
+still pending (see [ADR-0007](adr/0007-gate1-remaining-workloads.md)).
 
 ## S-scale campaign protocol — 2026-09-28
 
