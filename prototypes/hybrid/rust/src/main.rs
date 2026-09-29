@@ -91,7 +91,7 @@ impl Drop for Kernel {
         unsafe { csl_kernel_close(self.0) };
     }
 }
-fn run() -> Result<Value, Box<dyn std::error::Error>> {
+fn run() -> Result<String, Box<dyn std::error::Error>> {
     let args: Vec<String> = std::env::args().collect();
     let cmd = args.get(1).map(String::as_str).unwrap_or("info");
     let arg = |key: &str| -> Result<&str, String> {
@@ -103,13 +103,14 @@ fn run() -> Result<Value, Box<dyn std::error::Error>> {
     let k = Kernel::open()?;
     if cmd == "info" {
         return Ok(
-            json!({"candidate":"hybrid","abi_version":1,"semantic_kernel":"zig","representation":"typed-hash-v1"}),
+            json!({"candidate":"hybrid","abi_version":1,"semantic_kernel":"zig","representation":"typed-hash-v1"})
+                .to_string(),
         );
     }
     if cmd == "echo" {
         let mut q = vec![0];
         q.extend_from_slice(args.get(2).map(String::as_bytes).unwrap_or_default());
-        return Ok(json!({"echo":String::from_utf8(k.execute(&q)?)?}));
+        return Ok(json!({"echo":String::from_utf8(k.execute(&q)?)?}).to_string());
     }
     if cmd == "boundary" {
         let size: usize = arg("--size")?.parse()?;
@@ -140,9 +141,7 @@ fn run() -> Result<Value, Box<dyn std::error::Error>> {
             ns.push(start.elapsed().as_nanos());
             digest = format!("sha256:{:x}", Sha256::digest(&output));
         }
-        return Ok(
-            json!({"strategy":strategy,"payload_bytes":size,"latency_ns":ns,"calls_per_query":if strategy=="A"{2}else if strategy=="B"{1}else{0},"bytes_copied":size*if strategy=="A"{2}else{1},"output_allocations_per_call":if size==0{0}else if strategy=="A"{2}else if strategy=="B"{0}else{1},"result_digest":digest,"cancellation":"NOT IMPLEMENTED"}),
-        );
+        return Ok(json!({"strategy":strategy,"payload_bytes":size,"latency_ns":ns,"calls_per_query":if strategy=="A"{2}else if strategy=="B"{1}else{0},"bytes_copied":size*if strategy=="A"{2}else{1},"output_allocations_per_call":if size==0{0}else if strategy=="A"{2}else if strategy=="B"{0}else{1},"result_digest":digest,"cancellation":"NOT IMPLEMENTED"}).to_string());
     }
     let workload = cmd == "workload";
     // Read the fixture as raw bytes and splice them directly into the
@@ -174,13 +173,16 @@ fn run() -> Result<Value, Box<dyn std::error::Error>> {
     request.extend_from_slice(b",\"query\":");
     request.extend_from_slice(&query_bytes);
     request.push(b'}');
-    let result: Value = serde_json::from_slice(&k.execute(&request)?)?;
+    // The FFI response is only parsed into a generic Value for "load",
+    // which needs to introspect it; the normal query/workload path (the one
+    // that matters for benchmarking) never builds a Value for the result,
+    // for the same reason it no longer does for the fixture above.
+    let response_bytes = k.execute(&request)?;
     if cmd == "load" {
-        return Ok(
-            json!({"entities":result["entities"].as_array().ok_or("invalid response")?.len(),"snapshot":result["snapshot"]}),
-        );
+        let result: Value = serde_json::from_slice(&response_bytes)?;
+        return Ok(json!({"entities":result["entities"].as_array().ok_or("invalid response")?.len(),"snapshot":result["snapshot"]}).to_string());
     }
-    Ok(result)
+    Ok(String::from_utf8(response_bytes)?)
 }
 fn main() {
     match run() {
