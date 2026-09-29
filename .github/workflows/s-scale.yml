@@ -13,6 +13,11 @@ on:
         type: choice
         options: [mixed, cycle, fanout]
         default: mixed
+      preset:
+        description: Corpus scale (M needs the streaming oracle, ADR-0006; expect ~1.5 h)
+        type: choice
+        options: [S, M]
+        default: S
       candidates:
         description: Candidates (space-separated; add hybrid for the W10 boundary experiment)
         type: string
@@ -28,7 +33,7 @@ concurrency:
 jobs:
   evaluate:
     runs-on: ${{ inputs.runner }}
-    timeout-minutes: 90
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -85,28 +90,30 @@ jobs:
                   'RUNNER_OS', 'RUNNER_ARCH', 'RUNNER_LABEL', 'ImageOS', 'ImageVersion']
           Path('results/hosted-context/run.json').write_text(json.dumps({k:os.environ.get(k) for k in keys},indent=2)+'\n')
           PY
-      - name: Run paired S campaign
+      - name: Run paired campaign
         env:
+          PRESET: ${{ inputs.preset }}
           CORPUS_SHAPE: ${{ inputs.shape }}
           CANDIDATES: ${{ inputs.candidates }}
           # campaign.py refuses an existing output directory (ADR-0003): never
           # reuse a path a prior committed run already created.
-          OUTPUT_DIR: results/s-scale-hosted-${{ github.run_id }}
+          OUTPUT_DIR: results/${{ inputs.preset }}-scale-hosted-${{ github.run_id }}
         run: |
           set -euo pipefail
           read -ra candidate_args <<< "$CANDIDATES"
           if [[ "$CANDIDATES" == *hybrid* ]]; then python harness/benchctl.py build hybrid; fi
-          python harness/campaign.py run --preset S --repeat 10 --seed 20260928 \
+          python harness/campaign.py run --preset "$PRESET" --repeat 10 --seed 20260928 \
             --shape "$CORPUS_SHAPE" --max-load-per-cpu 0.75 --candidates "${candidate_args[@]}" \
             --output "$OUTPUT_DIR" | tee "$OUTPUT_DIR.log"
       - name: Upload evidence, including failed or blocked attempts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: s-scale-${{ inputs.runner }}-${{ inputs.shape }}-${{ github.run_id }}
+          name: ${{ inputs.preset }}-scale-${{ inputs.runner }}-${{ inputs.shape }}-${{ github.run_id }}
           retention-days: 7
           path: |
             results/
+            !results/**/references/**
             results-smoke.log
             results-checks.log
           if-no-files-found: error

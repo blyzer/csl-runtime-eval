@@ -1,0 +1,120 @@
+{
+  "schema": "csl.eval.campaign/v0.1",
+  "state": "PASS",
+  "started_utc": "2026-09-29T04:51:42.845891+00:00",
+  "environment": {
+    "tools": {
+      "python3": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python3",
+        "version": "Python 3.14.7"
+      },
+      "rustc": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/rustc",
+        "version": "rustc 1.98.1 (48a229cea 2026-09-01)"
+      },
+      "cargo": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/.cargo/bin/cargo",
+        "version": "cargo 1.98.1 (797e8a9bc 2026-08-05)"
+      },
+      "zig": {
+        "state": "PASS",
+        "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+        "version": "0.14.1"
+      },
+      "git": {
+        "state": "PASS",
+        "path": "/opt/homebrew/bin/git",
+        "version": "git version 2.55.0"
+      }
+    },
+    "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64",
+    "uname": [
+      "Darwin",
+      "Envers-MacBook-Pro.local",
+      "27.0.0",
+      "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+      "arm64",
+      "arm"
+    ],
+    "hardware": "arm",
+    "cpu_count": 10,
+    "runtime_python": "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/python",
+    "sdk_workaround": true
+  },
+  "preflight_machine": {
+    "utc": "2026-09-29T04:51:41.492373+00:00",
+    "load_average": [
+      13.62890625,
+      10.39208984375,
+      7.7734375
+    ],
+    "cpu_count": 10,
+    "available_memory_bytes": 4434018304,
+    "swapout_pages": 0,
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23461987)\t80%; AC attached; not charging present: true",
+    "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded"
+  },
+  "native_probe": {
+    "state": "FAIL",
+    "command": [
+      "/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/bin/zig",
+      "build-exe",
+      "/var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-j5z4kuwf/probe.zig",
+      "-lc",
+      "-femit-bin=/var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-j5z4kuwf/probe"
+    ],
+    "build_exit": 1,
+    "diagnostic": "error: undefined symbol: __availability_version_check\n    note: referenced by /Users/enverfrancisco/.cache/zig/o/0af9b8a0986e8ff6ed0fefde09e86521/libcompiler_rt.a(libcompiler_rt.a.o):___isPlatformVersionAtLeast\nerror: undefined symbol: _abort\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-j5z4kuwf/probe.o:_posix.abort\nerror: undefined symbol: _bzero\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-j5z4kuwf/probe.o:_hash_map.HashMapUnmanaged(usize,*debug.SelfInfo.Module__struct_6947,hash_map.AutoContext(usize),80).initMetadatas\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-j5z4kuwf/probe.o:_hash_map.HashMapUnmanaged([]const u8,u64,hash_map.StringContext,80).initMetadatas\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-j5z4kuwf/probe.o:_hash_map.HashMapUnmanaged([]const u8,debug.SelfInfo.Module__struct_6947.OFileInfo,hash_map.StringContext,80).initMetadatas\nerror: undefined symbol: _getenv\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-j5z4kuwf/probe.o:_posix.getenvZ\nerror: undefined symbol: _isatty\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-j5z4kuwf/probe.o:_posix.isatty\nerror: undefined symbol: _sigaction\n    note: referenced by /var/folders/9m/80rmwhfx6j79btcby6f55zfc0000gn/T/csl-native-probe-j5z4kuwf/probe.o:_posix.sigaction\n",
+    "run_exit": null,
+    "sdk": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+  },
+  "preflight_failures": [
+    "one-minute load exceeds declared per-CPU ceiling",
+    "unmodified native toolchain/SDK probe failed",
+    "project SDK overlay is present; build provenance is not native"
+  ],
+  "classification": "exploratory",
+  "preset": "M",
+  "shape": "mixed",
+  "repeat": 1,
+  "seed": 20260929,
+  "source_digest": "bfa642aa3bd259f9e8f1bb837c7b86c1e4ea630b05db34f317f39266b469a990",
+  "policy": {
+    "max_one_minute_load_per_cpu": 0.5,
+    "minimum_available_memory_gib": 3,
+    "swapping": "reject controlled samples with increased swapout counter",
+    "cache": "one validated unmeasured warm-up per candidate/query; OS caches not flushed",
+    "order": "seeded query order; candidate group rotated by one position per repeat",
+    "isolation": "serial native processes; oracle preparation and result verification outside native timing"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/rust/target/release/csl-eval-rust",
+      "digest": "86c5bf0bf300362000cc0bbac2345bcabeb040564fcce98b8f0101bb78051a9b",
+      "bytes": 743328
+    },
+    "zig": {
+      "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/zig/zig-out/bin/csl-eval-zig",
+      "digest": "3781877200463e22c04b64e4cd31c7e6e297a9acdfb8dfe2430e5c57fc7cc489",
+      "bytes": 264224
+    },
+    "hybrid": {
+      "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/hybrid/target/release/csl-eval-hybrid",
+      "digest": "64e85578bf7eecd8667a5beb4858873249d5bc1d7bf2051fc28872a5fb9b1cf1",
+      "bytes": 782192
+    }
+  },
+  "corpus": {
+    "path": "/Users/enverfrancisco/Downloads/csl-runtime-eval/corpus/synthetic/M-campaign-mixed-20260929.json",
+    "digest": "e9a22a73f7e0f3014eee5b84ff1b206174641e4777886f196659641a7462b5e1",
+    "entities": 1000000,
+    "edges": 10000000,
+    "evidence": 10000000
+  },
+  "finished_utc": "2026-09-29T05:11:03.500088+00:00",
+  "records": 27
+}
