@@ -75,6 +75,17 @@ jobs:
           python harness/benchctl.py build rust
           python harness/benchctl.py build zig
           python harness/benchctl.py conformance --candidate rust --candidate zig --profile
+      - name: Disable swap for controlled memory measurements
+        # Hosted runners ship 3 GB of swap. A few pages of unrelated swap-out during
+        # a large-RSS sample (M/hybrid peaks ~10.7 GB) trip the strict "swap-out
+        # counter must not increase" rule without any real memory pressure. Removing
+        # swap keeps that rule strict and makes a genuine overrun fail loudly (OOM).
+        run: |
+          mkdir -p results/hosted-context
+          swapon --show > results/hosted-context/swap-before.txt || true
+          sudo swapoff -a
+          swapon --show > results/hosted-context/swap-after.txt || true
+          free -b
       - name: Record runner context
         env:
           RUNNER_LABEL: ${{ inputs.runner }}
