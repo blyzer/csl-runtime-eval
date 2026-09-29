@@ -158,6 +158,9 @@ def run(args):
         repos[c].mkdir(parents=True)
         sids[c], rows = prepare_snapshot(c, binaries[c], repos[c], corpus, want, ctx, args.prep_repeat, args.max_line_bytes)
         prep.extend(rows)
+    rss_values = {p['peak_rss_bytes'] for p in prep}
+    if len(args.candidates) > 1 and len(rss_values) == 1:
+        raise SystemExit(f'peak RSS is identical across candidates ({rss_values}): the RSS measurement is inheriting the harness')
     (output / 'prep.jsonl').write_text(''.join(json.dumps(r) + '\n' for r in prep))
     records = []
     limits = (args.max_load_per_cpu, args.min_memory_gib)

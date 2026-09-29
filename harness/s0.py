@@ -159,9 +159,23 @@ class Client:
         self.opened = response
         return response
 
+    def _hwm_bytes(self):
+        """Peak RSS of the child itself, from /proc (Linux). `ru_maxrss` from wait4 is unusable there: exec folds
+        the parent's pre-exec RSS high-water mark into the child's, so a large harness process inflates every
+        candidate to the same number."""
+        try:
+            with open(f'/proc/{self.proc.pid}/status') as status:
+                for line in status:
+                    if line.startswith('VmHWM:'):
+                        return int(line.split()[1]) * 1024
+        except OSError:
+            pass
+        return None
+
     def finish(self):
         """Close politely, reap the child with wait4 and return its peak RSS in bytes (or None)."""
         import os
+        hwm = self._hwm_bytes() if sys.platform.startswith('linux') and self.proc.poll() is None else None
         try:
             if self.proc.poll() is None:
                 self.call('close')
@@ -178,6 +192,8 @@ class Client:
             self.proc.wait(timeout=30)
             return None
         self.proc.returncode = os.waitstatus_to_exitcode(status)
+        if hwm is not None:
+            return hwm
         return int(usage.ru_maxrss * (1 if sys.platform == 'darwin' else 1024))
 
     def close(self):

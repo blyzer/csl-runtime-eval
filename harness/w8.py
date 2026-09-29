@@ -193,6 +193,13 @@ def run(args):
                         stream.write(json.dumps(r) + '\n')
                         records.append(r)
             print(json.dumps({'repeat': repeat + 1, 'of': args.repeat}), flush=True)
+    rss_by_candidate = {}
+    for r in records:
+        if r.get('peak_rss_bytes'):
+            rss_by_candidate.setdefault(r['candidate'], set()).add(r['peak_rss_bytes'])
+    every = {v for values in rss_by_candidate.values() for v in values}
+    if len(args.candidates) > 1 and len(every) == 1:
+        raise SystemExit(f'peak RSS is identical across candidates ({every}): the RSS measurement is inheriting the harness')
     for (comp, frac), case in cases.items():
         for cand, strategy in combos:
             ok = measure_rejection(cand, strategy, binaries[cand], corpus, want_base, case)
