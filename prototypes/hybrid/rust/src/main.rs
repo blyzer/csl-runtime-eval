@@ -145,26 +145,33 @@ fn run() -> Result<Value, Box<dyn std::error::Error>> {
         );
     }
     let workload = cmd == "workload";
-    let fx: Value = serde_json::from_slice(&std::fs::read(arg(if workload {
-        "--corpus"
-    } else {
-        "--fixture"
-    })?)?)?;
-    let q: Value = if cmd == "load" {
-        json!({"schema":"csl.eval.query/v0.1","query_id":"load","op":"FILTER"})
+    // Read the fixture as raw bytes and splice them directly into the
+    // request: never parse the (potentially hundreds-of-MB) corpus into a
+    // generic serde_json::Value on the Rust side just to re-serialize it
+    // again for the FFI call. That double round trip (ADR-0006) was the
+    // dominant cost of every hybrid invocation, independent of query
+    // complexity: it is the same Value-tree fairness defect pass 2 fixed
+    // for Rust's result encoding, applied to the much larger input side.
+    let fixture_bytes = std::fs::read(arg(if workload { "--corpus" } else { "--fixture" })?)?;
+    let query_bytes: Vec<u8> = if cmd == "load" {
+        serde_json::to_vec(&json!({"schema":"csl.eval.query/v0.1","query_id":"load","op":"FILTER"}))?
     } else if workload {
         let id = arg("--id")?;
         if !["W1", "W2"].contains(&id) {
             return Err("invalid workload".into());
         }
-        serde_json::from_str::<Value>(arg("--params")?)?["query"].clone()
+        serde_json::to_vec(&serde_json::from_str::<Value>(arg("--params")?)?["query"])?
     } else if cmd == "query" {
-        serde_json::from_slice(&std::fs::read(arg("--query")?)?)?
+        std::fs::read(arg("--query")?)?
     } else {
         return Err("unknown command".into());
     };
     let mut request = vec![1];
-    request.extend(serde_json::to_vec(&json!({"fixture":fx,"query":q}))?);
+    request.extend_from_slice(b"{\"fixture\":");
+    request.extend_from_slice(&fixture_bytes);
+    request.extend_from_slice(b",\"query\":");
+    request.extend_from_slice(&query_bytes);
+    request.push(b'}');
     let result: Value = serde_json::from_slice(&k.execute(&request)?)?;
     if cmd == "load" {
         return Ok(
