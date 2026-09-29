@@ -3,8 +3,84 @@ use model::{Edge, Entity, Evidence, Fixture};
 use serde::Serialize;
 use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
+use std::alloc::{GlobalAlloc, Layout, System};
+use std::cell::{Cell, OnceCell};
 use std::collections::{HashMap, HashSet};
 use std::hash::{BuildHasherDefault, Hasher};
+use std::sync::atomic::{AtomicBool, AtomicI64, AtomicU64, Ordering::Relaxed};
+
+/// Heap accounting (X-MEM). A pass-through wrapper around the system allocator:
+/// when `--stats` is absent the only cost is one relaxed load and a branch per
+/// allocator call. When on, it counts *requested* bytes at the allocator
+/// interface (not allocator-internal overhead, which is unobservable here).
+static STATS_ON: AtomicBool = AtomicBool::new(false);
+static ALLOCATIONS: AtomicU64 = AtomicU64::new(0);
+static TOTAL_REQUESTED: AtomicU64 = AtomicU64::new(0);
+static TOTAL_FREED: AtomicU64 = AtomicU64::new(0);
+static LIVE: AtomicI64 = AtomicI64::new(0);
+static PEAK_LIVE: AtomicI64 = AtomicI64::new(0);
+struct CountingAlloc;
+fn note_alloc(size: usize) {
+    ALLOCATIONS.fetch_add(1, Relaxed);
+    TOTAL_REQUESTED.fetch_add(size as u64, Relaxed);
+    let live = LIVE.fetch_add(size as i64, Relaxed) + size as i64;
+    PEAK_LIVE.fetch_max(live, Relaxed);
+}
+// SAFETY: every method forwards to `System` with the caller's layout/pointer and only
+// updates atomic counters afterwards, so the `GlobalAlloc` contract is inherited as-is.
+unsafe impl GlobalAlloc for CountingAlloc {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        let ptr = unsafe { System.alloc(layout) };
+        if STATS_ON.load(Relaxed) && !ptr.is_null() {
+            note_alloc(layout.size());
+        }
+        ptr
+    }
+    unsafe fn alloc_zeroed(&self, layout: Layout) -> *mut u8 {
+        let ptr = unsafe { System.alloc_zeroed(layout) };
+        if STATS_ON.load(Relaxed) && !ptr.is_null() {
+            note_alloc(layout.size());
+        }
+        ptr
+    }
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        unsafe { System.dealloc(ptr, layout) };
+        if STATS_ON.load(Relaxed) {
+            TOTAL_FREED.fetch_add(layout.size() as u64, Relaxed);
+            LIVE.fetch_sub(layout.size() as i64, Relaxed);
+        }
+    }
+    unsafe fn realloc(&self, ptr: *mut u8, layout: Layout, new_size: usize) -> *mut u8 {
+        let new = unsafe { System.realloc(ptr, layout, new_size) };
+        if STATS_ON.load(Relaxed) && !new.is_null() {
+            ALLOCATIONS.fetch_add(1, Relaxed);
+            let delta = new_size as i64 - layout.size() as i64;
+            if delta >= 0 {
+                TOTAL_REQUESTED.fetch_add(delta as u64, Relaxed);
+            } else {
+                TOTAL_FREED.fetch_add((-delta) as u64, Relaxed);
+            }
+            let live = LIVE.fetch_add(delta, Relaxed) + delta;
+            PEAK_LIVE.fetch_max(live, Relaxed);
+        }
+        new
+    }
+}
+#[global_allocator]
+static GLOBAL: CountingAlloc = CountingAlloc;
+fn heap_live() -> u64 {
+    LIVE.load(Relaxed).max(0) as u64
+}
+/// All counters read at one instant, so a reported snapshot is coherent.
+fn heap_snapshot() -> [u64; 5] {
+    [
+        ALLOCATIONS.load(Relaxed),
+        TOTAL_REQUESTED.load(Relaxed),
+        TOTAL_FREED.load(Relaxed),
+        heap_live(),
+        PEAK_LIVE.load(Relaxed).max(0) as u64,
+    ]
+}
 
 /// Rust's `std::collections::HashMap` defaults to SipHash-1-3 (randomized,
 /// HashDoS-resistant, deliberately not optimized for raw speed). Zig's
@@ -130,13 +206,40 @@ struct Selection {
     props: Vec<Evidence>,
     truncated: bool,
 }
+/// Interned name -> entity ids (ascending). Keys borrow the fixture's strings, so
+/// interning copies no string data; only strings referenced by entities appear.
+type NameMap<'a> = HashMap<&'a str, Vec<u64>, FxBuild>;
 struct Store<'a> {
     fx: &'a Fixture,
     entities: HashMap<u64, Entity, FxBuild>,
     out: Index,
     inc: Index,
+    names: OnceCell<NameMap<'a>>,
+    name_build_ns: Cell<u128>,
 }
 impl<'a> Store<'a> {
+    /// Lazy name index: built the first time a name is resolved, and its build
+    /// time is remembered so the harness can report it (`intern_ns`).
+    fn names(&self) -> &NameMap<'a> {
+        self.names.get_or_init(|| {
+            let start = std::time::Instant::now();
+            let mut map: NameMap<'a> = HashMap::default();
+            for e in &self.fx.entities {
+                map.entry(self.fx.strings[e.name_sid as usize].as_str())
+                    .or_default()
+                    .push(e.id);
+            }
+            for ids in map.values_mut() {
+                ids.sort_unstable();
+            }
+            self.name_build_ns.set(start.elapsed().as_nanos());
+            map
+        })
+    }
+    /// All entities whose name equals `name`, ascending; empty if none.
+    fn resolve_name(&self, name: &str) -> &[u64] {
+        self.names().get(name).map_or(&[], Vec::as_slice)
+    }
     /// Entity map build + container-reference validation: the "entities"
     /// index sub-phase (STEP 3 investigation).
     fn build_entities(fx: &'a Fixture) -> Result<HashMap<u64, Entity, FxBuild>> {
@@ -199,13 +302,7 @@ impl<'a> Store<'a> {
         let op = q["op"].as_str().ok_or("missing op")?;
         if op == "RESOLVE" {
             if let Some(name) = q["name"].as_str() {
-                return Ok(self
-                    .fx
-                    .entities
-                    .iter()
-                    .filter(|e| self.fx.strings[e.name_sid as usize] == name)
-                    .map(|e| e.id)
-                    .collect());
+                return Ok(self.resolve_name(name).iter().copied().collect());
             }
             let i = id(&q["entity_id"])?;
             return Ok(self
@@ -462,6 +559,7 @@ fn main_run() -> Result<String> {
     let decode_ns = read_ns + parse_ns;
     let construct_ns: u128 = 0;
     let load_ns = decode_ns + construct_ns;
+    let live_after_load = heap_live();
     Store::check_schema(&fx)?;
     let start = std::time::Instant::now();
     let entities = Store::build_entities(&fx)?;
@@ -473,11 +571,14 @@ fn main_run() -> Result<String> {
     Store::sort_adjacency(&mut out, &mut inc);
     let sort_ns = start.elapsed().as_nanos();
     let index_ns = entities_ns + adjacency_ns + sort_ns;
+    let live_after_index = heap_live();
     let store = Store {
         fx: &fx,
         entities,
         out,
         inc,
+        names: OnceCell::new(),
+        name_build_ns: Cell::new(0),
     };
     match cmd {
         "load" => Ok(json!({"entities":store.entities.len(),"snapshot":fx.snapshot}).to_string()),
@@ -487,15 +588,42 @@ fn main_run() -> Result<String> {
         }
         "workload" => {
             let workload = arg("--id")?;
-            if !["W1", "W2"].contains(&workload) {
+            if !["W1", "W2", "W3", "W4"].contains(&workload) {
                 return Err("unknown workload".into());
             }
             let params: Value = serde_json::from_str(arg("--params")?)?;
             let query = &params["query"];
-            if args.iter().any(|v| v == "--profile") {
+            let profiled = args.iter().any(|v| v == "--profile");
+            let stats = args.iter().any(|v| v == "--stats");
+            if (stats || params.get("resolve").is_some()) && !profiled {
+                return Err("--stats and resolve require --profile".into());
+            }
+            let resolve = match params.get("resolve") {
+                None => None,
+                Some(r) => {
+                    let names: Vec<&str> = r["names"]
+                        .as_array()
+                        .ok_or("resolve.names must be an array")?
+                        .iter()
+                        .map(|n| n.as_str().ok_or("resolve.names must be strings"))
+                        .collect::<std::result::Result<_, _>>()?;
+                    let rounds = r["rounds"]
+                        .as_u64()
+                        .ok_or("resolve.rounds must be an integer")?;
+                    if names.is_empty()
+                        || rounds == 0
+                        || (names.len() as u64).saturating_mul(rounds) > 1_000_000
+                    {
+                        return Err("invalid resolve parameters".into());
+                    }
+                    Some((names, rounds))
+                }
+            };
+            if profiled {
                 let start = std::time::Instant::now();
                 let (selected, truncated) = store.query(query)?;
                 let query_ns = start.elapsed().as_nanos();
+                let live_after_query = heap_live();
                 let start = std::time::Instant::now();
                 let selection = store.materialize(query, selected, truncated);
                 let materialize_ns = start.elapsed().as_nanos();
@@ -504,7 +632,47 @@ fn main_run() -> Result<String> {
                 let encode_ns = start.elapsed().as_nanos();
                 std::hint::black_box(&result_bytes);
                 let result_ns = materialize_ns + encode_ns;
-                let metadata = json!({
+                // Repeated name resolution runs after the primary result and outside
+                // every recorded phase; only `resolve_name` itself is timed.
+                let name_index = match &resolve {
+                    None => None,
+                    Some((names, rounds)) => {
+                        store.names();
+                        let live = heap_snapshot();
+                        let mut lookup_ns: Vec<u64> =
+                            Vec::with_capacity(names.len() * *rounds as usize);
+                        let mut hasher = Sha256::new();
+                        let mut ids_total = 0u64;
+                        for round in 0..*rounds {
+                            for name in names {
+                                let start = std::time::Instant::now();
+                                let ids = std::hint::black_box(store.resolve_name(name));
+                                lookup_ns.push(start.elapsed().as_nanos() as u64);
+                                ids_total += ids.len() as u64;
+                                if round == 0 {
+                                    let joined: Vec<String> =
+                                        ids.iter().map(u64::to_string).collect();
+                                    hasher.update(format!("[{}]\n", joined.join(",")));
+                                }
+                            }
+                        }
+                        Some((
+                            json!({
+                                "intern_ns": store.name_build_ns.get(),
+                                "unique_strings": store.names().len(),
+                                "lookups": lookup_ns.len(),
+                                "lookup_ns": lookup_ns,
+                                "lookup_digest": format!("sha256:{:x}", hasher.finalize()),
+                                "lookup_ids_total": ids_total,
+                            }),
+                            live,
+                        ))
+                    }
+                };
+                let snapshot = name_index
+                    .as_ref()
+                    .map_or_else(heap_snapshot, |(_, snap)| *snap);
+                let mut metadata = json!({
                     "profile_schema": "csl.eval.profile/v0.1",
                     "representation": "typed-hash-v1",
                     "phases_ns": {
@@ -518,8 +686,25 @@ fn main_run() -> Result<String> {
                         "read": read_ns, "parse": parse_ns,
                         "entities": entities_ns, "adjacency": adjacency_ns, "sort": sort_ns
                     }
-                })
-                .to_string();
+                });
+                if let Some((index, _)) = name_index {
+                    metadata["name_index"] = index;
+                }
+                if stats {
+                    metadata["heap"] = json!({
+                        "model": "requested-bytes",
+                        "allocations": snapshot[0],
+                        "total_requested": snapshot[1],
+                        "total_freed": snapshot[2],
+                        "live": snapshot[3],
+                        "peak_live": snapshot[4],
+                        "live_after_load": live_after_load,
+                        "live_after_index": live_after_index,
+                        "live_after_query": live_after_query,
+                        "retained": null,
+                    });
+                }
+                let metadata = metadata.to_string();
                 let result_str = String::from_utf8(result_bytes)?;
                 Ok(format!(
                     "{},\"result\":{}}}",
@@ -534,6 +719,11 @@ fn main_run() -> Result<String> {
     }
 }
 fn main() {
+    // Decided before anything else allocates in `main_run`; args_os temporaries are
+    // allocated and freed while counting is still off, so they cancel out.
+    if std::env::args_os().any(|a| a == "--stats") {
+        STATS_ON.store(true, Relaxed);
+    }
     match main_run() {
         Ok(v) => println!("{v}"),
         Err(e) => {

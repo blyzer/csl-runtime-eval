@@ -158,7 +158,7 @@ fn run() -> Result<String, Box<dyn std::error::Error>> {
         )?
     } else if workload {
         let id = arg("--id")?;
-        if !["W1", "W2"].contains(&id) {
+        if !["W1", "W2", "W3", "W4"].contains(&id) {
             return Err("invalid workload".into());
         }
         serde_json::to_vec(&serde_json::from_str::<Value>(arg("--params")?)?["query"])?

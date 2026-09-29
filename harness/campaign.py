@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT))
 from harness.benchctl import (environment, executable, load, profile_metadata,
                               queries, save, source_digest, tool)
 from harness.generate import generate, PRESETS
+from harness import scenarios
 from oracle.compact import CompactOracle
 from oracle.validation import VALIDATORS
 
@@ -113,18 +114,21 @@ def compiler_label(env, candidate):
     return f"rustc {tools['rustc']['version']} + zig {tools['zig']['version']}"
 
 
-def schedule(repeat, seed, workloads, candidates=('rust', 'zig')):
+def schedule(repeat, seed, workloads, candidates=('rust', 'zig'), jobs=None):
     """Seeded query order; each query's candidate group is rotated by one
     position per repeat, so every candidate takes every position (1st, 2nd,
     ...) an equal (or near-equal, for repeat % len(candidates) != 0) number
     of times. For exactly two candidates this reproduces the original
     alternating rust/zig schedule exactly."""
     rng = random.Random(seed)
-    jobs = [(workload, query) for workload in workloads for query in queries(workload)]
+    if jobs is None:
+        jobs = [(workload, query, None) for workload in workloads for query in queries(workload)]
+    else:
+        jobs = [(job['workload'], job['query'], job.get('resolve')) for job in jobs]
     rng.shuffle(jobs)
     n = len(candidates)
     order = []
-    for workload, query in jobs:
+    for workload, query, resolve in jobs:
         base = list(candidates)
         rng.shuffle(base)
         for iteration in range(repeat):
@@ -132,26 +136,41 @@ def schedule(repeat, seed, workloads, candidates=('rust', 'zig')):
             group = base[rotation:] + base[:rotation]
             for candidate in group:
                 order.append({'candidate': candidate, 'workload': workload,
-                              'query': query, 'iteration': iteration})
+                              'query': query, 'iteration': iteration, **({'resolve': resolve} if resolve else {})})
     return order
 
 
-def reference_worker(fixture, directory, workloads):
+def reference_worker(fixture, directory, workloads, jobs_file=None):
     # Streaming/columnar oracle (ADR-0006): the fixture is validated record by
     # record and each reference is written as canonical JSON without ever
     # materializing the fixture or the result as a Python object tree.
     oracle = CompactOracle(fixture)
     index = []
-    for workload in workloads:
-        for query in queries(workload):
-            target = directory / f'{workload}-{query["query_id"]}.json'
-            info = oracle.execute_to(query, target)
-            index.append({'workload': workload, 'query': query,
-                          'path': str(target), 'file_digest': digest(target),
-                          'result_digest': info['digest'], 'propositions': info['propositions'],
-                          'bytes': info['bytes']})
-            print(json.dumps({'reference': target.name, 'state': 'PASS', 'bytes': info['bytes']}), flush=True)
+    if jobs_file:
+        jobs = load(jobs_file)
+    else:
+        jobs = [{'workload': workload, 'query': query} for workload in workloads for query in queries(workload)]
+    for job in jobs:
+        workload, query = job['workload'], job['query']
+        target = directory / f'{workload}-{query["query_id"]}.json'
+        info = oracle.execute_to(query, target)
+        row = {'workload': workload, 'query': query,
+               'path': str(target), 'file_digest': digest(target),
+               'result_digest': info['digest'], 'propositions': info['propositions'],
+               'bytes': info['bytes']}
+        if job.get('resolve'):
+            row['lookup'] = oracle.name_lookup(job['resolve']['names'], job['resolve']['rounds'])
+        index.append(row)
+        print(json.dumps({'reference': target.name, 'state': 'PASS', 'bytes': info['bytes']}), flush=True)
     save(directory / 'index.json', index)
+
+
+def scenario_jobs(scenario_id, variant, fixture, meta_path, output):
+    """Materialize a scenario's jobs; oracle-derived queries load the fixture once, here."""
+    meta = load(meta_path)
+    entry, variant = scenarios.resolve_scenario(scenario_id, variant)
+    oracle = CompactOracle(fixture) if entry['dynamic'] else None
+    save(output, scenarios.build_jobs(scenario_id, variant, meta, oracle))
 
 
 def strict_equal(actual, expected):
@@ -206,7 +225,7 @@ def verify_output(stream, reference_path, profiled):
     start, end, envelope = 0, trimmed, {}
     if profiled:
         stream.seek(0)
-        head = stream.read(1 << 16)
+        head = stream.read(1 << 24)
         marker = head.find(_RESULT_MARKER)
         if marker >= 0 and head[:marker].rstrip().endswith(b',') and tail.rstrip().endswith(b'}}'):
             envelope = json.loads(head[:marker].rstrip()[:-1] + b'}')
@@ -232,6 +251,17 @@ def result_digest(reference_path):
     return load(reference_path)['digest']
 
 
+def check_lookup(reported, expected):
+    """The W4 in-process lookups must reproduce the oracle's digest and counts."""
+    if not reported or not expected:
+        raise ValueError('W4 sample without name_index or oracle expectation')
+    for key in ('lookup_digest', 'lookup_ids_total', 'unique_strings', 'lookups'):
+        if reported.get(key) != expected[key]:
+            raise ValueError(f'name_index {key} mismatch: {reported.get(key)!r} != {expected[key]!r}')
+    if len(reported['lookup_ns']) != expected['lookups']:
+        raise ValueError('name_index lookup_ns length mismatch')
+
+
 def sample_worker(spec_path, target):
     spec = load(spec_path)
     job = spec['job']
@@ -240,10 +270,15 @@ def sample_worker(spec_path, target):
     # without --profile and is measured on elapsed_ns/RSS only, same as
     # rust/zig but without phases_ns/phase_detail_ns/phase_subdetail_ns.
     profiled = job['candidate'] in PROFILE_CAPABLE
+    params = {'query': job['query']}
+    if job.get('resolve') and profiled:
+        params['resolve'] = job['resolve']
     command = [spec['binary'], 'workload', '--id', job['workload'], '--corpus', spec['fixture'],
-               '--params', json.dumps({'query': job['query']})]
+               '--params', json.dumps(params)]
     if profiled:
         command.append('--profile')
+        if spec.get('stats'):
+            command.append('--stats')
     with tempfile.TemporaryFile() as out, tempfile.TemporaryFile() as err:
         before = snapshot()
         start = time.perf_counter_ns()
@@ -261,6 +296,8 @@ def sample_worker(spec_path, target):
     if not matched:
         raise ValueError('full oracle result mismatch; sample rejected')
     metadata = profile_metadata(payload, elapsed) if profiled else {}
+    if job.get('resolve') and profiled:
+        check_lookup(metadata.get('name_index'), spec.get('expected_lookup'))
     failures = condition_failures(before, spec['max_load'], spec['min_memory'])
     failures += condition_failures(after, spec['max_load'], spec['min_memory'])
     if before['swapout_pages'] is not None and after['swapout_pages'] is not None and after['swapout_pages'] > before['swapout_pages']:
@@ -271,6 +308,60 @@ def sample_worker(spec_path, target):
               'conditions_before': before, 'conditions_after': after,
               'condition_failures': sorted(set(failures))}
     save(target, record)
+
+
+def memory_pass(args, output, corpus, refs, binaries, order, env, manifest, variant):
+    """X-MEM: one untimed `--stats` run per pure candidate and query, kept apart from timed records.
+
+    Candidate heap counters need instrumentation (a counting allocator), so these runs are never
+    used for timing. Host peak RSS is recorded alongside. The hybrid has no counters (null, with reason).
+    """
+    rows = []
+    seen = set()
+    with (output / 'memory.jsonl').open('w') as stream:
+        for job in order:
+            candidate, key = job['candidate'], (job['workload'], job['query']['query_id'])
+            if candidate not in PROFILE_CAPABLE or (candidate, key) in seen:
+                continue
+            seen.add((candidate, key))
+            spec = {'job': job, 'binary': binaries[candidate]['path'], 'fixture': str(corpus), 'reference': refs[key]['path'],
+                    'result_digest': refs[key]['result_digest'], 'expected_lookup': refs[key].get('lookup'),
+                    'max_load': args.max_load_per_cpu, 'min_memory': args.min_memory_gib * 1024**3, 'stats': True}
+            save(output / 'sample-spec.json', spec)
+            with (output / 'sample-worker.log').open('a') as log:
+                subprocess.run([sys.executable, __file__, '_sample', '--spec', str(output / 'sample-spec.json'),
+                                '--output', str(output / 'sample-result.json')], stdout=log, stderr=subprocess.STDOUT, check=True)
+            record = load(output / 'sample-result.json')
+            record.update(candidate=candidate, workload=job['workload'], query=job['query']['query_id'], variant=variant,
+                          scenario=args.scenario, classification='memory-pass (untimed)', corpus=str(corpus.relative_to(ROOT)))
+            rows.append(record)
+            stream.write(json.dumps(record) + '\n')
+            stream.flush()
+    return rows
+
+
+def memory_summary(rows, corpus):
+    """Per candidate/query heap and RSS from candidate-reported live heap only, never RSS/count.
+
+    `live_after_index` covers the whole store *including the fixture bytes read from disk*, so it is
+    reported per entity (meaningful for the string-heavy W4 corpora) and per record (entities +
+    relations + evidence rows).
+    """
+    entities, records = corpus['entities'], corpus['entities'] + corpus['edges'] + corpus['evidence']
+    out = []
+    for row in rows:
+        heap = row.get('heap')
+        entry = {'candidate': row['candidate'], 'workload': row['workload'], 'query': row['query'],
+                 'host_rss_peak_bytes': row['rss_peak_bytes']}
+        if heap:
+            entry.update(heap={k: heap[k] for k in ('allocations', 'total_requested', 'peak_live', 'live_after_load',
+                                                    'live_after_index', 'live_after_query', 'retained')},
+                         live_after_index_bytes_per_entity=round(heap['live_after_index'] / entities, 2),
+                         live_after_index_bytes_per_record=round(heap['live_after_index'] / records, 2))
+        else:
+            entry['heap'] = None
+        out.append(entry)
+    return out
 
 
 def run_campaign(args):
@@ -289,6 +380,7 @@ def run_campaign(args):
                 'native_probe': probe, 'preflight_failures': failures,
                 'classification': 'exploratory' if args.exploratory else 'controlled',
                 'preset': args.preset, 'shape': args.shape, 'repeat': args.repeat,
+                'scenario': args.scenario, 'variant': args.variant,
                 'seed': args.seed, 'source_digest': source_digest(),
                 'policy': {'max_one_minute_load_per_cpu': args.max_load_per_cpu,
                            'minimum_available_memory_gib': args.min_memory_gib,
@@ -313,19 +405,42 @@ def run_campaign(args):
                 raise ValueError(f'{candidate}: unsupported representation')
             binaries[candidate] = {'path': str(binary), 'digest': digest(binary), 'bytes': binary.stat().st_size}
         manifest['artifacts'] = binaries
-        corpus = ROOT / 'corpus/synthetic' / f'{args.preset}-campaign-{args.shape}-{args.seed}.json'
-        n, m = PRESETS[args.preset]
-        # Always regenerate from the declared deterministic parameters.
-        generate(corpus, n, m, args.seed, args.shape)
-        manifest['corpus'] = {'path': str(corpus), 'digest': digest(corpus), 'entities': n, 'edges': m, 'evidence': m}
-        order = schedule(args.repeat, args.seed, args.workload, args.candidates)
+        jobs_file = None
+        if args.scenario:
+            entry, variant = scenarios.resolve_scenario(args.scenario, args.variant)
+            spec = entry['variants'][variant]
+            n, m = scenarios.scale_for(entry['family'], args.preset)
+            if spec['shape'] == 'chain':
+                m = n - 1
+            corpus = ROOT / 'corpus/synthetic' / f'{args.scenario}-{variant}-{args.preset}-{args.seed}.json'
+            meta = scenarios.generate_corpus(corpus, n, m, args.seed, spec)
+            manifest['corpus'] = {'path': str(corpus), 'digest': digest(corpus), 'entities': n, 'edges': m, 'evidence': m}
+            manifest['scenario_spec'] = spec
+            unsupported = sorted(set(('rust', 'zig', 'hybrid')) - set(entry['candidates']))
+            if unsupported:
+                manifest['candidates_not_run'] = {c: 'W4 needs in-process phase/heap instrumentation; the hybrid is a whole-fixture FFI batch (ADR-0007)' for c in unsupported}
+            jobs_file = output / 'jobs.json'
+            subprocess.run([sys.executable, __file__, '_scenario_jobs', '--scenario', args.scenario, '--variant', variant,
+                            '--fixture', str(corpus), '--meta', str(corpus.with_suffix('.meta.json')), '--output', str(jobs_file)], check=True)
+            order = schedule(args.repeat, args.seed, None, args.candidates, jobs=load(jobs_file))
+            workloads_used = sorted({job['workload'] for job in load(jobs_file)})
+        else:
+            corpus = ROOT / 'corpus/synthetic' / f'{args.preset}-campaign-{args.shape}-{args.seed}.json'
+            n, m = PRESETS[args.preset]
+            # Always regenerate from the declared deterministic parameters.
+            generate(corpus, n, m, args.seed, args.shape)
+            manifest['corpus'] = {'path': str(corpus), 'digest': digest(corpus), 'entities': n, 'edges': m, 'evidence': m}
+            order = schedule(args.repeat, args.seed, args.workload, args.candidates)
+            workloads_used = args.workload
         save(output / 'order.json', order)
         manifest['state'] = 'PREPARING_ORACLE'
         save(output / 'manifest.json', manifest)
         references = output / 'references'
         references.mkdir()
+        reference_command = [sys.executable, __file__, '_references', '--fixture', str(corpus), '--output', str(references)]
+        reference_command += ['--jobs', str(jobs_file)] if jobs_file else ['--workloads', *args.workload]
         with (output / 'oracle.log').open('w') as log:
-            subprocess.run([sys.executable, __file__, '_references', '--fixture', str(corpus), '--output', str(references), '--workloads', *args.workload], stdout=log, stderr=subprocess.STDOUT, check=True)
+            subprocess.run(reference_command, stdout=log, stderr=subprocess.STDOUT, check=True)
         refs = {(row['workload'], row['query']['query_id']): row for row in load(references / 'index.json')}
         manifest['state'] = 'RUNNING'
         save(output / 'manifest.json', manifest)
@@ -336,7 +451,8 @@ def run_campaign(args):
                 candidate = job['candidate']
                 key = (job['workload'], job['query']['query_id'])
                 spec = {'job': job, 'binary': binaries[candidate]['path'], 'fixture': str(corpus),
-                        'reference': refs[key]['path'], 'result_digest': refs[key]['result_digest'], 'max_load': args.max_load_per_cpu,
+                        'reference': refs[key]['path'], 'result_digest': refs[key]['result_digest'],
+                        'expected_lookup': refs[key].get('lookup'), 'max_load': args.max_load_per_cpu,
                         'min_memory': args.min_memory_gib * 1024**3}
                 for warmup in ([True, False] if (candidate, key) not in seen else [False]):
                     if digest(binaries[candidate]['path']) != binaries[candidate]['digest']:
@@ -347,6 +463,7 @@ def run_campaign(args):
                     record = load(output / 'sample-result.json')
                     record.update(schema='csl.eval.benchmark/v0.1', candidate=candidate, candidate_commit=None,
                                   workload=job['workload'], query=job['query']['query_id'], corpus=str(corpus.relative_to(ROOT)),
+                                  **({'scenario': args.scenario, 'variant': variant} if args.scenario else {}),
                                   seed=args.seed, shape=args.shape, iteration=job['iteration'], sequence=sequence,
                                   mode='cold-process', compiler=compiler_label(env, candidate),
                                   os=env['os'], architecture=env['architecture'], hardware=env['hardware'],
@@ -365,6 +482,11 @@ def run_campaign(args):
                         rows.append(record)
                     seen.add((candidate, key))
                 print(json.dumps({'completed': sequence + 1, 'total': len(order), 'candidate': candidate, 'query': job['query']['query_id']}), flush=True)
+        memory_rows = []
+        if args.scenario and args.memory_pass:
+            manifest['state'] = 'MEMORY_PASS'
+            save(output / 'manifest.json', manifest)
+            memory_rows = memory_pass(args, output, corpus, refs, binaries, order, env, manifest, variant)
         if source_digest() != manifest['source_digest'] or digest(corpus) != manifest['corpus']['digest']:
             raise ValueError('source or corpus changed during campaign')
         for candidate, artifact in binaries.items():
@@ -381,14 +503,23 @@ def run_campaign(args):
             has_phases = all('phases_ns' in row for row in samples)
             has_detail = all('phase_detail_ns' in row for row in samples)
             has_subdetail = all('phase_subdetail_ns' in row for row in samples)
-            summaries.append({'workload': workload, 'query': query, 'candidate': candidate, 'samples': len(samples),
+            lookups = [ns for row in samples for ns in row.get('name_index', {}).get('lookup_ns', ())]
+            w4 = {}
+            if lookups:
+                ordered = sorted(lookups)
+                pick = lambda q: ordered[min(len(ordered) - 1, int(q * len(ordered)))]   # noqa: E731
+                w4 = {'w4': {'lookups': len(ordered), 'lookup_p50_ns': pick(.50), 'lookup_p95_ns': pick(.95), 'lookup_p99_ns': pick(.99),
+                             'median_intern_ns': statistics.median(row['name_index']['intern_ns'] for row in samples),
+                             'unique_strings': samples[0]['name_index']['unique_strings']}}
+            summaries.append({'workload': workload, 'query': query, 'candidate': candidate, 'samples': len(samples), **w4,
                               **({'median_phases_ns': {k: statistics.median(row['phases_ns'][k] for row in samples) for k in ('load', 'index', 'query', 'result')}} if has_phases else {}),
                               **({'median_phase_detail_ns': {k: statistics.median(row['phase_detail_ns'][k] for row in samples) for k in ('decode', 'construct', 'materialize', 'encode')}} if has_detail else {}),
                               **({'median_phase_subdetail_ns': {k: statistics.median(row['phase_subdetail_ns'][k] for row in samples) for k in ('read', 'parse', 'entities', 'adjacency', 'sort')}} if has_subdetail else {}),
                               'median_elapsed_ns': statistics.median(row['elapsed_ns'] for row in samples),
                               'median_peak_rss_bytes': statistics.median(row['rss_peak_bytes'] for row in samples)})
         save(output / 'summary.json', {'state': 'PASS', 'classification': manifest['classification'], 'records': len(rows),
-                                      'condition_failure_samples': sum(bool(r['condition_failures']) for r in rows), 'groups': summaries})
+                                      'condition_failure_samples': sum(bool(r['condition_failures']) for r in rows), 'groups': summaries,
+                                      **({'memory': memory_summary(memory_rows, manifest['corpus'])} if memory_rows else {})})
         manifest.update(state='PASS', finished_utc=timestamp(), records=len(rows))
         save(output / 'manifest.json', manifest)
         print(json.dumps({'state': 'PASS', 'classification': manifest['classification'], 'records': len(rows), 'output': str(output)}))
@@ -409,26 +540,49 @@ def main():
     run.add_argument('--repeat', type=int, default=10)
     run.add_argument('--seed', type=int, default=20260928)
     run.add_argument('--workload', choices=('W1', 'W2'), action='append')
-    run.add_argument('--candidates', nargs='+', choices=('rust', 'zig', 'hybrid'), default=['rust', 'zig'])
+    run.add_argument('--candidates', nargs='+', choices=('rust', 'zig', 'hybrid'), default=None)
+    run.add_argument('--scenario', help='Gate #1 scenario id, e.g. W2.X1 or W4.S4 (see harness/scenarios.py)')
+    run.add_argument('--variant', help='scenario variant (default: the scenario default)')
+    run.add_argument('--no-memory-pass', dest='memory_pass', action='store_false', help='skip the untimed --stats memory pass')
     run.add_argument('--exploratory', action='store_true')
     run.add_argument('--max-load-per-cpu', type=float, default=0.5)
     run.add_argument('--min-memory-gib', type=float, default=3)
     ref = commands.add_parser('_references')
     ref.add_argument('--fixture', required=True)
     ref.add_argument('--output', required=True)
-    ref.add_argument('--workloads', nargs='+', required=True, choices=('W1', 'W2'))
+    ref.add_argument('--workloads', nargs='+', choices=('W1', 'W2'))
+    ref.add_argument('--jobs', help='scenario jobs file (replaces --workloads)')
+    scen = commands.add_parser('_scenario_jobs')
+    scen.add_argument('--scenario', required=True)
+    scen.add_argument('--variant')
+    scen.add_argument('--fixture', required=True)
+    scen.add_argument('--meta', required=True)
+    scen.add_argument('--output', required=True)
     sample = commands.add_parser('_sample')
     sample.add_argument('--spec', required=True)
     sample.add_argument('--output', required=True)
     args = parser.parse_args()
     if args.command == '_references':
-        reference_worker(args.fixture, Path(args.output), args.workloads)
+        if bool(args.workloads) == bool(args.jobs):
+            parser.error('_references needs exactly one of --workloads or --jobs')
+        reference_worker(args.fixture, Path(args.output), args.workloads, args.jobs)
+    elif args.command == '_scenario_jobs':
+        scenario_jobs(args.scenario, args.variant, args.fixture, args.meta, args.output)
     elif args.command == '_sample':
         sample_worker(args.spec, args.output)
     else:
         if args.repeat < 1 or args.max_load_per_cpu <= 0 or args.min_memory_gib <= 0:
             parser.error('repeat and condition thresholds must be positive')
         args.workload = list(dict.fromkeys(args.workload or ['W1', 'W2']))
+        if args.scenario:
+            entry, _ = scenarios.resolve_scenario(args.scenario, args.variant)
+            args.candidates = args.candidates or list(entry['candidates'])
+            if not set(args.candidates) <= set(entry['candidates']):
+                parser.error(f'{args.scenario} supports only {", ".join(entry["candidates"])}')
+            if args.preset not in scenarios.SCALES[entry['family']]:
+                parser.error(f'no scale {args.preset} for {args.scenario}')
+        else:
+            args.candidates = args.candidates or ['rust', 'zig']
         sys.exit(run_campaign(args))
 
 

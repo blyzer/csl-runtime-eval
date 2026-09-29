@@ -117,7 +117,7 @@ def corpus_path(corpus):
 def profile_metadata(envelope, elapsed_ns):
     """Reject missing/unsupported timing metadata before accepting a measurement."""
     required = {'profile_schema', 'representation', 'phases_ns', 'result'}
-    optional = {'phase_detail_ns', 'phase_subdetail_ns'}
+    optional = {'phase_detail_ns', 'phase_subdetail_ns', 'name_index', 'heap'}
     if not isinstance(envelope, dict) or not required <= set(envelope) or set(envelope) - required - optional:
         raise ValueError('invalid profile envelope')
     if 'phase_subdetail_ns' in envelope and 'phase_detail_ns' not in envelope:
@@ -147,7 +147,29 @@ def profile_metadata(envelope, elapsed_ns):
             raise ValueError('read+parse must equal decode')
         if sub['entities'] + sub['adjacency'] + sub['sort'] != phases['index']:
             raise ValueError('entities+adjacency+sort must equal index')
-    return {key: envelope[key] for key in fields}
+    extra = {}
+    if 'name_index' in envelope:
+        index = envelope['name_index']
+        if not isinstance(index, dict) or set(index) != {'intern_ns', 'unique_strings', 'lookups', 'lookup_ns', 'lookup_digest', 'lookup_ids_total'}:
+            raise ValueError('invalid name_index block')
+        ints = ('intern_ns', 'unique_strings', 'lookups', 'lookup_ids_total')
+        if any(type(index[k]) is not int or index[k] < 0 for k in ints) or not isinstance(index['lookup_digest'], str) \
+                or not isinstance(index['lookup_ns'], list) or any(type(v) is not int or v < 0 for v in index['lookup_ns']) \
+                or len(index['lookup_ns']) != index['lookups']:
+            raise ValueError('invalid name_index values')
+        extra['name_index'] = index
+    if 'heap' in envelope:
+        heap = envelope['heap']
+        keys = {'model', 'allocations', 'total_requested', 'total_freed', 'live', 'peak_live', 'live_after_load',
+                'live_after_index', 'live_after_query', 'retained'}
+        if not isinstance(heap, dict) or set(heap) != keys or heap['model'] != 'requested-bytes':
+            raise ValueError('invalid heap block')
+        if any(k != 'model' and k != 'retained' and (type(heap[k]) is not int or heap[k] < 0) for k in keys) \
+                or (heap['retained'] is not None and (type(heap['retained']) is not int or heap['retained'] < 0)) \
+                or heap['peak_live'] < heap['live']:
+            raise ValueError('invalid heap values')
+        extra['heap'] = heap
+    return {**{key: envelope[key] for key in fields}, **extra}
 
 def unpack_profile(envelope, elapsed_ns):
     metadata = profile_metadata(envelope, elapsed_ns)

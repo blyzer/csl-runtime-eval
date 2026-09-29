@@ -191,6 +191,7 @@ class CompactOracle:
         self.strings = strings
         self._finish(ent, (rel_s, rel_o, rel_r), (ev_s, ev_o, ev_p, ev_e, ev_l, ev_r, ev_pol, ev_q))
         self._names = None
+        self.last_traversal_steps = None
 
     def _finish(self, ent, rel, ev):
         ent.sort(key=lambda row: row[0])
@@ -309,6 +310,7 @@ class CompactOracle:
                         if steps >= cap:
                             truncated = True
                             break
+                self.last_traversal_steps = steps
                 return result
             if op == 'FILTER':
                 base = ev(node['input']) if 'input' in node else range(n)
@@ -320,6 +322,32 @@ class CompactOracle:
             raise ValueError(f'unsupported op {op}')
 
         return ev(q), truncated
+
+    def traversal_steps(self, q):
+        """Edges the (last) TRAVERSE in `q` inspects; used to place cap-boundary queries."""
+        from oracle.validation import validate_query
+        validate_query(q)
+        self.last_traversal_steps = None
+        self._evaluate(q)
+        if self.last_traversal_steps is None:
+            raise ValueError('query has no TRAVERSE')
+        return self.last_traversal_steps
+
+    def name_lookup(self, names, rounds=1):
+        """Expected W4 lookup block: digest over round 0 and total ids over all rounds.
+
+        Digest bytes per name, in order: b'[' + ascending ids comma-joined + b']\\n'.
+        """
+        index = self._name_index()
+        h = hashlib.sha256()
+        total = 0
+        for name in names:
+            ids = [int(self.ent_id[r]) for r in index.get(name, ())]
+            h.update(b'[' + b','.join(b'%d' % i for i in ids) + b']\n')
+            total += len(ids)
+        return {'lookup_digest': 'sha256:' + h.hexdigest(), 'lookup_ids_total': total * rounds,
+                'unique_strings': len({self.strings[self.ent_name[r]] for r in range(self.n)}),
+                'lookups': len(names) * rounds}
 
     def execute_to(self, q, target):
         """Evaluate `q`, write the canonical result JSON to `target`; return its summary."""
