@@ -103,18 +103,34 @@ def native_probe():
                 'sdk': command_output(['/usr/bin/xcrun', '--show-sdk-path']) if sys.platform == 'darwin' else None}
 
 
-def schedule(repeat, seed, workloads):
+def compiler_label(env, candidate):
+    tools = env['tools']
+    if candidate == 'rust':
+        return tools['rustc']['version']
+    if candidate == 'zig':
+        return tools['zig']['version']
+    # hybrid: Rust harness/ABI wrapper linking a Zig-compiled kernel, both toolchains apply.
+    return f"rustc {tools['rustc']['version']} + zig {tools['zig']['version']}"
+
+
+def schedule(repeat, seed, workloads, candidates=('rust', 'zig')):
+    """Seeded query order; each query's candidate group is rotated by one
+    position per repeat, so every candidate takes every position (1st, 2nd,
+    ...) an equal (or near-equal, for repeat % len(candidates) != 0) number
+    of times. For exactly two candidates this reproduces the original
+    alternating rust/zig schedule exactly."""
     rng = random.Random(seed)
     jobs = [(workload, query) for workload in workloads for query in queries(workload)]
     rng.shuffle(jobs)
+    n = len(candidates)
     order = []
     for workload, query in jobs:
-        first = rng.choice(['rust', 'zig'])
+        base = list(candidates)
+        rng.shuffle(base)
         for iteration in range(repeat):
-            pair = [first, 'zig' if first == 'rust' else 'rust']
-            if iteration % 2:
-                pair.reverse()
-            for candidate in pair:
+            rotation = iteration % n
+            group = base[rotation:] + base[:rotation]
+            for candidate in group:
                 order.append({'candidate': candidate, 'workload': workload,
                               'query': query, 'iteration': iteration})
     return order
@@ -149,11 +165,21 @@ def strict_equal(actual, expected):
     return actual == expected
 
 
+PROFILE_CAPABLE = ('rust', 'zig')
+
+
 def sample_worker(spec_path, target):
     spec = load(spec_path)
     job = spec['job']
+    # Hybrid is a whole-fixture FFI batch (ADR-0002): it has no pure-store
+    # decode/index/query/materialize/encode phases to report, so it runs
+    # without --profile and is measured on elapsed_ns/RSS only, same as
+    # rust/zig but without phases_ns/phase_detail_ns/phase_subdetail_ns.
+    profiled = job['candidate'] in PROFILE_CAPABLE
     command = [spec['binary'], 'workload', '--id', job['workload'], '--corpus', spec['fixture'],
-               '--params', json.dumps({'query': job['query']}), '--profile']
+               '--params', json.dumps({'query': job['query']})]
+    if profiled:
+        command.append('--profile')
     with tempfile.TemporaryFile() as out, tempfile.TemporaryFile() as err:
         before = snapshot()
         start = time.perf_counter_ns()
@@ -166,12 +192,13 @@ def sample_worker(spec_path, target):
             err.seek(0)
             raise RuntimeError(f'candidate exited {process.returncode}: {err.read(4096).decode(errors="replace")}')
         out.seek(0)
-        envelope = json.load(out)
-    metadata = profile_metadata(envelope, elapsed)
+        payload = json.load(out)
+    metadata = profile_metadata(payload, elapsed) if profiled else {}
+    result = payload['result'] if profiled else payload
     reference = load(spec['reference'])
     # Reference schema was checked once before timing. Full equality also proves
     # the candidate result has that schema, without millions of repeated checks.
-    if not strict_equal(envelope['result'], reference):
+    if not strict_equal(result, reference):
         raise ValueError('full oracle result mismatch; sample rejected')
     failures = condition_failures(before, spec['max_load'], spec['min_memory'])
     failures += condition_failures(after, spec['max_load'], spec['min_memory'])
@@ -206,7 +233,7 @@ def run_campaign(args):
                            'minimum_available_memory_gib': args.min_memory_gib,
                            'swapping': 'reject controlled samples with increased swapout counter',
                            'cache': 'one validated unmeasured warm-up per candidate/query; OS caches not flushed',
-                           'order': 'seeded query order; alternating paired candidate order',
+                           'order': 'seeded query order; candidate group rotated by one position per repeat',
                            'isolation': 'serial native processes; oracle preparation and result verification outside native timing'}}
     save(output / 'manifest.json', manifest)
     if failures and not args.exploratory:
@@ -216,7 +243,7 @@ def run_campaign(args):
         return 2
     try:
         binaries = {}
-        for candidate in ('rust', 'zig'):
+        for candidate in args.candidates:
             binary = executable(candidate)
             if not binary.exists():
                 raise ValueError(f'build {candidate} first')
@@ -230,7 +257,7 @@ def run_campaign(args):
         # Always regenerate from the declared deterministic parameters.
         generate(corpus, n, m, args.seed, args.shape)
         manifest['corpus'] = {'path': str(corpus), 'digest': digest(corpus), 'entities': n, 'edges': m, 'evidence': m}
-        order = schedule(args.repeat, args.seed, args.workload)
+        order = schedule(args.repeat, args.seed, args.workload, args.candidates)
         save(output / 'order.json', order)
         manifest['state'] = 'PREPARING_ORACLE'
         save(output / 'manifest.json', manifest)
@@ -260,7 +287,7 @@ def run_campaign(args):
                     record.update(schema='csl.eval.benchmark/v0.1', candidate=candidate, candidate_commit=None,
                                   workload=job['workload'], query=job['query']['query_id'], corpus=str(corpus.relative_to(ROOT)),
                                   seed=args.seed, shape=args.shape, iteration=job['iteration'], sequence=sequence,
-                                  mode='cold-process', compiler=env['tools']['rustc' if candidate == 'rust' else 'zig']['version'],
+                                  mode='cold-process', compiler=compiler_label(env, candidate),
                                   os=env['os'], architecture=env['architecture'], hardware=env['hardware'],
                                   source_digest=manifest['source_digest'], corpus_digest=manifest['corpus']['digest'],
                                   artifact_digest=binaries[candidate]['digest'], artifact_bytes=binaries[candidate]['bytes'],
@@ -320,6 +347,7 @@ def main():
     run.add_argument('--repeat', type=int, default=10)
     run.add_argument('--seed', type=int, default=20260928)
     run.add_argument('--workload', choices=('W1', 'W2'), action='append')
+    run.add_argument('--candidates', nargs='+', choices=('rust', 'zig', 'hybrid'), default=['rust', 'zig'])
     run.add_argument('--exploratory', action='store_true')
     run.add_argument('--max-load-per-cpu', type=float, default=0.5)
     run.add_argument('--min-memory-gib', type=float, default=3)

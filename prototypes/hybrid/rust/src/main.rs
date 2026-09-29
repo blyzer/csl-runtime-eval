@@ -102,7 +102,9 @@ fn run() -> Result<Value, Box<dyn std::error::Error>> {
     };
     let k = Kernel::open()?;
     if cmd == "info" {
-        return Ok(json!({"candidate":"hybrid","abi_version":1,"semantic_kernel":"zig"}));
+        return Ok(
+            json!({"candidate":"hybrid","abi_version":1,"semantic_kernel":"zig","representation":"typed-hash-v1"}),
+        );
     }
     if cmd == "echo" {
         let mut q = vec![0];

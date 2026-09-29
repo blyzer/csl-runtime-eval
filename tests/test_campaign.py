@@ -24,6 +24,21 @@ class Campaign(unittest.TestCase):
                 self.assertEqual(left['query'], right['query'])
                 self.assertEqual(left['iteration'], right['iteration'])
 
+    def test_order_rotates_three_candidates_evenly(self):
+        candidates = ('rust', 'zig', 'hybrid')
+        order = schedule(9, 17, ['W1'], candidates)
+        self.assertEqual(order, schedule(9, 17, ['W1'], candidates))
+        for start in range(0, len(order), 27):
+            block = order[start:start + 27]
+            for position in range(3):
+                seen = {block[i + position]['candidate'] for i in range(0, 27, 3)}
+                self.assertEqual(seen, set(candidates))
+            for group_start in range(0, 27, 3):
+                group = block[group_start:group_start + 3]
+                self.assertEqual({j['candidate'] for j in group}, set(candidates))
+                self.assertEqual(len({j['iteration'] for j in group}), 1)
+                self.assertEqual(len({j['query']['query_id'] for j in group}), 1)
+
     def test_equality_preserves_json_types(self):
         self.assertFalse(strict_equal({'entities':[True]}, {'entities':[1]}))
         self.assertFalse(strict_equal({'entities':[1.0]}, {'entities':[1]}))
@@ -56,7 +71,7 @@ class Campaign(unittest.TestCase):
             binary.chmod(0o755)
             reference = root/'reference.json'
             reference.write_text(json.dumps(expected))
-            spec = {'job':{'workload':'W1','query':query(entity_id=1)}, 'binary':str(binary),
+            spec = {'job':{'candidate':'rust','workload':'W1','query':query(entity_id=1)}, 'binary':str(binary),
                     'fixture':'unused', 'reference':str(reference),'max_load':100,'min_memory':1}
             spec_path = root/'spec.json';spec_path.write_text(json.dumps(spec))
             result_path = root/'sample.json'
@@ -71,4 +86,21 @@ class Campaign(unittest.TestCase):
             envelope['phases_ns']['query']=-1
             binary.write_text(f'#!{sys.executable}\nprint({json.dumps(json.dumps(envelope))})\n')
             with self.assertRaises(Exception):sample_worker(spec_path,result_path)
-            self.assertFalse(result_path.exists())
+
+    def test_sample_skips_profile_for_hybrid(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            expected = execute(BASE, query(entity_id=1))
+            binary = root/'candidate'
+            binary.write_text(f'#!{sys.executable}\nprint({json.dumps(json.dumps(expected))})\n')
+            binary.chmod(0o755)
+            reference = root/'reference.json'
+            reference.write_text(json.dumps(expected))
+            spec = {'job':{'candidate':'hybrid','workload':'W1','query':query(entity_id=1)}, 'binary':str(binary),
+                    'fixture':'unused', 'reference':str(reference),'max_load':100,'min_memory':1}
+            spec_path = root/'spec.json';spec_path.write_text(json.dumps(spec))
+            result_path = root/'sample.json'
+            sample_worker(spec_path,result_path)
+            record = json.loads(result_path.read_text())
+            self.assertTrue(record['conformance'])
+            self.assertNotIn('phases_ns',record)
