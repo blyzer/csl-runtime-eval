@@ -1,7 +1,7 @@
 {
   "schema": "csl.eval.campaign/v0.1",
   "state": "PASS",
-  "started_utc": "2026-09-29T01:31:34.145607+00:00",
+  "started_utc": "2026-09-28T09:44:45.373841+00:00",
   "environment": {
     "tools": {
       "python3": {
@@ -46,14 +46,14 @@
     "sdk_workaround": false
   },
   "preflight_machine": {
-    "utc": "2026-09-29T01:31:32.534591+00:00",
+    "utc": "2026-09-28T09:44:43.812046+00:00",
     "load_average": [
-      0.9423828125,
-      0.4228515625,
-      0.1591796875
+      0.966796875,
+      0.4169921875,
+      0.162109375
     ],
     "cpu_count": 4,
-    "available_memory_bytes": 15323885568,
+    "available_memory_bytes": 15218388992,
     "swapout_pages": 0,
     "power": null,
     "thermal": null
@@ -63,9 +63,9 @@
     "command": [
       "/home/runner/work/csl-runtime-eval/csl-runtime-eval/.venv/bin/zig",
       "build-exe",
-      "/tmp/csl-native-probe-a76z2q01/probe.zig",
+      "/tmp/csl-native-probe-j21cy4ct/probe.zig",
       "-lc",
-      "-femit-bin=/tmp/csl-native-probe-a76z2q01/probe"
+      "-femit-bin=/tmp/csl-native-probe-j21cy4ct/probe"
     ],
     "build_exit": 0,
     "diagnostic": "",
@@ -78,7 +78,7 @@
   "shape": "mixed",
   "repeat": 10,
   "seed": 20260928,
-  "source_digest": "d45577a0660a49a2fee107f8e4c49405a36acf038c799c085e6769590a5e8333",
+  "source_digest": "80ea43ca27b2578586a5c0765bc01e1f933f446feb49ec768ad14c61da3081fc",
   "policy": {
     "max_one_minute_load_per_cpu": 0.75,
     "minimum_available_memory_gib": 3,
@@ -90,13 +90,13 @@
   "artifacts": {
     "rust": {
       "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust/target/release/csl-eval-rust",
-      "digest": "05f9174064c5caef0e6df78ad6bdd344051208305fedc4ff7d62afc5a7138ed8",
-      "bytes": 840552
+      "digest": "9c007c776e32b10af21553590b2206ef9b376c74a3c8b9273eaac51be5140f62",
+      "bytes": 847232
     },
     "zig": {
       "path": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/zig/zig-out/bin/csl-eval-zig",
-      "digest": "392fac53d201cc4010edda7ed4f6299c0c838ea93a015fc90effe33a81851409",
-      "bytes": 2043784
+      "digest": "01dd176a69840200237555d4e9f1e92c10285b7ec3ca1831111381bbfcc099f3",
+      "bytes": 2027936
     }
   },
   "corpus": {
@@ -106,6 +106,6 @@
     "edges": 1000000,
     "evidence": 1000000
   },
-  "finished_utc": "2026-09-29T01:43:29.434488+00:00",
+  "finished_utc": "2026-09-28T09:56:53.449074+00:00",
   "records": 180
 }

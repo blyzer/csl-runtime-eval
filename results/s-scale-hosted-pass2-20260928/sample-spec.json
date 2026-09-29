@@ -20,7 +20,7 @@
   },
   "binary": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust/target/release/csl-eval-rust",
   "fixture": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/S-campaign-mixed-20260928.json",
-  "reference": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/s-scale-hosted-36508141357/references/W2-mixed-relations.json",
+  "reference": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/s-scale-hosted-36405210578/references/W2-mixed-relations.json",
   "max_load": 0.75,
   "min_memory": 3221225472
 }

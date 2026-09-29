@@ -2,11 +2,11 @@ RUN cargo fmt --manifest-path prototypes/rust/Cargo.toml --check
 PASS
 RUN cargo clippy --manifest-path prototypes/rust/Cargo.toml --all-targets --all-features -- -D warnings
     Checking csl-eval-rust v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.25s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.28s
 PASS
 RUN cargo test --manifest-path prototypes/rust/Cargo.toml
    Compiling csl-eval-rust v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.37s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.41s
      Running unittests src/main.rs (prototypes/rust/target/debug/build/csl-eval-rust/58ce721666be7fdc/out/csl_eval_rust-58ce721666be7fdc)
 
 running 0 tests
@@ -16,7 +16,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 PASS
 RUN cargo build --manifest-path prototypes/rust/Cargo.toml
    Compiling csl-eval-rust v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/rust)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.67s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.72s
 PASS
 RUN cargo build --release --manifest-path prototypes/rust/Cargo.toml
     Finished `release` profile [optimized] target(s) in 0.01s
@@ -25,7 +25,7 @@ RUN cargo fmt --manifest-path prototypes/hybrid/Cargo.toml --check
 PASS
 RUN cargo clippy --manifest-path prototypes/hybrid/Cargo.toml --all-targets --all-features -- -D warnings
    Compiling csl-eval-hybrid v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/hybrid/rust)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.29s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
 PASS
 RUN cargo test --manifest-path prototypes/hybrid/Cargo.toml
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.03s
@@ -39,7 +39,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 PASS
 RUN cargo build --manifest-path prototypes/hybrid/Cargo.toml
    Compiling csl-eval-hybrid v0.1.0 (/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/hybrid/rust)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.34s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.36s
 PASS
 RUN cargo build --release --manifest-path prototypes/hybrid/Cargo.toml
     Finished `release` profile [optimized] target(s) in 0.01s

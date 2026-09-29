@@ -136,18 +136,45 @@ order, or output changed; Zig was not touched. Verified before committing:
 digest byte-identical to the oracle on the golden fixture, 106/106
 conformance (normal + profile) unchanged, `clippy`/`fmt` clean.
 
-**SMOKE-scale result** (`scan-type`, this Mac, local, single-sample —
-directional only): `index_ns` 779,333 -> ~451,000-546,000 ns (**-30% to
--42%**); `adjacency` sub-phase 540,875 -> 268,000-357,000; `entities`
-sub-phase 90,083 -> ~28,000-32,000. On hosted CI (Linux, single
-`ci/smoke.sh` sample, also SMOKE scale): Zig `index_ns`=1,203,415 vs Rust
-(with the hasher change) `index_ns`=691,420 — the ranking **reversed**: Rust
-now measures faster than Zig at this phase, on this one sample. Both
-confirm the hypothesis directionally. The controlled S-scale rerun
-(S-pass3, [results/EVIDENCE-LEDGER.md](../results/EVIDENCE-LEDGER.md)) is
-the rigorous ten-repeat measurement; see STATUS.md for its numbers once
-recorded, and do not treat the SMOKE single-sample figures above as
-conclusive on their own.
+**SMOKE-scale single-sample result** (directional only, superseded by the
+controlled measurement below): local Mac, `scan-type` `index_ns` 779,333 ->
+~451,000-546,000 ns; hosted CI single sample showed Rust *overtaking* Zig
+entirely (691,420 vs 1,203,415 ns) — that reversal did not hold up at
+controlled scale (below) and should be read as SMOKE-scale noise amplified
+by a single sample, not as the real effect size.
+
+**Controlled S-scale result** (S-pass3 vs S-pass2, ten repeats, same corpus,
+[results/EVIDENCE-LEDGER.md](../results/EVIDENCE-LEDGER.md)): the hasher
+change closed **most but not all** of the index gap — it did not reverse it
+at this rigor.
+
+| Query | Rust index (pass2 -> pass3) | Zig index (pass2 -> pass3, unchanged code) | Gap (pass2 -> pass3) |
+|---|---|---|---|
+| W1 scan-type | 538.8 ms -> 394.2 ms (-27%) | 349.9 ms -> 377.2 ms (+8%, noise) | Zig 35% faster -> Zig only 4% faster |
+| W2 depth-8 | 625.8 ms -> 403.3 ms (-36%) | 382.8 ms -> 378.0 ms (flat) | Zig 39% faster -> Zig only 7% faster |
+
+Sub-phase detail at pass 3 (median, ns): Rust `entities` 4.1-4.4M vs Zig
+5.5-5.6M (**Rust now faster** on this sub-phase); Rust `adjacency` 324.5-333.5M
+vs Zig 285.8M (Zig still ~13-17% faster here); Rust `sort` 65.2-65.9M vs Zig
+86.0-86.4M (**Rust now faster**, plausibly cheaper comparator/allocation
+during `sort_unstable_by_key` vs Zig's `std.mem.sort`, not investigated
+further this pass). Net **elapsed** effect across all nine W1/W2 queries at
+S scale: Rust improved 9-18% on every query (median across queries ~-14%);
+Zig stayed flat (±0-4%, consistent with no code change). Conformance:
+212/159 PASS unchanged; semantic digests remained byte-identical to the
+oracle (hard gate, verified before this rerun was trusted).
+
+**Conclusion for this step**: SipHash-vs-Wyhash explains the *majority* of
+the index gap, confirmed at controlled scale, but not all of it — after the
+hasher fix Rust is faster on `entities` and `sort`, Zig remains faster on
+`adjacency`, and the two are within single-digit percent overall. This is a
+materially different, more modest conclusion than the SMOKE-scale single
+samples suggested, illustrating exactly why STEP 10's methodological lesson
+matters: single-sample measurements at small scale overstate effect sizes
+and can even flip direction. No further hasher tuning was attempted this
+pass (STEP 6: do not optimize merely because more optimization is
+available); the residual `adjacency`-phase gap is a candidate target for a
+future pass if it persists.
 
 ## STEP 5 — Representation equivalence report
 
@@ -202,18 +229,23 @@ per-entity/per-edge calls, per the existing `prototypes/hybrid` ABI v1).
 The pass-1 hypothesis for Hybrid — "Zig is intrinsically superior for
 large-result serialization, worth crossing a language boundary to capture" —
 is **falsified** by pass 2: that gap was a Rust implementation defect, fully
-closed without any hybrid boundary. The surviving hypothesis, narrowed by
-this pass: **can Zig's index-construction behavior (assuming further S-scale
-evidence confirms it survives past a hasher fix) justify a second production
-language once BoundaryTax is paid?** This is now explicitly conditional on
-whether an *index* advantage remains after the hasher experiment — if it
-does not (as the SMOKE-scale samples above suggest may be the case), the
-Hybrid hypothesis has no remaining large, demonstrated advantage to try to
-carry across a boundary, which is itself a valid, useful negative result:
-Hybrid would then need a *new* demonstrated advantage (not yet identified)
-to justify its BoundaryTax, copy/allocation, ownership-transition, and
-toolchain-complexity costs. P4 is not abandoned; it has no live hypothesis
-to test until the S-pass3 index numbers are in.
+closed without any hybrid boundary. The pass-3 controlled S-scale result
+above answers the narrowed question directly: Zig's index advantage
+survives the hasher fix, but only as a single-digit-percent gap
+(`adjacency` sub-phase ~13-17% faster; ~4-7% faster overall at the `index`
+phase, and Rust is now *ahead* on `entities` and `sort`). A 4-7% aggregate
+advantage is very unlikely to survive a Rust<->Zig FFI boundary crossing
+(BoundaryTax: batching/copy overhead, ownership transitions between
+allocators, serialization at the boundary) with any net benefit — P4 Hybrid
+would need to demonstrate that BoundaryTax stays below roughly this same
+single-digit-percent margin, which is a materially harder bar than the
+35-45% margin pass 1/2 appeared to offer. **This is a valid, useful negative
+signal, not a final answer**: P4 is not abandoned, but its current
+best-supported hypothesis is narrow enough that Hybrid may not be worth
+building unless a *new*, larger, demonstrated advantage is found (e.g. at M
+scale, or in a workload family W1/W2 does not cover) — BoundaryTax,
+copy/allocation, ownership-transition, and toolchain-complexity costs are
+real and must clear whatever margin remains.
 
 ## STEP 10 — Methodological lesson
 

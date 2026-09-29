@@ -155,6 +155,57 @@ by itself justify an architecture choice. Pure Rust and pure Zig only — hybrid
 has no S-scale measurement yet. Corpus M, workloads W3-W12, mutation/persistence
 and hybrid-at-scale remain the same open items listed below.
 
+## Decode/index asymmetry investigation (pass 3) — 2026-09-28
+
+[ADR-0005](adr/0005-decode-index-asymmetry-investigation.md) investigates the
+two asymmetries pass 2 left unexplained: Rust's ~2x faster JSON decode and
+Zig's ~35-45% faster index construction. Both `decode` and `index` were split
+into measurable sub-phases (`read`/`parse`, `entities`/`adjacency`/`sort`,
+exposed as `phase_subdetail_ns`) without changing either candidate's
+algorithm. Reading Zig 0.14.1's vendored source directly (not assumed) ruled
+out one decode-gap hypothesis (Zig's default string handling should be
+*cheaper* than Rust's, since `.alloc_if_needed` borrows unescaped strings
+zero-copy where Rust always copies into an owned `String`) and identified the
+leading, unconfirmed candidates as arena/chunk-growth allocation strategy and
+parser/scanner maturity — neither isolated without a profiler, which this
+iteration did not have available (Zig still cannot build locally on this
+Mac). **No change was made to decode.**
+
+For the index gap, source reading found the likely cause: Rust's
+`std::collections::HashMap` defaults to SipHash-1-3 (deliberately
+DoS-resistant, not speed-optimized); Zig's `std.AutoHashMap` defaults to
+Wyhash (fast, non-cryptographic) — confirmed from `std/hash_map.zig`. This is
+a standard-library default, not a language property. **Experiment**: swapped
+Rust's `HashMap`/`HashSet` to an inline FxHash-style hasher (no new
+dependency); verified byte-identical digest against the oracle and unchanged
+106/106 conformance before trusting any timing. Controlled S-scale rerun
+(S-pass3 vs S-pass2-fairness, same corpus/oracle/10-repeat protocol, archived
+in [results/EVIDENCE-LEDGER.md](results/EVIDENCE-LEDGER.md)):
+
+| | Rust index (pass2 -> pass3) | Zig index (unchanged code) | Gap |
+|---|---|---|---|
+| W1 scan-type | 538.8 ms -> 394.2 ms (-27%) | 349.9 ms -> 377.2 ms (noise) | Zig 35% faster -> Zig 4% faster |
+| W2 depth-8 | 625.8 ms -> 403.3 ms (-36%) | 382.8 ms -> 378.0 ms (flat) | Zig 39% faster -> Zig 7% faster |
+
+The hasher explains **most but not all** of the gap: Rust is now faster on
+the `entities` and `sort` sub-phases, Zig remains ~13-17% faster on
+`adjacency`. Across all nine W1/W2 queries, Rust's median *elapsed* time
+improved ~14% (every query 9-18% faster); Zig stayed flat (±0-4%, as
+expected since its code did not change). Conformance and digests unaffected.
+A SMOKE-scale single sample had suggested Rust might overtake Zig entirely —
+that did not hold at controlled S-scale, illustrating the pass 1/2/3
+methodological lesson: single small-scale samples overstate and can even
+flip an effect size relative to the controlled measurement.
+
+**P4 Hybrid, reframed**: the pass-1 hypothesis ("Zig wins large-result
+serialization, worth a language boundary") is falsified (pass 2). The
+narrowed hypothesis this pass leaves standing — can Zig's index-construction
+edge survive an FFI boundary — now has only a ~4-7% margin to work with
+after the hasher fix, a materially harder bar for BoundaryTax to clear than
+the original 35-45%. P4 is not closed, but has no large demonstrated
+advantage to carry across a boundary right now. Language Gate #1 remains
+**OPEN**.
+
 ## S-scale campaign protocol — 2026-09-28
 
 [ADR-0003](adr/0003-s-scale-campaign.md) defines the serial paired runner in
