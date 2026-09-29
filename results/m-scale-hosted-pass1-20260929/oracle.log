@@ -1,0 +1,9 @@
+{"reference": "W1-lookup-first.json", "state": "PASS", "bytes": 2612}
+{"reference": "W1-lookup-missing.json", "state": "PASS", "bytes": 268}
+{"reference": "W1-scan-type.json", "state": "PASS", "bytes": 841261448}
+{"reference": "W2-outgoing.json", "state": "PASS", "bytes": 32099}
+{"reference": "W2-incoming.json", "state": "PASS", "bytes": 20355}
+{"reference": "W2-depth-2.json", "state": "PASS", "bytes": 322425}
+{"reference": "W2-depth-4.json", "state": "PASS", "bytes": 31766951}
+{"reference": "W2-depth-8.json", "state": "PASS", "bytes": 274397783}
+{"reference": "W2-mixed-relations.json", "state": "PASS", "bytes": 284734}

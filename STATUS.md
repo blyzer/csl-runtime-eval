@@ -4,8 +4,8 @@ Gate #1: **PARTIAL — no architecture decision**. This is an empirical bootstra
 not production CSL. Most results below are local macOS/arm64 evidence; a
 controlled S-scale W1/W2 campaign for pure Rust/Zig has since run on a native
 GitHub Actions Linux ARM64 runner (see "Controlled S-scale campaign (hosted)"
-below). Controlled M-scale, the remaining Gate workloads, and hybrid-at-scale
-still have not been executed.
+below). Controlled M-scale and hybrid-at-scale (W1/W2) have since run on the same
+runner class; the remaining Gate workloads (W3-W9, W12) have not been executed.
 
 This repository is P1-P5 of a larger program; [ADR-0004](adr/0004-program-roadmap-and-gates.md)
 preserves the full roadmap (Gate #2/P15, Tree-sitter, Glean/Angle, MLIR, Mojo)
@@ -233,6 +233,39 @@ is ~4-7% and the boundary costs 3-13% plus ~25-35% more memory. This is one runn
 instance and a bootstrap hybrid (whole-fixture batch, no persistent kernel store),
 so it does not rule out a persistent-store hybrid design. Gate #1 remains **OPEN**;
 M scale and W3-W9/W12 are still pending.
+
+## M-scale controlled (hosted), pass 1 — 2026-09-29
+
+Same three candidates on a native `ubuntu-24.04-arm` runner, M corpus (1M entities /
+10M relations / 10M evidence rows, seed 20260928), 10 repeats, streaming oracle
+([ADR-0006](adr/0006-streaming-oracle.md)) with byte-level verification. Run
+[36538603932](https://github.com/blyzer/csl-runtime-eval/actions/runs/36538603932),
+commit `c164f89`. **State PASS, classification controlled, 270 records (90 per
+candidate), all byte-identical to the oracle, 0 condition failures,
+`sdk_workaround: false`.** Evidence: [results/m-scale-hosted-pass1-20260929](results/m-scale-hosted-pass1-20260929/).
+A first attempt (run 36530930295) was rejected after 32 samples by the strict swap-out
+rule (34 pages, no real memory pressure); swap is now disabled on the runner before
+the campaign (recorded in `hosted-context`) instead of loosening the rule.
+
+Median elapsed / peak RSS:
+
+| Query | Rust | Zig | Hybrid | Hybrid vs Zig |
+|---|---|---|---|---|
+| lookup / depth-2 / incoming / outgoing / mixed | 10.3-11.0 s / 3.9 GB | 14.5-15.1 s / 5.2 GB | 14.9-15.3 s / 7.3 GB | +1-4% time, +40% RSS |
+| depth-4 | 10.8 s / 4.0 GB | 15.0 s / 5.3 GB | 15.5 s / 7.4 GB | +3%, +40% |
+| depth-8 | 12.7 s / 4.5 GB | 16.7 s / 6.1 GB | 17.5 s / 8.2 GB | +5%, +34% |
+| scan-type | 17.3 s / 5.6 GB | 21.0 s / 8.0 GB | 22.7 s / 10.7 GB | +8%, +34% |
+
+Reading: the S-scale picture holds at 10x the data and is now controlled. Rust is
+fastest on every query (Zig ~1.3-1.4x behind); hybrid is never faster than pure Zig,
+its time cost stays small (1-8%) but it needs ~34-40% more memory, the same
+direction as at S. Elapsed grew ~7-8x for 10x the data on every candidate (no scaling
+cliff). The local exploratory M run agrees on ordering and time ratios; its RSS
+numbers (swap active) do not agree and should be disregarded. Absolute times differ
+between the Mac (faster) and this runner, so compare ratios, not seconds. Still one
+runner instance and a bootstrap hybrid (whole-fixture batch), so it does not rule out
+a persistent-store hybrid. Gate #1 remains **OPEN**: W3-W9 and W12 are not defined
+or run yet.
 
 ## M-scale, local exploratory (pass 5) — 2026-09-29
 
