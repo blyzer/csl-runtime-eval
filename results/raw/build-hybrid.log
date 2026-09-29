@@ -1,3 +1,22 @@
-    Blocking waiting for file lock on package cache
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling libc v0.2.189
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde_json v1.0.151
+   Compiling cfg-if v1.0.5
+   Compiling itoa v1.0.18
    Compiling csl-eval-hybrid v0.1.0 (/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/hybrid/rust)
-    Finished `release` profile [optimized] target(s) in 3.48s
+   Compiling memchr v2.8.3
+   Compiling generic-array v0.14.7
+warning: linker stderr: cc: error: Failed to open property list '/Users/enverfrancisco/Downloads/csl-runtime-eval/.venv/zig-sdk/SDKSettings.plist'
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `csl-eval-hybrid` (build script) generated 1 warning
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling cpufeatures v0.2.17
+   Compiling sha2 v0.10.9
+    Finished `release` profile [optimized] target(s) in 16.25s

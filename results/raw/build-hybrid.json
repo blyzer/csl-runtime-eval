@@ -1,9 +1,9 @@
 {
   "candidate": "hybrid",
   "state": "PASS",
-  "elapsed_ns": 3517549042,
+  "elapsed_ns": 16498995708,
   "build_kind": "existing-cache",
-  "artifact_bytes": 786480,
+  "artifact_bytes": 782192,
   "command": [
     "/Users/enverfrancisco/.cargo/bin/cargo",
     "build",

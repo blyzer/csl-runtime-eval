@@ -9,7 +9,8 @@ if platform.system()!='Darwin' or platform.machine()!='arm64':raise SystemExit('
 parser=argparse.ArgumentParser();parser.add_argument('--sdk',help='Explicit installed SDK path; default: xcrun selection');args=parser.parse_args()
 sdk=Path(args.sdk or subprocess.check_output(['/usr/bin/xcrun','--sdk','macosx','--show-sdk-path'],text=True).strip()).resolve()
 stub=(sdk/'usr/lib/libSystem.tbd').read_text()
-if 'arm64-macos' in stub:raise SystemExit('SDK already advertises arm64; workaround not needed')
+top=next(l for l in stub.splitlines() if l.startswith('targets:'))
+if ' arm64-macos' in top or '[arm64-macos' in top:raise SystemExit('SDK already advertises arm64; workaround not needed')
 if 'arm64e-macos' not in stub:raise SystemExit('Unrecognized SDK; no files modified')
 out=ROOT/'.venv/zig-sdk';lib=out/'usr/lib';lib.mkdir(parents=True,exist_ok=True)
 for item in (sdk/'usr/lib').iterdir():

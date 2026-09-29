@@ -343,7 +343,7 @@ def main():
     commands = parser.add_subparsers(dest='command', required=True)
     run = commands.add_parser('run')
     run.add_argument('--output', required=True)
-    run.add_argument('--preset', choices=('SMOKE', 'S'), default='S')
+    run.add_argument('--preset', choices=('SMOKE', 'S', 'M'), default='S')
     run.add_argument('--shape', choices=('mixed', 'cycle', 'fanout'), default='mixed')
     run.add_argument('--repeat', type=int, default=10)
     run.add_argument('--seed', type=int, default=20260928)
