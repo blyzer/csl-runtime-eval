@@ -1,0 +1,20 @@
+{
+  "job": {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 39
+  },
+  "binary": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/prototypes/zig/zig-out/bin/csl-eval-zig",
+  "fixture": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/corpus/synthetic/S-campaign-mixed-20260928.json",
+  "reference": "/home/runner/work/csl-runtime-eval/csl-runtime-eval/results/S-scale-hosted-36588754955/references/W1-scan-type.json",
+  "result_digest": "sha256:a927f5ffe5c01f4537ebc88725ae767332d86821d7ba4af76750387a33c8de01",
+  "expected_lookup": null,
+  "max_load": 0.75,
+  "min_memory": 3221225472
+}

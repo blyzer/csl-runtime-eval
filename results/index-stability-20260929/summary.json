@@ -1,0 +1,170 @@
+{
+  "state": "PASS",
+  "classification": "controlled",
+  "records": 240,
+  "condition_failure_samples": 0,
+  "groups": [
+    {
+      "workload": "W1",
+      "query": "lookup-first",
+      "candidate": "rust",
+      "samples": 40,
+      "median_phases_ns": {
+        "load": 470168038.5,
+        "index": 283701948.5,
+        "query": 3556.0,
+        "result": 3375429.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 470168038.5,
+        "construct": 0.0,
+        "materialize": 3341839.0,
+        "encode": 32578.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 72999723.5,
+        "parse": 397231370.0,
+        "entities": 3847668.5,
+        "adjacency": 217279833.0,
+        "sort": 62653399.5
+      },
+      "median_elapsed_ns": 810073656.0,
+      "median_peak_rss_bytes": 376897536.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-first",
+      "candidate": "zig",
+      "samples": 40,
+      "median_phases_ns": {
+        "load": 1003824844.5,
+        "index": 340430795.5,
+        "query": 1908.0,
+        "result": 10642608.5
+      },
+      "median_phase_detail_ns": {
+        "decode": 1003824844.5,
+        "construct": 0.0,
+        "materialize": 10619362.0,
+        "encode": 22550.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 73258383.0,
+        "parse": 931130603.5,
+        "entities": 6460132.5,
+        "adjacency": 252033311.5,
+        "sort": 82416163.0
+      },
+      "median_elapsed_ns": 1376742355.5,
+      "median_peak_rss_bytes": 490123264.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-missing",
+      "candidate": "rust",
+      "samples": 40,
+      "median_phases_ns": {
+        "load": 471351649.5,
+        "index": 274092543.5,
+        "query": 2511.5,
+        "result": 85075.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 471351649.5,
+        "construct": 0.0,
+        "materialize": 74423.5,
+        "encode": 10483.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 73361666.5,
+        "parse": 397880983.5,
+        "entities": 3935394.0,
+        "adjacency": 207430645.5,
+        "sort": 62676062.0
+      },
+      "median_elapsed_ns": 797001899.0,
+      "median_peak_rss_bytes": 376901632.0
+    },
+    {
+      "workload": "W1",
+      "query": "lookup-missing",
+      "candidate": "zig",
+      "samples": 40,
+      "median_phases_ns": {
+        "load": 1006993593.5,
+        "index": 338519871.5,
+        "query": 1440.0,
+        "result": 2544459.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 1006993593.5,
+        "construct": 0.0,
+        "materialize": 2537912.0,
+        "encode": 6559.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 73725514.5,
+        "parse": 932755539.0,
+        "entities": 6547730.0,
+        "adjacency": 249281316.0,
+        "sort": 82509741.5
+      },
+      "median_elapsed_ns": 1378657416.5,
+      "median_peak_rss_bytes": 490123264.0
+    },
+    {
+      "workload": "W1",
+      "query": "scan-type",
+      "candidate": "rust",
+      "samples": 40,
+      "median_phases_ns": {
+        "load": 477297498.5,
+        "index": 388330940.0,
+        "query": 5623654.0,
+        "result": 499340490.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 477297498.5,
+        "construct": 0.0,
+        "materialize": 88276105.0,
+        "encode": 411155683.5
+      },
+      "median_phase_subdetail_ns": {
+        "read": 77662218.5,
+        "parse": 398622469.0,
+        "entities": 4118984.5,
+        "adjacency": 319240534.5,
+        "sort": 65133385.5
+      },
+      "median_elapsed_ns": 1495077804.5,
+      "median_peak_rss_bytes": 547426304.0
+    },
+    {
+      "workload": "W1",
+      "query": "scan-type",
+      "candidate": "zig",
+      "samples": 40,
+      "median_phases_ns": {
+        "load": 1012464359.5,
+        "index": 425856925.0,
+        "query": 16675521.0,
+        "result": 502139971.0
+      },
+      "median_phase_detail_ns": {
+        "decode": 1012464359.5,
+        "construct": 0.0,
+        "materialize": 148125447.5,
+        "encode": 353819500.0
+      },
+      "median_phase_subdetail_ns": {
+        "read": 77870773.5,
+        "parse": 934492141.0,
+        "entities": 6515056.5,
+        "adjacency": 333637315.5,
+        "sort": 85291868.5
+      },
+      "median_elapsed_ns": 2039188746.5,
+      "median_peak_rss_bytes": 763932672.0
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "records": 240,
+  "pairs": 120,
+  "conformant": 240,
+  "condition_failure_samples": 0,
+  "sdk_workaround": [
+    false
+  ],
+  "corpus_digest": "7ea1c7884968206fff29bfd3f0a0102018df2e82cd6377061870b18ab369c4d5",
+  "source_digest": "aaf46497d4e607e440ad9644361eee3d684c92a9b1b97765766466e322a6a13a",
+  "bootstrap": {
+    "resamples": 10000,
+    "seed": 20260929
+  },
+  "parts": {
+    "index": {
+      "median_ratio_zig_over_rust": 1.163701447287124,
+      "ci95": [
+        1.139889545424551,
+        1.1967390643999534
+      ],
+      "fraction_pairs_rust_faster": 0.9916666666666667,
+      "fraction_pairs_zig_faster": 0.008333333333333333,
+      "rust_ns": {
+        "median": 301701578.5,
+        "iqr": 107837833.0,
+        "cv": 0.17247741684165863,
+        "min": 239208138,
+        "max": 430673287
+      },
+      "zig_ns": {
+        "median": 349193201.5,
+        "iqr": 80796633.75,
+        "cv": 0.11545521320661546,
+        "min": 312262371,
+        "max": 454795054
+      }
+    },
+    "entities": {
+      "median_ratio_zig_over_rust": 1.655160642230455,
+      "ci95": [
+        1.6369278919499077,
+        1.671467852426251
+      ],
+      "fraction_pairs_rust_faster": 1.0,
+      "fraction_pairs_zig_faster": 0.0,
+      "rust_ns": {
+        "median": 3940850.0,
+        "iqr": 273085.0,
+        "cv": 0.048143146035051335,
+        "min": 3739920,
+        "max": 4587166
+      },
+      "zig_ns": {
+        "median": 6510011.5,
+        "iqr": 232912.5,
+        "cv": 0.030542963310239507,
+        "min": 6283741,
+        "max": 7269683
+      }
+    },
+    "adjacency": {
+      "median_ratio_zig_over_rust": 1.1132438043144606,
+      "ci95": [
+        1.0936992985491691,
+        1.1491409949125506
+      ],
+      "fraction_pairs_rust_faster": 0.9,
+      "fraction_pairs_zig_faster": 0.1,
+      "rust_ns": {
+        "median": 235390936.0,
+        "iqr": 104591179.0,
+        "cv": 0.21185144208555634,
+        "min": 178492489,
+        "max": 359057536
+      },
+      "zig_ns": {
+        "median": 259344997.5,
+        "iqr": 78468341.0,
+        "cv": 0.14718302562890992,
+        "min": 224540756,
+        "max": 361434043
+      }
+    },
+    "sort": {
+      "median_ratio_zig_over_rust": 1.316227870943755,
+      "ci95": [
+        1.3120896170365621,
+        1.3184534349754897
+      ],
+      "fraction_pairs_rust_faster": 1.0,
+      "fraction_pairs_zig_faster": 0.0,
+      "rust_ns": {
+        "median": 63080102.0,
+        "iqr": 2528592.0,
+        "cv": 0.029335275846720132,
+        "min": 56932213,
+        "max": 68185957
+      },
+      "zig_ns": {
+        "median": 82877896.0,
+        "iqr": 2227055.75,
+        "cv": 0.018953174745951075,
+        "min": 80249615,
+        "max": 87734120
+      }
+    }
+  },
+  "per_repeat_block_median_index_ns": {
+    "rust": {
+      "median": 301133724.5,
+      "iqr": 26790169.0,
+      "cv": 0.07964031189149089,
+      "min": 261514070,
+      "max": 377337892
+    },
+    "zig": {
+      "median": 349193201.5,
+      "iqr": 18627313.5,
+      "cv": 0.04619866165253942,
+      "min": 330672928,
+      "max": 404592472
+    }
+  },
+  "classification": "Rust materially faster within this instance (cross-instance stability not established)"
+}

@@ -1,0 +1,2642 @@
+[
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 10
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 10
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 11
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 11
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 12
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 12
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 13
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 13
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 14
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 14
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 15
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 15
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 16
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 16
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 17
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 17
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 18
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 18
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 19
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 19
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 20
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 20
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 21
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 21
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 22
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 22
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 23
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 23
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 24
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 24
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 25
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 25
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 26
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 26
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 27
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 27
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 28
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 28
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 29
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 29
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 30
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 30
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 31
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 31
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 32
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 32
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 33
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 33
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 34
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 34
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 35
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 35
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 36
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 36
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 37
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 37
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 38
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 38
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 39
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-first",
+      "op": "RESOLVE",
+      "entity_id": 1
+    },
+    "iteration": 39
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 10
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 10
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 11
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 11
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 12
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 12
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 13
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 13
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 14
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 14
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 15
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 15
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 16
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 16
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 17
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 17
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 18
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 18
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 19
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 19
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 20
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 20
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 21
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 21
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 22
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 22
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 23
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 23
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 24
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 24
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 25
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 25
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 26
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 26
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 27
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 27
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 28
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 28
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 29
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 29
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 30
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 30
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 31
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 31
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 32
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 32
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 33
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 33
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 34
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 34
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 35
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 35
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 36
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 36
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 37
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 37
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 38
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 38
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 39
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "lookup-missing",
+      "op": "RESOLVE",
+      "entity_id": 18446744073709551615
+    },
+    "iteration": 39
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 0
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 1
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 2
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 3
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 4
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 5
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 6
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 7
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 8
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 9
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 10
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 10
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 11
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 11
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 12
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 12
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 13
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 13
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 14
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 14
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 15
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 15
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 16
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 16
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 17
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 17
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 18
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 18
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 19
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 19
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 20
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 20
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 21
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 21
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 22
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 22
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 23
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 23
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 24
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 24
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 25
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 25
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 26
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 26
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 27
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 27
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 28
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 28
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 29
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 29
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 30
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 30
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 31
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 31
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 32
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 32
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 33
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 33
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 34
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 34
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 35
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 35
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 36
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 36
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 37
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 37
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 38
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 38
+  },
+  {
+    "candidate": "rust",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 39
+  },
+  {
+    "candidate": "zig",
+    "workload": "W1",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "scan-type",
+      "op": "FILTER",
+      "kind": "TYPE"
+    },
+    "iteration": 39
+  }
+]

@@ -1,0 +1,82 @@
+{
+  "model_digest": "sha256:008f868d5819ba276d7807969e96472a87be6eb9d855b97b6923673b4d75ba7c",
+  "model_digest_after_mutate": "sha256:dabb740962a1fe048bd35db9aec7d604f5a1eaba9594e5cc163f97391bac7f70",
+  "results": {
+    "rust": {
+      "open_ms": 1518.3,
+      "strategy": {
+        "mutation": "full-rebuild"
+      },
+      "digest_ok": true,
+      "state_digest_ms_candidate": 930.53025,
+      "state_digest_ms_host": 931.0,
+      "bytes_processed": 209554927,
+      "query_depth-4_ok": true,
+      "query_depth-4_ms": 406.7,
+      "query_depth-4_chunked": true,
+      "query_in_ok": true,
+      "query_in_ms": 7.6,
+      "query_in_chunked": false,
+      "snapshot_ms": 556.0,
+      "snapshot_bytes": 59289011,
+      "mutate_ms_full_rebuild": 787.3,
+      "mutate_ok": true,
+      "digest_after_mutate_ok": true,
+      "stats": {
+        "live_heap_bytes": 380928714,
+        "peak_heap_bytes": 764161549,
+        "allocations_total": 2243284
+      },
+      "restore_ms": 761.5,
+      "restore_generation": 2,
+      "digest_after_restore_ok": true,
+      "cold": {
+        "spawn_to_open_ms": 16.6,
+        "restore_ms": 679.4,
+        "first_query_ms": 386.4,
+        "ttfq_ms": 1082.4,
+        "query_ok": true,
+        "digest_ok": true
+      },
+      "host_note": "local Mac, exploratory, SDK overlay; conformance check only"
+    },
+    "zig": {
+      "open_ms": 1005.7,
+      "strategy": {
+        "mutation": "full-rebuild"
+      },
+      "digest_ok": true,
+      "state_digest_ms_candidate": 697.612375,
+      "state_digest_ms_host": 699.2,
+      "bytes_processed": 209554927,
+      "query_depth-4_ok": true,
+      "query_depth-4_ms": 410.9,
+      "query_depth-4_chunked": true,
+      "query_in_ok": true,
+      "query_in_ms": 24.2,
+      "query_in_chunked": false,
+      "snapshot_ms": 66.8,
+      "snapshot_bytes": 58988996,
+      "mutate_ms_full_rebuild": 576.2,
+      "mutate_ok": true,
+      "digest_after_mutate_ok": true,
+      "stats": {
+        "live_heap_bytes": 174743753,
+        "peak_heap_bytes": 349194002,
+        "allocations_total": 1256764
+      },
+      "restore_ms": 307.1,
+      "restore_generation": 2,
+      "digest_after_restore_ok": true,
+      "cold": {
+        "spawn_to_open_ms": 29.7,
+        "restore_ms": 314.4,
+        "first_query_ms": 409.6,
+        "ttfq_ms": 753.8,
+        "query_ok": true,
+        "digest_ok": true
+      },
+      "host_note": "local Mac, exploratory, SDK overlay; conformance check only"
+    }
+  }
+}

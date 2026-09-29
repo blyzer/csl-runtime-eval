@@ -1,0 +1,3 @@
+{"reference": "W1-lookup-first.json", "state": "PASS", "bytes": 3287}
+{"reference": "W1-lookup-missing.json", "state": "PASS", "bytes": 268}
+{"reference": "W1-scan-type.json", "state": "PASS", "bytes": 82349563}
