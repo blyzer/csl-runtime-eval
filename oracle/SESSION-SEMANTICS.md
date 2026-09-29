@@ -1,10 +1,12 @@
-# S0 — Persistent Session Semantics (preliminary)
+# S0 — Persistent Session Semantics
 
-Status: PRELIMINARY DESIGN. Not implemented; operation names and field names are
-provisional until reviewed. This document defines *semantics only*. It contains no
-byte-level framing and no candidate-language concept; bytes are defined by a
-transport binding ([SESSION-BINDING-JSONL.md](SESSION-BINDING-JSONL.md)). Decision
-context and scope: [ADR-0007](../adr/0007-gate1-remaining-workloads.md).
+Status: FINAL DRAFT FOR REVIEW. **S0 must not be implemented until this contract
+and [ADR-0008](../adr/0008-mutation-semantics.md) have been reviewed.** Operation
+and field names remain provisional until that review. This document defines
+*semantics only*: no byte-level framing and no candidate-language concept. Bytes are
+defined by a transport binding
+([SESSION-BINDING-JSONL.md](SESSION-BINDING-JSONL.md)). Decision context and scope:
+[ADR-0007](../adr/0007-gate1-remaining-workloads.md).
 
 Compatibility rule: the existing one-shot mode
 (`workload --id ... --corpus ... --params ...`) is frozen and unchanged. S0 is
@@ -12,106 +14,144 @@ additive. Query and result semantics are those of [SEMANTICS.md](SEMANTICS.md).
 
 ## 1. Terms
 
-* **Logical state**: the set of entities, relations and evidence rows plus the
-  fixture context (`snapshot` label, `epoch`, `complete`). Independent of memory
-  layout, interning, file format or index structure.
+* **Logical state**: entities, relations and evidence rows plus the fixture context
+  (`snapshot` label, `epoch`, `complete`). Independent of memory layout, interning,
+  capacity, file format or index structure.
 * **Store**: a candidate's live representation of one logical state.
 * **Session**: the lifetime of one store, from `open` to `close`.
-* **Generation**: a non-negative integer counting state changes in a session.
-* **Snapshot**: a persisted image of the logical state, identified by `snapshot_id`.
+* **Generation**: a non-negative integer counting state-changing operations within
+  one session (section 3.2).
+* **Snapshot**: a persisted image of a logical state, named by `snapshot_id`.
+* **Checkpoint**: an explicit, separately costed conformance operation
+  (`state_digest`).
 
 ## 2. Logical state and `state_digest`
 
-Logical state is *resolved*, not stored: an entity carries its name string, not a
-`name_sid`, so interning strategy (W4) is not observable in the state. Concretely,
-canonical logical state is:
+Logical state is *resolved*, not stored. An entity carries its name string, not a
+`name_sid`, so interning strategy (W4) is not observable in the state. Canonical
+logical state is:
 
 * `entities`: `{id, kind, name, container}` sorted ascending by `id`;
-* `relations`: `{subject, relation, object}` sorted by `(subject, relation, object)`,
-  duplicates retained (multiset);
+* `relations`: `{subject, relation, object}` sorted by
+  `(subject, relation, object)`, duplicates retained (multiset);
 * `evidence`: the eight result fields, sorted by the result sort key
   `(subject, relation, object, proposition, lineage, polarity, quality, freshness_epoch)`,
   duplicates retained;
 * context: `snapshot`, `epoch` (`null` when absent), `complete` (`false` when absent).
 
-`state_digest` (**mandatory**) is `sha256:` over the canonical JSON (sorted keys,
-compact separators, UTF-8, no ASCII escaping) of that structure. It is the
-cross-candidate equality test for a state: two candidates in the same state must
-report the same `state_digest`, whatever their layouts. Strings not referenced by
-any entity are not part of logical state. Computing it may be expensive at M scale,
-so its cost is reported separately and never counted in query latency.
+**Only reachable content is state.** Strings that no entity references are not part
+of logical state. Interner garbage, string-table capacity, arena or allocator
+slack, index capacity and any other representation detail can **never** affect
+`state_digest`: two stores with the same logical state report the same digest
+regardless of how they got there (fixture load, mutation history, restore) and
+regardless of layout.
 
-## 3. Session lifecycle
+`state_digest` is `sha256:` over the canonical JSON (sorted keys, compact
+separators, UTF-8, no ASCII escaping) of that structure.
+
+## 3. Session model
+
+### 3.1 Lifecycle
 
 ```
 NEW --open--> OPEN --close--> CLOSED
-                 \--any unrecoverable fault--> FAILED (terminal)
+                 \--unrecoverable fault--> FAILED (terminal)
 ```
 
-One store per session. Every operation has a valid state; outside it the operation
-fails with `INVALID_STATE` and has no effect. `close` is idempotent in effect and
-releases the store. `FAILED` accepts only `close`.
+One store per session. Every operation has valid states; outside them it fails with
+`INVALID_STATE` and has no effect. `close` releases the store. `FAILED` accepts only
+`close`.
 
-## 4. Operations (provisional)
+### 3.2 Generation
+
+* `open` establishes `generation = 0`.
+* `generation` is **monotonic** within a session: it never decreases and is never
+  reset.
+* It advances by **exactly one** per successful `mutate` batch and by **exactly one**
+  per successful `restore`. No other operation changes it.
+* A failed request (including an empty or invalid batch) does not advance it.
+* `restore` never restores, rewinds or adopts the generation number recorded when the
+  snapshot was taken; that number is informational (`captured_generation`). Only the
+  *logical content* is restored.
+
+## 4. Operations (provisional names)
+
+Optional capabilities are marked (opt).
 
 | Operation | Valid in | Effect | Result |
 |---|---|---|---|
-| open | NEW | Loads a fixture (fixture format unchanged) into a store; `generation = 0` | protocol/semantics version, advertised capabilities, `generation`, `state_digest` |
+| open | NEW | Builds a store from a source (fixture; see open question 2 for snapshot sources); `generation = 0` | semantics version, advertised capabilities, `generation` |
 | query | OPEN | Evaluates one query IR against the current state; no state change | canonical result (section 9), `generation` |
-| mutate | OPEN | Applies one atomic batch (section 5) | new `generation`, `state_digest` |
-| state_digest | OPEN | Computes the digest of the current state | `state_digest`, `generation` |
-| snapshot | OPEN | Persists the current state | `snapshot_id`, the captured `generation` and `state_digest` |
-| restore | OPEN | Replaces the current state by the state captured under `snapshot_id` | new `generation`, `state_digest` |
-| cancel | OPEN | Requests cancellation of an earlier request (section 7) | outcome of the cancel request |
+| mutate | OPEN | Applies one atomic batch (section 5) | new `generation` |
+| state_digest | OPEN | **Explicit checkpoint**: computes the digest of the current state | `state_digest`, `generation` |
+| snapshot | OPEN | Persists the current logical state | `snapshot_id`, `captured_generation` |
+| restore | OPEN | Replaces the current logical content with the content captured under `snapshot_id`; advances `generation` by one | new `generation` |
+| cancel (opt) | OPEN | Requests cancellation of an earlier request (section 7) | outcome of the cancel request |
 | stats | OPEN | Reports memory and count statistics (section 10) | stats record |
 | close | OPEN, FAILED | Ends the session | acknowledgement |
 
+**`state_digest` is never computed implicitly.** `open`, `query`, `mutate`,
+`snapshot` and `restore` results do not carry it. The digest exists only where the
+harness issues the `state_digest` checkpoint. `snapshot` records no digest by itself;
+the harness obtains the reference digest by issuing `state_digest` immediately before
+`snapshot`, and the comparison digest by issuing it immediately after `restore`. The
+sequential baseline (section 6) guarantees no mutation intervenes between the pair.
+
+**Timing rule.** The elapsed time of `query`, `mutate`, `snapshot`, `restore` and
+`open` excludes any `state_digest` checkpoint. `state_digest` time is measured and
+reported as its own metric. A candidate may maintain digest data incrementally as a
+representation choice, but then that maintenance cost belongs to the timing of the
+mutation or restore that incurs it.
+
 ## 5. Mutation semantics (v0)
 
-* A batch is a list of operations over entities, relations and evidence rows (add /
-  remove). A batch must contain at least one operation; an empty batch is
-  `INVALID_INPUT`.
-* **Atomic**: all operations apply or none do. A failed mutation leaves logical
-  state and `generation` exactly as they were.
-* A batch is validated as a *whole*: the state after applying all operations must
-  satisfy every fixture invariant (schemas, unique entity ids, valid references,
-  valid string fields). Validation is on that final state, so operation order within
-  a batch does not matter for validity.
-* **No implicit cascade.** Removing an entity that is still referenced by relations
-  or evidence rows in the resulting state is rejected with `INVALID_INPUT`.
-  Removing the entity together with all its dependents in the *same* batch is valid.
-* `generation` is monotonic and increases by exactly one per successful batch.
-* Fine-grained rules (duplicate-row removal, conflicting operations on the same key,
-  entity rename) are deferred to the mutation-semantics ADR (ADR-0008, not yet
-  written), which is a prerequisite of W8.S1.
+* A batch is a list of operations over entities, relations and evidence rows.
+* **Empty batch**: `INVALID_INPUT`. It changes no state, does not advance
+  `generation`, and does not change `state_digest`.
+* **Atomic**: all operations apply or none do. A failed `mutate` leaves logical
+  state, `generation` and `state_digest` exactly as they were.
+* A batch is validated as a *whole*, on the resulting state, so operation order
+  within a batch does not affect validity or result.
+* **No implicit cascade.** Removing an entity that is still referenced by relations,
+  evidence rows or as a `container` in the resulting state is rejected with
+  `INVALID_INPUT`. Removing the entity together with all its dependents in the
+  *same* batch is valid.
+* `generation` advances by exactly one per successful batch (section 3.2).
+* Duplicate-row deletion, conflicting operations within a batch, rename/update and
+  every remaining mutation rule are defined in
+  [ADR-0008](../adr/0008-mutation-semantics.md), which is a prerequisite of W8.S1.
 
-## 6. Ordering and concurrency
+## 6. Ordering, concurrency and the sequential baseline
 
-* Execution is **sequential** in the baseline: one request is processed at a time
-  and **responses are emitted in request order**. Each operation observes exactly
-  the state left by the previous one.
-* Concurrency is an **optional advertised capability** (`open` lists it), used only
-  by X-CONC. Its semantics (which generation a concurrent query observes, whether
-  mutations act as barriers) are not defined in v0 and are added, additively, when
-  X-CONC is specified. A candidate without the capability is `UNSUPPORTED` for it,
-  not "zero".
+* The baseline is **sequential**: one request is processed at a time and **responses
+  are emitted in request order**. Each operation observes exactly the state left by
+  the previous one. A baseline implementation is **not required** to read further
+  requests while executing one.
+* **Concurrent request processing** and **cancellation** are **optional advertised
+  capabilities** (`open` lists them). A candidate that does not advertise a
+  capability returns `UNSUPPORTED` for the corresponding operation; that outcome is
+  recorded as `UNSUPPORTED`, never omitted and never counted as zero.
+* The semantics of concurrent execution (which generation a concurrent query
+  observes, whether mutations act as barriers) are not defined in v0 and are added
+  additively when X-CONC is specified.
 
-## 7. Cancellation
+## 7. Cancellation (optional capability)
 
-* Optional, advertised capability; without it `cancel` returns `UNSUPPORTED`.
-* Every request receives **exactly one terminal response**. A cancelled request's
-  terminal response is `CANCELLED` and carries **no partial semantic result**.
-* The observable state after a cancel equals the state before the cancelled
-  request: a cancelled `query` has no effect; a cancelled `mutate` either commits
-  fully before the cancel takes effect (the request completes normally) or not at
-  all. Whichever terminal response is produced first stands; there is no second one.
-* The `cancel` request has its own terminal response stating whether it took effect
-  (target cancelled, target already finished, or target unknown).
+* Not required by the baseline; a baseline implementation may return `UNSUPPORTED`
+  for `cancel`. X-CANCEL is non-blocking for Gate #1.
+* When advertised: every request still receives **exactly one terminal response**.
+  A cancelled request's terminal response is `CANCELLED` and carries **no partial
+  semantic result**. The observable state after a cancel equals the state before the
+  cancelled request: a cancelled `query` has no effect, and a cancelled `mutate`
+  either completes normally before the cancel takes effect or does not happen at all.
+  The first terminal response produced stands; there is never a second one.
+* The `cancel` request has its own terminal response stating whether it took effect.
 * Time-to-quiescence is a *measurement* (X-CANCEL), not a contract bound.
 
 ## 8. Error model
 
-Closed set of codes; only the code is compared across candidates, never message text.
+Closed set of codes; only the code is compared across candidates, never message
+text.
 
 | Code | Meaning |
 |---|---|
@@ -119,7 +159,7 @@ Closed set of codes; only the code is compared across candidates, never message 
 | `INVALID_STATE` | Operation not valid in the current lifecycle state |
 | `INVALID_INPUT` | Well-formed but semantically invalid: schema or integrity violation, referenced-entity removal, empty batch, unknown `snapshot_id` |
 | `UNSUPPORTED` | Capability or operation not implemented by this candidate |
-| `CANCELLED` | Request cancelled before completion |
+| `CANCELLED` | Request cancelled before completion (only with the capability) |
 | `LIMIT_EXCEEDED` | A resource limit was hit (memory, size) |
 | `INTERNAL` | Candidate fault; the session becomes `FAILED` |
 
@@ -135,76 +175,80 @@ Any failed request leaves logical state and `generation` unchanged (except that
   the same logical state and the same query. The existing content digest is
   unchanged. `generation` is context beside the result, never inside it.
 * `snapshot_id` is opaque and stable (it names one persisted snapshot). It has no
-  meaning across candidates, because native snapshot formats differ; cross-candidate
-  equality of a restored state is checked by `state_digest`.
+  meaning across candidates because native snapshot formats differ; cross-candidate
+  equality of a restored state is checked by `state_digest`. `restore` must yield
+  logical content equal to the snapshot's logical state.
+* Transport framing, including chunking of large results, is a binding concern and
+  never alters semantics or canonical logical results.
 
 ## 10. Stats and memory accounting
 
-`stats` returns a versioned record (`csl.eval.session.stats/v0.1`). Every field that
-a candidate cannot measure reliably is `null` (never 0) with a reason.
+`stats` returns a versioned record (`csl.eval.session.stats/v0.1`). Every field a
+candidate cannot measure reliably is `null` with a reason, never 0.
 
 | Field | Definition |
 |---|---|
 | `generation` | Current generation |
 | `entities`, `relations`, `evidence` | Current row counts |
-| `unique_strings` | Distinct name strings in the store |
+| `unique_strings` | Distinct *reachable* name strings in the store |
 | `live_heap_bytes` | Bytes currently allocated by the store through the candidate's allocator, including string data and indexes |
 | `peak_heap_bytes` | Peak of the above since `open` |
 | `heap_breakdown` | Optional: strings / entities / relations / evidence / indexes, each nullable |
 | `allocations_total` | Allocation calls since `open`, where reliably countable |
 
-Host-measured process RSS is reported by the harness, never by the candidate. The
-two sources are recorded independently, and bytes per entity/relation/evidence
-row/unique string are derived only from `live_heap_bytes`/`heap_breakdown`, never
-from RSS divided by a count. Categories a candidate excludes (for example a Hybrid's
-two allocators) must be stated per candidate.
+Host-measured process RSS is reported by the harness, never by the candidate. The two
+sources are recorded independently. Bytes per entity/relation/evidence row/unique
+string are derived only from `live_heap_bytes`/`heap_breakdown`, never from RSS
+divided by a count. Categories a candidate excludes (for example a hybrid's two
+allocators) must be stated per candidate. Heap figures may include internal garbage
+and capacity; that is exactly why they are *not* part of `state_digest`.
 
 ## 11. Versioning and capabilities
 
-* Semantics identifier: `csl.eval.session/v0.1`; the transport binding carries its
-  own version, separate from semantics.
-* `open` performs a handshake returning the semantics version and the list of
-  advertised optional capabilities (`concurrency`, `cancel`, ...). Unknown
-  operations return `UNSUPPORTED`. Changes within a minor version are additive
-  only. The one-shot mode is versioned independently and frozen.
+* Semantics identifier: `csl.eval.session/v0.1`. The transport binding carries its
+  own version, independent of semantics.
+* `open` performs a handshake returning the semantics version and the advertised
+  optional capabilities (`concurrency`, `cancel`, ...). Unknown operations return
+  `UNSUPPORTED`. Changes within a minor version are additive only. The one-shot mode
+  is versioned independently and frozen.
 
 ## 12. Validation after mutation and restore
 
-* After `open`, every `mutate`, and every `restore`, the harness computes the
-  oracle's state for the same sequence (the oracle gains an `apply(state, batch)`
-  operation) and compares `state_digest` and `generation`.
+* After `open`, every `mutate` and every `restore`, the harness compares the
+  candidate against the oracle for the same sequence (the oracle gains
+  `apply(state, batch)`) using the explicit `state_digest` checkpoint and the
+  `generation` value.
 * Queries issued after any state change are compared, byte-for-byte, with the oracle
   result on that state.
-* `snapshot` then `restore` must reproduce the `state_digest` recorded by
-  `snapshot`. A failed `mutate` must leave the digest and generation unchanged.
-* The oracle side stays independent: the streaming oracle (ADR-0006) produces the
-  expected values; candidates are never used to validate each other.
+* `state_digest` before `snapshot` must equal `state_digest` after `restore`. A
+  failed or empty `mutate` must leave `state_digest` and `generation` unchanged.
+* The oracle stays independent: the streaming oracle (ADR-0006) produces the expected
+  values; candidates are never used to validate each other.
 
 ## 13. Equivalent workloads for Rust, Zig and Hybrid
 
-A **scenario script** is a deterministic sequence of semantic requests generated from
-a seed, independent of any transport. The same script is bound to the same bytes and
-replayed into every candidate; the oracle produces the expected outcome for each
-step. Only protocol-level operations appear in a script, so no candidate-specific
-operation exists. A candidate lacking a capability records `UNSUPPORTED` for the
-affected steps; a step is never dropped for one candidate and never recorded as zero.
+A **scenario script** is a deterministic sequence of semantic requests generated
+from a seed, independent of any transport. The same script is bound to the same
+bytes and replayed into every candidate; the oracle produces the expected outcome for
+each step. Only protocol-level operations appear, so no candidate-specific operation
+exists. A candidate lacking a capability records `UNSUPPORTED` for the affected
+steps; a step is never dropped for one candidate and never recorded as zero.
+Checkpoint (`state_digest`) steps are explicit script steps, timed separately.
 
-## 14. Open questions (not settled by the approvals)
+## 14. Open questions
 
-1. **`restore` and `generation`.** `restore` replaces state; to keep `generation`
-   monotonic it is proposed to advance by one like a mutation (not to rewind).
-   Confirm.
-2. **Empty batch.** Proposed `INVALID_INPUT` (so "advances once per successful
-   batch" stays unambiguous). Confirm.
-3. **Cancellation with a sequential baseline.** A candidate must read requests while
-   executing one to observe `cancel`. Is that acceptable inside the baseline, or does
-   it force the concurrency capability?
-4. **Cost of mandatory `state_digest` at M scale** (10M+ rows): acceptable as an
-   explicitly costed operation, or does a bounded/incremental form need defining?
-5. **Result size.** M-scale results reach hundreds of MB; how a transport frames them
-   is a binding concern (see the JSONL binding), but the semantics should not require
-   a single in-memory result.
-6. **Unreferenced strings** are excluded from logical state; confirm no scenario
-   needs them observable.
-7. Duplicate-row removal, conflicting operations, entity rename: deferred to
-   ADR-0008.
+1. **Cost and bounds of `state_digest` at M scale** (10M+ rows). It is a measured
+   operation, timed separately. Open: whether a memory bound (streaming, bounded extra
+   memory) must be required of every candidate, and whether any wall-clock budget is
+   needed to keep scenario scripts runnable.
+2. **Cold restore.** `restore` replaces content inside an already-open session, but
+   W5.S1's time-to-first-query is a cold-start figure. Proposed: `open` accepts either
+   a fixture or a `snapshot_id` as its source (a new session, `generation = 0`). Needs
+   a decision before W5.S1.
+3. **Snapshot lifetime.** Whether a `snapshot_id` outlives its session and process
+   (cold restore in a new process implies yes), and how snapshots are cleaned up.
+4. **Cancel and `mutate` commit point.** When cancellation is advertised, the exact
+   point after which a `mutate` can no longer be cancelled must be defined and
+   documented per candidate.
+5. Context fields (`snapshot`, `epoch`, `complete`) are immutable in v0; confirm in
+   ADR-0008 review.
