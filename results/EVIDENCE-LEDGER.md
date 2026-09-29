@@ -11,8 +11,9 @@ Never overwritten; append a row when a new controlled S campaign runs.
 | S-pass2-fairness (archived) | [results/s-scale-hosted-pass2-20260928/](s-scale-hosted-pass2-20260928/) | [36405210578](https://github.com/blyzer/csl-runtime-eval/actions/runs/36405210578) | `3febcdd442d5d4ba07269442e757625006467216` | `80ea43ca27b2578586a5c0765bc01e1f933f446feb49ec768ad14c61da3081fc` | `7ea1c7884968206fff29bfd3f0a0102018df2e82cd6377061870b18ab369c4d5` | 10 | rustc 1.99.0-nightly (1a98b1e13 2026-08-07) | 0.14.1 | ubuntu-24.04-arm |
 | S-pass3-investigation (decode/index sub-phase instrumentation + Rust FxHash-style hasher) | [results/s-scale-hosted/](s-scale-hosted/) | [36508141357](https://github.com/blyzer/csl-runtime-eval/actions/runs/36508141357) | `b1a60cfad70df73b99a43fe95a4e071fc2109eba` | `d45577a0660a49a2fee107f8e4c49405a36acf038c799c085e6769590a5e8333` | `7ea1c7884968206fff29bfd3f0a0102018df2e82cd6377061870b18ab369c4d5` | 10 | rustc 1.99.0-nightly (1a98b1e13 2026-08-07) | 0.14.1 | ubuntu-24.04-arm |
 | S-pass4-hybrid (W10 Hybrid, input/output marshaling fixed; rust+zig+hybrid) | [results/s-scale-hosted-pass4-hybrid-20260929/](s-scale-hosted-pass4-hybrid-20260929/) | [36518543247](https://github.com/blyzer/csl-runtime-eval/actions/runs/36518543247) | `75e54c561aba9d11f03cf9b6f2594909214446e8` | `ed7f6103d01afa6ff20aa7acc0eb852725d375771bdf913d349fac163fa55d8d` | `7ea1c7884968206fff29bfd3f0a0102018df2e82cd6377061870b18ab369c4d5` | 10 | rustc 1.99.0-nightly (1a98b1e13 2026-08-07) | 0.14.1 | ubuntu-24.04-arm |
+| M-local-exploratory (rust+zig+hybrid, local Mac, streaming oracle; NOT controlled) | [results/local/m-local-20260929/](local/m-local-20260929/) | local | `4e7e643` | see manifest | see manifest | 10 | rustc 1.99.0-nightly (1a98b1e13 2026-08-07) | 0.14.1 | macOS arm64 16 GB (SDK overlay, load ~10) |
 
-All four share the same corpus (`corpus/synthetic/S-campaign-mixed-20260928.json`,
+All four S rows share the same corpus (`corpus/synthetic/S-campaign-mixed-20260928.json`,
 100,000 entities / 1,000,000 relations / 1,000,000 evidence rows, seed
 `20260928`, `mixed` shape) and the same oracle/query set, so the corpus digest
 column is the control: any change there would invalidate a cross-pass
@@ -22,3 +23,5 @@ conditions, per-tool versions, build flags and classification
 `result_digest` and `conformance: true/false` gate. STATUS.md's "Controlled
 S-scale campaign" sections carry the query-by-query comparison; this file is
 only the provenance index.
+
+The M-local row uses corpus `M-campaign-mixed-20260929` (1,000,000 entities / 10,000,000 relations / 10,000,000 evidence rows, seed `20260929`), a different corpus and seed from the S rows, so it is a scaling observation, not a paired comparison with them.

@@ -9,3 +9,4 @@ corpus/synthetic/*.json
 results/s-scale-exploratory/references/
 results/s-scale-hosted/references/
 results/s-scale-hosted-pass4-hybrid-20260929/references/
+results/local/*/references/

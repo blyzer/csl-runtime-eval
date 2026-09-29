@@ -1,0 +1,54 @@
+{
+  "profile_schema": "csl.eval.profile/v0.1",
+  "representation": "typed-hash-v1",
+  "phases_ns": {
+    "load": 7055935833,
+    "index": 2171896959,
+    "query": 1009417,
+    "result": 403800042
+  },
+  "phase_detail_ns": {
+    "decode": 7055935833,
+    "construct": 0,
+    "materialize": 292011083,
+    "encode": 111788959
+  },
+  "phase_subdetail_ns": {
+    "read": 249977833,
+    "parse": 6805958000,
+    "entities": 52195209,
+    "adjacency": 1454529791,
+    "sort": 665171959
+  },
+  "elapsed_ns": 9703294416,
+  "rss_peak_bytes": 5293850624,
+  "result_digest": "sha256:6646593a582d3e3f30dc3284df0894edf218ffddbeef9e0bc418128fd9e1ce13",
+  "conformance": true,
+  "conditions_before": {
+    "utc": "2026-09-29T06:16:07.840948+00:00",
+    "load_average": [
+      4.2216796875,
+      8.62890625,
+      10.927734375
+    ],
+    "cpu_count": 10,
+    "available_memory_bytes": 10297212928,
+    "swapout_pages": 2638889,
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23461987)\t80%; AC attached; not charging present: true",
+    "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded"
+  },
+  "conditions_after": {
+    "utc": "2026-09-29T06:16:17.627450+00:00",
+    "load_average": [
+      3.87939453125,
+      8.41015625,
+      10.82275390625
+    ],
+    "cpu_count": 10,
+    "available_memory_bytes": 10261544960,
+    "swapout_pages": 2638889,
+    "power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23461987)\t80%; AC attached; not charging present: true",
+    "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded"
+  },
+  "condition_failures": []
+}

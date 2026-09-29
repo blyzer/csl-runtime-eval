@@ -1,0 +1,24 @@
+{
+  "job": {
+    "candidate": "zig",
+    "workload": "W2",
+    "query": {
+      "schema": "csl.eval.query/v0.1",
+      "query_id": "depth-4",
+      "op": "TRAVERSE",
+      "input": {
+        "op": "RESOLVE",
+        "entity_id": 1
+      },
+      "max_depth": 4,
+      "max_paths": 100000
+    },
+    "iteration": 9
+  },
+  "binary": "/Users/enverfrancisco/Downloads/csl-runtime-eval/prototypes/zig/zig-out/bin/csl-eval-zig",
+  "fixture": "/Users/enverfrancisco/Downloads/csl-runtime-eval/corpus/synthetic/M-campaign-mixed-20260929.json",
+  "reference": "/Users/enverfrancisco/Downloads/csl-runtime-eval/results/local/m-hosted-local-20260929/references/W2-depth-4.json",
+  "result_digest": "sha256:6646593a582d3e3f30dc3284df0894edf218ffddbeef9e0bc418128fd9e1ce13",
+  "max_load": 0.5,
+  "min_memory": 3221225472
+}

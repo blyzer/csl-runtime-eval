@@ -234,6 +234,40 @@ instance and a bootstrap hybrid (whole-fixture batch, no persistent kernel store
 so it does not rule out a persistent-store hybrid design. Gate #1 remains **OPEN**;
 M scale and W3-W9/W12 are still pending.
 
+## M-scale, local exploratory (pass 5) — 2026-09-29
+
+First M-scale evidence (1M entities / 10M relations / 10M evidence rows, 2.16 GB
+fixture), run **locally on this Mac** because hosted 16 GB runners cannot hold the
+old oracle. Enabled by the streaming oracle ([ADR-0006](adr/0006-streaming-oracle.md)):
+the M oracle prepared all nine references in ~8 minutes with a few GB, and candidate
+output is verified by byte comparison. **270 records (90 per candidate), all
+byte-identical to the oracle.** Evidence: [results/local/m-local-20260929](results/local/m-local-20260929/)
+(`references/` not committed; regenerable from the seed).
+
+**Classification: exploratory, not controlled.** 232 of 270 samples recorded a
+machine-condition failure (one-minute load ~10-13 on 10 CPUs; 34 also saw swap-out),
+Zig runs through the local SDK overlay, and this is a laptop, not a quiet runner.
+Read it as direction and rough magnitude only.
+
+Median elapsed / peak RSS (10 samples each):
+
+| Query | Rust | Zig | Hybrid | Hybrid vs Zig |
+|---|---|---|---|---|
+| lookup / depth-2 / incoming / outgoing / mixed | 6.4-6.8 s / 4.2 GB | 9.5-10.5 s / 5.2 GB | 10.4-11.2 s / 4.7-6.2 GB | +5-12% |
+| depth-4 | 6.4 s / 4.2 GB | 9.8 s / 5.3 GB | 10.5 s / 6.2 GB | +7% |
+| depth-8 | 8.9 s / 4.8 GB | 12.4 s / 6.0 GB | 13.1 s / 5.2 GB | +6% |
+| scan-type | 12.0 s / 5.8 GB | 16.2 s / 7.4 GB | 16.7 s / 5.5 GB | +3% |
+
+Reading: the S-scale ordering holds at 10x the data: Rust fastest on every query
+(~1.4-1.5x ahead of Zig), Zig ahead of hybrid, hybrid's boundary cost a modest
+3-12%. Elapsed time grew ~7-8x for 10x the data on every candidate (fixed process
+costs), i.e. no candidate shows a scaling cliff. Hybrid's RSS is not consistently
+higher than Zig's here (5.2-5.5 GB vs 7.4 GB on `scan-type`) unlike S; with swap
+activity during samples, peak RSS is less trustworthy than at S, so I make no RSS
+claim from this run. Repeat on a quiet machine or a large native runner before
+treating any M number as controlled. Gate #1 remains **OPEN**; W3-W9 and W12 are
+still pending.
+
 ## S-scale campaign protocol — 2026-09-28
 
 [ADR-0003](adr/0003-s-scale-campaign.md) defines the serial paired runner in
