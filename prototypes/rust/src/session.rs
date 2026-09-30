@@ -737,7 +737,9 @@ fn put_str(out: &mut Vec<u8>, s: &str) {
     out.extend_from_slice(&(s.len() as u32).to_le_bytes());
     out.extend_from_slice(s.as_bytes());
 }
-fn encode_snapshot(l: &Logical) -> Vec<u8> {
+fn encode_snapshot(l: &Logical, diagnostic: bool) -> (Vec<u8>, u64, u64, u64) {
+    let total_started = diagnostic.then(Instant::now);
+    let mut row_preparation_ns = 0u64;
     let mut out = Vec::new();
     out.extend_from_slice(SNAP_MAGIC);
     out.extend_from_slice(&SNAP_VERSION.to_le_bytes());
@@ -746,12 +748,14 @@ fn encode_snapshot(l: &Logical) -> Vec<u8> {
     out.push(l.epoch.is_some() as u8);
     out.extend_from_slice(&l.epoch.unwrap_or(0).to_le_bytes());
     out.push(l.complete as u8);
+    let phase_started = diagnostic.then(Instant::now);
     let names: BTreeSet<&str> = l.entities.values().map(|e| e.name.as_str()).collect();
     let sid: HashMap<&str, u32> = names
         .iter()
         .enumerate()
         .map(|(i, n)| (*n, i as u32))
         .collect();
+    row_preparation_ns += phase_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
     out.extend_from_slice(&(names.len() as u64).to_le_bytes());
     for n in &names {
         put_str(&mut out, n);
@@ -770,11 +774,13 @@ fn encode_snapshot(l: &Logical) -> Vec<u8> {
     for e in l.entities.values() {
         out.extend_from_slice(&e.container.unwrap_or(0).to_le_bytes());
     }
+    let phase_started = diagnostic.then(Instant::now);
     let rows: Vec<&RelKey> = l
         .relations
         .iter()
         .flat_map(|(k, n)| std::iter::repeat_n(k, *n as usize))
         .collect();
+    row_preparation_ns += phase_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
     out.extend_from_slice(&(rows.len() as u64).to_le_bytes());
     for k in &rows {
         out.extend_from_slice(&k.0.to_le_bytes());
@@ -785,11 +791,13 @@ fn encode_snapshot(l: &Logical) -> Vec<u8> {
     for k in &rows {
         out.extend_from_slice(&k.2.to_le_bytes());
     }
+    let phase_started = diagnostic.then(Instant::now);
     let rows: Vec<&EvKey> = l
         .evidence
         .iter()
         .flat_map(|(k, n)| std::iter::repeat_n(k, *n as usize))
         .collect();
+    row_preparation_ns += phase_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
     out.extend_from_slice(&(rows.len() as u64).to_le_bytes());
     for k in &rows {
         out.extend_from_slice(&k.3.to_le_bytes());
@@ -815,9 +823,13 @@ fn encode_snapshot(l: &Logical) -> Vec<u8> {
     for k in &rows {
         out.push(index_of(&QUALITIES, k.6));
     }
+    let body_ns = total_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+    let checksum_started = diagnostic.then(Instant::now);
     let digest = Sha256::digest(&out);
     out.extend_from_slice(&digest);
-    out
+    let checksum_ns = checksum_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+    let encode_ns = body_ns.saturating_sub(row_preparation_ns);
+    (out, row_preparation_ns, encode_ns, checksum_ns)
 }
 
 struct Cursor<'a> {
@@ -851,75 +863,99 @@ impl<'a> Cursor<'a> {
         (n.checked_mul(width)? <= self.data.len() - self.pos.min(self.data.len())).then_some(n)
     }
 }
-fn decode_snapshot(data: &[u8]) -> Option<Logical> {
+fn decode_snapshot(data: &[u8], diagnostic: bool) -> (Option<Logical>, u64, u64, u64) {
     if data.len() < SNAP_MAGIC.len() + 32 {
-        return None;
+        return (None, 0, 0, 0);
     }
     let (body, tail) = data.split_at(data.len() - 32);
+    let checksum_started = diagnostic.then(Instant::now);
     if Sha256::digest(body).as_slice() != tail {
-        return None;
-    }
-    let mut c = Cursor { data: body, pos: 0 };
-    if c.take(8)? != SNAP_MAGIC || c.u32()? != SNAP_VERSION || c.str()? != ARTIFACT {
-        return None;
-    }
-    let snapshot = c.str()?.to_string();
-    let has_epoch = c.u8()? != 0;
-    let epoch = c.u64()?;
-    let complete = c.u8()? != 0;
-    let mut l = Logical::empty(snapshot, has_epoch.then_some(epoch), complete);
-    let mut names = Vec::new();
-    for _ in 0..c.count(4)? {
-        names.push(c.str()?);
-    }
-    let n = c.count(21)?;
-    let ids: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
-    let kinds: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
-    let sids: Vec<u32> = (0..n).map(|_| c.u32()).collect::<Option<_>>()?;
-    let containers: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
-    for i in 0..n {
-        l.entities.insert(
-            ids[i],
-            Ent {
-                kind: kind_of(KINDS.get(kinds[i] as usize)?)?,
-                name: (*names.get(sids[i] as usize)?).to_string(),
-                container: (containers[i] != 0).then_some(containers[i]),
-            },
+        return (
+            None,
+            checksum_started.map_or(0, |t| t.elapsed().as_nanos() as u64),
+            0,
+            0,
         );
     }
-    let n = c.count(17)?;
-    let subjects: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
-    let rels: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
-    let objects: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
-    for i in 0..n {
-        let relation = relation_of(RELS.get(rels[i] as usize)?)?.as_str();
-        *l.relations
-            .entry((subjects[i], relation, objects[i]))
-            .or_default() += 1;
-    }
-    let n = c.count(39)?;
-    let propositions: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
-    let subjects: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
-    let objects: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
-    let epochs: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
-    let lineages: Vec<u32> = (0..n).map(|_| c.u32()).collect::<Option<_>>()?;
-    let rels: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
-    let pols: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
-    let quals: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
-    for i in 0..n {
-        let key: EvKey = (
-            subjects[i],
-            relation_of(RELS.get(rels[i] as usize)?)?.as_str(),
-            objects[i],
-            propositions[i],
-            lineages[i],
-            polarity_of(POLARITIES.get(pols[i] as usize)?)?.as_str(),
-            quality_of(QUALITIES.get(quals[i] as usize)?)?.as_str(),
-            epochs[i],
-        );
-        *l.evidence.entry(key).or_default() += 1;
-    }
-    (c.pos == body.len()).then_some(l)
+    let checksum_ns = checksum_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+    let parse_started = diagnostic.then(Instant::now);
+    let mut table_ns = 0u64;
+    let logical = (|| {
+        let mut c = Cursor { data: body, pos: 0 };
+        if c.take(8)? != SNAP_MAGIC || c.u32()? != SNAP_VERSION || c.str()? != ARTIFACT {
+            return None;
+        }
+        let snapshot = c.str()?.to_string();
+        let has_epoch = c.u8()? != 0;
+        let epoch = c.u64()?;
+        let complete = c.u8()? != 0;
+        let mut l = Logical::empty(snapshot, has_epoch.then_some(epoch), complete);
+        let mut names = Vec::new();
+        for _ in 0..c.count(4)? {
+            names.push(c.str()?);
+        }
+        let n = c.count(21)?;
+        let ids: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
+        let kinds: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
+        let sids: Vec<u32> = (0..n).map(|_| c.u32()).collect::<Option<_>>()?;
+        let containers: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
+        let table_started = diagnostic.then(Instant::now);
+        for i in 0..n {
+            l.entities.insert(
+                ids[i],
+                Ent {
+                    kind: kind_of(KINDS.get(kinds[i] as usize)?)?,
+                    name: (*names.get(sids[i] as usize)?).to_string(),
+                    container: (containers[i] != 0).then_some(containers[i]),
+                },
+            );
+        }
+        table_ns += table_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+        let n = c.count(17)?;
+        let subjects: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
+        let rels: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
+        let objects: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
+        let table_started = diagnostic.then(Instant::now);
+        for i in 0..n {
+            let relation = relation_of(RELS.get(rels[i] as usize)?)?.as_str();
+            *l.relations
+                .entry((subjects[i], relation, objects[i]))
+                .or_default() += 1;
+        }
+        table_ns += table_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+        let n = c.count(39)?;
+        let propositions: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
+        let subjects: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
+        let objects: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
+        let epochs: Vec<u64> = (0..n).map(|_| c.u64()).collect::<Option<_>>()?;
+        let lineages: Vec<u32> = (0..n).map(|_| c.u32()).collect::<Option<_>>()?;
+        let rels: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
+        let pols: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
+        let quals: Vec<u8> = (0..n).map(|_| c.u8()).collect::<Option<_>>()?;
+        let table_started = diagnostic.then(Instant::now);
+        for i in 0..n {
+            let key: EvKey = (
+                subjects[i],
+                relation_of(RELS.get(rels[i] as usize)?)?.as_str(),
+                objects[i],
+                propositions[i],
+                lineages[i],
+                polarity_of(POLARITIES.get(pols[i] as usize)?)?.as_str(),
+                quality_of(QUALITIES.get(quals[i] as usize)?)?.as_str(),
+                epochs[i],
+            );
+            *l.evidence.entry(key).or_default() += 1;
+        }
+        table_ns += table_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+        (c.pos == body.len()).then_some(l)
+    })();
+    let total_ns = parse_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+    (
+        logical,
+        checksum_ns,
+        total_ns.saturating_sub(table_ns),
+        table_ns,
+    )
 }
 
 // ------------------------------------------------------------ session
@@ -1123,10 +1159,18 @@ impl Session {
             }
             "snapshot" => {
                 check_fields(req, &["id", "op"])?;
+                let diagnostic = std::env::var_os("CSL_W5_DIAGNOSTICS").is_some();
                 let repository = self.repository.clone();
                 let live = self.live()?;
-                let data = encode_snapshot(&live.logical());
+                let phase_started = diagnostic.then(Instant::now);
+                let logical = live.logical();
+                let logical_view_ns = phase_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+                let (data, row_preparation_ns, encode_ns, integrity_checksum_ns) =
+                    encode_snapshot(&logical, diagnostic);
+                let phase_started = diagnostic.then(Instant::now);
                 let snapshot_id = format!("snap-{}", &hex(&Sha256::digest(&data))[..16]);
+                let snapshot_id_ns = phase_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+                let phase_started = diagnostic.then(Instant::now);
                 std::fs::create_dir_all(&repository)
                     .map_err(|e| fail("INTERNAL", e.to_string()))?;
                 let target = repository.join(format!("{snapshot_id}.snap"));
@@ -1134,6 +1178,13 @@ impl Session {
                 std::fs::write(&temp, &data)
                     .and_then(|_| std::fs::rename(&temp, &target))
                     .map_err(|e| fail("INTERNAL", e.to_string()))?;
+                let physical_write_ns = phase_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+                if diagnostic {
+                    eprintln!(
+                        "CSL_W5_DIAG {}",
+                        json!({"operation":"snapshot","phases_ns":{"logical_view_ns":logical_view_ns,"row_preparation_ns":row_preparation_ns,"encode_ns":encode_ns,"integrity_checksum_ns":integrity_checksum_ns,"snapshot_id_generation_ns":snapshot_id_ns,"physical_write_ns":physical_write_ns},"snapshot_bytes":data.len(),"bytes_processed":data.len()})
+                    );
+                }
                 Ok(Reply::Value(ok(
                     id,
                     json!({"generation": live.generation, "snapshot_id": snapshot_id,
@@ -1142,6 +1193,7 @@ impl Session {
             }
             "restore" => {
                 check_fields(req, &["id", "op", "snapshot_id"])?;
+                let diagnostic = std::env::var_os("CSL_W5_DIAGNOSTICS").is_some();
                 let repository = self.repository.clone();
                 let live = self.live()?;
                 let snapshot_id = req["snapshot_id"]
@@ -1152,22 +1204,43 @@ impl Session {
                                 .all(|b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_')
                     })
                     .ok_or_else(|| invalid_input("unknown snapshot_id"))?;
+                let phase_started = diagnostic.then(Instant::now);
                 let data = std::fs::read(repository.join(format!("{snapshot_id}.snap")))
                     .map_err(|_| invalid_input("unknown snapshot_id"))?;
-                let restored = decode_snapshot(&data).ok_or_else(|| {
+                let physical_read_ns = phase_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+                let (decoded, integrity_checksum_ns, parse_ns, logical_table_ns) =
+                    decode_snapshot(&data, diagnostic);
+                let restored = decoded.ok_or_else(|| {
                     invalid_input("snapshot is corrupt or from an incompatible artifact")
                 })?;
                 if (restored.snapshot.clone(), restored.epoch, restored.complete) != live.context()
                 {
                     return Err(invalid_input("context mismatch"));
                 }
+                let phase_started = diagnostic.then(Instant::now);
+                let mut conversion_ns = 0u64;
                 live.engine = match live.engine {
-                    Engine::Rebuild { .. } => Engine::Rebuild {
-                        derived: Derived::build(restored.to_fixture())?,
-                        logical: restored,
-                    },
+                    Engine::Rebuild { .. } => {
+                        let conversion_started = diagnostic.then(Instant::now);
+                        let fixture = restored.to_fixture();
+                        conversion_ns =
+                            conversion_started.map_or(0, |t| t.elapsed().as_nanos() as u64);
+                        Engine::Rebuild {
+                            derived: Derived::build(fixture)?,
+                            logical: restored,
+                        }
+                    }
                     Engine::Inc(_) => Engine::Inc(IncStore::from_logical(&restored)),
                 };
+                let derived_store_ns = phase_started
+                    .map_or(0, |t| t.elapsed().as_nanos() as u64)
+                    .saturating_sub(conversion_ns);
+                if diagnostic {
+                    eprintln!(
+                        "CSL_W5_DIAG {}",
+                        json!({"operation":"restore","phases_ns":{"physical_read_ns":physical_read_ns,"integrity_checksum_ns":integrity_checksum_ns,"parse_ns":parse_ns,"logical_table_construction_aggregation_ns":logical_table_ns,"logical_state_to_fixture_conversion_ns":conversion_ns,"derived_store_construction_ns":derived_store_ns},"snapshot_bytes":data.len(),"bytes_processed":data.len()})
+                    );
+                }
                 live.rebuilds += 1;
                 live.generation += 1;
                 Ok(Reply::Value(ok(id, json!({"generation": live.generation}))))

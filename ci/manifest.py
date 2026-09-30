@@ -3,7 +3,7 @@
 import argparse, hashlib, os
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-DIRECTORIES=('schemas','oracle','harness','tests','ci','prototypes','adr','.github/workflows')
+DIRECTORIES=('schemas','oracle','harness','tests','ci','prototypes','adr','docs','.github/workflows')
 SKIP={'.git','.venv','.zig-cache','zig-out','target','__pycache__'}
 SUFFIXES={'.py','.rs','.zig','.json','.sh','.md','.toml','.lock','.h','.c','.yml'}
 def entries():

@@ -1,0 +1,109 @@
+name: Gate 1 controlled W5 diagnostic and W11/R4
+
+on:
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: Pinned native Linux ARM64 runner
+        type: choice
+        options: [ubuntu-24.04-arm]
+        default: ubuntu-24.04-arm
+      w5_repeat:
+        description: W5 repetitions per arm; preregistered minimum is 30
+        type: number
+        default: 30
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gate1-controlled-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  qualification:
+    runs-on: ${{ inputs.runner }}
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: true
+          fetch-depth: 0
+      - name: Verify clean checkout and baseline ancestry
+        run: |
+          set -euo pipefail
+          git clean -ffdx
+          git reset --hard HEAD
+          test "$(git rev-parse HEAD^)" = ce6a895d9ec1ec9011b0658f1ba6338f21651e13
+          git status --porcelain=v1 > "$RUNNER_TEMP/checkout-status.txt"
+          test ! -s "$RUNNER_TEMP/checkout-status.txt"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned toolchains with build caches disabled
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install nightly-2026-08-08 --profile minimal --component rustfmt,clippy
+          rustup override set nightly-2026-08-08
+          python -m venv .venv
+          .venv/bin/pip install --no-cache-dir jsonschema==4.23.0
+          .venv/bin/pip install --no-cache-dir -r requirements.txt ziglang==0.14.1
+          ln -s "$(.venv/bin/python -c 'import ziglang,pathlib; print(pathlib.Path(ziglang.__file__).parent / "zig")')" .venv/bin/zig
+          echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
+          echo "CARGO_HOME=$RUNNER_TEMP/gate1-cargo-home" >> "$GITHUB_ENV"
+          mkdir -p "$RUNNER_TEMP/gate1-cargo-home"
+          mkdir -p results/gate1-controlled
+          .venv/bin/pip freeze > results/gate1-controlled/python-dependencies.txt
+      - name: Record runner and toolchain inventory
+        env:
+          RUNNER_LABEL: ${{ inputs.runner }}
+        run: |
+          set -euo pipefail
+          mkdir -p results/gate1-controlled
+          { uname -a; lscpu; free -b; swapon --show; rustc -Vv; cargo -V; zig version; python --version; .venv/bin/pip --version; } > results/gate1-controlled/inventory.txt
+          git rev-parse HEAD > results/gate1-controlled/source-commit.txt
+          cp "$RUNNER_TEMP/checkout-status.txt" results/gate1-controlled/checkout-status.txt
+          sha256sum tests/golden_fixture.json > results/gate1-controlled/golden-corpus-hash.txt
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          keys = ['GITHUB_REPOSITORY', 'GITHUB_SHA', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT',
+                  'RUNNER_OS', 'RUNNER_ARCH', 'RUNNER_LABEL', 'ImageOS', 'ImageVersion']
+          Path('results/gate1-controlled/runner.json').write_text(json.dumps({k: os.environ.get(k) for k in keys}, indent=2) + '\n')
+          PY
+          sudo swapoff -a
+          swapon --show > results/gate1-controlled/swap-after-disable.txt
+      - name: W11/R4 clean build and artifact reproducibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          ci/gate1-w11-r4.sh "$PWD/results/gate1-controlled/w11"
+      - name: Tests, normal/profile conformance and S0
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./ci/check-candidates.sh 2>&1 | tee results/gate1-controlled/candidate-checks.log
+          ./ci/smoke.sh 2>&1 | tee results/gate1-controlled/smoke.log
+          python harness/benchctl.py conformance --candidate rust --candidate zig --candidate hybrid 2>&1 | tee results/gate1-controlled/conformance-normal.log
+          python harness/benchctl.py conformance --candidate rust --candidate zig --profile 2>&1 | tee results/gate1-controlled/conformance-profile.log
+          python harness/s0.py --candidate rust --candidate zig --candidate hybrid --json results/gate1-controlled/s0.json 2>&1 | tee results/gate1-controlled/s0.log
+      - name: Controlled W5 phase decomposition and overhead control
+        shell: bash
+        env:
+          W5_REPEAT: ${{ inputs.w5_repeat }}
+        run: |
+          set -euo pipefail
+          test "$W5_REPEAT" -ge 30
+          ci/gate1-w5-diagnostic.sh "$W5_REPEAT" "$PWD/results/gate1-controlled/w5-phase"
+      - name: Generate evidence report
+        if: always()
+        run: python harness/gate1_controlled_report.py results/gate1-controlled --output results/gate1-controlled/report.md
+      - name: Upload evidence, including failed or blocked runs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate1-controlled-${{ inputs.runner }}-${{ github.run_id }}
+          retention-days: 30
+          path: results/gate1-controlled/
+          if-no-files-found: warn

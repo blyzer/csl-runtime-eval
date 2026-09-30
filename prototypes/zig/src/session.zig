@@ -763,6 +763,12 @@ pub const Strategy = enum {
     }
 };
 
+fn persistenceDiagnosticsEnabled() bool {
+    const value = std.process.getEnvVarOwned(std.heap.page_allocator, "CSL_W5_DIAGNOSTICS") catch return false;
+    defer std.heap.page_allocator.free(value);
+    return std.mem.eql(u8, value, "1");
+}
+
 fn buildBackend(strategy: Strategy, counters: *Counters, ctx: Context, ents: []const LEnt, rels: []const sem.Edge, evs: []const sem.Evidence) Err!Backend {
     return switch (strategy) {
         .@"full-rebuild" => .{ .full = try genFromRows(counters, ctx, ents, rels, evs) },
@@ -1097,7 +1103,7 @@ const Reader = struct {
     }
 };
 
-fn encodeSnapshot(ra: A, rows: Rows, artifact: []const u8) ![]u8 {
+fn encodeSnapshot(ra: A, rows: Rows, artifact: []const u8, diagnostic: bool, checksum_ns: *u64) ![]u8 {
     var out = std.ArrayList(u8).init(ra);
     try out.appendSlice(SNAP_MAGIC);
     try putInt(&out, u32, SNAP_VERSION);
@@ -1132,7 +1138,9 @@ fn encodeSnapshot(ra: A, rows: Rows, artifact: []const u8) ![]u8 {
         try putInt(&out, u32, r.lineage);
     }
     var hash: [32]u8 = undefined;
+    var checksum_timer: ?std.time.Timer = if (diagnostic) (std.time.Timer.start() catch unreachable) else null;
     Sha256.hash(out.items, &hash, .{});
+    checksum_ns.* = if (checksum_timer) |*timer| timer.read() else 0;
     try out.appendSlice(&hash);
     return out.toOwnedSlice();
 }
@@ -1144,11 +1152,14 @@ fn enumFromByte(comptime T: type, b: u8) Err!T {
 
 /// Decode a snapshot into logical rows (the caller builds the store); rejects a snapshot whose
 /// artifact or context differs from the session's.
-fn decodeSnapshot(ra: A, data: []const u8, ctx: Context, artifact: []const u8) Err!Rows {
+fn decodeSnapshot(ra: A, data: []const u8, ctx: Context, artifact: []const u8, diagnostic: bool, checksum_ns: *u64, parse_ns: *u64, logical_table_ns: *u64) Err!Rows {
     if (data.len < SNAP_MAGIC.len + 32) return error.InvalidInput;
     var hash: [32]u8 = undefined;
+    var checksum_timer: ?std.time.Timer = if (diagnostic) (std.time.Timer.start() catch unreachable) else null;
     Sha256.hash(data[0 .. data.len - 32], &hash, .{});
+    checksum_ns.* = if (checksum_timer) |*timer| timer.read() else 0;
     if (!std.mem.eql(u8, &hash, data[data.len - 32 ..])) return error.InvalidInput;
+    var parse_timer: ?std.time.Timer = if (diagnostic) (std.time.Timer.start() catch unreachable) else null;
     var r = Reader{ .data = data[0 .. data.len - 32] };
     if (!std.mem.eql(u8, try r.take(SNAP_MAGIC.len), SNAP_MAGIC)) return error.InvalidInput;
     if (try r.int(u32) != SNAP_VERSION) return error.InvalidInput;
@@ -1162,6 +1173,8 @@ fn decodeSnapshot(ra: A, data: []const u8, ctx: Context, artifact: []const u8) E
     const nr = try r.int(u64);
     const nv = try r.int(u64);
     if (ne > data.len or nr > data.len or nv > data.len) return error.InvalidInput;
+    parse_ns.* = if (parse_timer) |*timer| timer.read() else 0;
+    var table_timer: ?std.time.Timer = if (diagnostic) (std.time.Timer.start() catch unreachable) else null;
     const ents = ra.alloc(LEnt, @intCast(ne)) catch return error.OutOfMemory;
     for (ents) |*e| {
         const id = try r.int(u64);
@@ -1188,6 +1201,7 @@ fn decodeSnapshot(ra: A, data: []const u8, ctx: Context, artifact: []const u8) E
         e.* = .{ .proposition = proposition, .subject = subject, .relation = relation, .object = object, .polarity = polarity, .quality = quality, .freshness_epoch = freshness_epoch, .lineage = try r.int(u32) };
     }
     if (r.pos != r.data.len) return error.InvalidInput;
+    logical_table_ns.* = if (table_timer) |*timer| timer.read() else 0;
     return .{ .ctx = ctx, .ents = ents, .rels = rels, .evs = evs };
 }
 
@@ -1248,12 +1262,13 @@ pub const Engine = struct {
     /// Build identifier reported at `open` and stamped into / required from snapshots. A front end whose
     /// snapshots must not be interchangeable with the pure-Zig candidate's (the Hybrid) overrides it.
     artifact: []const u8 = ARTIFACT,
+    diagnostics: bool = false,
 
     pub fn init(repository: []const u8, strategy: Strategy) Engine {
-        return .{ .repo = repository, .strategy = strategy };
+        return .{ .repo = repository, .strategy = strategy, .diagnostics = persistenceDiagnosticsEnabled() };
     }
     pub fn initWithArtifact(repository: []const u8, strategy: Strategy, artifact: []const u8) Engine {
-        return .{ .repo = repository, .strategy = strategy, .artifact = artifact };
+        return .{ .repo = repository, .strategy = strategy, .artifact = artifact, .diagnostics = persistenceDiagnosticsEnabled() };
     }
     pub fn deinit(self: *Engine) void {
         if (self.backend) |b| b.destroy();
@@ -1465,15 +1480,27 @@ pub const Engine = struct {
 
     fn doSnapshot(self: *Engine, ra: A, id: u64, obj: ObjectMap) Err!Reply {
         if (!exactKeys(obj, &.{ "id", "op" })) return error.InvalidRequest;
+        var phase_timer: ?std.time.Timer = if (self.diagnostics) (std.time.Timer.start() catch unreachable) else null;
         const rows = try self.backendNow().rows(ra);
-        const data = try encodeSnapshot(ra, rows, self.artifact);
+        const logical_view_row_preparation_ns = if (phase_timer) |*timer| timer.read() else 0;
+        phase_timer = if (self.diagnostics) (std.time.Timer.start() catch unreachable) else null;
+        var checksum_ns: u64 = 0;
+        const data = try encodeSnapshot(ra, rows, self.artifact, self.diagnostics, &checksum_ns);
+        const encode_ns = (if (phase_timer) |*timer| timer.read() else 0) - checksum_ns;
+        phase_timer = if (self.diagnostics) (std.time.Timer.start() catch unreachable) else null;
         var dir = std.fs.cwd().makeOpenPath(self.repo, .{}) catch return error.InvalidState;
         defer dir.close();
+        const directory_setup_ns = if (phase_timer) |*timer| timer.read() else 0;
         self.snapshots += 1;
+        phase_timer = if (self.diagnostics) (std.time.Timer.start() catch unreachable) else null;
         const snap_id = try std.fmt.allocPrint(ra, "zs{x}-{d}", .{ @as(u64, @intCast(std.time.nanoTimestamp() & 0xffffffffffff)), self.snapshots });
+        const snapshot_id_generation_ns = if (phase_timer) |*timer| timer.read() else 0;
+        phase_timer = if (self.diagnostics) (std.time.Timer.start() catch unreachable) else null;
         const file = dir.createFile(try snapshotPath(ra, snap_id), .{}) catch return error.OutOfMemory;
         defer file.close();
         file.writeAll(data) catch return error.OutOfMemory;
+        const physical_write_ns = directory_setup_ns + (if (phase_timer) |*timer| timer.read() else 0);
+        if (self.diagnostics) std.debug.print("CSL_W5_DIAG operation=snapshot logical_view_row_preparation_ns={d} encode_ns={d} integrity_checksum_ns={d} snapshot_id_generation_ns={d} physical_write_ns={d} snapshot_bytes={d} bytes_processed={d}\n", .{ logical_view_row_preparation_ns, encode_ns, checksum_ns, snapshot_id_generation_ns, physical_write_ns, data.len, data.len });
         var s = Sink.init(ra, false);
         try s.raw("{\"captured_generation\":");
         try s.num(self.generation);
@@ -1498,10 +1525,18 @@ pub const Engine = struct {
         for (sid.string) |c| if (!(std.ascii.isAlphanumeric(c) or c == '-' or c == '_')) return error.InvalidInput;
         var dir = std.fs.cwd().openDir(self.repo, .{}) catch return error.InvalidInput;
         defer dir.close();
+        var phase_timer: ?std.time.Timer = if (self.diagnostics) (std.time.Timer.start() catch unreachable) else null;
         const data = dir.readFileAlloc(ra, try snapshotPath(ra, sid.string), std.math.maxInt(usize)) catch return error.InvalidInput;
+        const physical_read_ns = if (phase_timer) |*timer| timer.read() else 0;
         const old = self.backendNow();
-        const rows = try decodeSnapshot(ra, data, old.ctx(), self.artifact);
+        var checksum_ns: u64 = 0;
+        var parse_ns: u64 = 0;
+        var logical_table_ns: u64 = 0;
+        const rows = try decodeSnapshot(ra, data, old.ctx(), self.artifact, self.diagnostics, &checksum_ns, &parse_ns, &logical_table_ns);
+        phase_timer = if (self.diagnostics) (std.time.Timer.start() catch unreachable) else null;
         const fresh = try buildBackend(self.strategy, &self.counters, old.ctx(), rows.ents, rows.rels, rows.evs);
+        const derived_store_construction_ns = if (phase_timer) |*timer| timer.read() else 0;
+        if (self.diagnostics) std.debug.print("CSL_W5_DIAG operation=restore physical_read_ns={d} integrity_checksum_ns={d} parse_ns={d} logical_table_construction_aggregation_ns={d} logical_state_to_fixture_conversion_ns=0 derived_store_construction_ns={d} snapshot_bytes={d} bytes_processed={d}\n", .{ physical_read_ns, checksum_ns, parse_ns, logical_table_ns, derived_store_construction_ns, data.len, data.len });
         old.destroy();
         self.backend = fresh;
         self.generation += 1;

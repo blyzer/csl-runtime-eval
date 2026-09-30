@@ -172,6 +172,13 @@ class Client:
             pass
         return None
 
+    def diagnostics(self, marker=b'CSL_W5_DIAG '):
+        """Read opt-in candidate phase records from stderr after the child has exited."""
+        self.errors.flush()
+        self.errors.seek(0)
+        return [line[len(marker):].decode('utf-8', errors='replace').strip()
+                for line in self.errors if line.startswith(marker)]
+
     def finish(self):
         """Close politely, reap the child with wait4 and return its peak RSS in bytes (or None)."""
         import os

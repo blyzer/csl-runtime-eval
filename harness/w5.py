@@ -13,6 +13,7 @@ a sample that fails it aborts the run.
 import argparse
 import json
 import os
+import re
 from pathlib import Path
 import sys
 import time
@@ -48,11 +49,15 @@ def prepare_snapshot(name, exe, repository, corpus, want, ctx, repeats, max_line
         snap = c.call('snapshot')
         snapshot_id = snap.message['snapshot_id']
         size = sum(f.stat().st_size for f in Path(repository).iterdir() if snapshot_id in f.name)
+        stats = c.call('stats')                                  # outside snapshot service timing
         rss = c.finish()
+        phase_records = parse_phase_records(c.diagnostics())
         rows.append({'candidate': name, 'repeat': k, 'fixture_open_service_ns': opened.service_ns, 'state_digest_service_ns': digest.service_ns,
                      'state_digest_ms': digest.message.get('state_digest_ms'), 'bytes_processed': digest.message.get('bytes_processed'),
                      'snapshot_roundtrip_ns': snap.ns, 'snapshot_service_ns': snap.service_ns, 'snapshot_bytes': size,
-                     'snapshot_id': snapshot_id, 'peak_rss_bytes': rss, 'strategy': opened.message.get('strategy')})
+                     'snapshot_id': snapshot_id, 'peak_rss_bytes': rss, 'strategy': opened.message.get('strategy'),
+                     'heap': {k: stats.message['stats'].get(k) for k in ('live_heap_bytes', 'peak_heap_bytes', 'allocations_total', 'derived_rebuilds_total')} if stats.ok else None,
+                     'persistence_diagnostics': phase_records})
     return snapshot_id, rows
 
 
@@ -72,6 +77,7 @@ def cold_restore(name, exe, repository, snapshot_id, ctx, cell, query, expected,
           and digest.message.get('state_digest') == want and restored.generation == 1)
     boundary = stats.message.get('stats', {}).get('boundary') if stats.ok else None
     rss = c.finish()
+    phase_records = parse_phase_records(c.diagnostics())
     spawn_to_open = t_open - t0
     record = {'candidate': name, 'cell': cell, 'query': query['query_id'], 'conformant': bool(ok),
               'spawn_to_open_response_ns': spawn_to_open, 'process_start_ns': spawn_to_open - opened.service_ns,
@@ -83,8 +89,26 @@ def cold_restore(name, exe, repository, snapshot_id, ctx, cell, query, expected,
               'peak_rss_bytes': rss,
               'heap': {k: stats.message['stats'].get(k) for k in ('live_heap_bytes', 'peak_heap_bytes', 'allocations_total', 'derived_rebuilds_total')} if stats.ok else None,
               'boundary': boundary, 'conditions_before': before, 'conditions_after': after,
-              'condition_failures': failures_between(before, after, *limits)}
+              'condition_failures': failures_between(before, after, *limits),
+              'persistence_diagnostics': phase_records}
     return record
+
+
+def parse_phase_records(lines):
+    """Normalize Rust JSON and Zig key/value records without changing candidate responses."""
+    records = []
+    for line in lines:
+        try:
+            record = json.loads(line)
+        except json.JSONDecodeError:
+            record = {}
+            for key, value in re.findall(r'([a-z_]+)=([0-9]+)', line):
+                record[key] = int(value)
+            op = re.search(r'operation=(snapshot|restore)', line)
+            if op:
+                record['operation'] = op.group(1)
+        records.append(record)
+    return records
 
 
 def summarize(records, prep):
@@ -129,6 +153,7 @@ def run(args):
     manifest = {'schema': 'csl.eval.w5/v0.1', 'workload': 'W5.S1', 'started_utc': timestamp(), 'classification': classification,
                 'environment': env, 'preflight_machine': machine, 'preflight_failures': failures, 'repeat': args.repeat,
                 'candidates': args.candidates, 'source_digest': source_digest(), 'protocol': BINDING, 'max_line_bytes': args.max_line_bytes,
+                'artifact_source': os.environ.get('CSL_W5_ARTIFACT_SOURCE', 'workspace build'),
                 'notes': 'warm OS page cache (snapshots were just written); cold-cache is not attempted; state_digest excluded from all phases'}
     (output / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     if failures and not args.exploratory:

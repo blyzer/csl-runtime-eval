@@ -10,6 +10,8 @@ fn main() {
         println!("cargo:rerun-if-changed={p}");
     }
     println!("cargo:rerun-if-env-changed=ZIG");
+    println!("cargo:rerun-if-env-changed=CSL_ZIG_CACHE_DIR");
+    println!("cargo:rerun-if-env-changed=CSL_ZIG_GLOBAL_CACHE_DIR");
     let dir = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap()).join("../zig");
     let out = PathBuf::from(env::var_os("OUT_DIR").unwrap());
     let zig = env::var_os("ZIG").unwrap_or_else(|| "zig".into());
@@ -17,10 +19,18 @@ fn main() {
     if installed.exists() {
         std::fs::remove_file(&installed).expect("remove previous generated archive");
     }
-    let status = Command::new(zig)
+    let mut command = Command::new(zig);
+    command
         .current_dir(&dir)
         .args(["build", "-Doptimize=ReleaseFast", "--prefix"])
-        .arg(&out)
+        .arg(&out);
+    if let Some(path) = env::var_os("CSL_ZIG_CACHE_DIR") {
+        command.args(["--cache-dir"]).arg(path);
+    }
+    if let Some(path) = env::var_os("CSL_ZIG_GLOBAL_CACHE_DIR") {
+        command.args(["--global-cache-dir"]).arg(path);
+    }
+    let status = command
         .status()
         .expect("Zig is required: install 0.14.1 or set ZIG");
     assert!(status.success(), "Zig kernel compilation failed");

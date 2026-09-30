@@ -29,15 +29,23 @@ def environment():
     return {'tools':tools,'os':platform.platform(),'architecture':platform.machine(),'uname':list(platform.uname()),'hardware':platform.processor() or None,'cpu_count':os.cpu_count(),'runtime_python':sys.executable,'sdk_workaround':(ROOT/'.venv/bin/xcrun').exists()}
 
 def available(candidate):return all(tool(t) for t in {'rust':['rustc','cargo'],'zig':['zig'],'hybrid':['rustc','cargo','zig']}[candidate])
-def executable(c):return ROOT/(f'prototypes/zig/zig-out/bin/csl-eval-zig' if c=='zig' else f'prototypes/{c}/target/release/csl-eval-{c}')
+def executable(c):
+    override=os.environ.get(f'CSL_BIN_{c.upper()}')
+    if override:return Path(override)
+    return ROOT/(f'prototypes/zig/zig-out/bin/csl-eval-zig' if c=='zig' else f'prototypes/{c}/target/release/csl-eval-{c}')
 def build(c):
     if not available(c):return {'candidate':c,'state':'SKIP','reason':'required toolchain NOT AVAILABLE'}
     env=os.environ.copy()
     if tool('zig'):env['ZIG']=tool('zig')
-    cmd=[tool('zig'),'build','-Doptimize=ReleaseFast'] if c=='zig' else [tool('cargo'),'build','--release','--manifest-path',str(ROOT/f'prototypes/{c}/Cargo.toml')]
+    if c=='zig':
+        cmd=[tool('zig'),'build','-Doptimize=ReleaseFast']
+        if os.environ.get('CSL_ZIG_CACHE_DIR'):cmd += ['--cache-dir',os.environ['CSL_ZIG_CACHE_DIR']]
+        if os.environ.get('CSL_ZIG_GLOBAL_CACHE_DIR'):cmd += ['--global-cache-dir',os.environ['CSL_ZIG_GLOBAL_CACHE_DIR']]
+    else:cmd=[tool('cargo'),'build','--release','--manifest-path',str(ROOT/f'prototypes/{c}/Cargo.toml')]
     start=time.perf_counter_ns();p=subprocess.run(cmd,cwd=ROOT/f'prototypes/{c}',env=env,capture_output=True,text=True);elapsed=time.perf_counter_ns()-start
     log=ROOT/f'results/raw/build-{c}.log';log.write_text(p.stdout+p.stderr)
-    record={'candidate':c,'state':'PASS' if p.returncode==0 else 'FAIL','elapsed_ns':elapsed,'build_kind':'existing-cache','artifact_bytes':executable(c).stat().st_size if p.returncode==0 else None,'command':cmd}
+    clean_control=bool(os.environ.get('CSL_ZIG_CACHE_DIR')) if c=='zig' else bool(os.environ.get('CARGO_HOME'))
+    record={'candidate':c,'state':'PASS' if p.returncode==0 else 'FAIL','elapsed_ns':elapsed,'build_kind':'controlled-clean-output' if clean_control else 'existing-cache','artifact_bytes':executable(c).stat().st_size if p.returncode==0 else None,'command':cmd}
     save(ROOT/f'results/raw/build-{c}.json',record);return record
 
 def invoke(cmd):
